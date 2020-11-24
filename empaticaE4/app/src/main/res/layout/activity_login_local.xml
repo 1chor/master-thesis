@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.anwender.empaticae4.UsermanagementLocal.LoginActivityLocal">
+
+
+    <TextView
+        android:id="@+id/text_emotion2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:ems="10"
+        android:text="@string/please_enter_your_id_number" />
+
+    <EditText
+        android:id="@+id/text_ID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:digits="0123456789"
+        android:textSize="15sp"
+        android:maxLength="3"
+        android:theme="@style/EditTextTheme"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:hint="@string/type_here" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+    <Button
+        android:id="@+id/button_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login" />
+
+
+
+</LinearLayout>

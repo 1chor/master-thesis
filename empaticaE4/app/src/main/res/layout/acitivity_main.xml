@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:weightSum="1">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/text_connection_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_weight="0.5"
+            android:text="@string/not_connected" />
+
+        <TextView
+            android:id="@+id/text_device_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:paddingLeft="10dp"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_weight="0.5"
+            android:text="-" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/text_battery"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_weight="0.5"
+            android:text="@string/battery" />
+
+        <TextView
+            android:id="@+id/text_battery_level"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:paddingLeft="10dp"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_weight="0.5"
+            android:text="-" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_session"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp"
+        android:text="@string/connect_to_your_device"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/button_start"
+            android:layout_width="175dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:text="Connect" />
+
+        <Button
+            android:id="@+id/button_stop"
+            android:layout_width="175dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:text="Disconnect" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_tag_emotion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp"
+        android:text="@string/tag_an_emotion"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/button_emotion"
+            android:layout_width="175dp"
+            android:layout_height="50dp"
+            android:text="@string/tag_emotion"
+            android:layout_weight="0.5"
+             />
+
+        <Button
+            android:id="@+id/button_log_emotion"
+            android:layout_width="175dp"
+            android:layout_height="50dp"
+            android:text="@string/log_emotion"
+            android:layout_weight="0.5"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_tag_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp"
+        android:text="@string/tag_an_activity"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/button_activity"
+            android:layout_width="175dp"
+            android:layout_height="50dp"
+            android:text="@string/tag_activity"
+            android:layout_weight="0.5"/>
+
+        <Button
+            android:id="@+id/button_log_activity"
+            android:layout_width="175dp"
+            android:layout_height="50dp"
+            android:text="@string/log_activity"
+            android:layout_weight="0.5"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/text_EWS_Score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp"
+        android:text="@string/EWS_Score"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/button_EWS_Score"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:text="EWS" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/button_logout"
+            android:layout_width="175dp"
+            android:layout_height="50dp"
+            android:text="Logout" />
+    </LinearLayout>
+
+</LinearLayout>

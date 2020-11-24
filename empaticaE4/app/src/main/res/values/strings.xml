@@ -1,0 +1,159 @@
+<resources>
+    <string name="app_name">EmAct-R4.01</string>
+    <string name="choose_an_emotion">• Choose an emotion:</string>
+    <string name="how_strongly_did_you_feel_the_emotion">• How strongly did you feel the emotion?</string>
+    <string name="how_confident_are_you_about_this_feeling">• How confident are you about this feeling?</string>
+    <string name="submit_data">Submit Data</string>
+    <string name="cancel">Cancel</string>
+    <string name="choose_an_activity">• Choose an activity:</string>
+    <string name="tag_emotion">Tag emotion</string>
+    <string name="tag_activity">Tag Activity</string>
+    <string name="_10">10</string>
+    <string name="_9">9</string>
+    <string name="_8">8</string>
+    <string name="_7">7</string>
+    <string name="_6">6</string>
+    <string name="_5">5</string>
+    <string name="_4">4</string>
+    <string name="_3">3</string>
+    <string name="_2">2</string>
+    <string name="_1">1</string>
+    <string name="please_add_an_emotion">• Please add an additional emotion to better describe your feelings:</string>
+    <string name="type_here">Type here…</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="start_or_stop_a_session">• Start or Stop a session</string>
+    <string name="tag_an_emotion">• Tag/Log an Emotion</string>
+    <string name="tag_an_activity">• Tag/Log an Acitivty</string>
+    <string name="local_service_stopped">Service Stopped</string>
+    <string name="local_service_text">Empatica E4</string>
+    <string name="local_service_title">Sensor data processed in the background</string>
+    <string name="connection_status">• Connection Status:</string>
+    <string name="not_connected">Connection Status:</string>
+    <string name="batterylevel">Battery Level</string>
+    <string name="connect_to_your_device">• Connect to your device:</string>
+    <string name="battery">Battery level:</string>
+    <string name="add_activity">• Please add an additional activity to more accurately describe it:</string>
+    <string name="log_activity">Log Activity</string>
+    <string name="Select_dateTime">• Please select the date, the start and the end of the activity</string>
+    <string name="date">Date</string>
+    <string name="start_time">Start</string>
+    <string name="end_time">End</string>
+    <string name="not_selected">Not selected</string>
+    <string name="login">Login</string>
+    <string name="please_enter_your_id_number">• Please enter your 3 digit ID number</string>
+    <string name="oxygen_saturation">Sp02</string>
+    <string name="pulse_rate">PR</string>
+    <string name="perfusion_index">PI</string>
+    <string name="pleth_variability_index">PVI</string>
+    <string name="galvanic_skin_response">GSR</string>
+    <string name="index_bioligical_integrity">IBI</string>
+    <string name="systolic_blood_presure">SBP</string>
+    <string name="temperature">T (ºC)</string>
+    <string name="respiratory_rate">RR</string>
+    <string name="heart_rate">HR</string>
+    <string name="level_of_consciousness">AVPU</string>
+    <string name="historical">historical</string>
+    <string name="graphs">graphs</string>
+    <string name="score">EWScore</string>
+    <string name="value">Value</string>
+    <string name="no_value">--</string>
+    <string name="info_spo2">Complete this with SpO2 meaning and importance</string>
+    <string name="oxi_connection_status">Oximeter Status:</string>
+    <string name="oxi_name">Oximeter Name: </string>
+    <string name="title_historical">HISTORICAL VALUES</string>
+    <string name="explain_historical">
+
+        <b>1. The main importance of historic values is to have a record of your personal health history.></b>
+        \n\n<b>2. By clicking on a specific date you will be able to have a deeper look in your previous results, and in the average, maximum and minimum measurements of any session.</b>
+
+
+    </string>
+    <string name="about">
+        <b>About this application</b>
+
+        \n\nFor any questions or feedback, please contact Florian Wende e1126346@student.tuwien.ac.at\n
+
+        \n\n<b>1. Invitation to Participate</b>\n
+        You are being invited to participate in this research study to find information relevant to emotions found in certain bio-signals measured.
+        Your participation allows us to create a better understanding and establish a better correlation between different factors. Consequently, this will help us
+        in improving our emotion recognition algorithms and be able to help people who cannot properly express their own emotion, to communicate their feelings and needs.
+
+        \n\n<b>2. Purpose of the Letter</b>\n
+        The purpose of this letter is to provide you with information required for you to make an informed decision regarding participation in this research.
+
+        \n\n<b>3. Purpose of this Study</b>\n
+        The main purpose of this study is to collect necessary data for establishing meaningful correlation necessary for emotion recognition using bio-signals. This will allow us to obtain a better understanding of the requirements for creating a system that –among others- can help individuals in need of a better communication of their feelings with outside world (e.g., a main target group consists of autistic children).
+
+        \n\n<b>4. Inclusion Criteria</b>\n
+        Individuals who are in perfect mental health and have no history of medical illness attributed to heart disease, respiration, skin or central nervous system disorder are eligible to participate in this study.
+
+        \n\n<b>5. Exclusion Criteria</b>\n
+        Individuals with mental, heart-disease or skin disorders are excluded.
+
+        \n\n<b>6. Study Procedures</b>\n
+        If you agree to participate, you will be asked to log your emotions and activities using the E4 Smartwatch and the Android Application provided to you.
+        The emotions include (among others): happiness (joy), interest, anger, annoyance, frustration, boredom, disgust, sadness, pensiveness, surprise, fear, anxiety, admiration, and pain
+        The activities include (among others): walking, running, jogging, taking stairs, relaxing, studying, sleeping, and eating.
+
+        \n\n<b>7. Possible Risks and Harms</b>\n
+        There are no known or anticipated risks or discomforts associated with participation in this study.
+
+        \n\n<b>8. Possible Benefits</b>\n
+        You may not directly benefit from participating in this study, however, it is our strong belief that the information gathered by this study will hopefully provide benefits to the society as a whole.
+
+        \n\n<b>9. Compensation</b>\n
+        You will not be compensated for your participation in this research.
+
+        \n\n<b>10. Voluntary Participation</b>\n
+        Participation in this study is voluntary. You may refuse to participate or withdraw from the study at any time with no consequence.
+
+        \n\n<b>11. Confidentiality</b>\n
+        All the collected personal data will remain confidential and accessible only to the investigators of this study. All the technical data (bio-signals and the result of your self-assessment test) will be anonymized and stored. If any part of the data is published (e.g., in an article, or online data base), it will be in anonymous format, that is, your personal data(name, age, etc.) will not be used or made available in the public domain.
+        If you choose to withdraw from this study, your data will be removed and destroyed from our database. While we will do our best to protect your information there is no guarantee that we will be able to do so.
+
+        \n\n<b>12.	Contacts for Further Information</b>\n
+        If you require any further information regarding this research project or your participation in the study you may contact the principal investigator or the conductor of the experiment. Necessary contact information are available on top of the first page.
+
+        \n\n<b>13. Publication</b>\n
+        If the results of the study are published, your name will not be used. If you would like to receive a copy of any potential study results, please contact the principal investigator or the conductor of the experiment.
+
+        \n\n<b>14.	Consent</b>\n
+        By using this app you indicate to have read, understood, and when necessary agreed with the information and procedures as they were provided to you here.
+    </string>
+
+    <string-array name="array_emotions">
+        <item>…</item>
+        <item>Happiness</item>
+        <item>Interest</item>
+        <item>Anger</item>
+        <item>Annoyance</item>
+        <item>Frustration</item>
+        <item>Boredom</item>
+        <item>Disgust</item>
+        <item>Pensiveness</item>
+        <item>Surprise</item>
+        <item>Fear</item>
+        <item>Anxiety</item>
+        <item>Admiration</item>
+        <item>In pain</item>
+    </string-array>
+
+    <string-array name="array_activities">
+        <item>…</item>
+        <item>Sitting</item>
+        <item>Walking</item>
+        <item>Running</item>
+        <item>Jogging</item>
+        <item>Stairs</item>
+        <item>Relaxing</item>
+        <item>Studying</item>
+        <item>Sleeping</item>
+        <item>Eating</item>
+    </string-array>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="id_number">ID Number:</string>
+    <string name="log_emotion">Log Emotion</string>
+    <string name="EWS_Score">• Early Warning Score</string>
+    <string name="validation">• Validate results</string>
+</resources>
