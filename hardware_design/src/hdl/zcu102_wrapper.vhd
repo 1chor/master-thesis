@@ -18,21 +18,7 @@ use UNISIM.VCOMPONENTS.ALL;
 
 entity zcu102_wrapper is
   port (
-    HDMI_TX_CLK_N_OUT : out STD_LOGIC;
-    HDMI_TX_CLK_P_OUT : out STD_LOGIC;
-    HDMI_TX_DAT_N_OUT : out STD_LOGIC_VECTOR ( 2 downto 0 );
-    HDMI_TX_DAT_P_OUT : out STD_LOGIC_VECTOR ( 2 downto 0 );
     LED : out STD_LOGIC_VECTOR ( 7 downto 0 );
-    SI5324_LOL_IN : in STD_LOGIC;
-    SI5324_RST_OUT : out STD_LOGIC_VECTOR ( 0 to 0 );
-    TX_DDC_OUT_scl_io : inout STD_LOGIC;
-    TX_DDC_OUT_sda_io : inout STD_LOGIC;
-    TX_EN_OUT : out STD_LOGIC_VECTOR ( 0 to 0 );
-    TX_HPD_IN : in STD_LOGIC;
-    TX_REFCLK_N_IN : in STD_LOGIC;
-    TX_REFCLK_P_IN : in STD_LOGIC;
-    fmch_iic_scl_io : inout STD_LOGIC;
-    fmch_iic_sda_io : inout STD_LOGIC;
     reset : in STD_LOGIC
   );
 end zcu102_wrapper;
@@ -48,31 +34,9 @@ architecture STRUCTURE of zcu102_wrapper is
   ------------------------------------------
   
   component zcu102 is
-  port (
-    TX_EN_OUT : out STD_LOGIC_VECTOR ( 0 to 0 );
-    HDMI_TX_CLK_N_OUT : out STD_LOGIC;
-    HDMI_TX_CLK_P_OUT : out STD_LOGIC;
-    HDMI_TX_DAT_N_OUT : out STD_LOGIC_VECTOR ( 2 downto 0 );
-    HDMI_TX_DAT_P_OUT : out STD_LOGIC_VECTOR ( 2 downto 0 );
-    TX_HPD_IN : in STD_LOGIC;
+  port (    
     LED : out STD_LOGIC_VECTOR ( 7 downto 0 );
-    reset : in STD_LOGIC;
-    TX_REFCLK_N_IN : in STD_LOGIC;
-    TX_REFCLK_P_IN : in STD_LOGIC;
-    SI5324_LOL_IN : in STD_LOGIC;
-    SI5324_RST_OUT : out STD_LOGIC_VECTOR ( 0 to 0 );
-    fmch_iic_scl_i : in STD_LOGIC;
-    fmch_iic_scl_o : out STD_LOGIC;
-    fmch_iic_scl_t : out STD_LOGIC;
-    fmch_iic_sda_i : in STD_LOGIC;
-    fmch_iic_sda_o : out STD_LOGIC;
-    fmch_iic_sda_t : out STD_LOGIC;
-    TX_DDC_OUT_scl_i : in STD_LOGIC;
-    TX_DDC_OUT_scl_o : out STD_LOGIC;
-    TX_DDC_OUT_scl_t : out STD_LOGIC;
-    TX_DDC_OUT_sda_i : in STD_LOGIC;
-    TX_DDC_OUT_sda_o : out STD_LOGIC;
-    TX_DDC_OUT_sda_t : out STD_LOGIC;
+    reset : in STD_LOGIC;    
     -- S_AXI interface for simple_filter
     s_axi_aclk : out STD_LOGIC;
     peripheral_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 );
@@ -97,20 +61,7 @@ architecture STRUCTURE of zcu102_wrapper is
     M05_AXI_rready : out STD_LOGIC
   );
   end component zcu102;
-  
-  ------------------------------------------
-  -- declare IOBUF instance
-  ------------------------------------------
-  
-  component IOBUF is
-  port (
-    I : in STD_LOGIC;
-    O : out STD_LOGIC;
-    T : in STD_LOGIC;
-    IO : inout STD_LOGIC
-  );
-  end component IOBUF;
-  
+    
   ------------------------------------------
   -- declare simple_filter instance
   ------------------------------------------
@@ -171,19 +122,7 @@ architecture STRUCTURE of zcu102_wrapper is
   ------------------------------------------
   -- external signal declarations
   ------------------------------------------
-  
-  signal TX_DDC_OUT_scl_i : STD_LOGIC;
-  signal TX_DDC_OUT_scl_o : STD_LOGIC;
-  signal TX_DDC_OUT_scl_t : STD_LOGIC;
-  signal TX_DDC_OUT_sda_i : STD_LOGIC;
-  signal TX_DDC_OUT_sda_o : STD_LOGIC;
-  signal TX_DDC_OUT_sda_t : STD_LOGIC;
-  signal fmch_iic_scl_i : STD_LOGIC;
-  signal fmch_iic_scl_o : STD_LOGIC;
-  signal fmch_iic_scl_t : STD_LOGIC;
-  signal fmch_iic_sda_i : STD_LOGIC;
-  signal fmch_iic_sda_o : STD_LOGIC;
-  signal fmch_iic_sda_t : STD_LOGIC;
+    
   
   ------------------------------------------
   -- simple_filter signal declarations
@@ -213,65 +152,13 @@ architecture STRUCTURE of zcu102_wrapper is
   signal M05_AXI_rready : STD_LOGIC;
 
 begin
-
-  ------------------------------------------
-  -- instantiate IOBUF for TX_DDC_OUT_scl
-  ------------------------------------------
-  
-  TX_DDC_OUT_scl_iobuf: component IOBUF
-    port map (
-      I => TX_DDC_OUT_scl_o,
-      IO => TX_DDC_OUT_scl_io,
-      O => TX_DDC_OUT_scl_i,
-      T => TX_DDC_OUT_scl_t
-    );
-    
-  ------------------------------------------
-  -- instantiate IOBUF for TX_DDC_OUT_sda
-  ------------------------------------------
-  
-  TX_DDC_OUT_sda_iobuf: component IOBUF
-    port map (
-      I => TX_DDC_OUT_sda_o,
-      IO => TX_DDC_OUT_sda_io,
-      O => TX_DDC_OUT_sda_i,
-      T => TX_DDC_OUT_sda_t
-    );
-    
-  ------------------------------------------
-  -- instantiate IOBUF for fmch_iic_scl
-  ------------------------------------------
-    
-  fmch_iic_scl_iobuf: component IOBUF
-    port map (
-      I => fmch_iic_scl_o,
-      IO => fmch_iic_scl_io,
-      O => fmch_iic_scl_i,
-      T => fmch_iic_scl_t
-    );
-
-  ------------------------------------------
-  -- instantiate IOBUF for fmch_iic_sda
-  ------------------------------------------
-  
-  fmch_iic_sda_iobuf: component IOBUF
-    port map (
-      I => fmch_iic_sda_o,
-      IO => fmch_iic_sda_io,
-      O => fmch_iic_sda_i,
-      T => fmch_iic_sda_t
-    );
-
+ 
   ------------------------------------------
   -- instantiate block diagram instance
   ------------------------------------------
 
   zcu102_i: component zcu102
-    port map (
-      HDMI_TX_CLK_N_OUT => HDMI_TX_CLK_N_OUT,
-      HDMI_TX_CLK_P_OUT => HDMI_TX_CLK_P_OUT,
-      HDMI_TX_DAT_N_OUT(2 downto 0) => HDMI_TX_DAT_N_OUT(2 downto 0),
-      HDMI_TX_DAT_P_OUT(2 downto 0) => HDMI_TX_DAT_P_OUT(2 downto 0),
+    port map (      
       LED(7 downto 0) => LED(7 downto 0),
       M05_AXI_araddr(31 downto 0) => M05_AXI_araddr(31 downto 0),
       M05_AXI_arprot(2 downto 0) => M05_AXI_arprot(2 downto 0),
@@ -291,32 +178,14 @@ begin
       M05_AXI_wdata(31 downto 0) => M05_AXI_wdata(31 downto 0),
       M05_AXI_wready => M05_AXI_wready,
       M05_AXI_wstrb(3 downto 0) => M05_AXI_wstrb(3 downto 0),
-      M05_AXI_wvalid => M05_AXI_wvalid,
-      SI5324_LOL_IN => SI5324_LOL_IN,
-      SI5324_RST_OUT(0) => SI5324_RST_OUT(0),
-      TX_DDC_OUT_scl_i => TX_DDC_OUT_scl_i,
-      TX_DDC_OUT_scl_o => TX_DDC_OUT_scl_o,
-      TX_DDC_OUT_scl_t => TX_DDC_OUT_scl_t,
-      TX_DDC_OUT_sda_i => TX_DDC_OUT_sda_i,
-      TX_DDC_OUT_sda_o => TX_DDC_OUT_sda_o,
-      TX_DDC_OUT_sda_t => TX_DDC_OUT_sda_t,
-      TX_EN_OUT(0) => TX_EN_OUT(0),
-      TX_HPD_IN => TX_HPD_IN,
-      TX_REFCLK_N_IN => TX_REFCLK_N_IN,
-      TX_REFCLK_P_IN => TX_REFCLK_P_IN,
-      fmch_iic_scl_i => fmch_iic_scl_i,
-      fmch_iic_scl_o => fmch_iic_scl_o,
-      fmch_iic_scl_t => fmch_iic_scl_t,
-      fmch_iic_sda_i => fmch_iic_sda_i,
-      fmch_iic_sda_o => fmch_iic_sda_o,
-      fmch_iic_sda_t => fmch_iic_sda_t,
+      M05_AXI_wvalid => M05_AXI_wvalid,      
       peripheral_aresetn(0) => peripheral_aresetn(0),
       reset => reset,
       s_axi_aclk => s_axi_aclk
     );
     
   ------------------------------------------
-  -- instantiate block diagram instance
+  -- instantiate simple_filter instance
   ------------------------------------------
   
   simple_filter_0: component simple_filter
