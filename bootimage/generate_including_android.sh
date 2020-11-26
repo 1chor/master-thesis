@@ -113,20 +113,44 @@ fi
 
 ########################################################################
 
-if [ ! -d android/packages/apps/SoC ]; then
-
+if [ -f client/app/build/outputs/apk/debug/app-debug.apk ]; then
+	
 	pretty_header "Preparing client app"
 	
 	cd android
 	
-	mkdir packages/apps/SoC
+	if [ ! -d packages/apps/SoC ]; then
+		mkdir packages/apps/SoC
+	fi
+	
 	cp ../client/app/build/outputs/apk/debug/app-debug.apk packages/apps/SoC/SoC_Client.apk
-	cp ../build-files/app/Android.mk packages/apps/SoC/
+	cp ../build-files/app/client/Android.mk packages/apps/SoC/
 	cp ../build-files/app/core.mk build/target/product/
 	
 	cd ..
 
 	echo_green "Preparing client app done"
+fi
+
+########################################################################
+
+if [ -f empaticaE4/app/build/outputs/apk/debug/app-debug.apk ]; then
+	
+	pretty_header "Preparing empaticaE4 app"
+	
+	cd android
+	
+	if [ ! -d packages/apps/empaticaE4 ]; then
+		mkdir packages/apps/empaticaE4
+	fi
+	
+	cp ../empaticaE4/app/build/outputs/apk/debug/app-debug.apk packages/apps/empaticaE4/empaticaE4.apk
+	cp ../build-files/app/empaticaE4/Android.mk packages/apps/empaticaE4/
+	cp ../build-files/app/core.mk build/target/product/
+	
+	cd ..
+
+	echo_green "Preparing empaticaE4 app done"
 fi
 
 ########################################################################

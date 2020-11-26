@@ -60,7 +60,8 @@ PRODUCT_PACKAGES += \
     VpnDialogs \
     vr \
     MmsService \
-    SoC
+    SoC \
+    empaticaE4
 
 # The set of packages whose code can be loaded by the system server.
 PRODUCT_SYSTEM_SERVER_APPS += \
