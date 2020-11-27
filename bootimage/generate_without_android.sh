@@ -25,6 +25,7 @@ function depends () {
 
 if [ "$1" == "clean" ]; then
 	pretty_header "Cleaning repository"
+	cd ..
 	
 	#Linux Kernel
 	cd mpsoc-linux-xlnx 
