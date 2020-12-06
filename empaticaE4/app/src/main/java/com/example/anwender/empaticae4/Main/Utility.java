@@ -11,9 +11,11 @@ import android.widget.Toast;
 
 import com.example.anwender.empaticae4.EWS.ConnectOximeter;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -72,6 +74,38 @@ public final class Utility {
         else{
             Log.e("WriteToCsv", "Cannot write to storage!");
         }
+    }
+
+    //Read from File
+    public static float readfromCSV(Context context,File path, String Filename, int linenumber){
+
+        float value = 0;
+
+        if (isExternalStorageWritable()) { //If it is writable, it is readable too
+            try {
+                String line;
+
+                //open file @ path/filename
+                File file = new File(path, Filename);
+
+                if (file.exists()) {
+                    FileReader fr = new FileReader(file);
+                    BufferedReader in = new BufferedReader(fr);
+                    in.skip(linenumber);
+                    line = in.readLine();
+                    value = Float.parseFloat(line);
+                    in.close();
+                    toastie(context,"Entry read");
+                }
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            Log.e("readfromCSV", "Cannot read from storage!");
+        }
+        return value;
     }
 
 
