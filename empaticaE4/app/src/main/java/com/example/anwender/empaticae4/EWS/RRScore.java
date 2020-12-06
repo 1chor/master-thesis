@@ -37,8 +37,6 @@ public class RRScore{
         return featEx.getRsFM();
     }
 
-
-
     private List<int[]> windows(int rsFmSize){
 
         List<int[]> wd = new ArrayList<>();

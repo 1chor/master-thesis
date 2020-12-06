@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 };
 
-                //Send sogin quest to the server
+                //Send login request to the server
                 LoginRequest loginRequest = new LoginRequest(email, password, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 queue.add(loginRequest);
