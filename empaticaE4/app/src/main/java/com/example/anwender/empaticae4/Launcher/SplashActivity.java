@@ -34,7 +34,13 @@ public class SplashActivity extends AppCompatActivity {
         // if the shared preference does not exist the user is not logged in => send him to the loginAcitivty
         } else {
             Log.d("Splash Activity", "User is not logged in");
-            final Intent intent = new Intent(this, LoginActivity.class);
+
+            /*
+            // out-commented by Andreas Dejmek, as no login is available
+                //final Intent intent = new Intent(this, LoginActivity.class);
+            */
+            final Intent intent = new Intent(this, MainActivity.class); //use MainActivity instead
+
             startActivity(intent);
             finish();
 

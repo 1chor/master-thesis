@@ -151,7 +151,13 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
 
         //Get user id from shared preferences
         SharedPreferences login_status = getSharedPreferences("Login_status", Context.MODE_PRIVATE);
-        userID = (login_status.getString("userID", ""));
+
+        /*
+        // out-commented by Andreas Dejmek, as no login is available
+            //userID = (login_status.getString("userID", ""));
+        */
+        userID = "1"; //use pseudo ID instead
+
         userID=String.format("%010d", Integer.parseInt(userID)); //Pad idNumber with 0s for a constant length
         Log.i("MainActivity", "userID= " + userID);
 
@@ -162,8 +168,12 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
 
         //Intent to start the service (foreground)
         serviceSession = new Intent(this, MyService.class);
-        //Initialize the device manager to communicate with the E4
-        initEmpaticaDeviceManager();
+
+        /*
+        // out-commented by Andreas Dejmek, as no device is available
+            //Initialize the device manager to communicate with the E4
+            //initEmpaticaDeviceManager();
+        */
 
         //Start test
         test_didReceiveBVP();
