@@ -325,40 +325,40 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
         }
     }
 
-    public void test_didReceiveBVP()
-    {
-        int linenumber = 0;
+    public void test_didReceiveBVP() {
         float bvp = 0;
 
-        bvp = Utility.readfromCSV(this, path, "BVP1.csv", linenumber);
+        for (int i = 0; i < 9297; i++) {
+            bvp = Utility.readfromCSV(this, path, "BVP1.csv", i);
 
-        //When called for the first time, write sample frequency (= 64Hz) and start timestamp in the first 2 rows
-        if( !flagBVP ){
-            flagBVP=true;
-            firstWindow = true;
 
-        } else{
+            //When called for the first time, write sample frequency (= 64Hz) and start timestamp in the first 2 rows
+            if (!flagBVP) {
+                flagBVP = true;
+                firstWindow = true;
 
-            //Here we need to skip (to avoid problems, the first 8 samples (zeros)
-            filtersInit++;
-            if(filtersInit >9 || !firstWindow){
-                bvpSamples.add(filters.filteredData(bvp));
-                if(bvpSamples.size() == 1728){
-                    RRScore analyze = new RRScore(bvpSamples);
-                    rrSamples.add(new Entry(rrSamples.size(),analyze.runAnalysis()));
-                    rrScores.add(new Entry(rrScores.size(),getRREWScore(analyze.runAnalysis())));
-                    rrHist.add((float) analyze.runAnalysis());
-                    rrHistScore.add(getRREWScore(analyze.runAnalysis()));
-                    setEWSValue();
-                    setHistFiles();
-                    Log.i("RR-Ready","RR analysis finished!, Ready to show!");
-                    bvpSamples.clear();
-                    analyze.clearBuffer();
-                    firstWindow=false;
+            } else {
+
+                //Here we need to skip (to avoid problems, the first 8 samples (zeros)
+                filtersInit++;
+                if (filtersInit > 9 || !firstWindow) {
+                    bvpSamples.add(filters.filteredData(bvp));
+                    if (bvpSamples.size() == 1728) {
+                        RRScore analyze = new RRScore(bvpSamples);
+                        rrSamples.add(new Entry(rrSamples.size(), analyze.runAnalysis()));
+                        rrScores.add(new Entry(rrScores.size(), getRREWScore(analyze.runAnalysis())));
+                        rrHist.add((float) analyze.runAnalysis());
+                        rrHistScore.add(getRREWScore(analyze.runAnalysis()));
+                        setEWSValue();
+                        setHistFiles();
+                        Log.i("RR-Ready", "RR analysis finished!, Ready to show!");
+                        bvpSamples.clear();
+                        analyze.clearBuffer();
+                        firstWindow = false;
+                    }
                 }
             }
         }
-        linenumber++;
     }
 
     int bvpFreq=64;

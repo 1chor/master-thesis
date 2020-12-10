@@ -100,8 +100,15 @@ public final class Utility {
                 if (file.exists()) {
                     FileReader fr = new FileReader(file);
                     BufferedReader in = new BufferedReader(fr);
-                    in.skip(linenumber);
+
+                    //skip lines
+                    for (int i = 0; i < linenumber; i++) {
+                        in.readLine();
+                    }
+
+                    //read line from linenumber
                     line = in.readLine();
+                    //convert line to float
                     value = Float.parseFloat(line);
                     in.close();
                     toastie(context,"Entry read");
