@@ -46,8 +46,17 @@ public final class Utility {
         //path will be storage/sdcard/documents/foldername
         File path = new File(documents, folderName);
         Log.d("getStorageDir", path.toString());
-        if (!path.mkdirs()) {
-            Log.e("getStorageDir", "E4 Directory not created");
+
+        if (path.exists() && path.isDirectory()) {
+            Log.i("getStorageDir", "E4 Directory is already available");
+        }
+        else {
+            if (!path.mkdirs()) {
+                Log.e("getStorageDir", "E4 Directory not created");
+            }
+            else {
+                Log.i("getStorageDir", "E4 Directory created");
+            }
         }
         return path;
     }
