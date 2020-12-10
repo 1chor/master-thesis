@@ -174,9 +174,6 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
             //Initialize the device manager to communicate with the E4
             //initEmpaticaDeviceManager();
         */
-
-        //Start test
-        test_didReceiveBVP();
     }
 
     private  void initializeLayout(){
@@ -207,10 +204,14 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
         Button btnLogActivity = findViewById(R.id.button_log_activity);
         btnLogActivity.setOnClickListener(this);
 
-
         Button btnEWSActivity = findViewById(R.id.button_EWS_Score);
         btnEWSActivity.setOnClickListener(this);
 
+        Button btnTestRR = findViewById(R.id.button_test_RR);
+        btnTestRR.setOnClickListener(this);
+
+        Button btnConfigRR = findViewById(R.id.button_config_RR);
+        btnConfigRR.setOnClickListener(this);
     }
 
 
@@ -220,7 +221,6 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                 connectDevice();
                 break;
             case R.id.button_stop:
-
                 onDisconnect();
                 break;
             case R.id.button_emotion:
@@ -277,9 +277,14 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                 startActivity(LoginActivity);
                 finish();
                 break;
+            case R.id.button_test_RR:
+                //Start test
+                test_didReceiveBVP();
+                break;
+            case R.id.button_config_RR:
+                //Create new class to configure the RR
+                break;
         }
-
-
     }
 
     @Override
