@@ -29,6 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -90,6 +91,9 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
     private TextView connectionStatus;
     private TextView batteryLevel;
     private TextView connectedDevice;
+
+    private ProgressBar progressBar;
+    private Handler handler = new Handler();
 
     private Intent serviceSession;
     private BluetoothReceiver bluetoothReceiver;
@@ -212,6 +216,8 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
 
         Button btnConfigRR = findViewById(R.id.button_config_RR);
         btnConfigRR.setOnClickListener(this);
+
+        progressBar = findViewById(R.id.progressBar);
     }
 
 
@@ -280,6 +286,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
             case R.id.button_test_RR:
                 //Start test
                 test_didReceiveBVP();
+                Utility.toastie(getApplicationContext(),"RR Test finished!");
                 break;
             case R.id.button_config_RR:
                 //Create new class to configure the RR
@@ -331,39 +338,57 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
     }
 
     public void test_didReceiveBVP() {
-        float bvp = 0;
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final int max = 40920;
+                float bvp = 0;
 
-        for (int i = 0; i < 9297; i++) {
-            bvp = Utility.readfromCSV(this, path, "BVP1.csv", i);
+                for (int i = 0; i < max; i++) {
+                    final int progress = i + 1;
 
+                    bvp = Utility.readfromCSV(getApplicationContext(), path, "BVP.csv", i);
 
-            //When called for the first time, write sample frequency (= 64Hz) and start timestamp in the first 2 rows
-            if (!flagBVP) {
-                flagBVP = true;
-                firstWindow = true;
+                    //When called for the first time, write sample frequency (= 64Hz) and start timestamp in the first 2 rows
+                    if (!flagBVP) {
+                        flagBVP = true;
+                        firstWindow = true;
 
-            } else {
+                    } else {
 
-                //Here we need to skip (to avoid problems, the first 8 samples (zeros)
-                filtersInit++;
-                if (filtersInit > 9 || !firstWindow) {
-                    bvpSamples.add(filters.filteredData(bvp));
-                    if (bvpSamples.size() == 1728) {
-                        RRScore analyze = new RRScore(bvpSamples);
-                        rrSamples.add(new Entry(rrSamples.size(), analyze.runAnalysis()));
-                        rrScores.add(new Entry(rrScores.size(), getRREWScore(analyze.runAnalysis())));
-                        rrHist.add((float) analyze.runAnalysis());
-                        rrHistScore.add(getRREWScore(analyze.runAnalysis()));
-                        setEWSValue();
-                        setHistFiles();
-                        Log.i("RR-Ready", "RR analysis finished!, Ready to show!");
-                        bvpSamples.clear();
-                        analyze.clearBuffer();
-                        firstWindow = false;
+                        //Here we need to skip (to avoid problems, the first 8 samples (zeros)
+                        filtersInit++;
+                        if (filtersInit > 9 || !firstWindow) {
+                            bvpSamples.add(filters.filteredData(bvp));
+                            if (bvpSamples.size() == 1728) {
+                                RRScore analyze = new RRScore(bvpSamples);
+                                rrSamples.add(new Entry(rrSamples.size(), analyze.runAnalysis()));
+                                rrScores.add(new Entry(rrScores.size(), getRREWScore(analyze.runAnalysis())));
+                                rrHist.add((float) analyze.runAnalysis());
+                                rrHistScore.add(getRREWScore(analyze.runAnalysis()));
+                                setEWSValue();
+                                setHistFiles();
+                                Log.i("RR-Ready", "RR analysis finished!, Ready to show!");
+                                bvpSamples.clear();
+                                analyze.clearBuffer();
+                                firstWindow = false;
+                            }
+                        }
                     }
+
+                    //Update the progress bar
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            //Set progress bar
+                            progressBar.setProgress((progress * 100) / max);
+                        }
+                    });
                 }
+                Log.i("RR-Finish", "RR Test finished!");
             }
-        }
+        });
+        thread.start();
     }
 
     int bvpFreq=64;

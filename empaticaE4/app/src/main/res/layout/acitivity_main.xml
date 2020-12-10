@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:orientation="vertical"
     android:weightSum="1">
-
 
 
     <LinearLayout
@@ -18,14 +17,14 @@
             android:id="@+id/text_connection_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:textSize="15sp"
-            android:textColor="#000000"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
             android:layout_weight="0.5"
-            android:text="@string/not_connected" />
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            android:text="@string/not_connected"
+            android:textColor="#000000"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/text_device_name"
@@ -53,14 +52,14 @@
             android:id="@+id/text_battery"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:textSize="15sp"
-            android:textColor="#000000"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
             android:layout_weight="0.5"
-            android:text="@string/battery" />
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            android:text="@string/battery"
+            android:textColor="#000000"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/text_battery_level"
@@ -82,10 +81,10 @@
         android:id="@+id/text_session"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:paddingTop="15dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
         android:text="@string/connect_to_your_device"
         android:textColor="#000000"
         android:textSize="18sp" />
@@ -116,10 +115,10 @@
         android:id="@+id/text_tag_emotion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:paddingTop="15dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
         android:text="@string/tag_an_emotion"
         android:textColor="#000000"
         android:textSize="18sp" />
@@ -134,26 +133,25 @@
             android:id="@+id/button_emotion"
             android:layout_width="175dp"
             android:layout_height="50dp"
-            android:text="@string/tag_emotion"
             android:layout_weight="0.5"
-             />
+            android:text="@string/tag_emotion" />
 
         <Button
             android:id="@+id/button_log_emotion"
             android:layout_width="175dp"
             android:layout_height="50dp"
-            android:text="@string/log_emotion"
-            android:layout_weight="0.5"/>
+            android:layout_weight="0.5"
+            android:text="@string/log_emotion" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/text_tag_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:paddingTop="15dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
         android:text="@string/tag_an_activity"
         android:textColor="#000000"
         android:textSize="18sp" />
@@ -168,15 +166,15 @@
             android:id="@+id/button_activity"
             android:layout_width="175dp"
             android:layout_height="50dp"
-            android:text="@string/tag_activity"
-            android:layout_weight="0.5"/>
+            android:layout_weight="0.5"
+            android:text="@string/tag_activity" />
 
         <Button
             android:id="@+id/button_log_activity"
             android:layout_width="175dp"
             android:layout_height="50dp"
-            android:text="@string/log_activity"
-            android:layout_weight="0.5"/>
+            android:layout_weight="0.5"
+            android:text="@string/log_activity" />
     </LinearLayout>
 
 
@@ -184,10 +182,10 @@
         android:id="@+id/text_EWS_Score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:paddingTop="15dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
         android:text="@string/EWS_Score"
         android:textColor="#000000"
         android:textSize="18sp" />
@@ -224,6 +222,7 @@
             android:text="@string/test_RR"
             android:textColor="#000000"
             android:textSize="18sp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -245,6 +244,25 @@
             android:layout_height="50dp"
             android:layout_weight="0.5"
             android:text="@string/config_RR" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginRight="23dp"
+            android:layout_weight="0.5"
+            android:max="100"
+            android:progress="0" />
     </LinearLayout>
 
     <LinearLayout

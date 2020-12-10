@@ -111,7 +111,7 @@ public final class Utility {
                     //convert line to float
                     value = Float.parseFloat(line);
                     in.close();
-                    toastie(context,"Entry read");
+                    //toastie(context,"Entry read");
                 }
             }
             catch (IOException e) {
