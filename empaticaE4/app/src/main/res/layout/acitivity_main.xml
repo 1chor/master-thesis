@@ -31,15 +31,15 @@
             android:id="@+id/text_device_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0.5"
             android:gravity="end"
             android:paddingLeft="10dp"
-            android:textSize="15sp"
-            android:textColor="#000000"
-            android:paddingRight="10dp"
             android:paddingTop="5dp"
+            android:paddingRight="10dp"
             android:paddingBottom="5dp"
-            android:layout_weight="0.5"
-            android:text="-" />
+            android:text="@string/devicename"
+            android:textColor="#000000"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -66,15 +66,15 @@
             android:id="@+id/text_battery_level"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="0.5"
             android:gravity="end"
             android:paddingLeft="10dp"
-            android:textSize="15sp"
-            android:textColor="#000000"
-            android:paddingRight="10dp"
             android:paddingTop="5dp"
+            android:paddingRight="10dp"
             android:paddingBottom="5dp"
-            android:layout_weight="0.5"
-            android:text="-" />
+            android:text="@string/text_batterylevel"
+            android:textColor="#000000"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -101,14 +101,14 @@
             android:layout_width="175dp"
             android:layout_height="50dp"
             android:layout_weight="0.5"
-            android:text="Connect" />
+            android:text="@string/text_connect" />
 
         <Button
             android:id="@+id/button_stop"
             android:layout_width="175dp"
             android:layout_height="50dp"
             android:layout_weight="0.5"
-            android:text="Disconnect" />
+            android:text="@string/text_disconnect" />
 
     </LinearLayout>
 
@@ -203,16 +203,56 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="0.5"
-            android:text="EWS" />
+            android:text="@string/EWS" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dip"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/text_test_RR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingTop="15dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            android:text="@string/test_RR"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/button_test_RR"
+            android:layout_width="175dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:text="@string/button_test_RR" />
+
+        <Button
+            android:id="@+id/button_config_RR"
+            android:layout_width="175dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:text="@string/config_RR" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center|bottom"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/button_logout"

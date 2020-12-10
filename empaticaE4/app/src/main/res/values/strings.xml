@@ -32,7 +32,11 @@
     <string name="not_connected">Connection Status:</string>
     <string name="batterylevel">Battery Level</string>
     <string name="connect_to_your_device">• Connect to your device:</string>
+    <string name="text_connect">Connect</string>
+    <string name="text_disconnect">Disconnect</string>
     <string name="battery">Battery level:</string>
+    <string name="text_batterylevel">-</string>
+    <string name="devicename">-</string>
     <string name="add_activity">• Please add an additional activity to more accurately describe it:</string>
     <string name="log_activity">Log Activity</string>
     <string name="Select_dateTime">• Please select the date, the start and the end of the activity</string>
@@ -155,5 +159,10 @@
     <string name="id_number">ID Number:</string>
     <string name="log_emotion">Log Emotion</string>
     <string name="EWS_Score">• Early Warning Score</string>
+    <string name="EWS">EWS</string>
     <string name="validation">• Validate results</string>
+
+    <string name="test_RR">• Test Respiratory Rate</string>
+    <string name="button_test_RR">Test RR</string>
+    <string name="config_RR">Config RR</string>
 </resources>
