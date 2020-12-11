@@ -189,8 +189,6 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
 
         //Initialize Buttons
         btnStart = findViewById(R.id.button_start);
-
-
         btnStart.setOnClickListener(this);
 
         Button btnStop = findViewById(R.id.button_stop);
