@@ -165,4 +165,13 @@
     <string name="test_RR">• Test Respiratory Rate</string>
     <string name="button_test_RR">Test RR</string>
     <string name="config_RR">Config RR</string>
+    <string name="text_status">Configuration status:</string>
+    <string name="serverIP">Server IP address:</string>
+    <string name="hint_text">Enter server IP address: </string>
+    <string name="select_config">Select the configuration for RR:</string>
+    <string name="text_config">Configure</string>
+    <string name="radio_SDFT">Software DFT</string>
+    <string name="radio_HDFT">Xilinx Hardware DFT</string>
+    <string name="radio_HFFT">Xilinx Hardware FFT</string>
+    <string name="radio_custom_FFT">Custom FFT</string>
 </resources>
