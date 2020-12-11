@@ -289,7 +289,9 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                 Utility.toastie(getApplicationContext(),"RR Test finished!");
                 break;
             case R.id.button_config_RR:
-                //Create new class to configure the RR
+                final Intent ConfigActivity = new Intent(MainActivity.this, com.example.anwender.empaticae4.Configuration.ConfigActivity.class);
+                ConfigActivity.putExtra("Path", path); // Send the Path to save to
+                startActivity(ConfigActivity);
                 break;
         }
     }
