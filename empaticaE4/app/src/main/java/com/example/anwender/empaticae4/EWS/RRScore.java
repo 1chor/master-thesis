@@ -3,6 +3,8 @@ package com.example.anwender.empaticae4.EWS;
     Created by Cayetano on 10.02.2020
  */
 
+import com.example.anwender.empaticae4.Configuration.ConfigActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +42,7 @@ public class RRScore{
     private List<int[]> windows(int rsFmSize){
 
         List<int[]> wd = new ArrayList<>();
-        int windowSize = 100;
+        int windowSize = ConfigActivity.windowSize;
         for(int i=0;i<rsFmSize/windowSize;i++){
             wd.add(new int[]{(i*(windowSize)),(windowSize+i*(windowSize))});
         }

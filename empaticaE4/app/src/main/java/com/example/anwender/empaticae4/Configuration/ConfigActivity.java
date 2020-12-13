@@ -139,22 +139,27 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         switch (checkedRadioID) {
             case R.id.radioButton_SDFT:
                 repo_name = "SDFT"; //set name of server repository
+                windowSize = 100; //set WindowSize
                 break;
 
             case R.id.radioButton_HDFT:
                 repo_name = "HDFT"; //set name of server repository
+                //windowSize = ???; //set WindowSize
                 break;
 
             case R.id.radioButton_HFFT:
                 repo_name = "HFFT"; //set name of server repository
+                //windowSize = ???; //set WindowSize
                 break;
 
             case R.id.radioButton_custom_FFT:
                 repo_name = "custom_FFT"; //set name of server repository
+                //windowSize = ???; //set WindowSize
                 break;
 
             default: //equals to radioButton_SDFT
                 repo_name = "SDFT"; //set name of server repository
+                windowSize = 100; //set WindowSize
                 break;
         }
     }
