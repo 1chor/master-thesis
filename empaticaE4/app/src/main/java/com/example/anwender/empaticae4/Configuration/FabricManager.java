@@ -47,7 +47,7 @@ public class FabricManager {
                     Thread.currentThread();
                     Thread.sleep(1000);
 
-                    //wait until file exists
+                    //wait until file exists (hash ready)
                     File file = new File(hash);
                     while (!file.exists());
 
