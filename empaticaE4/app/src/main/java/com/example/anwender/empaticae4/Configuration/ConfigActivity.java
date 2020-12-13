@@ -1,17 +1,10 @@
 package com.example.anwender.empaticae4.Configuration;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -23,13 +16,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.anwender.empaticae4.EWS.EWSScore;
-import com.example.anwender.empaticae4.EWS.GraphHR;
-import com.example.anwender.empaticae4.EWS.GraphRR;
-import com.example.anwender.empaticae4.EWS.GraphSBP;
-import com.example.anwender.empaticae4.EWS.GraphSPO2;
-import com.example.anwender.empaticae4.EWS.GraphTemp;
-import com.example.anwender.empaticae4.EWS.Historical;
 import com.example.anwender.empaticae4.Main.MainActivity;
 import com.example.anwender.empaticae4.Main.Utility;
 import com.example.anwender.empaticae4.R;
@@ -63,7 +49,10 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
 
     private SharedPreferences mSharedPref;
     private boolean download;
-    private String repo_name;
+
+    //public variables
+    public static String repo_name = "SDFT"; //set default name of server repository
+    public static int windowSize = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +98,6 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         reconfigDriver = "partial.txt";
 
         download = false;
-        repo_name = "SDFT"; //set default name of server repository
 
         //Configure button
         mButtonConfig.setOnClickListener(new View.OnClickListener() {
@@ -222,6 +210,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         WordtoSpan.setSpan(new ForegroundColorSpan(colour), 0, WordtoSpan.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         mConsole.append(WordtoSpan);
     }
+
 
     //--------------------------------------------------------------------------------------------//
     //  NETWORK MANAGER CALLBACKS:

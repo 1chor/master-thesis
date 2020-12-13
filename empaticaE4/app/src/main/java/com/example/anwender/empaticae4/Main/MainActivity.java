@@ -42,23 +42,19 @@ import com.empatica.empalink.delegate.EmpaDataDelegate;
 import com.empatica.empalink.delegate.EmpaStatusDelegate;
 import com.example.anwender.empaticae4.EWS.RRScore;
 import com.example.anwender.empaticae4.EWS.SBP;
-import com.example.anwender.empaticae4.EWS.ScanOxi;
 import com.example.anwender.empaticae4.HttpUpload.FileUpload;
 import com.example.anwender.empaticae4.R;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.utils.FSize;
 
 import java.io.File;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity implements EmpaDataDelegate, EmpaStatusDelegate, View.OnClickListener {
