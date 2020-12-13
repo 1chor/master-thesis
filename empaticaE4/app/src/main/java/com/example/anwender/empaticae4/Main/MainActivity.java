@@ -40,6 +40,7 @@ import com.empatica.empalink.config.EmpaSensorType;
 import com.empatica.empalink.config.EmpaStatus;
 import com.empatica.empalink.delegate.EmpaDataDelegate;
 import com.empatica.empalink.delegate.EmpaStatusDelegate;
+import com.example.anwender.empaticae4.Configuration.ConfigActivity;
 import com.example.anwender.empaticae4.EWS.RRScore;
 import com.example.anwender.empaticae4.EWS.SBP;
 import com.example.anwender.empaticae4.HttpUpload.FileUpload;
@@ -278,6 +279,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                 finish();
                 break;
             case R.id.button_test_RR:
+                Log.i("Start RR Test", "Use " + ConfigActivity.repo_name + " method");
                 //Start test
                 test_didReceiveBVP();
                 Utility.toastie(getApplicationContext(),"RR Test finished!");
