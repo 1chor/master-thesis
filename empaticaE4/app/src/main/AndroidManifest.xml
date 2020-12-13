@@ -103,6 +103,10 @@
             android:configChanges="orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
+        <activity android:name=".Configuration.ConfigActivity"
+            android:configChanges="orientation"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
 
         <service
             android:name=".Main.MyService"
