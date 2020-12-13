@@ -1,5 +1,7 @@
 package com.example.anwender.empaticae4.EWS;
 
+import com.example.anwender.empaticae4.Configuration.ConfigActivity;
+
 import java.util.List;
 
 public class SpectralAnalysis {
@@ -11,12 +13,25 @@ public class SpectralAnalysis {
 
     //Constructor: Requires input signal
     public SpectralAnalysis(List<float[]> inputSignal){
-        this.signalSize=inputSignal.size();
-        this.argConstantPart = (Math.PI * 2)/signalSize;
-        Complex[] dft = calculateDFT(inputSignal);
-        List<double[]> spd = SPD(dft);
-        this.expSPD = spd;
-        this.domF = dominantFrequency(spd);
+        switch (ConfigActivity.repo_name) {
+            case "SDFT": //Software DFT
+                this.signalSize=inputSignal.size();
+                this.argConstantPart = (Math.PI * 2)/signalSize;
+                Complex[] dft = calculateDFT(inputSignal);
+                List<double[]> spd = SPD(dft);
+                this.expSPD = spd;
+                this.domF = dominantFrequency(spd);
+                break;
+
+            case "HDFT": //Hardware DFT
+                break;
+
+            case "HFFT": //Hardware FFT
+                break;
+
+            case "custom_FFT": //Custom FFT
+                break;
+        }
     }
 
     public double getDomF(){return this.domF;}
