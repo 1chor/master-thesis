@@ -6,13 +6,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.method.ScrollingMovementMethod;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -110,9 +114,10 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         mButtonConfig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mServerIP.getText().toString().isEmpty())
-                    Utility.toastie(getApplicationContext(), "Enter Server IP address!");
-                else {
+                if (mServerIP.getText().toString().isEmpty()) {
+                    //print with defined text colour
+                    printColour("Enter Server IP address!", Color.RED);
+                } else {
                     //Configure Network Manager and connect to server
                     mNetworkFragment.configure("http://" + mServerIP.getText() + ":5000/api/", repo_name);
 
@@ -156,7 +161,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
                 break;
 
             case R.id.radioButton_custom_FFT:
-                repo_name = "custom_FF"; //set name of server repository
+                repo_name = "custom_FFT"; //set name of server repository
                 break;
 
             default: //equals to radioButton_SDFT
@@ -200,7 +205,21 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
      * @param text
      */
     private void printDebug(String text) {
-        mConsole.append(text);
+        mConsole.append("\r\n" + text);
+    }
+
+
+    /**
+     * print message to user interface in defined colour
+     *
+     * @param text
+     * @param colour
+     */
+    private void printColour(String text, int colour) {
+        //change text colour only for one print
+        Spannable WordtoSpan = new SpannableString("\r\n" + text);
+        WordtoSpan.setSpan(new ForegroundColorSpan(colour), 0, WordtoSpan.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mConsole.append(WordtoSpan);
     }
 
     //--------------------------------------------------------------------------------------------//
