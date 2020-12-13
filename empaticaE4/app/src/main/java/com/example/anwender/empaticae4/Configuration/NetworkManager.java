@@ -93,7 +93,6 @@ public class NetworkManager extends android.support.v4.app.Fragment {
 
                     } else {
                         mCallback.printToTextBox("Connection failed.\r\n");
-                        debug("Connection failed.\r\n");
                     }
 
                 } catch (Exception e) {
@@ -196,10 +195,5 @@ public class NetworkManager extends android.support.v4.app.Fragment {
         void onDataAvailable(JSONObject json);
 
         void onDownloadComplete(Repository repo);
-    }
-
-
-    public void debug(Object o) {
-        System.out.println(o.toString());
     }
 }
