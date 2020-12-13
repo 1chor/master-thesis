@@ -109,6 +109,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         reconfigDriver = "partial.txt";
 
         download = false;
+        repo_name = "SDFT"; //set default name of server repository
 
         //Configure button
         mButtonConfig.setOnClickListener(new View.OnClickListener() {
