@@ -15,7 +15,7 @@ public class SpectralAnalysis {
     public SpectralAnalysis(List<float[]> inputSignal){
         switch (ConfigActivity.repo_name) {
             case "SDFT": //Software DFT
-                this.signalSize=inputSignal.size();
+                this.signalSize = inputSignal.size();
                 this.argConstantPart = (Math.PI * 2)/signalSize;
                 Complex[] dft = calculateDFT(inputSignal);
                 List<double[]> spd = SPD(dft);
