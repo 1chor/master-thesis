@@ -59,16 +59,22 @@ public class MsgProcessor {
     }
 
 
-    public void verifyBitstream(Repository repo) {
-        // calculate hash with the hardware blake2b module
-        byte[] hash_buffer = mCallback.calculateHash(repo.getFile());
-        String hash = new String(hash_buffer, StandardCharsets.US_ASCII);
+    public void verifyBitstream(Repository repo, boolean enable_hash) {
+        // check if hash calculation is enabled
+        if (enable_hash) {
+            // calculate hash with the hardware blake2b module
+            byte[] hash_buffer = mCallback.calculateHash(repo.getFile());
+            String hash = new String(hash_buffer, StandardCharsets.US_ASCII);
 
-        // compare with received hash from the server
-        if (hash.equals(repo.getChecksum())) {
-            mCallback.onVerifiedBitstream(repo, true);
+            // compare with received hash from the server
+            if (hash.equals(repo.getChecksum())) {
+                mCallback.onVerifiedBitstream(repo, true);
+            } else {
+                mCallback.onVerifiedBitstream(repo, false);
+            }
         } else {
-            mCallback.onVerifiedBitstream(repo, false);
+            // process without hash verification
+            mCallback.onVerifiedBitstream(repo, true);
         }
     }
 

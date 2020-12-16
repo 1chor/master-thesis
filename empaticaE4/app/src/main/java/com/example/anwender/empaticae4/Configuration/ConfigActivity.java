@@ -12,6 +12,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -41,6 +42,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
     private RadioButton radioButtonHDFT;
     private RadioButton radioButtonHFFT;
     private RadioButton radioButtonCustomFFT;
+    private CheckBox checkBoxhash;
 
     //filenames
     private String blake2bDriver;
@@ -49,6 +51,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
 
     private SharedPreferences mSharedPref;
     private boolean download;
+    private boolean enable_hash;
 
     //public variables
     public static String repo_name = "SDFT"; //set default name of server repository
@@ -66,7 +69,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         mConsole.setMovementMethod(new ScrollingMovementMethod());
         mServerIP = (TextView) findViewById(R.id.edit_serverIP);
 
-        //initialise Buttons
+        //initialise Button
         mButtonConfig = (Button) findViewById(R.id.button_config);
 
         //initialise RadioButtons
@@ -84,6 +87,9 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
                 doOnConfigChanged(group, checkedId);
             }
         });
+
+        //initialise CheckBox
+        checkBoxhash = (CheckBox) findViewById(R.id.checkBox_hash);
 
         //Initialise classes
         mNetworkFragment = new NetworkManager();
@@ -111,6 +117,11 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
                     mNetworkFragment.configure("http://" + mServerIP.getText() + ":5000/api/", repo_name);
 
                     if (!download) {
+                        enable_hash = checkBoxhash.isChecked(); //check if hash is enabled
+                        if (enable_hash)
+                            printDebug("true");
+                        else
+                            printDebug("false");
                         mNetworkFragment.getUpdate();
                     }
                 }
@@ -238,7 +249,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         download = false;
         Utility.toastie(getApplicationContext(), "Download complete");
         mConsole.append("\r\nDownload Complete\r\n");
-        mMsgProcessor.verifyBitstream(repo);
+        mMsgProcessor.verifyBitstream(repo, enable_hash);
     }
 
     //--------------------------------------------------------------------------------------------//
@@ -264,12 +275,16 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
     @Override
     public void onVerifiedBitstream(Repository repo, boolean valid) {
         if (valid) {
-            mConsole.append("Bitstream verified\r\n");
+            if (enable_hash) {
+                mConsole.append("Bitstream verified\r\n");
+            } else {
+                mConsole.append("Bitstream not verified, but it continues anyway\r\n");
+            }
+
             mConsole.append("Reconfigure fabric\r\n");
             mFabricManager.reconfigureFabric(MainActivity.path + "/" + repo.getFile(), MainActivity.path + "/" + reconfigDriver);
         } else {
             mConsole.append("Bitstream invalid\r\n");
-
         }
     }
 
