@@ -13,9 +13,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 
 public class NetworkManager extends android.support.v4.app.Fragment {
     private Callback mCallback;
@@ -95,6 +97,10 @@ public class NetworkManager extends android.support.v4.app.Fragment {
                         mCallback.printToTextBox("Connection failed.\r\n");
                     }
 
+                } catch (UnknownHostException e) {
+                    mCallback.printToTextBox("Unable to resolve host " + serverURL + "\r\n");
+                } catch (ConnectException e) {
+                    mCallback.printToTextBox("Failed to connect to " + serverURL + "\r\n");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

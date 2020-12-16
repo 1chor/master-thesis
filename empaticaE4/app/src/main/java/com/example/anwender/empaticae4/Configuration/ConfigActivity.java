@@ -118,10 +118,6 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
 
                     if (!download) {
                         enable_hash = checkBoxhash.isChecked(); //check if hash is enabled
-                        if (enable_hash)
-                            printDebug("true");
-                        else
-                            printDebug("false");
                         mNetworkFragment.getUpdate();
                     }
                 }
@@ -240,7 +236,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
 
     @Override
     public void printToTextBox(String text) {
-        printDebug(text);
+        printColour(text, Color.RED);
     }
 
 
