@@ -1,0 +1,836 @@
+#-----------------------------------------------------------
+# Vivado v2018.1 (64-bit)
+# SW Build 2188600 on Wed Apr  4 18:39:19 MDT 2018
+# IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
+# Start of session at: Thu Dec 10 21:17:43 2020
+# Process ID: 12298
+# Current directory: /media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.runs/dft_0_synth_1
+# Command line: vivado -log dft_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source dft_0.tcl
+# Log file: /media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.runs/dft_0_synth_1/dft_0.vds
+# Journal file: /media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.runs/dft_0_synth_1/vivado.jou
+#-----------------------------------------------------------
+source dft_0.tcl -notrace
+Command: synth_design -top dft_0 -part xczu9eg-ffvb1156-2-e -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xczu9eg'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xczu9eg'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 12594 
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1576.727 ; gain = 0.000 ; free physical = 108 ; free virtual = 23125
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'dft_0' [/media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.srcs/sources_1/ip/dft_0/synth/dft_0.vhd:77]
+	Parameter C_XDEVICEFAMILY bound to: zynquplus - type: string 
+	Parameter C_COMPONENT_NAME bound to: dft_0 - type: string 
+	Parameter C_DATA_WIDTH bound to: 16 - type: integer 
+	Parameter C_SIZE_1536 bound to: 0 - type: integer 
+	Parameter C_HAS_CE bound to: 0 - type: integer 
+	Parameter C_HAS_SCLR bound to: 1 - type: integer 
+	Parameter C_FMAX bound to: 307 - type: integer 
+INFO: [Synth 8-3491] module 'dft_v4_0_15' declared at '/media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.srcs/sources_1/ip/dft_0/hdl/dft_v4_0_vh_rfs.vhd:17422' bound to instance 'U0' of component 'dft_v4_0_15' [/media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.srcs/sources_1/ip/dft_0/synth/dft_0.vhd:142]
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+WARNING: [Synth 8-5858] RAM coef_sel_queue_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5856] 3D RAM write_addr_r423_delay_reg  for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5856] 3D RAM write_addr_r5_delay_reg  for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5856] 3D RAM busmux_read_delay_reg  for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5856] 3D RAM read_addr_delay_reg  for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM coef_sel_delay_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM delay_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM delay_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM delay_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM delay_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM data_int_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM R5TW_FWD_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM R5TW_INV_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM R5TW_SM_FWD_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM R5TW_SM_INV_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM switched_twiddle_int_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM switched_twiddle_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM data_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM data_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM bf_data_pm1_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM data_out_int_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5856] 3D RAM delayed_r423_muxsel_reg  for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5856] 3D RAM delayed_r5_muxsel_reg  for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM DATAOUT_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5856] 3D RAM adj_theta_reg  for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5856] 3D RAM s4_adj_theta_reg  for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM s10_muxed_data_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM dout_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM s11_dout_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5856] 3D RAM s5_adj_theta_reg  for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM s11_muxed_data_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM data_i_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM data_queue_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM WRITE_DATA_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5858] RAM data_queue_reg from Abstract Data Type (record/struct) for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-5856] 3D RAM coef_queue_reg  for this pattern/configuration is not supported. This will most likely be implemented in registers
+INFO: [Synth 8-256] done synthesizing module 'dft_0' (40#1) [/media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.srcs/sources_1/ip/dft_0/synth/dft_0.vhd:77]
+WARNING: [Synth 8-3331] design coefmem_tables has unconnected port SCLR
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[N][10]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[N][9]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[N][8]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[N][7]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[N][6]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[N][5]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[N][4]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[N][3]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[N][2]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[N][1]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[N][0]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[M][3]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[M][2]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[M][1]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[M][0]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[P][2]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[P][1]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[P][0]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[Q][1]
+WARNING: [Synth 8-3331] design coefficient_memory has unconnected port TABLE[Q][0]
+WARNING: [Synth 8-3331] design output_mux has unconnected port SCLR
+WARNING: [Synth 8-3331] design input_mux has unconnected port SCLR
+WARNING: [Synth 8-3331] design data_memory has unconnected port READ_DATA[3][im][17]
+WARNING: [Synth 8-3331] design data_memory has unconnected port READ_DATA[3][im][16]
+WARNING: [Synth 8-3331] design data_memory has unconnected port READ_DATA[3][re][17]
+WARNING: [Synth 8-3331] design data_memory has unconnected port READ_DATA[3][re][16]
+WARNING: [Synth 8-3331] design data_memory has unconnected port READ_DATA[2][im][17]
+WARNING: [Synth 8-3331] design data_memory has unconnected port READ_DATA[2][im][16]
+WARNING: [Synth 8-3331] design data_memory has unconnected port READ_DATA[2][re][17]
+WARNING: [Synth 8-3331] design data_memory has unconnected port READ_DATA[2][re][16]
+WARNING: [Synth 8-3331] design data_memory has unconnected port READ_DATA[1][im][17]
+WARNING: [Synth 8-3331] design data_memory has unconnected port READ_DATA[1][im][16]
+WARNING: [Synth 8-3331] design data_memory has unconnected port READ_DATA[1][re][17]
+WARNING: [Synth 8-3331] design data_memory has unconnected port READ_DATA[1][re][16]
+WARNING: [Synth 8-3331] design data_memory has unconnected port READ_DATA[0][im][17]
+WARNING: [Synth 8-3331] design data_memory has unconnected port READ_DATA[0][im][16]
+WARNING: [Synth 8-3331] design data_memory has unconnected port READ_DATA[0][re][17]
+WARNING: [Synth 8-3331] design data_memory has unconnected port READ_DATA[0][re][16]
+WARNING: [Synth 8-3331] design data_memory has unconnected port WRITE_DATA[3][im][17]
+WARNING: [Synth 8-3331] design data_memory has unconnected port WRITE_DATA[3][im][16]
+WARNING: [Synth 8-3331] design data_memory has unconnected port WRITE_DATA[3][re][17]
+WARNING: [Synth 8-3331] design data_memory has unconnected port WRITE_DATA[3][re][16]
+WARNING: [Synth 8-3331] design data_memory has unconnected port WRITE_DATA[2][im][17]
+WARNING: [Synth 8-3331] design data_memory has unconnected port WRITE_DATA[2][im][16]
+WARNING: [Synth 8-3331] design data_memory has unconnected port WRITE_DATA[2][re][17]
+WARNING: [Synth 8-3331] design data_memory has unconnected port WRITE_DATA[2][re][16]
+WARNING: [Synth 8-3331] design data_memory has unconnected port WRITE_DATA[1][im][17]
+WARNING: [Synth 8-3331] design data_memory has unconnected port WRITE_DATA[1][im][16]
+WARNING: [Synth 8-3331] design data_memory has unconnected port WRITE_DATA[1][re][17]
+WARNING: [Synth 8-3331] design data_memory has unconnected port WRITE_DATA[1][re][16]
+WARNING: [Synth 8-3331] design data_memory has unconnected port WRITE_DATA[0][im][17]
+WARNING: [Synth 8-3331] design data_memory has unconnected port WRITE_DATA[0][im][16]
+WARNING: [Synth 8-3331] design data_memory has unconnected port WRITE_DATA[0][re][17]
+WARNING: [Synth 8-3331] design data_memory has unconnected port WRITE_DATA[0][re][16]
+WARNING: [Synth 8-3331] design delay__parameterized8 has unconnected port SCLR
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[im][26]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[im][25]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[im][24]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[im][23]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[im][22]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[im][21]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[im][20]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[im][19]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[im][18]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[im][17]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[im][16]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[re][26]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[re][25]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[re][24]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[re][23]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[re][22]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[re][21]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[re][20]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[re][19]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[re][18]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[re][17]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized1 has unconnected port D[re][16]
+WARNING: [Synth 8-3331] design delay__parameterized34 has unconnected port SCLR
+WARNING: [Synth 8-3331] design delay_int_data__parameterized14 has unconnected port D[im][26]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized14 has unconnected port D[im][25]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized14 has unconnected port D[re][26]
+WARNING: [Synth 8-3331] design delay_int_data__parameterized14 has unconnected port D[re][25]
+WARNING: [Synth 8-3331] design delay__parameterized15 has unconnected port SCLR
+WARNING: [Synth 8-3331] design scale_and_quantize has unconnected port DATA[im][26]
+WARNING: [Synth 8-3331] design scale_and_quantize has unconnected port DATA[im][25]
+WARNING: [Synth 8-3331] design scale_and_quantize has unconnected port DATA[im][24]
+WARNING: [Synth 8-3331] design scale_and_quantize has unconnected port DATA[im][23]
+WARNING: [Synth 8-3331] design scale_and_quantize has unconnected port DATA[im][22]
+WARNING: [Synth 8-3331] design scale_and_quantize has unconnected port DATA[re][26]
+WARNING: [Synth 8-3331] design scale_and_quantize has unconnected port DATA[re][25]
+WARNING: [Synth 8-3331] design scale_and_quantize has unconnected port DATA[re][24]
+WARNING: [Synth 8-3331] design scale_and_quantize has unconnected port DATA[re][23]
+WARNING: [Synth 8-3331] design scale_and_quantize has unconnected port DATA[re][22]
+WARNING: [Synth 8-3331] design delay__parameterized10 has unconnected port SCLR
+WARNING: [Synth 8-3331] design margin_calc has unconnected port DATA[5][im][26]
+WARNING: [Synth 8-3331] design margin_calc has unconnected port DATA[5][im][25]
+WARNING: [Synth 8-3331] design margin_calc has unconnected port DATA[5][im][24]
+WARNING: [Synth 8-3331] design margin_calc has unconnected port DATA[5][im][23]
+WARNING: [Synth 8-3331] design margin_calc has unconnected port DATA[5][im][22]
+INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:50 ; elapsed = 00:00:54 . Memory (MB): peak = 1576.727 ; gain = 0.000 ; free physical = 202 ; free virtual = 23058
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:51 ; elapsed = 00:00:56 . Memory (MB): peak = 1576.727 ; gain = 0.000 ; free physical = 212 ; free virtual = 23079
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:51 ; elapsed = 00:00:56 . Memory (MB): peak = 1576.727 ; gain = 0.000 ; free physical = 212 ; free virtual = 23079
+---------------------------------------------------------------------------------
+INFO: [Netlist 29-17] Analyzing 91 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Device 21-403] Loading part xczu9eg-ffvb1156-2-e
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.srcs/sources_1/ip/dft_0/dft_0_ooc.xdc] for cell 'U0'
+Finished Parsing XDC File [/media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.srcs/sources_1/ip/dft_0/dft_0_ooc.xdc] for cell 'U0'
+Parsing XDC File [/media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.runs/dft_0_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.runs/dft_0_synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 91 instances were transformed.
+  DSP48E => DSP48E2 (DSP_ALU, DSP_A_B_DATA, DSP_C_DATA, DSP_MULTIPLIER, DSP_M_DATA, DSP_OUTPUT, DSP_PREADD_DATA, DSP_PREADD): 16 instances
+  MUXF5 => LUT3: 36 instances
+  MUXF6 => LUT3: 32 instances
+  RAMB16 => RAMB36E2: 3 instances
+  RAMB18SDP => RAMB18E2: 4 instances
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.77 ; elapsed = 00:00:00.38 . Memory (MB): peak = 2431.480 ; gain = 0.000 ; free physical = 102 ; free virtual = 22316
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:01:34 ; elapsed = 00:01:56 . Memory (MB): peak = 2431.480 ; gain = 854.754 ; free physical = 123 ; free virtual = 22438
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xczu9eg-ffvb1156-2-e
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:01:34 ; elapsed = 00:01:56 . Memory (MB): peak = 2431.480 ; gain = 854.754 ; free physical = 121 ; free virtual = 22439
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property DONT_TOUCH = true for U0. (constraint file  /media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.runs/dft_0_synth_1/dont_touch.xdc, line 9).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:01:34 ; elapsed = 00:01:57 . Memory (MB): peak = 2431.480 ; gain = 854.754 ; free physical = 113 ; free virtual = 22440
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5544] ROM "stage_one_s4" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "a24" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "np3_x5" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "n4_minus_stage" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5545] ROM "addr_shift_value_temp" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5545] ROM "addr_shift_value_temp" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5545] ROM "addr_shift_value_temp" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5545] ROM "addr_shift_value_temp" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5544] ROM "step" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "addr_int_s7[4]" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "addr_int_s7[2]" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bi0" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bi0" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bi1" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bi1" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bi2" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+DSP Debug: Collapsed multipler of size 7, multiple = 3
+DSP Debug: Collapsed multipler of size 9, multiple = 3
+INFO: [Synth 8-5544] ROM "stage_one_s4" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "a24" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "np3_x5" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "n4_minus_stage" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "addr_shift_value_temp" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "step" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "addr_int_s7[4]" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "addr_int_s7[2]" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bi0" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bi0" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bi1" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bi1" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bi2" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "msk4_comb" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "n4_minus_stage_temp" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bi0" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bi1" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bi2" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bi3" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "findPower3" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "findPower3" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "idx4_max" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "idx_big_max" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "idx4_max" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "idx_big_max" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "npoint4_temp" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "phase_radix_4" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "findPower3_dec" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "findPower5_dec" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "findPower5_dec" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "findPower3_dec" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "a0_offset" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bank_select[3]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bank_select[2]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bank_select[1]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bank_select[0]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bank_select[3]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bank_select[3]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bank_select[2]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bank_select[2]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bank_select[1]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bank_select[1]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bank_select[0]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bank_select[0]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-802] inferred FSM for state register 'dft_state_reg' in module 'control'
+INFO: [Synth 8-5544] ROM "OUTPUT_MUX" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "addr_valid" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5546] ROM "addr_valid" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5544] ROM "addr_setup_state" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "r_reg[3]" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "r_reg[2]" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "r_reg[1]" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "r_reg[0]" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "first_layer" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "finish" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "next_radix" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "processing_done" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "layer_end" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "exponent_en_pulsed" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "OUTPUT_MUX" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "addr_valid" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5546] ROM "addr_valid" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5544] ROM "addr_setup_state" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "first_layer" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "finish" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "next_radix" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "processing_done" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "layer_end" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "exponent_en_pulsed" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "dft_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Common 17-14] Message 'Synth 8-5544' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-5587] ROM size for "calc_shift_adjust" is below threshold of ROM address width. It will be mapped to LUTs
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 st_wait |                             1011 |                             0000
+               st_input1 |                             1010 |                             0001
+               st_input2 |                             0101 |                             0010
+               st_input3 |                             0000 |                             0011
+        st_input4_run_r4 |                             0001 |                             0100
+          st_run_wait_r4 |                             0010 |                             0110
+               st_run_r4 |                             1110 |                             0101
+               st_run_r2 |                             1100 |                             0111
+          st_run_wait_r2 |                             1101 |                             1000
+               st_run_r5 |                             1001 |                             1001
+          st_run_wait_r5 |                             1000 |                             1010
+               st_run_r3 |                             0111 |                             1011
+          st_run_wait_r3 |                             0100 |                             1100
+              st_output2 |                             0110 |                             1110
+              st_output3 |                             1111 |                             1111
+       st_run_r3_output1 |                             0011 |                             1101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'dft_state_reg' using encoding 'sequential' in module 'control'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:41 ; elapsed = 00:02:04 . Memory (MB): peak = 2431.480 ; gain = 854.754 ; free physical = 111 ; free virtual = 22424
+---------------------------------------------------------------------------------
+INFO: [Synth 8-223] decloning instance 'U0/i_synth/i/control_u/findAddrA_u/gen_counter_v5.idx_counter_u/idx_phase35' (counter_M) to 'U0/i_synth/i/control_u/findAddrA_u/gen_counter_v5.idx_counter_u/idx_r35'
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 2520 (col length:168)
+BRAMs: 1824 (col length: RAMB18 168 RAMB36 84)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+INFO: [Synth 8-5545] ROM "npoint4_comb_temp1" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][0]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][re][0]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][1]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][re][1]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][2]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][re][2]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][3]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][re][3]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][4]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][re][4]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][5]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][re][5]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][6]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][re][6]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][7]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][re][7]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][8]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][re][8]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][9]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][re][9]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][10]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][re][10]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][11]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][re][11]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][12]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][re][12]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][13]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][re][13]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][14]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][re][14]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][15]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][re][15]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][16]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][im][0]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][17]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][im][1]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][18]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][im][2]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][19]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][im][3]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][20]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][im][4]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][21]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][im][5]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][22]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][im][6]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][23]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][im][7]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][24]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][im][8]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][25]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][im][9]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][26]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][im][10]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][27]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][im][11]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][28]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][im][12]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][29]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][im][13]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][30]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][im][14]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[0][31]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[0][im][15]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][0]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][re][0]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][1]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][re][1]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][2]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][re][2]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][3]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][re][3]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][4]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][re][4]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][5]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][re][5]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][6]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][re][6]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][7]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][re][7]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][8]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][re][8]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][9]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][re][9]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][10]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][re][10]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][11]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][re][11]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][12]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][re][12]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][13]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][re][13]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][14]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][re][14]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][15]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][re][15]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][16]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][im][0]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][17]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][im][1]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][18]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][im][2]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][19]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][im][3]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][20]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][im][4]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][21]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][im][5]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][22]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][im][6]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][23]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][im][7]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][24]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][im][8]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][25]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][im][9]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][26]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][im][10]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][27]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][im][11]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][28]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][im][12]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][29]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][im][13]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][30]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][im][14]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[1][31]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[1][im][15]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][0]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][re][0]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][1]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][re][1]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][2]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][re][2]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][3]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][re][3]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][4]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][re][4]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][5]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][re][5]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][6]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][re][6]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][7]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][re][7]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][8]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][re][8]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][9]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][re][9]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][10]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][re][10]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][11]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][re][11]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][12]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][re][12]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][13]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][re][13]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][14]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][re][14]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][15]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][re][15]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][16]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][im][0]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][17]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][im][1]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][18]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][im][2]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][19]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][im][3]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][20]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][im][4]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][21]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][im][5]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][22]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][im][6]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][23]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][im][7]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][24]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][im][8]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][25]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][im][9]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][26]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][im][10]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][27]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][im][11]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][28]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][im][12]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][29]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][im][13]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][30]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][im][14]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[2][31]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[2][im][15]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[3][0]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[3][re][0]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[3][1]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[3][re][1]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[3][2]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[3][re][2]'
+INFO: [Synth 8-3886] merging instance 'U0/i_synth/i/din_queue_reg[3][3]' (FD) to 'U0/i_synth/i/input_mux_u/data_queue_reg[3][re][3]'
+INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/gen_counter_v5.idx_counter_u/coef_sel_reg_gen.delayed_shift_value_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/gen_counter_v5.idx_counter_u/coef_sel_reg_gen.phase_radix_4_reg[8] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/coef_gen.coef_mem_u /\s2s3_reg.s3_mode_in_reg[base][0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/coef_gen.coef_mem_u /\s3s4_reg.s4_bounds_reg[4][10] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (U0/i_synth/\i/coef_gen.coef_mem_u /\s4s5_reg.s5_lessthan_reg[3][6] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/a0_offset_reg[5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/a0_offset_reg[6] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/a0_offset_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/a0_offset_reg[8] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /TWIDDLE_MULT/\TWIDDLE_MULT_0/AI_X_CR_DSP48/C_IN_DELAY/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][16] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/dft235_find_addr_u /\npoint3_comb_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/dft235_find_addr_u /\npoint3_comb_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/dft235_find_addr_u /\temp_1_s4_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/dft235_find_addr_u /\addr_shift_value_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/dft235_find_addr_u /\n4_minus_stage_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/dft235_find_addr_u /\latch_s8_gen.addr_int_s8_reg[4][1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/dft235_find_addr_u /\latch_s8_gen.addr_int_s8_reg[2][0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/gen_counter_v5.idx_counter_u/npoint4_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/gen_counter_v5.idx_counter_u/npoint3i_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/coef_gen.coef_mem_u /\s2s3_reg.s3_mode_in_reg[base][0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /TWIDDLE_MULT/\TWIDDLE_MULT_4.OP_DEL/IM/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][1] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/dft235_find_addr_u /\npoint3_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/dft235_find_addr_u /\npoint4_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/dft235_find_addr_u /\addr_shift_value_s6_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/coef_gen.coef_mem_u /\s2s3_reg.s3_mode_in_reg[base][0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /TWIDDLE_MULT/\TWIDDLE_MULT_4.OP_DEL/IM/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][1] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/dft235_find_addr_u /\npoint3_s3_1_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/dft235_find_addr_u /\npoint4_s3_1_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/dft235_find_addr_u /\addr_shift_value_s7_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/coef_gen.coef_mem_u /\s2s3_reg.s3_mode_in_reg[base][0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /TWIDDLE_MULT/\TWIDDLE_MULT_4.OP_DEL/IM/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][1] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/dft235_find_addr_u /\np3_s4_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/dft235_find_addr_u /\np3_s4_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /L1_ADDERS/\OP_4_5_DEL/DEL_I[0].DEL/IM/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][1] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/dft235_find_addr_u /\np3_s5_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/control_u /\findAddrA_u/dft235_find_addr_u /\np3_s5_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /R3_MULT_LAY/\IP_4_DEL/IM/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /R3_MULT_LAY/\IP_4_DEL/IM/DEL/SR_ALLOWED.RTL.delay_sig_reg[1][1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /R3_MULT_LAY/\IP_4_DEL/IM/DEL/SR_ALLOWED.RTL.delay_sig_reg[2][1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /R3_MULT_LAY/\IP_4_DEL/IM/DEL/SR_ALLOWED.RTL.delay_sig_reg[3][1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /R3_MULT_LAY/\IP_4_DEL/IM/DEL/SR_ALLOWED.RTL.delay_sig_reg[4][1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /L2_ADDERS/\OP_DEL/DEL_I[4].DEL/IM/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][1] )
+INFO: [Synth 8-3332] Sequential element (npoint4_comb_reg[0]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (npoint4_reg[0]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (npoint4_s3_1_reg[0]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (n4_minus_stage_reg[8]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (n4_minus_stage_reg[7]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (npoint3_reg[0]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (npoint3_s3_1_reg[0]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (np3_s4_reg[0]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (np3_x5_reg[8]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (np3_s5_reg[2]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (np3_s5_reg[0]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (latch_s8_gen.addr_int_s8_reg[4][1]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (step_s7_reg[7]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (step_s7_reg[6]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (step_s7_reg[5]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (step_s7_reg[4]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (step_s7_reg[3]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (step_s7_reg[2]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (step_s7_reg[0]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (addr_shift_value_reg[7]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (addr_shift_value_s6_reg[7]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (addr_shift_value_s7_reg[7]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (latch_s8_gen.addr_int_s8_reg[2][0]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (npoint3_comb_reg[0]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (npoint3_comb_reg[2]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (npoint4_reg[3]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (npoint4_s3_1_reg[3]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (np3_s4_reg[2]) is unused and will be removed from module dft235_find_addr.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/a0_offset_reg[8]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/a0_offset_reg[7]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/a0_offset_reg[6]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/a0_offset_reg[5]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/gen_counter_v5.idx_counter_u/idx2_phase35/zero_allowed.value_reg[0]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/gen_counter_v5.idx_counter_u/npoint4_reg[7]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/INPUT_ADDR_reg[3][8]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/INPUT_ADDR_reg[3][7]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/INPUT_ADDR_reg[3][6]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/INPUT_ADDR_reg[3][5]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/INPUT_ADDR_reg[3][4]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/INPUT_ADDR_reg[3][3]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/INPUT_ADDR_reg[3][2]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/INPUT_ADDR_reg[3][1]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/INPUT_ADDR_reg[3][0]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/gen_counter_v5.idx_counter_u/coef_sel_reg_gen.delayed_shift_value_reg[0]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/gen_counter_v5.idx_counter_u/coef_sel_reg_gen.phase_radix_4_reg[8]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/valid_queue_reg[11]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/valid_queue_reg[10]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/valid_queue_reg[9]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/table_s1_reg[N][10]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/table_s1_reg[N][9]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/table_s1_reg[N][8]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/table_s1_reg[N][7]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/table_s1_reg[N][6]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/table_s1_reg[N][5]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/table_s1_reg[N][4]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/table_s1_reg[N][3]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/table_s1_reg[N][2]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/table_s1_reg[N][1]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/table_s1_reg[N][0]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_reg[idx][5]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_reg[idx][4]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_reg[idx][3]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_reg[idx][2]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_reg[idx][1]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_reg[idx][0]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_s1_reg[idx][5]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_s1_reg[idx][4]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_s1_reg[idx][3]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_s1_reg[idx][2]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_s1_reg[idx][1]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_s1_reg[idx][0]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_reg[idx5][4]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_reg[idx5][3]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_reg[idx5][2]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_reg[idx5][1]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_reg[idx5][0]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_s1_reg[idx5][4]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_s1_reg[idx5][3]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_s1_reg[idx5][2]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_s1_reg[idx5][1]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/idx_wide_s1_reg[idx5][0]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (findAddrA_u/gen_counter_v5.idx_counter_u/npoint3i_reg[2]) is unused and will be removed from module control.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AI_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][13]) is unused and will be removed from module twiddle.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AI_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][12]) is unused and will be removed from module twiddle.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AI_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][11]) is unused and will be removed from module twiddle.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AI_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][10]) is unused and will be removed from module twiddle.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AI_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][9]) is unused and will be removed from module twiddle.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AI_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][8]) is unused and will be removed from module twiddle.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AI_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][7]) is unused and will be removed from module twiddle.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AI_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][6]) is unused and will be removed from module twiddle.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AI_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][5]) is unused and will be removed from module twiddle.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AI_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][4]) is unused and will be removed from module twiddle.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AI_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][3]) is unused and will be removed from module twiddle.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AI_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][2]) is unused and will be removed from module twiddle.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AI_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][1]) is unused and will be removed from module twiddle.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AI_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][0]) is unused and will be removed from module twiddle.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AR_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][13]) is unused and will be removed from module twiddle.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AR_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][12]) is unused and will be removed from module twiddle.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AR_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][11]) is unused and will be removed from module twiddle.
+INFO: [Synth 8-3332] Sequential element (TWIDDLE_MULT_1/AR_X_CR_DEL/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][10]) is unused and will be removed from module twiddle.
+INFO: [Common 17-14] Message 'Synth 8-3332' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /TWIDDLE_MULT/\TWIDDLE_MULT_4.OP_DEL/IM/DEL/IP_REG.ip_reg_op_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/coef_gen.coef_mem_u /\s4s5_reg.s5_adj_theta_reg[4][1][0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /TWIDDLE_MULT/\TWIDDLE_MULT_4.OP_DEL/IM/DEL/IP_REG.ip_reg_op_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /TWIDDLE_MULT/\TWIDDLE_MULT_4.OP_DEL/IM/DEL/IP_REG.ip_reg_op_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /TWIDDLE_MULT/\TWIDDLE_MULT_4.OP_DEL/IM/DEL/IP_REG.ip_reg_op_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /L1_ADDERS/\OP_4_5_DEL/DEL_I[0].DEL/IM/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /R3_MULT_LAY/\IP_4_DEL/IM/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /R3_MULT_LAY/\IP_4_DEL/IM/DEL/SR_ALLOWED.RTL.delay_sig_reg[1][2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /R3_MULT_LAY/\IP_4_DEL/IM/DEL/SR_ALLOWED.RTL.delay_sig_reg[2][2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /R3_MULT_LAY/\IP_4_DEL/IM/DEL/SR_ALLOWED.RTL.delay_sig_reg[3][2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /R3_MULT_LAY/\IP_4_DEL/IM/DEL/SR_ALLOWED.RTL.delay_sig_reg[4][2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (U0/i_synth/\i/butterfly_u /L2_ADDERS/\OP_DEL/DEL_I[4].DEL/IM/DEL/SR_ALLOWED.RTL.delay_sig_reg[0][2] )
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:02:11 ; elapsed = 00:02:38 . Memory (MB): peak = 2431.480 ; gain = 854.754 ; free physical = 126 ; free virtual = 22330
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:03:05 ; elapsed = 00:04:10 . Memory (MB): peak = 2854.301 ; gain = 1277.574 ; free physical = 104 ; free virtual = 21669
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:03:09 ; elapsed = 00:04:14 . Memory (MB): peak = 2877.316 ; gain = 1300.590 ; free physical = 108 ; free virtual = 21663
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:03:17 ; elapsed = 00:04:22 . Memory (MB): peak = 2922.652 ; gain = 1345.926 ; free physical = 104 ; free virtual = 21663
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:03:18 ; elapsed = 00:04:24 . Memory (MB): peak = 2922.652 ; gain = 1345.926 ; free physical = 106 ; free virtual = 21665
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:03:18 ; elapsed = 00:04:24 . Memory (MB): peak = 2922.652 ; gain = 1345.926 ; free physical = 100 ; free virtual = 21666
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:03:21 ; elapsed = 00:04:26 . Memory (MB): peak = 2922.652 ; gain = 1345.926 ; free physical = 98 ; free virtual = 21663
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:03:21 ; elapsed = 00:04:26 . Memory (MB): peak = 2922.652 ; gain = 1345.926 ; free physical = 106 ; free virtual = 21660
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:03:21 ; elapsed = 00:04:27 . Memory (MB): peak = 2922.652 ; gain = 1345.926 ; free physical = 115 ; free virtual = 21661
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:03:21 ; elapsed = 00:04:27 . Memory (MB): peak = 2922.652 ; gain = 1345.926 ; free physical = 111 ; free virtual = 21661
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------+----------+
+|      |BlackBox name |Instances |
++------+--------------+----------+
+|1     |DSP48E        |        16|
++------+--------------+----------+
+
+Report Cell Usage: 
++------+-----------------+------+
+|      |Cell             |Count |
++------+-----------------+------+
+|1     |DSP48E_bbox_4    |     1|
+|2     |DSP48E_bbox_4__1 |     1|
+|3     |DSP48E_bbox_4__2 |     1|
+|4     |DSP48E_bbox_4__3 |     1|
+|5     |DSP48E_bbox_5    |     1|
+|6     |DSP48E_bbox_5__1 |     1|
+|7     |DSP48E_bbox_5__2 |     1|
+|8     |DSP48E_bbox_5__3 |     1|
+|9     |DSP48E_bbox_5__4 |     1|
+|10    |DSP48E_bbox_5__5 |     1|
+|11    |DSP48E_bbox_6    |     1|
+|12    |DSP48E_bbox_6__1 |     1|
+|13    |DSP48E_bbox_7    |     1|
+|14    |DSP48E_bbox_7__1 |     1|
+|15    |DSP48E_bbox_8    |     1|
+|16    |DSP48E_bbox_8__1 |     1|
+|17    |CARRY8           |   168|
+|18    |LUT1             |    74|
+|19    |LUT2             |   665|
+|20    |LUT3             |  1564|
+|21    |LUT4             |   659|
+|22    |LUT5             |   331|
+|23    |LUT6             |   760|
+|24    |MUXF6            |    32|
+|25    |MUXF7            |    18|
+|26    |RAMB16           |     3|
+|27    |RAMB18SDP        |     4|
+|28    |SRL16E           |   461|
+|29    |SRLC32E          |    48|
+|30    |FDRE             |  4568|
+|31    |FDSE             |    58|
++------+-----------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:03:21 ; elapsed = 00:04:27 . Memory (MB): peak = 2922.652 ; gain = 1345.926 ; free physical = 108 ; free virtual = 21662
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 889 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:02:50 ; elapsed = 00:03:40 . Memory (MB): peak = 2922.652 ; gain = 491.172 ; free physical = 135 ; free virtual = 21698
+Synthesis Optimization Complete : Time (s): cpu = 00:03:21 ; elapsed = 00:04:27 . Memory (MB): peak = 2922.660 ; gain = 1345.926 ; free physical = 128 ; free virtual = 21708
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 241 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/i_synth/i/coef_gen.coef_mem_u/virtex_memory.trig_luts/trig_ram_0 has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/i_synth/i/coef_gen.coef_mem_u/virtex_memory.trig_luts/trig_ram_1 has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/i_synth/i/coef_gen.coef_mem_u/virtex_memory.trig_luts/trig_ram_2 has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/i_synth/i/data_mem_u/mem_units[0].v5_mem.mem/RAMB18_inst0 has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/i_synth/i/data_mem_u/mem_units[1].v5_mem.mem/RAMB18_inst0 has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/i_synth/i/data_mem_u/mem_units[2].v5_mem.mem/RAMB18_inst0 has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/i_synth/i/data_mem_u/mem_units[3].v5_mem.mem/RAMB18_inst0 has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 55 instances were transformed.
+  DSP48E => DSP48E2 (DSP_ALU, DSP_A_B_DATA, DSP_C_DATA, DSP_MULTIPLIER, DSP_M_DATA, DSP_OUTPUT, DSP_PREADD_DATA, DSP_PREADD): 16 instances
+  MUXF6 => LUT3: 32 instances
+  RAMB16 => RAMB36E2: 3 instances
+  RAMB18SDP => RAMB18E2: 4 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+392 Infos, 137 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:03:29 ; elapsed = 00:04:35 . Memory (MB): peak = 2922.660 ; gain = 1368.082 ; free physical = 155 ; free virtual = 21697
+INFO: [Common 17-1381] The checkpoint '/media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.runs/dft_0_synth_1/dft_0.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2946.664 ; gain = 24.004 ; free physical = 116 ; free virtual = 21700
+INFO: [Coretcl 2-1482] Added synthesis output to IP cache for IP /media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.srcs/sources_1/ip/dft_0/dft_0.xci
+INFO: [Coretcl 2-1174] Renamed 461 cell refs.
+INFO: [Common 17-1381] The checkpoint '/media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.runs/dft_0_synth_1/dft_0.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2954.672 ; gain = 0.000 ; free physical = 108 ; free virtual = 21627
+INFO: [runtcl-4] Executing : report_utilization -file dft_0_utilization_synth.rpt -pb dft_0_utilization_synth.pb
+report_utilization: Time (s): cpu = 00:00:00.65 ; elapsed = 00:00:01 . Memory (MB): peak = 2954.672 ; gain = 0.000 ; free physical = 116 ; free virtual = 21629
+INFO: [Common 17-206] Exiting Vivado at Thu Dec 10 21:24:07 2020...
