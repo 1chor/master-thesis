@@ -86,3 +86,7 @@
 !*.elf
 !*.bmm
 !*.xmp
+#########
+#ignore folders generated from vivado
+#########
+*.cache/

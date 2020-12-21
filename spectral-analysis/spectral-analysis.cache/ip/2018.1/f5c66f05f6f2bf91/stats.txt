@@ -1,3 +1,0 @@
-NumberHits:1
-Timestamp: Tue Dec 15 15:16:31 UTC 2020
-VLNV: xilinx.com:ip:dft:4.0
