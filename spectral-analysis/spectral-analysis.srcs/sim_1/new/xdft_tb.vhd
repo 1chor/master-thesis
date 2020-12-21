@@ -58,6 +58,7 @@ architecture bench of xdft_tb is
     -- constant declaration
     constant SIZE : positive := 108;
     constant DATA_WIDTH : positive := 32;
+    constant INPUT_WIDTH : positive := 16;
     constant CLK_PERIOD : time := 10 ns;
     constant stop_clock : boolean := false;
     
@@ -70,9 +71,11 @@ architecture bench of xdft_tb is
     shared variable my_line : line;
     
     -- type declaration
-    subtype word_t is std_logic_vector(DATA_WIDTH -1 downto 0);
-    type array_t is array(integer range 0 to SIZE -1) of word_t;
-    type output_buf_t is array(integer range 0 to 2*SIZE -1) of word_t;
+    subtype word16_t is std_logic_vector(INPUT_WIDTH -1 downto 0);
+    type array_t is array(integer range 0 to SIZE -1) of word16_t;
+    
+    subtype word32_t is std_logic_vector(DATA_WIDTH -1 downto 0);
+    type output_buf_t is array(integer range 0 to 2*SIZE -1) of word32_t;
     
     shared variable real_in : array_t;
     shared variable imag_in : array_t;
@@ -97,16 +100,16 @@ begin
     -- testbench process
     stimulus : process
         
-        variable output_real : array_t;
-        variable output_imag : array_t;
+        variable output_real : output_buf_t;
+        variable output_imag : output_buf_t;
         
-        variable temp : word_t;
+        variable temp : word16_t;
         
         -- function to read file content 
         impure function read_file(filename: string) return array_t is
             file FileHandle : text open read_mode is filename;
             variable CurrentLine : line;
-            variable TempWord : word_t;
+            variable TempWord : word16_t;
             variable Result : array_t := (others => (others => '0'));
         begin
             for i in 0 to SIZE-1 loop
@@ -142,7 +145,7 @@ begin
         end function;
         
         -- procedure to compare two buffers
-        procedure compare_buffers(buffer_A, buffer_B : array_t; length : integer) is
+        procedure compare_buffers(buffer_A, buffer_B : output_buf_t; length : integer) is
         begin
             for i in 0 to length-1 loop
                 report ("Buffers don't match (index = " & integer'image(i) & ", " & slv_to_hex(buffer_A(i)) & " vs. " & slv_to_hex(buffer_B(i))) severity error;
@@ -193,41 +196,32 @@ begin
         
         output_buffer_idx := 0;
         
+        for i in 0 to SIZE-1 loop
+            --send input data
+            data_in <= imag_in(i) & real_in(i);
+        end loop;
         
+        wait_for_output_buffer_fill_level(2*SIZE);
         
+        for i in 0 to SIZE-1 loop
+            -- read output data
+            output_real(i) := output_buffer(2*i);
+            output_imag(i) := output_buffer(2*i+1);
+        end loop;
         
+        write(my_line, string'("Compare results"));
+        writeline(output, my_line);
         
+        --compare_buffers(output_real, , SIZE);
+        --compare_buffers(output_real, , SIZE);
         
+        write(my_line, string'("Done"));
+        writeline(output, my_line);
         
-        
-        
-        
-        
-        
+        write(my_line, string'("-----------------------------------"));
+        writeline(output, my_line);
+       
         wait;
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
     end process;
     
@@ -241,14 +235,13 @@ begin
     end process;
     
     -- clock generator process
-        generate_clk : process
-        begin
-            while not stop_clock loop
-                clk <= '0', '1' after CLK_PERIOD / 2;
-                wait for CLK_PERIOD;
-            end loop;
-            wait;            
-        end process;
+    generate_clk : process
+    begin
+        while not stop_clock loop
+            clk <= '0', '1' after CLK_PERIOD / 2;
+            wait for CLK_PERIOD;
+        end loop;
+        wait;            
+    end process;
     
-
 end bench;
