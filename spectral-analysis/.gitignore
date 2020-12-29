@@ -90,3 +90,7 @@
 #ignore folders generated from vivado
 #########
 *.cache/
+#########
+#ignore TestData folder
+#########
+TestData/
