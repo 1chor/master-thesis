@@ -345,7 +345,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                 for (int i = 0; i < max; i++) {
                     final int progress = i + 1;
 
-                    bvp = Utility.readfromCSV(getApplicationContext(), path, "BVP.csv", i);
+                    bvp = Utility.readfromCSV(getApplicationContext(), path, "BVP1.csv", i);
 
                     //When called for the first time, write sample frequency (= 64Hz) and start timestamp in the first 2 rows
                     if (!flagBVP) {

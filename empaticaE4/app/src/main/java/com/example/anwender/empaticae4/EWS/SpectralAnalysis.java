@@ -1,7 +1,15 @@
 package com.example.anwender.empaticae4.EWS;
 
-import com.example.anwender.empaticae4.Configuration.ConfigActivity;
+import android.util.Log;
 
+import com.example.anwender.empaticae4.Configuration.ConfigActivity;
+import com.example.anwender.empaticae4.Main.MainActivity;
+import com.example.anwender.empaticae4.Main.Utility;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 public class SpectralAnalysis {
@@ -17,6 +25,20 @@ public class SpectralAnalysis {
             case "SDFT": //Software DFT
                 this.signalSize = inputSignal.size();
                 this.argConstantPart = (Math.PI * 2)/signalSize;
+
+                for (int i=0; i<signalSize; i++) {
+                    //Convert float to hex string
+                    float fval = inputSignal.get(i)[0];
+                    int intval = Float.floatToRawIntBits(fval);
+                    String st = String.format("0x%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n";
+
+                    //Write hex string to file
+                    writeTestDatatoFile(MainActivity.path, "input_TestData_hex.txt", st);
+
+                    //Write float value to file
+                    writeTestDatatoFile(MainActivity.path, "input_TestData.txt", Float.toString(fval) + "\n");
+                }
+
                 Complex[] dft = calculateDFT(inputSignal);
                 List<double[]> spd = SPD(dft);
                 this.expSPD = spd;
@@ -94,5 +116,28 @@ public class SpectralAnalysis {
             }
         }
         return f[pos];
+    }
+
+    //Write TestData to File
+    private void writeTestDatatoFile(File path, String Filename , String Data){
+
+        if (Utility.isExternalStorageWritable()) {
+            try {
+                //Create a new file @ path/filename
+                File file = new File(path, Filename);
+
+                //1st Parameter = filepath, 2nd Paramter true=append
+                FileWriter fw = new FileWriter(file, true);
+                BufferedWriter out = new BufferedWriter(fw);
+                out.write(Data);
+                out.close();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            Log.e("writeTestDatatoFile", "Cannot write to storage!");
+        }
     }
 }
