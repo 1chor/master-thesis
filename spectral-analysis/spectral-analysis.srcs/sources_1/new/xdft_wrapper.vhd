@@ -38,9 +38,17 @@ entity xdft_wrapper is
     );
     port ( 
         clk : in std_logic;
-        reset_n : in std_logic;
-        regin : in std_logic_vector(C_S_AXI_DATA_WIDTH -1 downto 0);
-        regout : out std_logic_vector(C_S_AXI_DATA_WIDTH -1 downto 0)
+        reset : in std_logic;
+        
+        -- streaming sink (input)
+        stin_data : in std_logic_vector(C_S_AXI_DATA_WIDTH -1 downto 0);
+        stin_valid : in std_logic;
+        stin_ready : out std_logic;
+        
+        -- streaming source (ouput)
+        stout_data : out std_logic_vector(C_S_AXI_DATA_WIDTH -1 downto 0);
+        stout_valid : out std_logic
+        --stout_ready : in std_logic        
     );
 begin
     -- check if SIZE is valid    
@@ -64,16 +72,16 @@ architecture arch of xdft_wrapper is
     signal in_real              : std_logic_vector(15 downto 0);
     signal in_imag              : std_logic_vector(15 downto 0);
     signal first_in             : std_logic;
-    signal ready_in             : std_logic;
+    signal first_ready_in             : std_logic;
     
     signal out_real             : std_logic_vector(15 downto 0);
     signal out_imag             : std_logic_vector(15 downto 0);
     signal first_out            : std_logic;
-    signal out_valid            : std_logic;
+    signal s_out_valid          : std_logic;
     signal exp                  : std_logic_vector(3 downto 0);
     
     signal size_s               : positive := SIZE;
-    signal dft_size            : std_logic_vector(5 downto 0);
+    signal dft_size             : std_logic_vector(5 downto 0);
     
     signal index                : natural range 0 to SIZE := 0;
     signal index_next           : natural range 0 to SIZE := 0;
@@ -87,6 +95,13 @@ architecture arch of xdft_wrapper is
         OUTPUT_DATA
     );
     signal state, state_next : state_type := TRANSFER_TO_FFT;
+    
+    type input_state_type is (
+        INPUT_IDLE,
+        FIRST_FRAME,
+        OTHER_FRAMES
+    );
+    signal input_state, input_state_next : input_state_type := INPUT_IDLE;
   
     -- component for DFT IP core
     component dft_0 is
@@ -113,18 +128,18 @@ begin
     dft_inst : component dft_0
     port map (
         CLK         => clk,
-        SCLR        => reset_n,
+        SCLR        => reset,
         XN_RE       => in_real,
         XN_IM       => in_imag,
         FD_IN       => first_in,
         FWD_INV     => FWD,
         SIZE        => dft_size,
-        RFFD        => ready_in,
+        RFFD        => first_ready_in,
         XK_RE       => out_real,
         XK_IM       => out_imag,
         BLK_EXP     => exp,
         FD_OUT      => first_out,
-        DATA_VALID  => out_valid
+        DATA_VALID  => s_out_valid
     );
     
     -----------------------------------------------------------------------
@@ -175,13 +190,17 @@ begin
     -----------------------------------------------------------------------
     
     --syncronous process
-    sync_state_proc: process (reset_n, clk)
+    sync_state_proc: process (reset, clk)
     begin
-        if reset_n = '0' then --Reset signals
+        if reset = '1' then --Reset signals
+            state <= TRANSFER_TO_FFT;
+            input_state <= INPUT_IDLE;
             index <= 0;
             receive_index <= 0;
             
         elsif rising_edge(clk) then
+            state <= state_next;
+            input_state <= input_state_next;
             index <= index_next;
             receive_index <= receive_index_next;
         end if;
@@ -191,28 +210,67 @@ begin
     -----------------------------------------------------------------------
         
     --process to feed the DFT
-    input_proc: process (index, state, ready_in)
+    input_proc: process (input_state, index, state, first_ready_in, stin_valid, stin_data)
     begin
         --default values to prevent latches
-        first_in <= '0';
+        input_state_next <= input_state;
         index_next <= index;
+        first_in <= '0';
+        stin_ready <= '0';
         
-        if index = SIZE then --independent of valid signals
-            index_next <= 0; --reset counter
+        in_real <= (others => '0');
+        in_imag <= (others => '0');
+        
+        case input_state is
+        
+            when INPUT_IDLE =>
+                if (state = TRANSFER_TO_FFT) and (first_ready_in = '1') then --forward back pressure
+                    stin_ready <= '1';
+                    input_state_next <= FIRST_FRAME;
+                end if;
+        
+            when FIRST_FRAME =>
+                if (state = TRANSFER_TO_FFT) and (first_ready_in = '1') and (stin_valid = '1') then --check if DFT is ready to process data and data_in is valid
+                    stin_ready <= '1';
+                    
+                    --set data inputs
+                    in_real <= stin_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0); -- (15 - 0)
+                    in_imag <= stin_data(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2); -- (32 - 16)
+                    
+                    if index = 0 then
+                        first_in <= '1'; --set flag for first data input
+                    end if;
+                    
+                    --increase index
+                    index_next <= index + 1;
+                    
+                    input_state_next <= OTHER_FRAMES;                    
+                end if;
             
-        elsif (state = TRANSFER_TO_FFT) and (ready_in = '1') then --check if DFT is ready to process data
-            --set data inputs
-            in_real <= regin(C_S_AXI_DATA_WIDTH / 2 -1 downto 0); -- (15 - 0)
-            in_imag <= regin(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2); -- (32 - 16)
-            
-            if index = 0 then
-                first_in <= '1'; --set flag for first data input
-            end if;
-            
-            --increase index
-            index_next <= index + 1;
-            
-        end if;
+            when OTHER_FRAMES =>    
+                if index = SIZE then --independent of valid signals
+                    stin_ready <= '0';
+                    index_next <= 0; --reset counter
+                    input_state_next <= INPUT_IDLE;
+                    
+                elsif (state = TRANSFER_TO_FFT) and (stin_valid = '1') then --check if DFT is ready to process data and data_in is valid
+                    stin_ready <= '1';
+                    
+                    --set data inputs
+                    in_real <= stin_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0); -- (15 - 0)
+                    in_imag <= stin_data(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2); -- (32 - 16)
+                    
+                    if index = 0 then
+                        first_in <= '1'; --set flag for first data input
+                    end if;
+                    
+                    --increase index
+                    index_next <= index + 1;
+                end if;
+                
+            when others =>
+                input_state_next <= INPUT_IDLE; 
+        end case;
     
     end process input_proc;
 
@@ -243,20 +301,22 @@ begin
     end process dft_proc;
     
     --process to get output of the DFT
-    output_proc: process (receive_index, state)
+    output_proc: process (receive_index, state, s_out_valid, out_real, out_imag)
     begin
         --default values to prevent latches
         receive_index_next <= receive_index;
+        stout_valid <= '0';
         
         if receive_index = SIZE then --independent of valid signals
             receive_index_next <= 0; --reset counter
             
-        elsif (state = OUTPUT_DATA) and (out_valid = '1') then --check if the output data of the DFT is valid
-            --get data outputs
-            regout(C_S_AXI_DATA_WIDTH / 2 -1 downto 0) <= out_real;
-            regout(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2) <= out_imag;
+        elsif (state = OUTPUT_DATA) and (s_out_valid = '1') then --check if the output data of the DFT is valid
+            stout_valid <= '1';
             
-                        
+            --get data outputs
+            stout_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0) <= out_real;
+            stout_data(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2) <= out_imag;
+                                    
             --increase index
             receive_index_next <= receive_index + 1;
             
