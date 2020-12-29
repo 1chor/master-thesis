@@ -91,6 +91,7 @@
 #########
 *.cache/
 #########
-#ignore TestData folder
+#ignore TestData folder and files
 #########
 TestData/
+*.txt

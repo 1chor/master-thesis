@@ -49,9 +49,17 @@ architecture bench of xdft_tb is
         );
         port ( 
             clk : in std_logic;
-            reset_n : in std_logic;
-            regin : in std_logic_vector(C_S_AXI_DATA_WIDTH -1 downto 0);
-            regout : out std_logic_vector(C_S_AXI_DATA_WIDTH -1 downto 0)
+            reset : in std_logic;
+            
+            -- streaming sink (input)
+            stin_data : in std_logic_vector(C_S_AXI_DATA_WIDTH -1 downto 0);
+            stin_valid : in std_logic;
+            stin_ready : out std_logic;
+            
+            -- streaming source (ouput)
+            stout_data : out std_logic_vector(C_S_AXI_DATA_WIDTH -1 downto 0);
+            stout_valid : out std_logic
+            --stout_ready : in std_logic
         );
     end component;
 
@@ -64,9 +72,13 @@ architecture bench of xdft_tb is
     
     -- signal declaration
     signal clk : std_logic;
-    signal reset_n : std_logic;
-    signal data_in : std_logic_vector(DATA_WIDTH -1 downto 0);
-    signal data_out : std_logic_vector(DATA_WIDTH -1 downto 0);
+    signal reset : std_logic;    
+    signal stin_data : std_logic_vector(DATA_WIDTH -1 downto 0);
+    signal stin_valid : std_logic;
+    signal stin_ready : std_logic;
+    signal stout_data : std_logic_vector(DATA_WIDTH -1 downto 0);
+    signal stout_valid : std_logic;
+    --signal stout_ready : std_logic;
     
     shared variable my_line : line;
     
@@ -91,10 +103,14 @@ begin
             C_S_AXI_DATA_WIDTH => DATA_WIDTH
         )
         port map( 
-            clk => clk,
-            reset_n => reset_n,
-            regin => data_in,
-            regout => data_out
+            clk         => clk,
+            reset       => reset,
+            stin_data   => stin_data,
+            stin_valid  => stin_valid,
+            stin_ready  => stin_ready,
+            stout_data  => stout_data,
+            stout_valid => stout_valid
+            --stout_ready => stout_ready
         );
     
     -- testbench process
@@ -144,6 +160,22 @@ begin
             return ret_value;
         end function;
         
+        -- procedure to write data
+        procedure write_data(val_real : std_logic_vector; val_imag : std_logic_vector) is
+        begin
+            if (stin_ready = '0') then
+                wait until stin_ready = '1';
+            end if;
+            
+            --send input data
+            stin_data(DATA_WIDTH -1 downto DATA_WIDTH/2) <= val_imag;
+            stin_data(DATA_WIDTH/2 -1 downto 0) <= val_real;
+            stin_valid <= '1';
+            wait until rising_edge(clk);
+            stin_valid <= '0';
+            wait for 0 ns;
+        end procedure;
+        
         -- procedure to compare two buffers
         procedure compare_buffers(buffer_A, buffer_B : output_buf_t; length : integer) is
         begin
@@ -157,7 +189,7 @@ begin
         procedure wait_for_output_buffer_fill_level(fill_level : integer) is
         begin
             loop
-                wait for 100ns;
+                wait for 100 ns;
                 if(output_buffer_idx = fill_level) then
                     exit;
                 end if;
@@ -170,19 +202,20 @@ begin
         writeline(output, my_line);
         
         --Test Reset
-        reset_n <= '0';
-        data_in <= (others => '0');
+        reset <= '1';
+        stin_data <= (others => '0');
+        stin_valid <= '0';
         
         wait until rising_edge(clk);
         wait until rising_edge(clk);
         wait until rising_edge(clk);
-        reset_n <= '1';
+        reset <= '0';
         wait until rising_edge(clk);
         
         write(my_line, string'("Load Input Buffers"));
         writeline(output, my_line);
         
-        real_in := read_file("real_dft.txt");
+        real_in := read_file("input_TestData_hex.txt");
         imag_in := read_file("imag_dft.txt");
         
         write(my_line, string'("Load Reference Output Buffers"));
@@ -198,7 +231,7 @@ begin
         
         for i in 0 to SIZE-1 loop
             --send input data
-            data_in <= imag_in(i) & real_in(i);
+            write_data(real_in(i), imag_in(i));
         end loop;
         
         wait_for_output_buffer_fill_level(2*SIZE);
@@ -229,8 +262,10 @@ begin
     read_data_output : process(clk)
     begin
         if (rising_edge(clk)) then
-            output_buffer(output_buffer_idx) := data_out;
-            output_buffer_idx := output_buffer_idx + 1;
+            if stout_valid = '1' then
+                output_buffer(output_buffer_idx) := stout_data;
+                output_buffer_idx := output_buffer_idx + 1;
+            end if;
         end if;
     end process;
     
