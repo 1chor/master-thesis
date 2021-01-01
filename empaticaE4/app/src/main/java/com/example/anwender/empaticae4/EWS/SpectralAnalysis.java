@@ -26,20 +26,54 @@ public class SpectralAnalysis {
                 this.signalSize = inputSignal.size();
                 this.argConstantPart = (Math.PI * 2)/signalSize;
 
+                //Write input values to file
                 for (int i=0; i<signalSize; i++) {
                     //Convert float to hex string
                     float fval = inputSignal.get(i)[0];
                     int intval = Float.floatToRawIntBits(fval);
-                    String st = String.format("0x%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n";
+                    String st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n";
 
                     //Write hex string to file
-                    writeTestDatatoFile(MainActivity.path, "input_TestData_hex.txt", st);
+                    writeTestDatatoFile(MainActivity.path, "input_TestData.txt", st);
 
-                    //Write float value to file
-                    writeTestDatatoFile(MainActivity.path, "input_TestData.txt", Float.toString(fval) + "\n");
+                    //zero extend to size of 108
+                    if (i == signalSize-1) {
+                        for (int j=0; j<8; j++)
+                            writeTestDatatoFile(MainActivity.path, "input_TestData.txt", "00000000\n");
+                    }
                 }
 
                 Complex[] dft = calculateDFT(inputSignal);
+
+                //Write output values to files
+                for (int i=0; i<signalSize; i++) {
+                    //Real component
+                    //Convert double to hex string
+                    double dval = dft[i].getR();
+                    long intval = Double.doubleToRawLongBits(dval);
+                    String st = String.format("%16s", Long.toHexString(intval)).replace(' ', '0') + "\n";
+
+                    //Write hex string to file
+                    writeTestDatatoFile(MainActivity.path, "real_out_TestData.txt", st);
+
+                    //Imaginary component
+                    //Convert double to hex string
+                    dval = dft[i].getI();
+                    intval = Double.doubleToRawLongBits(dval);
+                    st = String.format("%16s", Long.toHexString(intval)).replace(' ', '0') + "\n";
+
+                    //Write hex string to file
+                    writeTestDatatoFile(MainActivity.path, "imag_out_TestData.txt", st);
+
+                    //zero extend to size of 108
+                    if (i == signalSize-1) {
+                        for (int j=0; j<8; j++) {
+                            writeTestDatatoFile(MainActivity.path, "real_out_TestData.txt", "0000000000000000\n");
+                            writeTestDatatoFile(MainActivity.path, "imag_out_TestData.txt", "0000000000000000\n");
+                        }
+                    }
+                }
+
                 List<double[]> spd = SPD(dft);
                 this.expSPD = spd;
                 this.domF = dominantFrequency(spd);
