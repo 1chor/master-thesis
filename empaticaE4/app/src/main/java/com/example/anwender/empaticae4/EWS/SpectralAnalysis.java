@@ -29,6 +29,19 @@ public class SpectralAnalysis {
                 long result = 0;
                 double res = 0;
 
+                //define file names
+                String input_file = "input_TestData.txt";
+                String real_out_file = "real_out_TestData.txt";
+                String imag_out_file = "imag_out_TestData.txt";
+
+                //check if TestData exists and delete it
+                if (checkFileExists(MainActivity.path, input_file, true))
+                    Log.i("TestData", "Deleted "+ input_file + " !");
+                if (checkFileExists(MainActivity.path, real_out_file, true))
+                    Log.i("TestData", "Deleted "+ real_out_file + " !");
+                if (checkFileExists(MainActivity.path, imag_out_file, true))
+                    Log.i("TestData", "Deleted "+ imag_out_file + " !");
+
                 //Write input values to file
                 for (int i=0; i<signalSize; i++) {
                     //Convert float to hex string
@@ -37,12 +50,12 @@ public class SpectralAnalysis {
                     String st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n";
 
                     //Write hex string to file
-                    writeTestDatatoFile(MainActivity.path, "input_TestData.txt", st);
+                    writeTestDatatoFile(MainActivity.path, input_file, st);
 
                     //zero extend to size of 108
                     //if (i == signalSize-1) {
                     //    for (int j=0; j<8; j++)
-                    //        writeTestDatatoFile(MainActivity.path, "input_TestData.txt", "00000000\n");
+                    //        writeTestDatatoFile(MainActivity.path, input_file, "00000000\n");
                     //}
 
                     result = result + intval;
@@ -65,7 +78,7 @@ public class SpectralAnalysis {
                     String st = String.format("%16s", Long.toHexString(intval)).replace(' ', '0') + "\n";
 
                     //Write hex string to file
-                    writeTestDatatoFile(MainActivity.path, "real_out_TestData.txt", st);
+                    writeTestDatatoFile(MainActivity.path, real_out_file, st);
 
                     //Imaginary component
                     //Convert double to hex string
@@ -74,13 +87,13 @@ public class SpectralAnalysis {
                     st = String.format("%16s", Long.toHexString(intval)).replace(' ', '0') + "\n";
 
                     //Write hex string to file
-                    writeTestDatatoFile(MainActivity.path, "imag_out_TestData.txt", st);
+                    writeTestDatatoFile(MainActivity.path, imag_out_file, st);
 
                     //zero extend to size of 108
                     //if (i == signalSize-1) {
                     //    for (int j=0; j<8; j++) {
-                    //        writeTestDatatoFile(MainActivity.path, "real_out_TestData.txt", "0000000000000000\n");
-                    //        writeTestDatatoFile(MainActivity.path, "imag_out_TestData.txt", "0000000000000000\n");
+                    //        writeTestDatatoFile(MainActivity.path, real_out_file, "0000000000000000\n");
+                    //        writeTestDatatoFile(MainActivity.path, imag_out_file, "0000000000000000\n");
                     //    }
                     //}
                 }
@@ -183,6 +196,26 @@ public class SpectralAnalysis {
         }
         else{
             Log.e("writeTestDatatoFile", "Cannot write to storage!");
+        }
+    }
+
+    //Check if file exists
+    private boolean checkFileExists(File path, String Filename, boolean delete){
+
+        if (Utility.isExternalStorageWritable()) { //same as read permission
+            //Create a new file @ path/filename
+            File file = new File(path, Filename);
+
+            if (file.exists()) {
+                if (delete)
+                    file.delete(); //delete file if option is selected
+                return true;
+            } else
+                return false;
+        }
+        else{
+            Log.e("checkFileExists", "Cannot read from storage!");
+            return false;
         }
     }
 }
