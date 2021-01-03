@@ -62,6 +62,7 @@ public class SpectralAnalysis {
                     res = res + fval;
 
                 }
+                Log.i("TestData", "Created input TestData: "+ input_file + " !");
 
                 String rst = String.format("%16s", Long.toHexString(result)).replace(' ', '0') + "\n";
                 long lval = Double.doubleToRawLongBits(res);
@@ -97,6 +98,8 @@ public class SpectralAnalysis {
                     //    }
                     //}
                 }
+                Log.i("TestData", "Created output TestData: "+ real_out_file + " !");
+                Log.i("TestData", "Created output TestData: "+ imag_out_file + " !");
 
                 List<double[]> spd = SPD(dft);
                 this.expSPD = spd;
