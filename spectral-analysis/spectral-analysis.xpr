@@ -33,7 +33,7 @@
     <Option Name="DSAVendor" Val="xilinx"/>
     <Option Name="DSABoardId" Val="zcu102"/>
     <Option Name="DSANumComputeUnits" Val="60"/>
-    <Option Name="WTXSimLaunchSim" Val="50"/>
+    <Option Name="WTXSimLaunchSim" Val="63"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -83,27 +83,33 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sim_1/imports/TestData/input_TestData.txt">
+      <File Path="$PPRDIR/xdft_tb_behav.wcfg">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/TestData/input_TestData.txt"/>
-          <Attr Name="ImportTime" Val="1609238308"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sim_1/imports/TestData/input_TestData_hex.txt">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/TestData/input_TestData_hex.txt"/>
-          <Attr Name="ImportTime" Val="1609242873"/>
+          <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
       <File Path="$PSRCDIR/sim_1/imports/TestData/imag_dft.txt">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/TestData/imag_dft.txt"/>
-          <Attr Name="ImportTime" Val="1609243051"/>
+          <Attr Name="ImportTime" Val="1609516069"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/xdft_tb_behav.wcfg">
+      <File Path="$PSRCDIR/sim_1/imports/TestData/imag_out_TestData.txt">
         <FileInfo>
-          <Attr Name="UsedIn" Val="simulation"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/imag_out_TestData.txt"/>
+          <Attr Name="ImportTime" Val="1609714908"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/input_TestData.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/input_TestData.txt"/>
+          <Attr Name="ImportTime" Val="1609714910"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/real_out_TestData.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/real_out_TestData.txt"/>
+          <Attr Name="ImportTime" Val="1609714909"/>
         </FileInfo>
       </File>
       <Config>
