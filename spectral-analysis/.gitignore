@@ -95,3 +95,11 @@
 #########
 TestData/
 *.txt
+#########
+#matlab simulation
+#########
+#Do NOT ignore matlab simulation files
+!matlab/*
+#ignore compiled cmodel
+*.mexa64
+*.asv
