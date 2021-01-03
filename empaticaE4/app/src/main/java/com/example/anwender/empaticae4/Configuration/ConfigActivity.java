@@ -55,7 +55,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
 
     //public variables
     public static String repo_name = "SDFT"; //set default name of server repository
-    public static int windowSize = 100;
+    public static int windowSize = 108;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

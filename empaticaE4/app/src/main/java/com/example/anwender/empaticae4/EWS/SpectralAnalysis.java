@@ -26,6 +26,9 @@ public class SpectralAnalysis {
                 this.signalSize = inputSignal.size();
                 this.argConstantPart = (Math.PI * 2)/signalSize;
 
+                long result = 0;
+                double res = 0;
+
                 //Write input values to file
                 for (int i=0; i<signalSize; i++) {
                     //Convert float to hex string
@@ -37,11 +40,19 @@ public class SpectralAnalysis {
                     writeTestDatatoFile(MainActivity.path, "input_TestData.txt", st);
 
                     //zero extend to size of 108
-                    if (i == signalSize-1) {
-                        for (int j=0; j<8; j++)
-                            writeTestDatatoFile(MainActivity.path, "input_TestData.txt", "00000000\n");
-                    }
+                    //if (i == signalSize-1) {
+                    //    for (int j=0; j<8; j++)
+                    //        writeTestDatatoFile(MainActivity.path, "input_TestData.txt", "00000000\n");
+                    //}
+
+                    result = result + intval;
+                    res = res + fval;
+
                 }
+
+                String rst = String.format("%16s", Long.toHexString(result)).replace(' ', '0') + "\n";
+                long lval = Double.doubleToRawLongBits(res);
+                rst = String.format("%16s", Long.toHexString(lval)).replace(' ', '0') + "\n";
 
                 Complex[] dft = calculateDFT(inputSignal);
 
@@ -66,12 +77,12 @@ public class SpectralAnalysis {
                     writeTestDatatoFile(MainActivity.path, "imag_out_TestData.txt", st);
 
                     //zero extend to size of 108
-                    if (i == signalSize-1) {
-                        for (int j=0; j<8; j++) {
-                            writeTestDatatoFile(MainActivity.path, "real_out_TestData.txt", "0000000000000000\n");
-                            writeTestDatatoFile(MainActivity.path, "imag_out_TestData.txt", "0000000000000000\n");
-                        }
-                    }
+                    //if (i == signalSize-1) {
+                    //    for (int j=0; j<8; j++) {
+                    //        writeTestDatatoFile(MainActivity.path, "real_out_TestData.txt", "0000000000000000\n");
+                    //        writeTestDatatoFile(MainActivity.path, "imag_out_TestData.txt", "0000000000000000\n");
+                    //    }
+                    //}
                 }
 
                 List<double[]> spd = SPD(dft);
