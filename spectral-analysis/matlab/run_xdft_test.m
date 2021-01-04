@@ -2,7 +2,7 @@
 % check if cmodel is already compiled
 % -----------------------------------------------------
 
-if (~exist('dft_v4_0_bitacc_mex.mexa64'))
+if (~exist('dft_v4_0_bitacc_mex.mexa64', 'file'))
     disp('Compiling cmodel');
     make_dft_v4_0_mex;
 end
@@ -20,49 +20,76 @@ size = 2^n2 * 3^n3 * 5^n5; % = 108
 precision = 16;
 fwdinv = 0; % use forward transformation
 
-infile = './../TestData/input_TestData.txt';
+use_hex_float = false; % hex = true, float = false
 
-imag_in = zeros(1, size);
+if (use_hex_float == true)
+    infile = './../TestData/input_TestData.txt';
+else
+    infile = './../TestData/input_TestData_float.txt';
+end
 
 % -----------------------------------------------------
 % read files
 % -----------------------------------------------------
 
 fileID = fopen(infile, 'r');
-data = textscan(fileID, '%s'); % read as string
+if (use_hex_float == true)
+    data = textscan(fileID, '%s'); % read as string
+else
+    real_in = fscanf(fileID, '%f', size); % read as float
+end
 fclose(fileID);
 
-stringData = string(data{:}); % convert to hex string
-real_in = hex2num(transpose(stringData)); % convert to float num
-
-%saturate
-for i=1:size    
-   if(real_in(i)>=1)
-       real_in(i) = real_in(i)/(real_in(i)+2^(1-precision));
-   end
+if (use_hex_float == true)
+    stringData = string(data{:}); % convert to hex string
+    real_in = hex2num(stringData); % convert to float num
 end
 
-input = complex(real_in, imag_in); % convert to complex
+% Normalise values of the array to be between -1 and 1
+% original sign of the array values is maintained
+if abs(min(real_in)) > max(real_in)
+    max_range_value = abs(min(real_in));
+    min_range_value = min(real_in);
+else
+    max_range_value = max(real_in);
+    min_range_value = -max(real_in);
+end
+
+norm = (max_range_value - min_range_value + 2^(1-precision));
+norm_real_in = 2 .* real_in ./ norm;
+
+input = complex(transpose(norm_real_in)); % convert to complex
 
 % -----------------------------------------------------
 % Call the bit accurate model
 % -----------------------------------------------------
 
 [result_dft, block_exp] = dft_v4_0_bitacc_mex(input, n2, n3, n5, fwdinv, precision);
-num2hex(result_dft(1))
-result_dft = result_dft * 2^block_exp; % apply shifts
-num2hex(result_dft(1))
+% conjugate the result and apply shifts and unnormalise
+result_dft = conj(result_dft) .* 2^block_exp .* norm ./ 2; 
+
+%num2hex(result_dft(1))
 
 % -----------------------------------------------------
 % Compare with built-in Matlab's double precision DFT
 % -----------------------------------------------------
 
-ref=ifft(input);
-ref = size*ref;
+ref=fft(input);
+% unnormalise
+ref = ref .* norm ./ 2;
 
 % -----------------------------------------------------
 % report maximum error
 % ----------------------------------------------------- 
-max_error = max(abs(result_dft-ref)/max(abs(ref)))
+max_error = max(abs(result_dft-ref)/max(abs(ref)));
 
-disp('Fin');
+disp('max_error = ');
+disp(max_error);
+
+disp('Finish');
+
+
+
+
+
+
