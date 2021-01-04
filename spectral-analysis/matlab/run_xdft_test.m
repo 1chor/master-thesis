@@ -49,7 +49,7 @@ if (use_hex_float == true)
 end
 
 % Normalise values of the array to be between -1 and 1
-% original sign of the array values is maintained
+% original sign of the array values are maintained
 if abs(min(real_in)) > max(real_in)
     max_range_value = abs(min(real_in));
     min_range_value = min(real_in);
@@ -58,8 +58,8 @@ else
     min_range_value = -max(real_in);
 end
 
-norm = (max_range_value - min_range_value + 2^(1-precision));
-norm_real_in = 2 .* real_in ./ norm;
+norm_abs = (max_range_value - min_range_value + 2^(1-precision));
+norm_real_in = 2 .* real_in ./ norm_abs;
 
 input = complex(transpose(norm_real_in)); % convert to complex
 
@@ -69,7 +69,7 @@ input = complex(transpose(norm_real_in)); % convert to complex
 
 [result_dft, block_exp] = dft_v4_0_bitacc_mex(input, n2, n3, n5, fwdinv, precision);
 % conjugate the result and apply shifts and unnormalise
-result_dft = conj(result_dft) .* 2^block_exp .* norm ./ 2; 
+result_dft = conj(result_dft) .* 2^block_exp .* norm_abs ./ 2; 
 
 %Beaware of float with single or double precision
 num2hex(result_dft(1))
@@ -81,7 +81,7 @@ num2hex(single(result_dft(1)))
 
 ref=fft(input);
 % unnormalise
-ref = ref .* norm ./ 2;
+ref = ref .* norm_abs ./ 2;
 
 % -----------------------------------------------------
 % report maximum error
