@@ -71,7 +71,9 @@ input = complex(transpose(norm_real_in)); % convert to complex
 % conjugate the result and apply shifts and unnormalise
 result_dft = conj(result_dft) .* 2^block_exp .* norm ./ 2; 
 
-%num2hex(result_dft(1))
+%Beaware of float with single or double precision
+num2hex(result_dft(1))
+num2hex(single(result_dft(1)))
 
 % -----------------------------------------------------
 % Compare with built-in Matlab's double precision DFT
