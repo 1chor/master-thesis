@@ -20,7 +20,7 @@ size = 2^n2 * 3^n3 * 5^n5; % = 108
 precision = 16;
 fwdinv = 0; % use forward transformation
 
-use_hex_float = false; % hex = true, float = false
+use_hex_float = true; % hex = true, float = false
 
 if (use_hex_float == true)
     infile = './../TestData/input_TestData.txt';
@@ -42,7 +42,10 @@ fclose(fileID);
 
 if (use_hex_float == true)
     stringData = string(data{:}); % convert to hex string
-    real_in = hex2num(stringData); % convert to float num
+    real_in = typecast(uint32(hex2dec(stringData)),'single'); % convert to single float num
+    % Single float is needed, otherwise matlab uses double float as default
+    % and the convertion is not correct
+    real_in = double(real_in); % convert the single float to double, needed by the dft
 end
 
 % Normalise values of the array to be between -1 and 1
