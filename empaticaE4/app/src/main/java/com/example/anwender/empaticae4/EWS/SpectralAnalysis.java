@@ -31,12 +31,15 @@ public class SpectralAnalysis {
 
                 //define file names
                 String input_file = "input_TestData.txt";
+                String input_float_file = "input_TestData_float.txt";
                 String real_out_file = "real_out_TestData.txt";
                 String imag_out_file = "imag_out_TestData.txt";
 
                 //check if TestData exists and delete it
                 if (checkFileExists(MainActivity.path, input_file, true))
                     Log.i("TestData", "Deleted "+ input_file + " !");
+                if (checkFileExists(MainActivity.path, input_float_file, true))
+                    Log.i("TestData", "Deleted "+ input_float_file + " !");
                 if (checkFileExists(MainActivity.path, real_out_file, true))
                     Log.i("TestData", "Deleted "+ real_out_file + " !");
                 if (checkFileExists(MainActivity.path, imag_out_file, true))
@@ -52,6 +55,9 @@ public class SpectralAnalysis {
                     //Write hex string to file
                     writeTestDatatoFile(MainActivity.path, input_file, st);
 
+                    //Write float values to file
+                    writeTestDatatoFile(MainActivity.path, input_float_file, fval + "\n");
+
                     //zero extend to size of 108
                     //if (i == signalSize-1) {
                     //    for (int j=0; j<8; j++)
@@ -62,7 +68,7 @@ public class SpectralAnalysis {
                     res = res + fval;
 
                 }
-                Log.i("TestData", "Created input TestData: "+ input_file + " !");
+                Log.i("TestData", "Created input TestData: "+ input_file + " & " + input_float_file + " !");
 
                 String rst = String.format("%16s", Long.toHexString(result)).replace(' ', '0') + "\n";
                 long lval = Double.doubleToRawLongBits(res);
@@ -98,8 +104,7 @@ public class SpectralAnalysis {
                     //    }
                     //}
                 }
-                Log.i("TestData", "Created output TestData: "+ real_out_file + " !");
-                Log.i("TestData", "Created output TestData: "+ imag_out_file + " !");
+                Log.i("TestData", "Created output TestData: "+ real_out_file + " & " + imag_out_file  + " !");
 
                 List<double[]> spd = SPD(dft);
                 this.expSPD = spd;
