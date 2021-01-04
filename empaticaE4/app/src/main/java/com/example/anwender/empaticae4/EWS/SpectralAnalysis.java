@@ -6,6 +6,8 @@ import com.example.anwender.empaticae4.Configuration.ConfigActivity;
 import com.example.anwender.empaticae4.Main.MainActivity;
 import com.example.anwender.empaticae4.Main.Utility;
 
+import org.apache.commons.math3.linear.DefaultIterativeLinearSolverEvent;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -24,10 +26,13 @@ public class SpectralAnalysis {
         switch (ConfigActivity.repo_name) {
             case "SDFT": //Software DFT
                 this.signalSize = inputSignal.size();
-                this.argConstantPart = (Math.PI * 2)/signalSize;
+                this.argConstantPart = (Math.PI * 2) / signalSize;
 
-                long result = 0;
-                double res = 0;
+                boundaries bound = new boundaries(inputSignal); //search for boundaries
+
+                float norm_abs = 0;
+                float max_range_value = 0;
+                float min_range_value = 0;
 
                 //define file names
                 String input_file = "input_TestData.txt";
@@ -37,42 +42,46 @@ public class SpectralAnalysis {
 
                 //check if TestData exists and delete it
                 if (checkFileExists(MainActivity.path, input_file, true))
-                    Log.i("TestData", "Deleted "+ input_file + " !");
+                    Log.i("TestData", "Deleted " + input_file + " !");
                 if (checkFileExists(MainActivity.path, input_float_file, true))
-                    Log.i("TestData", "Deleted "+ input_float_file + " !");
+                    Log.i("TestData", "Deleted " + input_float_file + " !");
                 if (checkFileExists(MainActivity.path, real_out_file, true))
-                    Log.i("TestData", "Deleted "+ real_out_file + " !");
+                    Log.i("TestData", "Deleted " + real_out_file + " !");
                 if (checkFileExists(MainActivity.path, imag_out_file, true))
-                    Log.i("TestData", "Deleted "+ imag_out_file + " !");
+                    Log.i("TestData", "Deleted " + imag_out_file + " !");
+
+                //normalise input values to be between -1 and 1
+                //original sign of the values are maintained
+                if (Math.abs(bound.getMin()) > bound.getMax()) {
+                    max_range_value = Math.abs(bound.getMin());
+                    min_range_value = bound.getMin();
+                } else {
+                    max_range_value = bound.getMax();
+                    min_range_value = -bound.getMax();
+                }
+                norm_abs = (max_range_value - min_range_value);
 
                 //Write input values to file
                 for (int i=0; i<signalSize; i++) {
                     //Convert float to hex string
                     float fval = inputSignal.get(i)[0];
-                    int intval = Float.floatToRawIntBits(fval);
+                    float norm_fval = 2 * fval / norm_abs;
+                    int intval = Float.floatToRawIntBits(norm_fval);
                     String st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n";
 
                     //Write hex string to file
                     writeTestDatatoFile(MainActivity.path, input_file, st);
 
                     //Write float values to file
-                    writeTestDatatoFile(MainActivity.path, input_float_file, fval + "\n");
+                    writeTestDatatoFile(MainActivity.path, input_float_file, norm_fval + "\n");
 
                     //zero extend to size of 108
                     //if (i == signalSize-1) {
                     //    for (int j=0; j<8; j++)
                     //        writeTestDatatoFile(MainActivity.path, input_file, "00000000\n");
                     //}
-
-                    result = result + intval;
-                    res = res + fval;
-
                 }
                 Log.i("TestData", "Created input TestData: "+ input_file + " & " + input_float_file + " !");
-
-                String rst = String.format("%16s", Long.toHexString(result)).replace(' ', '0') + "\n";
-                long lval = Double.doubleToRawLongBits(res);
-                rst = String.format("%16s", Long.toHexString(lval)).replace(' ', '0') + "\n";
 
                 Complex[] dft = calculateDFT(inputSignal);
 
