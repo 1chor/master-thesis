@@ -36,15 +36,25 @@ public class SpectralAnalysis {
 
                 //define file names
                 String input_file = "input_TestData.txt";
+                String input_norm_file = "input_TestData_norm.txt";
+
                 String input_float_file = "input_TestData_float.txt";
+                String input_norm_float_file = "input_TestData_norm_float.txt";
+
                 String real_out_file = "real_out_TestData.txt";
                 String imag_out_file = "imag_out_TestData.txt";
 
                 //check if TestData exists and delete it
                 if (checkFileExists(MainActivity.path, input_file, true))
                     Log.i("TestData", "Deleted " + input_file + " !");
+                if (checkFileExists(MainActivity.path, input_norm_file, true))
+                    Log.i("TestData", "Deleted " + input_norm_file + " !");
+
                 if (checkFileExists(MainActivity.path, input_float_file, true))
                     Log.i("TestData", "Deleted " + input_float_file + " !");
+                if (checkFileExists(MainActivity.path, input_norm_float_file, true))
+                    Log.i("TestData", "Deleted " + input_norm_float_file + " !");
+
                 if (checkFileExists(MainActivity.path, real_out_file, true))
                     Log.i("TestData", "Deleted " + real_out_file + " !");
                 if (checkFileExists(MainActivity.path, imag_out_file, true))
@@ -63,25 +73,29 @@ public class SpectralAnalysis {
 
                 //Write input values to file
                 for (int i=0; i<signalSize; i++) {
+                    float fval = inputSignal.get(i)[0]; //get input value
+                    float norm_fval = 2 * fval / norm_abs; //normalise input value, range [-1 1]
+
                     //Convert float to hex string
-                    float fval = inputSignal.get(i)[0];
-                    float norm_fval = 2 * fval / norm_abs;
-                    int intval = Float.floatToRawIntBits(norm_fval);
+                    int intval = Float.floatToRawIntBits(fval);
+                    int norm_intval = Float.floatToRawIntBits(norm_fval);
                     String st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n";
+                    String norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n";
 
                     //Write hex string to file
                     writeTestDatatoFile(MainActivity.path, input_file, st);
 
-                    //Write float values to file
-                    writeTestDatatoFile(MainActivity.path, input_float_file, norm_fval + "\n");
+                    //Write normalised hex string to file
+                    writeTestDatatoFile(MainActivity.path, input_norm_file, norm_st);
 
-                    //zero extend to size of 108
-                    //if (i == signalSize-1) {
-                    //    for (int j=0; j<8; j++)
-                    //        writeTestDatatoFile(MainActivity.path, input_file, "00000000\n");
-                    //}
+                    //Write float values to file
+                    writeTestDatatoFile(MainActivity.path, input_float_file, fval + "\n");
+
+                    //Write normalised float values to file
+                    writeTestDatatoFile(MainActivity.path, input_norm_float_file, norm_fval + "\n");
                 }
-                Log.i("TestData", "Created input TestData: "+ input_file + " & " + input_float_file + " !");
+                Log.i("TestData", "Created input hex TestData: " + input_file + " & " + input_norm_file + " !");
+                Log.i("TestData", "Created input float TestData: " + input_float_file + " & " + input_norm_float_file + " !");
 
                 Complex[] dft = calculateDFT(inputSignal);
 
@@ -104,14 +118,6 @@ public class SpectralAnalysis {
 
                     //Write hex string to file
                     writeTestDatatoFile(MainActivity.path, imag_out_file, st);
-
-                    //zero extend to size of 108
-                    //if (i == signalSize-1) {
-                    //    for (int j=0; j<8; j++) {
-                    //        writeTestDatatoFile(MainActivity.path, real_out_file, "0000000000000000\n");
-                    //        writeTestDatatoFile(MainActivity.path, imag_out_file, "0000000000000000\n");
-                    //    }
-                    //}
                 }
                 Log.i("TestData", "Created output TestData: "+ real_out_file + " & " + imag_out_file  + " !");
 
