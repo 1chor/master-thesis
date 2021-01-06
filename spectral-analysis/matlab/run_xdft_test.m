@@ -22,10 +22,19 @@ fwdinv = 0; % use forward transformation
 
 use_hex_float = true; % hex = true, float = false
 normalised_data = true; % true = use already normalised input data, flase = calculate it
+use_1q15 = true; % true = input data has 1q15 format
+
+if ( (use_1q15 == true) && ( (normalised_data == false) || (use_hex_float == false) ) )
+   error('This configuration is not possible!');
+end
 
 if (use_hex_float == true)
     if (normalised_data == true)
-        infile = './../TestData/input_TestData_norm.txt';
+        if (use_1q15 == true)
+            infile = './../TestData/input_TestData_norm16.txt';
+        else
+            infile = './../TestData/input_TestData_norm.txt';
+        end
     else
         infile = './../TestData/input_TestData.txt';
     end
@@ -51,10 +60,19 @@ fclose(fileID);
 
 if (use_hex_float == true)
     stringData = string(data{:}); % convert to hex string
-    real_in = typecast(uint32(hex2dec(stringData)),'single'); % convert to single float num
-    % Single float is needed, otherwise matlab uses double float as default
-    % and the convertion is not correct
-    real_in = double(real_in); % convert the single float to double, needed by the dft
+    
+    if (use_1q15 == true)
+        for i=1:size
+            stringData(i) = stringData{i}(1:end-4); % remove "0000" at end of string
+            real_in(i) = convert_1q15(hex2dec(stringData(i)));
+        end
+        
+    else
+        real_in = typecast(uint32(hex2dec(stringData)),'single'); % convert to single float num
+        % Single float is needed, otherwise matlab uses double float as default
+        % and the convertion is not correct
+        real_in = double(real_in); % convert the single float to double, needed by the dft
+    end 
 end
 
 if (normalised_data == true)
@@ -64,8 +82,15 @@ if (normalised_data == true)
             real_in(i) = real_in(i)/(real_in(i)+2^(1-precision));
         end
     end
-    input = complex(transpose(real_in)); % convert to complex
+    
+    if (use_1q15 == true)
+    	input = complex(real_in); % convert to complex
+    else
+        input = complex(transpose(real_in)); % convert to complex
+    end
+    
     norm_abs = 4.4371;% only valid with certain test data
+
 else
     % Normalise values of the array to be between -1 and 1
     % original sign of the array values are maintained
@@ -86,6 +111,9 @@ end
 % -----------------------------------------------------
 % Call the bit accurate model
 % -----------------------------------------------------
+
+num2hex(input(1))
+num2hex(single(input(1)))
 
 [result_dft, block_exp] = dft_v4_0_bitacc_mex(input, n2, n3, n5, fwdinv, precision);
 % conjugate the result and apply shifts and unnormalise
@@ -112,8 +140,6 @@ disp('max_error = ');
 disp(max_error);
 
 disp('Finish');
-
-
 
 
 
