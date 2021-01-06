@@ -37,6 +37,7 @@ public class SpectralAnalysis {
                 //define file names
                 String input_file = "input_TestData.txt";
                 String input_norm_file = "input_TestData_norm.txt";
+                String input_norm_16_file = "input_TestData_norm16.txt";
 
                 String input_float_file = "input_TestData_float.txt";
                 String input_norm_float_file = "input_TestData_norm_float.txt";
@@ -49,6 +50,8 @@ public class SpectralAnalysis {
                     Log.i("TestData", "Deleted " + input_file + " !");
                 if (checkFileExists(MainActivity.path, input_norm_file, true))
                     Log.i("TestData", "Deleted " + input_norm_file + " !");
+                if (checkFileExists(MainActivity.path, input_norm_16_file, true))
+                    Log.i("TestData", "Deleted " + input_norm_16_file + " !");
 
                 if (checkFileExists(MainActivity.path, input_float_file, true))
                     Log.i("TestData", "Deleted " + input_float_file + " !");
@@ -79,8 +82,10 @@ public class SpectralAnalysis {
                     //Convert float to hex string
                     int intval = Float.floatToRawIntBits(fval);
                     int norm_intval = Float.floatToRawIntBits(norm_fval);
+                    int norm_intval16 = convert_to_fixed_1q15(norm_fval);
                     String st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n";
                     String norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n";
+                    String norm_st16 = String.format("%4s", Integer.toHexString(norm_intval16)).replace(' ', '0') + "0000\n";
 
                     //Write hex string to file
                     writeTestDatatoFile(MainActivity.path, input_file, st);
@@ -88,13 +93,16 @@ public class SpectralAnalysis {
                     //Write normalised hex string to file
                     writeTestDatatoFile(MainActivity.path, input_norm_file, norm_st);
 
+                    //Write normalised 16 bit hex string to file
+                    writeTestDatatoFile(MainActivity.path, input_norm_16_file, norm_st16);
+
                     //Write float values to file
                     writeTestDatatoFile(MainActivity.path, input_float_file, fval + "\n");
 
                     //Write normalised float values to file
                     writeTestDatatoFile(MainActivity.path, input_norm_float_file, norm_fval + "\n");
                 }
-                Log.i("TestData", "Created input hex TestData: " + input_file + " & " + input_norm_file + " !");
+                Log.i("TestData", "Created input hex TestData: " + input_file + " & " + input_norm_file + " & " + input_norm_16_file + " !");
                 Log.i("TestData", "Created input float TestData: " + input_float_file + " & " + input_norm_float_file + " !");
 
                 Complex[] dft = calculateDFT(inputSignal);
@@ -273,6 +281,11 @@ public class SpectralAnalysis {
                 num_float += Math.pow(2, i*(-1));
             }
             shift_by += 1;
+
+            //calculate integer part to the left of the comma
+            if ((i == 1) & ((num >> shift_by) > 0)) {
+                num_float += num >> shift_by;
+            }
         }
 
         if (invert == 1) {
