@@ -241,4 +241,44 @@ public class SpectralAnalysis {
             return false;
         }
     }
+
+    //convert float value to integer fixed 1q15 format
+    private int convert_to_fixed_1q15(float num){
+        return (int)(num * (1 << 15));
+    }
+
+    //convert integer fixed 1q15 format to float
+    private float convert_1q15(int num){
+        byte i = 0;
+        byte shift_by = 0;
+        byte invert = 0;
+
+        float num_float = 0;
+
+        //if num is negativ, num will be inverted (2's complement)
+        if (num < 0) {
+            invert = 1;
+
+            num = ~num;
+            num += 1;
+        }
+
+        //for the 1q15 format we have to start at 15
+        //the smallest part is 2^⁻15
+        for (i = 15; i > 0; i--) {
+
+            // if lsb is 1
+            if ( ( (num >> shift_by) & 1) == 1) {
+                //then add 2^-i
+                num_float += Math.pow(2, i*(-1));
+            }
+            shift_by += 1;
+        }
+
+        if (invert == 1) {
+            num_float *= -1;
+        }
+
+        return num_float;
+    }
 }
