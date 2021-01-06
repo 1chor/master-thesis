@@ -283,7 +283,7 @@ public class SpectralAnalysis {
             shift_by += 1;
 
             //calculate integer part to the left of the comma
-            if ((i == 1) & ((num >> shift_by) > 0)) {
+            if ((i == 1) && ((num >> shift_by) > 0)) {
                 num_float += num >> shift_by;
             }
         }
