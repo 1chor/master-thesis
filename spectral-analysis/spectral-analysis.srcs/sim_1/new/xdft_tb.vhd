@@ -80,6 +80,8 @@ architecture bench of xdft_tb is
     signal stout_valid : std_logic;
     --signal stout_ready : std_logic;
     
+    signal out_shift : std_logic_vector(DATA_WIDTH -1 downto 0);
+    
     shared variable my_line : line;
     
     -- type declaration
@@ -121,6 +123,7 @@ begin
         
         variable output_real : array_t;
         variable output_imag : array_t;
+        variable temp_var : output_buf_t;
         
         variable temp : word16_t;
         
@@ -218,7 +221,7 @@ begin
         write(my_line, string'("Load Input Buffers"));
         writeline(output, my_line);
         
-        real_in := read_file("input_TestData.txt");
+        real_in := read_file("input_TestData_norm16.txt");
         imag_in := read_file("imag_dft.txt");
         
         write(my_line, string'("Load Reference Output Buffers"));
@@ -242,9 +245,9 @@ begin
         for i in 0 to SIZE-1 loop
             -- read output data
             output_real(i) := output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
-            output_imag(i) := output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);            
-        end loop;
-        
+            output_imag(i) := output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
+        end loop;               
+
         write(my_line, string'("Compare results"));
         writeline(output, my_line);
         
@@ -268,6 +271,7 @@ begin
             if stout_valid = '1' then
                 output_buffer(output_buffer_idx) := stout_data;
                 output_buffer_idx := output_buffer_idx + 1;
+               out_shift <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), out_shift'length), 7) );
             end if;
         end if;
     end process;

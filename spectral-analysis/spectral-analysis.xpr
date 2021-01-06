@@ -33,7 +33,7 @@
     <Option Name="DSAVendor" Val="xilinx"/>
     <Option Name="DSABoardId" Val="zcu102"/>
     <Option Name="DSANumComputeUnits" Val="60"/>
-    <Option Name="WTXSimLaunchSim" Val="63"/>
+    <Option Name="WTXSimLaunchSim" Val="97"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -97,19 +97,31 @@
       <File Path="$PSRCDIR/sim_1/imports/TestData/imag_out_TestData.txt">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/TestData/imag_out_TestData.txt"/>
-          <Attr Name="ImportTime" Val="1609714908"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sim_1/imports/TestData/input_TestData.txt">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/TestData/input_TestData.txt"/>
-          <Attr Name="ImportTime" Val="1609714910"/>
+          <Attr Name="ImportTime" Val="1609764420"/>
         </FileInfo>
       </File>
       <File Path="$PSRCDIR/sim_1/imports/TestData/real_out_TestData.txt">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/TestData/real_out_TestData.txt"/>
-          <Attr Name="ImportTime" Val="1609714909"/>
+          <Attr Name="ImportTime" Val="1609764422"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/input_TestData.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/input_TestData.txt"/>
+          <Attr Name="ImportTime" Val="1609791079"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/input_TestData_norm.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/input_TestData_norm.txt"/>
+          <Attr Name="ImportTime" Val="1609929457"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/input_TestData_norm16.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/input_TestData_norm16.txt"/>
+          <Attr Name="ImportTime" Val="1609961038"/>
         </FileInfo>
       </File>
       <Config>

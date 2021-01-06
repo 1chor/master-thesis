@@ -10,34 +10,18 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="295500000001fs"></ZoomEndTime>
-      <Cursor1Time time="35000000fs"></Cursor1Time>
+      <ZoomStartTime time="209166666fs"></ZoomStartTime>
+      <ZoomEndTime time="3204166667fs"></ZoomEndTime>
+      <Cursor1Time time="2695000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="175"></NameColumnWidth>
-      <ValueColumnWidth column_width="110"></ValueColumnWidth>
+      <ValueColumnWidth column_width="102"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="38" />
+   <WVObjectSize size="32" />
    <wvobject type="logic" fp_name="/xdft_tb/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/xdft_tb/reset_n">
-      <obj_property name="ElementShortName">reset_n</obj_property>
-      <obj_property name="ObjectShortName">reset_n</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/xdft_tb/data_in">
-      <obj_property name="ElementShortName">data_in[31:0]</obj_property>
-      <obj_property name="ObjectShortName">data_in[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/xdft_tb/data_out">
-      <obj_property name="ElementShortName">data_out[31:0]</obj_property>
-      <obj_property name="ObjectShortName">data_out[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/xdft_tb/out_valid">
-      <obj_property name="ElementShortName">out_valid</obj_property>
-      <obj_property name="ObjectShortName">out_valid</obj_property>
    </wvobject>
    <wvobject type="other" fp_name="/xdft_tb/SIZE">
       <obj_property name="ElementShortName">SIZE</obj_property>
@@ -62,10 +46,6 @@
    <wvobject fp_name="divider10" type="divider">
       <obj_property name="label">DFT Wrapper</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/xdft_tb/uut/regin">
-      <obj_property name="ElementShortName">regin[31:0]</obj_property>
-      <obj_property name="ObjectShortName">regin[31:0]</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/xdft_tb/uut/in_real">
       <obj_property name="ElementShortName">in_real[15:0]</obj_property>
@@ -95,10 +75,6 @@
       <obj_property name="ElementShortName">state_next</obj_property>
       <obj_property name="ObjectShortName">state_next</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/xdft_tb/uut/regout">
-      <obj_property name="ElementShortName">regout[31:0]</obj_property>
-      <obj_property name="ObjectShortName">regout[31:0]</obj_property>
-   </wvobject>
    <wvobject type="array" fp_name="/xdft_tb/uut/out_real">
       <obj_property name="ElementShortName">out_real[15:0]</obj_property>
       <obj_property name="ObjectShortName">out_real[15:0]</obj_property>
@@ -110,10 +86,6 @@
    <wvobject type="logic" fp_name="/xdft_tb/uut/first_out">
       <obj_property name="ElementShortName">first_out</obj_property>
       <obj_property name="ObjectShortName">first_out</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/xdft_tb/uut/out_valid">
-      <obj_property name="ElementShortName">out_valid</obj_property>
-      <obj_property name="ObjectShortName">out_valid</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/xdft_tb/uut/s_out_valid">
       <obj_property name="ElementShortName">s_out_valid</obj_property>
@@ -170,5 +142,9 @@
    <wvobject type="logic" fp_name="/xdft_tb/uut/dft_inst/DATA_VALID">
       <obj_property name="ElementShortName">DATA_VALID</obj_property>
       <obj_property name="ObjectShortName">DATA_VALID</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/out_shift">
+      <obj_property name="ElementShortName">out_shift[31:0]</obj_property>
+      <obj_property name="ObjectShortName">out_shift[31:0]</obj_property>
    </wvobject>
 </wave_config>
