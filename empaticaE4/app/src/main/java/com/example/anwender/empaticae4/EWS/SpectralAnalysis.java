@@ -22,7 +22,7 @@ public class SpectralAnalysis {
     private List<double[]> expSPD;
 
     //Constructor: Requires input signal
-    public SpectralAnalysis(List<float[]> inputSignal){
+    public SpectralAnalysis(List<float[]> inputSignal) {
         switch (ConfigActivity.repo_name) {
             case "SDFT": //Software DFT
                 this.signalSize = inputSignal.size();
@@ -153,7 +153,7 @@ public class SpectralAnalysis {
      * @param signal input signal in form float{peaks,timeValues}
      * @return Complex[] representing the fourier transformed of the signal
      */
-    private Complex[] calculateDFT(List<float[]> signal){
+    private Complex[] calculateDFT(List<float[]> signal) {
         Complex[] result = new Complex[signalSize];
         for(int k=0;k<signalSize;k++){
             Complex freqComponent= new Complex(0,0);
@@ -173,7 +173,7 @@ public class SpectralAnalysis {
      * @param dft discrete fourier transformed signal
      * @return real array with the spectral density
      */
-    private List<double[]> SPD(Complex[] dft){
+    private List<double[]> SPD(Complex[] dft) {
         double fs = 5;
         double[] resSPD = new double[1+dft.length/2];
         for(int i=0;i<resSPD.length;i++){
@@ -192,7 +192,7 @@ public class SpectralAnalysis {
      * @param rsSPD real arry with the power spectral density analysis
      * @return double that represent the dominant frequency
      */
-    private double dominantFrequency(List<double[]> rsSPD){
+    private double dominantFrequency(List<double[]> rsSPD) {
         double[] f = new double[rsSPD.size()];
         for (int i=0;i<f.length;i++){
             f[i]=rsSPD.get(i)[1];
@@ -208,7 +208,7 @@ public class SpectralAnalysis {
     }
 
     //Write TestData to File
-    private void writeTestDatatoFile(File path, String Filename , String Data){
+    private void writeTestDatatoFile(File path, String Filename , String Data) {
 
         if (Utility.isExternalStorageWritable()) {
             try {
@@ -231,7 +231,7 @@ public class SpectralAnalysis {
     }
 
     //Check if file exists
-    private boolean checkFileExists(File path, String Filename, boolean delete){
+    private boolean checkFileExists(File path, String Filename, boolean delete) {
 
         if (Utility.isExternalStorageWritable()) { //same as read permission
             //Create a new file @ path/filename
@@ -251,12 +251,17 @@ public class SpectralAnalysis {
     }
 
     //convert float value to integer fixed 1q15 format
-    private int convert_to_fixed_1q15(float num){
+    private int convert_to_fixed_1q15(float num) {
         return (int)(num * (1 << 15));
     }
 
+    //convert float value to integer fixed 9q23 format
+    private int convert_to_fixed_9q23(float num) {
+        return (int)(num * (1 << 23));
+    }
+
     //convert integer fixed 1q15 format to float
-    private float convert_1q15(int num){
+    private float convert_1q15(int num) {
         byte i = 0;
         byte shift_by = 0;
         byte invert = 0;
@@ -274,6 +279,48 @@ public class SpectralAnalysis {
         //for the 1q15 format we have to start at 15
         //the smallest part is 2^⁻15
         for (i = 15; i > 0; i--) {
+
+            // if lsb is 1
+            if ( ( (num >> shift_by) & 1) == 1) {
+                //then add 2^-i
+                num_float += Math.pow(2, i*(-1));
+            }
+            shift_by += 1;
+
+            //calculate integer part to the left of the comma
+            if ((i == 1) && ((num >> shift_by) > 0)) {
+                num_float += num >> shift_by;
+            }
+        }
+
+        if (invert == 1) {
+            num_float *= -1;
+        }
+
+        return num_float;
+    }
+
+    //convert integer fixed 9q23 format to float
+    private float convert_9q23(int num) {
+        byte i = 0;
+        byte shift_by = 0;
+        byte invert = 0;
+
+        float num_float = 0;
+
+        //if num is negativ, num will be inverted (2's complement)
+        if (num < 0) {
+            invert = 1;
+
+            num = ~num;
+            num += 1;
+        }
+
+        //num_float += num >> 23;
+
+        //for the 9q23 format we have to start at 23
+        //the smallest part is 2^⁻23
+        for (i = 23; i > 0; i--) {
 
             // if lsb is 1
             if ( ( (num >> shift_by) & 1) == 1) {
