@@ -20,6 +20,8 @@ size = 2^n2 * 3^n3 * 5^n5; % = 108
 precision = 16;
 fwdinv = 0; % use forward transformation
 
+%numb = 1; % specifies which values shoulb be output
+
 use_hex_float = true; % hex = true, float = false
 normalised_data = true; % true = use already normalised input data, flase = calculate it
 use_1q15 = true; % true = input data has 1q15 format
@@ -112,16 +114,34 @@ end
 % Call the bit accurate model
 % -----------------------------------------------------
 
-num2hex(input(1))
-num2hex(single(input(1)))
+%Output first input in 1q15 format
+fprintf('\n');
+fprintf('Input(%d): ', numb);
+fprintf(dec2hex(int16(input(numb)*2^15)));
+fprintf('\n');
 
 [result_dft, block_exp] = dft_v4_0_bitacc_mex(input, n2, n3, n5, fwdinv, precision);
-% conjugate the result and apply shifts and unnormalise
-result_dft = conj(result_dft) .* 2^block_exp .* norm_abs ./ 2; 
 
-%Beaware of float with single or double precision
-num2hex(result_dft(1))
-num2hex(single(result_dft(1)))
+%Output first output in 1q15 format
+fprintf('Result(%d): ', numb);
+fprintf(dec2hex(int32(real(result_dft(numb))*2^15)));
+fprintf('\n');
+
+% conjugate the result and apply shifts
+result_dft = conj(result_dft) .* 2^block_exp;
+
+%Output first shifted output in 1q15 format
+fprintf('Result_shifted(%d): ', numb);
+fprintf(dec2hex(int32(real(result_dft(numb))*2^15)));
+fprintf('\n');
+
+% unnormalise the result
+result_dft = result_dft .* norm_abs ./ 2; 
+
+%Output first unnormalised output in 1q15 format
+fprintf('Result_norm(%d): ', numb);
+fprintf(dec2hex(int32(real(result_dft(numb))*2^15)));
+fprintf('\n');
 
 % -----------------------------------------------------
 % Compare with built-in Matlab's double precision DFT
@@ -136,6 +156,7 @@ ref = ref .* norm_abs ./ 2;
 % ----------------------------------------------------- 
 max_error = max(abs(result_dft-ref)/max(abs(ref)));
 
+fprintf('\n');
 disp('max_error = ');
 disp(max_error);
 
