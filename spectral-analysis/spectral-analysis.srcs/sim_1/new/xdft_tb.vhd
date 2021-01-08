@@ -103,6 +103,11 @@ architecture bench of xdft_tb is
     --signal declaration for shifted output
     signal real_out_shifted : output_buf_t := (others => (others => '0'));
     signal imag_out_shifted : output_buf_t := (others => (others => '0'));
+    
+    signal signed16 : signed(INPUT_WIDTH -1 downto 0);
+    signal signed32 : signed(DATA_WIDTH -1 downto 0);
+    signal signed32_shifted : signed(DATA_WIDTH -1 downto 0);
+    signal std_shifted : std_logic_vector(DATA_WIDTH -1 downto 0);
 
 begin
 
@@ -393,6 +398,14 @@ begin
         if (rising_edge(clk)) then
             if stout_valid = '1' then
                 output_buffer(output_buffer_idx) := stout_data;
+                
+                signed16 <= signed( stout_data( DATA_WIDTH / 2 -1 downto 0) );
+                signed32 <= resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), out_shift'length);
+                signed32_shifted <= shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), out_shift'length), 7);
+                std_shifted <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), out_shift'length), 7) );
+                
+                
+                
                 out_shift <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), out_shift'length), 7) );
                 real_out_shifted(output_buffer_idx) <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), DATA_WIDTH), 7) );
                 imag_out_shifted(output_buffer_idx) <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH -1 downto DATA_WIDTH / 2) ), DATA_WIDTH), 7) );

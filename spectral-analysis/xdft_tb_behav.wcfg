@@ -10,15 +10,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="11375000001fs"></ZoomEndTime>
-      <Cursor1Time time="10265000000fs"></Cursor1Time>
+      <ZoomStartTime time="899500000fs"></ZoomStartTime>
+      <ZoomEndTime time="1020100001fs"></ZoomEndTime>
+      <Cursor1Time time="1000000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="175"></NameColumnWidth>
       <ValueColumnWidth column_width="98"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="35" />
+   <WVObjectSize size="41" />
    <wvobject type="logic" fp_name="/xdft_tb/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -158,5 +158,29 @@
    <wvobject type="array" fp_name="/xdft_tb/imag_out_shifted">
       <obj_property name="ElementShortName">imag_out_shifted[0:107][31:0]</obj_property>
       <obj_property name="ObjectShortName">imag_out_shifted[0:107][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/stout_data">
+      <obj_property name="ElementShortName">stout_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">stout_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider151" type="divider">
+      <obj_property name="label">Test</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/signed16">
+      <obj_property name="ElementShortName">signed16[15:0]</obj_property>
+      <obj_property name="ObjectShortName">signed16[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/signed32">
+      <obj_property name="ElementShortName">signed32[31:0]</obj_property>
+      <obj_property name="ObjectShortName">signed32[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/signed32_shifted">
+      <obj_property name="ElementShortName">signed32_shifted[31:0]</obj_property>
+      <obj_property name="ObjectShortName">signed32_shifted[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/std_shifted">
+      <obj_property name="ElementShortName">std_shifted[31:0]</obj_property>
+      <obj_property name="ObjectShortName">std_shifted[31:0]</obj_property>
    </wvobject>
 </wave_config>
