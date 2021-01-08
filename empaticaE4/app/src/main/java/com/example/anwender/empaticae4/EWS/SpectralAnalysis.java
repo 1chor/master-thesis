@@ -143,7 +143,7 @@ public class SpectralAnalysis {
 
                     String st = String.format("%16s", Long.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
                     String norm_st = String.format("%16s", Long.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
-                    String norm_st32 = String.format("%16s", Long.toHexString(norm_intval32)).replace(' ', '0') + "\n"; //normalised hex string in 9q23 format
+                    String norm_st32 = String.format("%8s", Integer.toHexString((int)norm_intval32)).replace(' ', '0') + "00000000\n"; //normalised hex string in 9q23 format
 
                     //Write hex string to file
                     writeTestDatatoFile(MainActivity.path, real_file, st);
@@ -165,7 +165,7 @@ public class SpectralAnalysis {
 
                     st = String.format("%16s", Long.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
                     norm_st = String.format("%16s", Long.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
-                    norm_st32 = String.format("%16s", Long.toHexString(norm_intval32)).replace(' ', '0') + "\n"; //normalised hex string in 9q23 format
+                    norm_st32 = String.format("%8s", Integer.toHexString((int)norm_intval32)).replace(' ', '0') + "00000000\n"; //normalised hex string in 9q23 format
 
                     //Write hex string to file
                     writeTestDatatoFile(MainActivity.path, imag_file, st);
