@@ -1,10 +1,10 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.1 (lin64) Build 2188600 Wed Apr  4 18:39:19 MDT 2018
-// Date        : Thu Dec 10 21:24:01 2020
+// Date        : Thu Dec 10 21:23:48 2020
 // Host        : soc running 64-bit Ubuntu 18.04.5 LTS
-// Command     : write_verilog -force -mode synth_stub
-//               /media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.srcs/sources_1/ip/dft_0/dft_0_stub.v
+// Command     : write_verilog -force -mode synth_stub -rename_top dft_0 -prefix
+//               dft_0_ dft_0_stub.v
 // Design      : dft_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xczu9eg-ffvb1156-2-e

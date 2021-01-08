@@ -33,20 +33,20 @@
     <Option Name="DSAVendor" Val="xilinx"/>
     <Option Name="DSABoardId" Val="zcu102"/>
     <Option Name="DSANumComputeUnits" Val="60"/>
-    <Option Name="WTXSimLaunchSim" Val="97"/>
+    <Option Name="WTXSimLaunchSim" Val="176"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
     <Option Name="WTVcsLaunchSim" Val="0"/>
     <Option Name="WTRivieraLaunchSim" Val="0"/>
     <Option Name="WTActivehdlLaunchSim" Val="0"/>
-    <Option Name="WTXSimExportSim" Val="2"/>
-    <Option Name="WTModelSimExportSim" Val="2"/>
-    <Option Name="WTQuestaExportSim" Val="2"/>
-    <Option Name="WTIesExportSim" Val="2"/>
-    <Option Name="WTVcsExportSim" Val="2"/>
-    <Option Name="WTRivieraExportSim" Val="2"/>
-    <Option Name="WTActivehdlExportSim" Val="2"/>
+    <Option Name="WTXSimExportSim" Val="4"/>
+    <Option Name="WTModelSimExportSim" Val="4"/>
+    <Option Name="WTQuestaExportSim" Val="4"/>
+    <Option Name="WTIesExportSim" Val="4"/>
+    <Option Name="WTVcsExportSim" Val="4"/>
+    <Option Name="WTRivieraExportSim" Val="4"/>
+    <Option Name="WTActivehdlExportSim" Val="4"/>
     <Option Name="GenerateIPUpgradeLog" Val="TRUE"/>
     <Option Name="XSimRadix" Val="hex"/>
     <Option Name="XSimTimeUnit" Val="ns"/>
@@ -57,6 +57,13 @@
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
       <Filter Type="Srcs"/>
+      <File Path="$PSRCDIR/sources_1/ip/dft_0/dft_0.xci">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/new/xdft_wrapper.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -88,40 +95,52 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sim_1/imports/TestData/imag_dft.txt">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/TestData/imag_dft.txt"/>
-          <Attr Name="ImportTime" Val="1609516069"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sim_1/imports/TestData/imag_out_TestData.txt">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/TestData/imag_out_TestData.txt"/>
-          <Attr Name="ImportTime" Val="1609764420"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sim_1/imports/TestData/real_out_TestData.txt">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/TestData/real_out_TestData.txt"/>
-          <Attr Name="ImportTime" Val="1609764422"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sim_1/imports/TestData/input_TestData.txt">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/TestData/input_TestData.txt"/>
-          <Attr Name="ImportTime" Val="1609791079"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sim_1/imports/TestData/input_TestData_norm.txt">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/TestData/input_TestData_norm.txt"/>
-          <Attr Name="ImportTime" Val="1609929457"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sim_1/imports/TestData/input_TestData_norm16.txt">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/TestData/input_TestData_norm16.txt"/>
           <Attr Name="ImportTime" Val="1609961038"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/real_TestData_norm32.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/real_TestData_norm32.txt"/>
+          <Attr Name="ImportTime" Val="1610048883"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/imag_TestData_norm32.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/imag_TestData_norm32.txt"/>
+          <Attr Name="ImportTime" Val="1610048886"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/ones.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/ones.txt"/>
+          <Attr Name="ImportTime" Val="1610105743"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/one_zeros.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/one_zeros.txt"/>
+          <Attr Name="ImportTime" Val="1610106471"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/zeros.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/zeros.txt"/>
+          <Attr Name="ImportTime" Val="1609516069"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/result_ones.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/result_ones.txt"/>
+          <Attr Name="ImportTime" Val="1610113977"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/result_one_zeros.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/result_one_zeros.txt"/>
+          <Attr Name="ImportTime" Val="1610114036"/>
         </FileInfo>
       </File>
       <Config>
@@ -132,19 +151,6 @@
         <Option Name="TransportIntDelay" Val="0"/>
         <Option Name="SrcSet" Val="sources_1"/>
         <Option Name="XSimWcfgFile" Val="$PPRDIR/xdft_tb_behav.wcfg"/>
-      </Config>
-    </FileSet>
-    <FileSet Name="dft_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/dft_0">
-      <File Path="$PSRCDIR/sources_1/ip/dft_0/dft_0.xci">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <Config>
-        <Option Name="TopModule" Val="dft_0"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
   </FileSets>
@@ -181,32 +187,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2018"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>
-    <Run Id="dft_0_synth_1" Type="Ft3:Synth" SrcSet="dft_0" Part="xczu9eg-ffvb1156-2-e" ConstrsSet="dft_0" Description="Vivado Synthesis Defaults" WriteIncrSynthDcp="false" Dir="$PRUNDIR/dft_0_synth_1" IncludeInArchive="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2018"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-    </Run>
     <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xczu9eg-ffvb1156-2-e" ConstrsSet="constrs_1" Description="Default settings for Implementation." WriteIncrSynthDcp="false" State="current" SynthRun="synth_1" IncludeInArchive="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2018"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-    </Run>
-    <Run Id="dft_0_impl_1" Type="Ft2:EntireDesign" Part="xczu9eg-ffvb1156-2-e" ConstrsSet="dft_0" Description="Default settings for Implementation." WriteIncrSynthDcp="false" SynthRun="dft_0_synth_1" IncludeInArchive="false">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018"/>
         <Step Id="init_design"/>

@@ -94,8 +94,8 @@ architecture bench of xdft_tb is
     shared variable real_in : array_t;
     shared variable imag_in : array_t;
     
-    shared variable real_out : array_t;
-    shared variable imag_out : array_t;
+    shared variable real_out : output_buf_t;
+    shared variable imag_out : output_buf_t;
     
     shared variable output_buffer : output_buf_t;
     shared variable output_buffer_idx : integer := 0;
@@ -121,18 +121,34 @@ begin
     -- testbench process
     stimulus : process
         
-        variable output_real : array_t;
-        variable output_imag : array_t;
-        variable temp_var : output_buf_t;
+        variable output_real : output_buf_t;
+        variable output_imag : output_buf_t;        
         
-        variable temp : word16_t;
-        
-        -- function to read file content 
-        impure function read_file(filename: string) return array_t is
+        -- function to read file content 16 bit
+        impure function read_file16(filename: string) return array_t is
             file FileHandle : text open read_mode is filename;
             variable CurrentLine : line;
             variable TempWord : word16_t;
             variable Result : array_t := (others => (others => '0'));
+        begin
+            for i in 0 to SIZE-1 loop
+                exit when endfile(FileHandle);
+                
+                readline(FileHandle, CurrentLine);
+                hread(CurrentLine, TempWord);
+                --report "TempWord: " & to_hstring(TempWord);
+                Result(i) := TempWord;
+            end loop;
+            
+            return Result;        
+        end function;
+        
+        -- function to read file content 32 bit
+        impure function read_file32(filename: string) return output_buf_t is
+            file FileHandle : text open read_mode is filename;
+            variable CurrentLine : line;
+            variable TempWord : word32_t;
+            variable Result : output_buf_t := (others => (others => '0'));
         begin
             for i in 0 to SIZE-1 loop
                 exit when endfile(FileHandle);
@@ -183,10 +199,12 @@ begin
         end procedure;
         
         -- procedure to compare two buffers
-        procedure compare_buffers(buffer_A, buffer_B : array_t; length : integer) is
+        procedure compare_buffers(buffer_A, buffer_B : output_buf_t; length : integer) is
         begin
             for i in 0 to length-1 loop
-                report ("Buffers don't match (index = " & integer'image(i) & ", " & slv_to_hex(buffer_A(i)) & " vs. " & slv_to_hex(buffer_B(i))) severity error;
+                if ( buffer_A(i) /= buffer_B(i) ) then
+                    report ("Buffers don't match (index = " & integer'image(i) & ", " & slv_to_hex(buffer_A(i)) & " vs. " & slv_to_hex(buffer_B(i))) severity error;
+                end if;
             end loop;
         end procedure;
         
@@ -218,17 +236,20 @@ begin
         reset <= '0';
         wait until rising_edge(clk);
         
+        write(my_line, string'("All Ones Test:"));
+        writeline(output, my_line);
+        
         write(my_line, string'("Load Input Buffers"));
         writeline(output, my_line);
         
-        real_in := read_file("input_TestData_norm16.txt");
-        imag_in := read_file("imag_dft.txt");
+        real_in := read_file16("ones.txt");
+        imag_in := read_file16("zeros.txt");
         
         write(my_line, string'("Load Reference Output Buffers"));
         writeline(output, my_line);
         
-        real_out := read_file("real_out_TestData.txt");
-        imag_out := read_file("imag_out_TestData.txt");
+        real_out := read_file32("result_ones.txt");
+        imag_out := read_file32("zeros.txt");
         
         write(my_line, string'("Start DFT Test"));
         writeline(output, my_line);
@@ -244,8 +265,8 @@ begin
         
         for i in 0 to SIZE-1 loop
             -- read output data
-            output_real(i) := output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
-            output_imag(i) := output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
+            output_real(i) := x"0000" & output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
+            output_imag(i) := x"0000" & output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
         end loop;               
 
         write(my_line, string'("Compare results"));
@@ -253,6 +274,101 @@ begin
         
         compare_buffers(output_real, real_out, SIZE);
         compare_buffers(output_imag, imag_out, SIZE);
+        
+        write(my_line, string'("Done"));
+        writeline(output, my_line);
+        
+        --------------------------------------------------------------
+        write(my_line, string'("-----------------------------------"));
+        writeline(output, my_line);
+        write(my_line, string'("-----------------------------------"));
+        writeline(output, my_line);
+        --------------------------------------------------------------
+        
+        write(my_line, string'("First One, Others Zero Test:"));
+        writeline(output, my_line);
+        
+        write(my_line, string'("Load Input Buffers"));
+        writeline(output, my_line);
+        
+        real_in := read_file16("one_zeros.txt");
+        imag_in := read_file16("zeros.txt");
+        
+        write(my_line, string'("Load Reference Output Buffers"));
+        writeline(output, my_line);
+        
+        real_out := read_file32("result_one_zeros.txt");
+        imag_out := read_file32("zeros.txt");
+        
+        write(my_line, string'("Start DFT Test"));
+        writeline(output, my_line);
+        
+        output_buffer_idx := 0;
+        
+        for i in 0 to SIZE-1 loop
+            --send input data
+            write_data(real_in(i), imag_in(i));
+        end loop;
+        
+        wait_for_output_buffer_fill_level(SIZE);
+        
+        for i in 0 to SIZE-1 loop
+            -- read output data
+            output_real(i) := x"0000" & output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
+            output_imag(i) := x"0000" & output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
+        end loop;               
+
+        write(my_line, string'("Compare results"));
+        writeline(output, my_line);
+        
+        compare_buffers(output_real, real_out, SIZE);
+        compare_buffers(output_imag, imag_out, SIZE);
+                
+        write(my_line, string'("Done"));
+        writeline(output, my_line);
+        
+        --------------------------------------------------------------
+        write(my_line, string'("-----------------------------------"));
+        writeline(output, my_line);
+        write(my_line, string'("-----------------------------------"));
+        writeline(output, my_line);
+        --------------------------------------------------------------
+                
+        write(my_line, string'("Load Input Buffers"));
+        writeline(output, my_line);
+        
+        real_in := read_file16("input_TestData_norm16.txt");
+        imag_in := read_file16("zeros.txt");
+        
+        write(my_line, string'("Load Reference Output Buffers"));
+        writeline(output, my_line);
+        
+        real_out := read_file32("real_TestData_norm32.txt");
+        imag_out := read_file32("imag_TestData_norm32.txt");
+        
+        write(my_line, string'("Start DFT Test"));
+        writeline(output, my_line);
+        
+        output_buffer_idx := 0;
+        
+        for i in 0 to SIZE-1 loop
+            --send input data
+            write_data(real_in(i), imag_in(i));
+        end loop;
+        
+        wait_for_output_buffer_fill_level(SIZE);
+        
+        for i in 0 to SIZE-1 loop
+            -- read output data
+            output_real(i) := x"0000" & output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
+            output_imag(i) := x"0000" & output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
+        end loop;               
+
+        write(my_line, string'("Compare results"));
+        writeline(output, my_line);
+        
+        --compare_buffers(output_real, real_out, SIZE);
+        --compare_buffers(output_imag, imag_out, SIZE);
         
         write(my_line, string'("Done"));
         writeline(output, my_line);
@@ -271,7 +387,7 @@ begin
             if stout_valid = '1' then
                 output_buffer(output_buffer_idx) := stout_data;
                 output_buffer_idx := output_buffer_idx + 1;
-               out_shift <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), out_shift'length), 7) );
+               out_shift <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), out_shift'length), 8) );
             end if;
         end if;
     end process;
