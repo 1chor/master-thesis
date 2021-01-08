@@ -10,15 +10,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="10900000fs"></ZoomStartTime>
-      <ZoomEndTime time="12070900001fs"></ZoomEndTime>
-      <Cursor1Time time="7550900000fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="11375000001fs"></ZoomEndTime>
+      <Cursor1Time time="10265000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="175"></NameColumnWidth>
       <ValueColumnWidth column_width="98"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="32" />
+   <WVObjectSize size="35" />
    <wvobject type="logic" fp_name="/xdft_tb/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -143,8 +143,20 @@
       <obj_property name="ElementShortName">DATA_VALID</obj_property>
       <obj_property name="ObjectShortName">DATA_VALID</obj_property>
    </wvobject>
+   <wvobject fp_name="divider149" type="divider">
+      <obj_property name="label">Shifted Output</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
    <wvobject type="array" fp_name="/xdft_tb/out_shift">
       <obj_property name="ElementShortName">out_shift[31:0]</obj_property>
       <obj_property name="ObjectShortName">out_shift[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/real_out_shifted">
+      <obj_property name="ElementShortName">real_out_shifted[0:107][31:0]</obj_property>
+      <obj_property name="ObjectShortName">real_out_shifted[0:107][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/imag_out_shifted">
+      <obj_property name="ElementShortName">imag_out_shifted[0:107][31:0]</obj_property>
+      <obj_property name="ObjectShortName">imag_out_shifted[0:107][31:0]</obj_property>
    </wvobject>
 </wave_config>

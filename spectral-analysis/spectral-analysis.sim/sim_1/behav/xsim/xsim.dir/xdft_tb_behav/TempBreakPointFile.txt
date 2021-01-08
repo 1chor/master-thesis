@@ -1,3 +1,2 @@
 Breakpoint File Version 1.0
-340 true /media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.srcs/sim_1/new/xdft_tb.vhd
-379 true /media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.srcs/sim_1/new/xdft_tb.vhd
+390 true /media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.srcs/sim_1/new/xdft_tb.vhd

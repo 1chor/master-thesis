@@ -80,8 +80,8 @@ architecture bench of xdft_tb is
     signal stout_valid : std_logic;
     --signal stout_ready : std_logic;
     
-    signal out_shift : std_logic_vector(DATA_WIDTH -1 downto 0);
-    
+    signal out_shift : std_logic_vector(DATA_WIDTH -1 downto 0) := (others => '0');
+        
     shared variable my_line : line;
     
     -- type declaration
@@ -99,6 +99,10 @@ architecture bench of xdft_tb is
     
     shared variable output_buffer : output_buf_t;
     shared variable output_buffer_idx : integer := 0;
+    
+    --signal declaration for shifted output
+    signal real_out_shifted : output_buf_t := (others => (others => '0'));
+    signal imag_out_shifted : output_buf_t := (others => (others => '0'));
 
 begin
 
@@ -333,7 +337,10 @@ begin
         write(my_line, string'("-----------------------------------"));
         writeline(output, my_line);
         --------------------------------------------------------------
-                
+        
+        write(my_line, string'("Real Input Test:"));
+        writeline(output, my_line);
+        
         write(my_line, string'("Load Input Buffers"));
         writeline(output, my_line);
         
@@ -363,12 +370,12 @@ begin
             output_real(i) := x"0000" & output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
             output_imag(i) := x"0000" & output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
         end loop;               
-
+        
         write(my_line, string'("Compare results"));
         writeline(output, my_line);
         
-        --compare_buffers(output_real, real_out, SIZE);
-        --compare_buffers(output_imag, imag_out, SIZE);
+        compare_buffers(real_out_shifted, real_out, SIZE);
+        compare_buffers(imag_out_shifted, imag_out, SIZE);
         
         write(my_line, string'("Done"));
         writeline(output, my_line);
@@ -386,8 +393,10 @@ begin
         if (rising_edge(clk)) then
             if stout_valid = '1' then
                 output_buffer(output_buffer_idx) := stout_data;
+                out_shift <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), out_shift'length), 7) );
+                real_out_shifted(output_buffer_idx) <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), DATA_WIDTH), 7) );
+                imag_out_shifted(output_buffer_idx) <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH -1 downto DATA_WIDTH / 2) ), DATA_WIDTH), 7) );
                 output_buffer_idx := output_buffer_idx + 1;
-               out_shift <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), out_shift'length), 8) );
             end if;
         end if;
     end process;
