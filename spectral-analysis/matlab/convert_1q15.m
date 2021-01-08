@@ -25,7 +25,7 @@ function fval = convert_1q15(num)
 
         %calculate integer part to the left of the comma
         if ((i == 1) && ((bitshift(num, -shift_by)) > 0))
-            num_float = num_float + bitshift(num, -shift_by);
+            num_float = num_float + double(bitshift(num, -shift_by));
         end
     end
 
