@@ -230,9 +230,9 @@ begin
                 end if;
         
             when FIRST_FRAME =>
+                stin_ready <= '1';
+                
                 if (state = TRANSFER_TO_FFT) and (first_ready_in = '1') and (stin_valid = '1') then --check if DFT is ready to process data and data_in is valid
-                    stin_ready <= '1';
-                    
                     --set data inputs
                     in_real <= stin_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0); -- (15 - 0)
                     in_imag <= stin_data(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2); -- (32 - 16)
