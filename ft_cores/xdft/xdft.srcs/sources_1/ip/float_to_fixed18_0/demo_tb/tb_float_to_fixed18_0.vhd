@@ -85,7 +85,7 @@ architecture tb of tb_float_to_fixed18_0 is
   constant CLOCK_PERIOD : time := 100 ns;
   constant T_HOLD       : time := 10 ns;
   constant T_STROBE     : time := CLOCK_PERIOD - (1 ns);
-  constant DUT_DELAY    : time := CLOCK_PERIOD * 0;
+  constant DUT_DELAY    : time := CLOCK_PERIOD * 1;
 
   -----------------------------------------------------------------------
   -- Testbench types and signals
@@ -361,7 +361,7 @@ architecture tb of tb_float_to_fixed18_0 is
   -----------------------------------------------------------------------
 
   -- Global signals
-  signal aclk                    : std_logic := '0';  -- the master clock (used by this testbench, not the DUT)
+  signal aclk                    : std_logic := '0';  -- the master clock
 
   -- A operand slave channel signals
   signal s_axis_a_tvalid         : std_logic := '0';  -- payload is valid
@@ -403,6 +403,7 @@ begin
   dut : entity work.float_to_fixed18_0
     port map (
       -- Global signals
+      aclk                    => aclk,
     -- AXI4-Stream slave channel for operand A
       s_axis_a_tvalid         => s_axis_a_tvalid,
       s_axis_a_tdata          => s_axis_a_tdata,

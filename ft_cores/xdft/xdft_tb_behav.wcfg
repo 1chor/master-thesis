@@ -10,15 +10,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="899500000fs"></ZoomStartTime>
-      <ZoomEndTime time="1031637547fs"></ZoomEndTime>
-      <Cursor1Time time="923228000fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="61100001fs"></ZoomEndTime>
+      <Cursor1Time time="45000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="175"></NameColumnWidth>
-      <ValueColumnWidth column_width="94"></ValueColumnWidth>
+      <ValueColumnWidth column_width="90"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="41" />
+   <WVObjectSize size="47" />
    <wvobject type="logic" fp_name="/xdft_tb/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -47,13 +47,37 @@
       <obj_property name="label">DFT Wrapper</obj_property>
       <obj_property name="DisplayName">label</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/xdft_tb/uut/in_real">
-      <obj_property name="ElementShortName">in_real[15:0]</obj_property>
-      <obj_property name="ObjectShortName">in_real[15:0]</obj_property>
+   <wvobject type="logic" fp_name="/xdft_tb/uut/stin_valid">
+      <obj_property name="ElementShortName">stin_valid</obj_property>
+      <obj_property name="ObjectShortName">stin_valid</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/xdft_tb/uut/in_imag">
-      <obj_property name="ElementShortName">in_imag[15:0]</obj_property>
-      <obj_property name="ObjectShortName">in_imag[15:0]</obj_property>
+   <wvobject type="array" fp_name="/xdft_tb/uut/stin_data">
+      <obj_property name="ElementShortName">stin_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">stin_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/xdft_tb/uut/float2fixed_in_tvalid">
+      <obj_property name="ElementShortName">float2fixed_in_tvalid</obj_property>
+      <obj_property name="ObjectShortName">float2fixed_in_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/uut/float2fixed_in_tdata">
+      <obj_property name="ElementShortName">float2fixed_in_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">float2fixed_in_tdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/xdft_tb/uut/float2fixed_out_tvalid">
+      <obj_property name="ElementShortName">float2fixed_out_tvalid</obj_property>
+      <obj_property name="ObjectShortName">float2fixed_out_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/uut/float2fixed_out_tdata">
+      <obj_property name="ElementShortName">float2fixed_out_tdata[23:0]</obj_property>
+      <obj_property name="ObjectShortName">float2fixed_out_tdata[23:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/uut/float2fixed_out_tuser">
+      <obj_property name="ElementShortName">float2fixed_out_tuser[0:0]</obj_property>
+      <obj_property name="ObjectShortName">float2fixed_out_tuser[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/uut/in_real">
+      <obj_property name="ElementShortName">in_real[17:0]</obj_property>
+      <obj_property name="ObjectShortName">in_real[17:0]</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/xdft_tb/uut/first_in">
       <obj_property name="ElementShortName">first_in</obj_property>
@@ -76,12 +100,12 @@
       <obj_property name="ObjectShortName">state_next</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/xdft_tb/uut/out_real">
-      <obj_property name="ElementShortName">out_real[15:0]</obj_property>
-      <obj_property name="ObjectShortName">out_real[15:0]</obj_property>
+      <obj_property name="ElementShortName">out_real[17:0]</obj_property>
+      <obj_property name="ObjectShortName">out_real[17:0]</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/xdft_tb/uut/out_imag">
-      <obj_property name="ElementShortName">out_imag[15:0]</obj_property>
-      <obj_property name="ObjectShortName">out_imag[15:0]</obj_property>
+      <obj_property name="ElementShortName">out_imag[17:0]</obj_property>
+      <obj_property name="ObjectShortName">out_imag[17:0]</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/xdft_tb/uut/first_out">
       <obj_property name="ElementShortName">first_out</obj_property>
@@ -108,12 +132,12 @@
       <obj_property name="ObjectShortName">SCLR</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/xdft_tb/uut/dft_inst/XN_RE">
-      <obj_property name="ElementShortName">XN_RE[15:0]</obj_property>
-      <obj_property name="ObjectShortName">XN_RE[15:0]</obj_property>
+      <obj_property name="ElementShortName">XN_RE[17:0]</obj_property>
+      <obj_property name="ObjectShortName">XN_RE[17:0]</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/xdft_tb/uut/dft_inst/XN_IM">
-      <obj_property name="ElementShortName">XN_IM[15:0]</obj_property>
-      <obj_property name="ObjectShortName">XN_IM[15:0]</obj_property>
+      <obj_property name="ElementShortName">XN_IM[17:0]</obj_property>
+      <obj_property name="ObjectShortName">XN_IM[17:0]</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/xdft_tb/uut/dft_inst/RFFD">
       <obj_property name="ElementShortName">RFFD</obj_property>
@@ -124,12 +148,12 @@
       <obj_property name="ObjectShortName">FD_IN</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/xdft_tb/uut/dft_inst/XK_RE">
-      <obj_property name="ElementShortName">XK_RE[15:0]</obj_property>
-      <obj_property name="ObjectShortName">XK_RE[15:0]</obj_property>
+      <obj_property name="ElementShortName">XK_RE[17:0]</obj_property>
+      <obj_property name="ObjectShortName">XK_RE[17:0]</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/xdft_tb/uut/dft_inst/XK_IM">
-      <obj_property name="ElementShortName">XK_IM[15:0]</obj_property>
-      <obj_property name="ObjectShortName">XK_IM[15:0]</obj_property>
+      <obj_property name="ElementShortName">XK_IM[17:0]</obj_property>
+      <obj_property name="ObjectShortName">XK_IM[17:0]</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/xdft_tb/uut/dft_inst/BLK_EXP">
       <obj_property name="ElementShortName">BLK_EXP[3:0]</obj_property>

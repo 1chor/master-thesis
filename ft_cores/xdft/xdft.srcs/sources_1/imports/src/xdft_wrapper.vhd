@@ -124,6 +124,7 @@ architecture arch of xdft_wrapper is
     component float_to_fixed18_0 is
         port (
             -- Global signals
+            aclk : IN STD_LOGIC;
             -- AXI4-Stream slave channel for operand A
             s_axis_a_tvalid : in std_logic;
             s_axis_a_tdata : in std_logic_vector(DATA_WIDTH downto 0);
@@ -138,6 +139,7 @@ architecture arch of xdft_wrapper is
     component fixed32_to_float_0 is
         port (
             -- Global signals
+            --aclk : IN STD_LOGIC;
             -- AXI4-Stream slave channel for operand A
             s_axis_a_tvalid : in std_logic;
             s_axis_a_tdata : in std_logic_vector(DATA_WIDTH DOWNTO 0);
@@ -172,6 +174,7 @@ begin
     float_to_fixed18_inst : component float_to_fixed18_0
     port map (
         -- Global signals
+        aclk => clk,
         -- AXI4-Stream slave channel for operand A
         s_axis_a_tvalid => float2fixed_in_tvalid,
         s_axis_a_tdata => float2fixed_in_tdata,
@@ -185,6 +188,7 @@ begin
     fixed32_to_float_inst : component fixed32_to_float_0
     port map (
         -- Global signals
+        --aclk => clk,
         -- AXI4-Stream slave channel for operand A
         s_axis_a_tvalid => fixed2float_in_tvalid,
         s_axis_a_tdata => fixed2float_in_tdata,

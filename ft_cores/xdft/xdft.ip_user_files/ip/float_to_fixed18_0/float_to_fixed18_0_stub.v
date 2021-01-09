@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.1 (lin64) Build 2188600 Wed Apr  4 18:39:19 MDT 2018
-// Date        : Sat Jan  9 15:38:57 2021
+// Date        : Sat Jan  9 21:49:31 2021
 // Host        : soc running 64-bit Ubuntu 18.04.5 LTS
 // Command     : write_verilog -force -mode synth_stub
 //               /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/float_to_fixed18_0/float_to_fixed18_0_stub.v
@@ -14,9 +14,10 @@
 // The synthesis directives are for Synopsys Synplify support to prevent IO buffer insertion.
 // Please paste the declaration into a Verilog source file or add the file as an additional source.
 (* x_core_info = "floating_point_v7_1_6,Vivado 2018.1" *)
-module float_to_fixed18_0(s_axis_a_tvalid, s_axis_a_tdata, 
+module float_to_fixed18_0(aclk, s_axis_a_tvalid, s_axis_a_tdata, 
   m_axis_result_tvalid, m_axis_result_tdata, m_axis_result_tuser)
-/* synthesis syn_black_box black_box_pad_pin="s_axis_a_tvalid,s_axis_a_tdata[31:0],m_axis_result_tvalid,m_axis_result_tdata[23:0],m_axis_result_tuser[0:0]" */;
+/* synthesis syn_black_box black_box_pad_pin="aclk,s_axis_a_tvalid,s_axis_a_tdata[31:0],m_axis_result_tvalid,m_axis_result_tdata[23:0],m_axis_result_tuser[0:0]" */;
+  input aclk;
   input s_axis_a_tvalid;
   input [31:0]s_axis_a_tdata;
   output m_axis_result_tvalid;

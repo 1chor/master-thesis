@@ -58,6 +58,7 @@ USE floating_point_v7_1_6.floating_point_v7_1_6;
 
 ENTITY float_to_fixed18_0 IS
   PORT (
+    aclk : IN STD_LOGIC;
     s_axis_a_tvalid : IN STD_LOGIC;
     s_axis_a_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
     m_axis_result_tvalid : OUT STD_LOGIC;
@@ -182,6 +183,8 @@ ARCHITECTURE float_to_fixed18_0_arch OF float_to_fixed18_0 IS
   ATTRIBUTE X_INTERFACE_INFO OF s_axis_a_tdata: SIGNAL IS "xilinx.com:interface:axis:1.0 S_AXIS_A TDATA";
   ATTRIBUTE X_INTERFACE_PARAMETER OF s_axis_a_tvalid: SIGNAL IS "XIL_INTERFACENAME S_AXIS_A, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 0, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, LAYERED_METADATA undef";
   ATTRIBUTE X_INTERFACE_INFO OF s_axis_a_tvalid: SIGNAL IS "xilinx.com:interface:axis:1.0 S_AXIS_A TVALID";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF aclk: SIGNAL IS "XIL_INTERFACENAME aclk_intf, ASSOCIATED_BUSIF S_AXIS_OPERATION:M_AXIS_RESULT:S_AXIS_C:S_AXIS_B:S_AXIS_A, ASSOCIATED_RESET aresetn, ASSOCIATED_CLKEN aclken, FREQ_HZ 10000000, PHASE 0.000";
+  ATTRIBUTE X_INTERFACE_INFO OF aclk: SIGNAL IS "xilinx.com:signal:clock:1.0 aclk_intf CLK";
 BEGIN
   U0 : floating_point_v7_1_6
     GENERIC MAP (
@@ -213,7 +216,7 @@ BEGIN
       C_RESULT_WIDTH => 18,
       C_RESULT_FRACTION_WIDTH => 17,
       C_COMPARE_OPERATION => 8,
-      C_LATENCY => 0,
+      C_LATENCY => 1,
       C_OPTIMIZATION => 1,
       C_MULT_USAGE => 0,
       C_BRAM_USAGE => 0,
@@ -257,7 +260,7 @@ BEGIN
       C_FIXED_DATA_UNSIGNED => 0
     )
     PORT MAP (
-      aclk => '0',
+      aclk => aclk,
       aclken => '1',
       aresetn => '1',
       s_axis_a_tvalid => s_axis_a_tvalid,
