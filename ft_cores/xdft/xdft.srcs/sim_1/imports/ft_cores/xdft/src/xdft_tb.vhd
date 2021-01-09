@@ -388,6 +388,8 @@ begin
         write(my_line, string'("-----------------------------------"));
         writeline(output, my_line);
        
+       -- End of simulation
+        report "Not a real failure. Simulation finished successfully. Test completed successfully" severity failure;
         wait;
         
     end process;
