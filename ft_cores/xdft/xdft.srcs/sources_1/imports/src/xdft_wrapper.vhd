@@ -114,8 +114,10 @@ architecture arch of xdft_wrapper is
     
     type input_state_type is (
         INPUT_IDLE,
+        PRE_CONVERT,
         FIRST_FRAME,
-        OTHER_FRAMES
+        OTHER_FRAMES,
+        LAST_FRAME
     );
     signal input_state, input_state_next : input_state_type := INPUT_IDLE;
     
@@ -278,13 +280,14 @@ begin
     -----------------------------------------------------------------------
         
     --process to feed the DFT
-    input_proc: process (input_state, index, state, first_ready_in, stin_valid, stin_data)
+    input_proc: process (input_state, index, state, first_ready_in, stin_valid, stin_data, float2fixed_out_tvalid)
     begin
         --default values to prevent latches
         input_state_next <= input_state;
         index_next <= index;
         first_in <= '0';
         stin_ready <= '0';
+        float2fixed_in_tvalid <= '0';
         
         in_real <= (others => '0');
         
@@ -293,41 +296,70 @@ begin
             when INPUT_IDLE =>
                 if (state = TRANSFER_TO_FFT) and (first_ready_in = '1') then --forward back pressure
                     stin_ready <= '1';
+                    input_state_next <= PRE_CONVERT;
+                end if;
+                
+            when PRE_CONVERT =>
+                stin_ready <= '1';
+                
+                if (stin_valid = '1') then
+                    --convert first input data
+                    float2fixed_in_tdata <= stin_data; --convert float to fixed18
+                    float2fixed_in_tvalid <= '1';
+                    
                     input_state_next <= FIRST_FRAME;
                 end if;
         
             when FIRST_FRAME =>
                 stin_ready <= '1';
                 
-                if (state = TRANSFER_TO_FFT) and (first_ready_in = '1') and (stin_valid = '1') then --check if DFT is ready to process data and data_in is valid
-                    --set data inputs
-                    in_real <= stin_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0); -- (15 - 0)
+                if (state = TRANSFER_TO_FFT) and (first_ready_in = '1') and (stin_valid = '1') and (float2fixed_out_tvalid = '1') then --check if DFT is ready to process data and data_in is valid
+                    --convert next input
+                    float2fixed_in_tdata <= stin_data; --convert float to fixed18
+                    float2fixed_in_tvalid <= '1';
+                                        
+                    --set real data input
+                    in_real <= float2fixed_out_tdata(DFT_DATA_WIDTH downto 0); --fixed18 format
                     
-                    if index = 0 then
-                        first_in <= '1'; --set flag for first data input
-                    end if;
-                    
+                    --set flag for first data input
+                    first_in <= '1'; 
+                                        
                     --increase index
                     index_next <= index + 1;
                     
                     input_state_next <= OTHER_FRAMES;                    
                 end if;
             
-            when OTHER_FRAMES =>    
+            when OTHER_FRAMES => 
+                stin_ready <= '1';
+                   
+                if (state = TRANSFER_TO_FFT) and (stin_valid = '1') and (float2fixed_out_tvalid = '1') then --check if DFT is ready to process data and data_in is valid
+                    --convert next input
+                    float2fixed_in_tdata <= stin_data; --convert float to fixed18
+                    float2fixed_in_tvalid <= '1';
+                                        
+                    --set real data input
+                    in_real <= float2fixed_out_tdata(DFT_DATA_WIDTH downto 0); --fixed18 format
+                      
+                    --increase index
+                    index_next <= index + 1;
+                    
+                    if (index = SIZE-2) then
+                        input_state_next <= LAST_FRAME;
+                    end if;
+                end if;
+                
+            when LAST_FRAME =>    
                 if index = SIZE then --independent of valid signals
                     stin_ready <= '0';
                     index_next <= 0; --reset counter
                     input_state_next <= INPUT_IDLE;
                     
-                elsif (state = TRANSFER_TO_FFT) and (stin_valid = '1') then --check if DFT is ready to process data and data_in is valid
+                elsif (state = TRANSFER_TO_FFT) and (float2fixed_out_tvalid = '1') then --check if DFT is ready to process data and data_in is valid
                     stin_ready <= '1';
-                    
-                    --set data inputs
-                    in_real <= stin_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0); -- (15 - 0)
-                    
-                    if index = 0 then
-                        first_in <= '1'; --set flag for first data input
-                    end if;
+                                                            
+                    --set real data input
+                    in_real <= float2fixed_out_tdata(DFT_DATA_WIDTH downto 0); --fixed18 format
                     
                     --increase index
                     index_next <= index + 1;
@@ -379,8 +411,8 @@ begin
             stout_valid <= '1';
             
             --get data outputs
-            stout_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0) <= out_real;
-            stout_data(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2) <= out_imag;
+            --stout_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0) <= out_real;
+            --stout_data(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2) <= out_imag;
                                     
             --increase index
             receive_index_next <= receive_index + 1;
