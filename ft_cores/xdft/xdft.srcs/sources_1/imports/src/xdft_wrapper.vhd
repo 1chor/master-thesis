@@ -67,29 +67,44 @@ architecture arch of xdft_wrapper is
 
     -- constant declaration
     constant FWD : std_logic := '1'; -- use forward transformation
-    constant DFT_DATA_WIDTH : positive := 18;
+    constant DATA_WIDTH : positive := 31;
+    constant DFT_DATA_WIDTH : positive := 17;
     
     -- signal declaration
-    signal in_real              : std_logic_vector(DFT_DATA_WIDTH downto 0);
-    signal in_imag              : std_logic_vector(DFT_DATA_WIDTH downto 0);
-    signal first_in             : std_logic;
-    signal first_ready_in             : std_logic;
+    --DFT signals
+    signal in_real                  : std_logic_vector(DFT_DATA_WIDTH downto 0);
+    signal in_imag                  : std_logic_vector(DFT_DATA_WIDTH downto 0);
+    signal first_in                 : std_logic;
+    signal first_ready_in           : std_logic;
     
-    signal out_real             : std_logic_vector(DFT_DATA_WIDTH downto 0);
-    signal out_imag             : std_logic_vector(DFT_DATA_WIDTH downto 0);
-    signal first_out            : std_logic;
-    signal s_out_valid          : std_logic;
-    signal exp                  : std_logic_vector(3 downto 0);
+    signal out_real                 : std_logic_vector(DFT_DATA_WIDTH downto 0);
+    signal out_imag                 : std_logic_vector(DFT_DATA_WIDTH downto 0);
+    signal first_out                : std_logic;
+    signal s_out_valid              : std_logic;
+    signal exp                      : std_logic_vector(3 downto 0);
     
-    signal size_s               : positive := SIZE;
-    signal dft_size             : std_logic_vector(5 downto 0);
+    signal size_s                   : positive := SIZE;
+    signal dft_size                 : std_logic_vector(5 downto 0);
     
-    signal index                : natural range 0 to SIZE := 0;
-    signal index_next           : natural range 0 to SIZE := 0;
+    signal index                    : natural range 0 to SIZE := 0;
+    signal index_next               : natural range 0 to SIZE := 0;
     
-    signal receive_index        : natural range 0 to SIZE := 0;
-    signal receive_index_next   : natural range 0 to SIZE := 0;
+    signal receive_index            : natural range 0 to SIZE := 0;
+    signal receive_index_next       : natural range 0 to SIZE := 0;
+    
+    -- signals for float_to_fixed18
+    signal float2fixed_in_tvalid    : std_logic := '0'; -- payload is valid
+    signal float2fixed_in_tdata     : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
+    signal float2fixed_out_tvalid   : std_logic := '0';
+    signal float2fixed_out_tdata    : std_logic_vector(23 downto 0) := (others => '0'); -- data payload
+    signal float2fixed_out_tuser    : std_logic_vector(0 downto 0) := (others => '0'); -- exceptions and user-defined payload
         
+    -- signals for fixed32_to_float
+    signal fixed2float_in_tvalid     : std_logic := '0'; -- payload is valid
+    signal fixed2float_in_tdata      : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
+    signal fixed2float_out_tvalid    : std_logic := '0';
+    signal fixed2float_out_tdata     : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
+    
     -- type declaration
     type state_type is (
         TRANSFER_TO_FFT,
@@ -103,6 +118,33 @@ architecture arch of xdft_wrapper is
         OTHER_FRAMES
     );
     signal input_state, input_state_next : input_state_type := INPUT_IDLE;
+    
+    -- component for float_to_fixed18 converter
+    component float_to_fixed18_0 is
+        port (
+            -- Global signals
+            -- AXI4-Stream slave channel for operand A
+            s_axis_a_tvalid : in std_logic;
+            s_axis_a_tdata : in std_logic_vector(DATA_WIDTH downto 0);
+            -- AXI4-Stream master channel for output result
+            m_axis_result_tvalid : out std_logic;
+            m_axis_result_tdata : out std_logic_vector(23 downto 0);
+            m_axis_result_tuser :out std_logic_vector(0 downto 0)
+        );
+    end component float_to_fixed18_0;
+    
+    --component for fixed32_to_float converter
+    component fixed32_to_float_0 is
+        port (
+            -- Global signals
+            -- AXI4-Stream slave channel for operand A
+            s_axis_a_tvalid : in std_logic;
+            s_axis_a_tdata : in std_logic_vector(DATA_WIDTH DOWNTO 0);
+            -- AXI4-Stream master channel for output result
+            m_axis_result_tvalid : out std_logic;
+            m_axis_result_tdata : out std_logic_vector(DATA_WIDTH DOWNTO 0)
+      );
+    end component fixed32_to_float_0;
   
     -- component for DFT IP core
     component dft_0 is
@@ -124,6 +166,31 @@ architecture arch of xdft_wrapper is
     end component dft_0;
 
 begin
+
+    -- implement float_to_fixed18 unit
+    float_to_fixed18_inst : component float_to_fixed18_0
+    port map (
+        -- Global signals
+        -- AXI4-Stream slave channel for operand A
+        s_axis_a_tvalid => float2fixed_in_tvalid,
+        s_axis_a_tdata => float2fixed_in_tdata,
+        -- AXI4-Stream master channel for output result
+        m_axis_result_tvalid => float2fixed_out_tvalid,
+        m_axis_result_tdata => float2fixed_out_tdata,
+        m_axis_result_tuser => float2fixed_out_tuser
+    );
+    
+    -- implement fixed32_to_float unit
+    fixed32_to_float_inst : component fixed32_to_float_0
+    port map (
+        -- Global signals
+        -- AXI4-Stream slave channel for operand A
+        s_axis_a_tvalid => fixed2float_in_tvalid,
+        s_axis_a_tdata => fixed2float_in_tdata,
+        -- AXI4-Stream master channel for output result
+        m_axis_result_tvalid => fixed2float_out_tvalid,
+        m_axis_result_tdata => fixed2float_out_tdata
+    );
 
     -- implement DFT unit
     dft_inst : component dft_0
