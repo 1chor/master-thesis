@@ -1,1 +1,0 @@
--wto "240320931f30448ea4c354a75bae82e7" --incr --debug "typical" --relax --mt "8" -L "xbip_utils_v3_0_9" -L "dft_v4_0_15" -L "xil_defaultlib" -L "secureip" -L "xpm" --snapshot "xdft_tb_behav" "xil_defaultlib.xdft_tb" -log "elaborate.log" 

@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<Runs Version="1" Minor="0">
-	<Run Id="dft_0_synth_1" LaunchDir="/media/soc/Volume/master-thesis/spectral-analysis/spectral-analysis.runs/dft_0_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
-</Runs>
-
