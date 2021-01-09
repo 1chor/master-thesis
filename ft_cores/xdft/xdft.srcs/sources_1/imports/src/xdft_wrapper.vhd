@@ -69,11 +69,11 @@ architecture arch of xdft_wrapper is
     constant FWD : std_logic := '1'; -- use forward transformation
     constant DATA_WIDTH : positive := 31;
     constant DFT_DATA_WIDTH : positive := 17;
+    constant zeros : std_logic_vector(DFT_DATA_WIDTH downto 0) := (others => '0');
     
     -- signal declaration
     --DFT signals
     signal in_real                  : std_logic_vector(DFT_DATA_WIDTH downto 0);
-    signal in_imag                  : std_logic_vector(DFT_DATA_WIDTH downto 0);
     signal first_in                 : std_logic;
     signal first_ready_in           : std_logic;
     
@@ -197,8 +197,8 @@ begin
     port map (
         CLK         => clk,
         SCLR        => reset,
-        XN_RE       => in_real,
-        XN_IM       => in_imag,
+        XN_RE       => in_real, -- real input without imaginary part
+        XN_IM       => zeros,   -- constant 0
         FD_IN       => first_in,
         FWD_INV     => FWD,
         SIZE        => dft_size,
@@ -287,7 +287,6 @@ begin
         stin_ready <= '0';
         
         in_real <= (others => '0');
-        in_imag <= (others => '0');
         
         case input_state is
         
@@ -303,7 +302,6 @@ begin
                 if (state = TRANSFER_TO_FFT) and (first_ready_in = '1') and (stin_valid = '1') then --check if DFT is ready to process data and data_in is valid
                     --set data inputs
                     in_real <= stin_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0); -- (15 - 0)
-                    in_imag <= stin_data(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2); -- (32 - 16)
                     
                     if index = 0 then
                         first_in <= '1'; --set flag for first data input
@@ -326,7 +324,6 @@ begin
                     
                     --set data inputs
                     in_real <= stin_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0); -- (15 - 0)
-                    in_imag <= stin_data(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2); -- (32 - 16)
                     
                     if index = 0 then
                         first_in <= '1'; --set flag for first data input
