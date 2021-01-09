@@ -58,8 +58,7 @@ begin
                 or (SIZE = 300) or (SIZE = 324) or (SIZE = 360) or (SIZE = 384) or (SIZE = 432) or (SIZE = 480) or (SIZE = 540)
                 or (SIZE = 576) or (SIZE = 600) or (SIZE = 648) or (SIZE = 720) or (SIZE = 768) or (SIZE = 864) or (SIZE = 900)
                 or (SIZE = 960) or (SIZE = 972) or (SIZE = 1080) or (SIZE = 1152) or (SIZE = 1200) or (SIZE = 1296))
-    report "The selected transform size (" & SIZE & ") is not supported!"
-    severity failure;
+    report ("The selected transform size (" & integer'image(SIZE) & ") is not supported!") severity failure;
     
 end xdft_wrapper;
 
