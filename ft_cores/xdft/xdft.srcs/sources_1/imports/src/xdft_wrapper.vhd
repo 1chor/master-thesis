@@ -67,15 +67,16 @@ architecture arch of xdft_wrapper is
 
     -- constant declaration
     constant FWD : std_logic := '1'; -- use forward transformation
+    constant DFT_DATA_WIDTH : positive := 18;
     
     -- signal declaration
-    signal in_real              : std_logic_vector(15 downto 0);
-    signal in_imag              : std_logic_vector(15 downto 0);
+    signal in_real              : std_logic_vector(DFT_DATA_WIDTH downto 0);
+    signal in_imag              : std_logic_vector(DFT_DATA_WIDTH downto 0);
     signal first_in             : std_logic;
     signal first_ready_in             : std_logic;
     
-    signal out_real             : std_logic_vector(15 downto 0);
-    signal out_imag             : std_logic_vector(15 downto 0);
+    signal out_real             : std_logic_vector(DFT_DATA_WIDTH downto 0);
+    signal out_imag             : std_logic_vector(DFT_DATA_WIDTH downto 0);
     signal first_out            : std_logic;
     signal s_out_valid          : std_logic;
     signal exp                  : std_logic_vector(3 downto 0);
@@ -108,14 +109,14 @@ architecture arch of xdft_wrapper is
         port (
             CLK : in std_logic;                             -- clock
             SCLR : in std_logic;                            -- syncronous clear (reset)
-            XN_RE : in std_logic_vector(15 downto 0);       -- real data input
-            XN_IM : in std_logic_vector(15 downto 0);       -- imaginary data input
+            XN_RE : in std_logic_vector(DFT_DATA_WIDTH downto 0);       -- real data input
+            XN_IM : in std_logic_vector(DFT_DATA_WIDTH downto 0);       -- imaginary data input
             FD_IN : in std_logic;                           -- first data in
             FWD_INV : in std_logic;                         -- transform direction
             SIZE : in std_logic_vector(5 downto 0);         -- size of transform to be performed
             RFFD : out std_logic;                           -- ready for first data
-            XK_RE : out std_logic_vector(15 downto 0);      -- real data output
-            XK_IM : out std_logic_vector(15 downto 0);      -- imaginary data output
+            XK_RE : out std_logic_vector(DFT_DATA_WIDTH downto 0);      -- real data output
+            XK_IM : out std_logic_vector(DFT_DATA_WIDTH downto 0);      -- imaginary data output
             BLK_EXP : out std_logic_vector(3 downto 0);     -- block exponent
             FD_OUT : out std_logic;                         -- first data out
             DATA_VALID : out std_logic                      -- data valid
