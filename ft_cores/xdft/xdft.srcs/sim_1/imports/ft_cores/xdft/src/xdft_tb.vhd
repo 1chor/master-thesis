@@ -91,8 +91,7 @@ architecture bench of xdft_tb is
     subtype word32_t is std_logic_vector(DATA_WIDTH -1 downto 0);
     type output_buf_t is array(integer range 0 to SIZE -1) of word32_t;
     
-    shared variable real_in : array_t;
-    shared variable imag_in : array_t;
+    shared variable real_in : output_buf_t;
     
     shared variable real_out : output_buf_t;
     shared variable imag_out : output_buf_t;
@@ -192,15 +191,14 @@ begin
         end function;
         
         -- procedure to write data
-        procedure write_data(val_real : std_logic_vector; val_imag : std_logic_vector) is
+        procedure write_data(val_real : std_logic_vector) is
         begin
             if (stin_ready = '0') then
                 wait until stin_ready = '1';
             end if;
             
             --send input data
-            stin_data(DATA_WIDTH -1 downto DATA_WIDTH/2) <= val_imag;
-            stin_data(DATA_WIDTH/2 -1 downto 0) <= val_real;
+            stin_data <= val_real;
             stin_valid <= '1';
             wait until rising_edge(clk);
             stin_valid <= '0';
@@ -251,8 +249,7 @@ begin
         write(my_line, string'("Load Input Buffers"));
         writeline(output, my_line);
         
-        real_in := read_file16("ones.txt");
-        imag_in := read_file16("zeros.txt");
+        real_in := read_file32("ones.txt");
         
         write(my_line, string'("Load Reference Output Buffers"));
         writeline(output, my_line);
@@ -267,7 +264,7 @@ begin
         
         for i in 0 to SIZE-1 loop
             --send input data
-            write_data(real_in(i), imag_in(i));
+            write_data(real_in(i));
         end loop;
         
         wait_for_output_buffer_fill_level(SIZE);
@@ -300,8 +297,7 @@ begin
         write(my_line, string'("Load Input Buffers"));
         writeline(output, my_line);
         
-        real_in := read_file16("one_zeros.txt");
-        imag_in := read_file16("zeros.txt");
+        real_in := read_file32("one_zeros.txt");
         
         write(my_line, string'("Load Reference Output Buffers"));
         writeline(output, my_line);
@@ -316,7 +312,7 @@ begin
         
         for i in 0 to SIZE-1 loop
             --send input data
-            write_data(real_in(i), imag_in(i));
+            write_data(real_in(i));
         end loop;
         
         wait_for_output_buffer_fill_level(SIZE);
@@ -349,8 +345,7 @@ begin
         write(my_line, string'("Load Input Buffers"));
         writeline(output, my_line);
         
-        real_in := read_file16("input_TestData_norm16.txt");
-        imag_in := read_file16("zeros.txt");
+        real_in := read_file32("input_TestData_norm16.txt");
         
         write(my_line, string'("Load Reference Output Buffers"));
         writeline(output, my_line);
@@ -365,7 +360,7 @@ begin
         
         for i in 0 to SIZE-1 loop
             --send input data
-            write_data(real_in(i), imag_in(i));
+            write_data(real_in(i));
         end loop;
         
         wait_for_output_buffer_fill_level(SIZE);
