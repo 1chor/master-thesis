@@ -319,6 +319,7 @@ begin
         stin_ready <= '0';
         float2fixed_in_tvalid <= '0';
         
+        float2fixed_in_tdata <= (others => '0');
         in_real <= (others => '0');
         
         case input_state is
@@ -437,6 +438,8 @@ begin
         real_fixed2float_in_tvalid <= '0';
         imag_fixed2float_in_tvalid <= '0';
         
+        real_fixed2float_in_tdata <= (others => '0');
+        imag_fixed2float_in_tdata <= (others => '0');
         stout_data <= (others => '0');
         
         case output_state is
@@ -448,16 +451,22 @@ begin
                     real_fixed2float_in_tdata <= out_real; --convert float to fixed18
                     real_fixed2float_in_tvalid <= '1';
                     --imaginary part
-                    real_fixed2float_in_tdata <= out_imag; --convert float to fixed18
-                    real_fixed2float_in_tvalid <= '1';
+                    imag_fixed2float_in_tdata <= out_imag; --convert float to fixed18
+                    imag_fixed2float_in_tvalid <= '1';
                     
                     output_state_next <= OUTPUT_FRAMES;
                 end if;
             
             when OUTPUT_FRAMES =>
         
-                if receive_index = SIZE then --independent of valid signals
+                if (receive_index = SIZE) and (real_fixed2float_out_tvalid = '1') and (imag_fixed2float_out_tvalid = '1') then --independent of valid signals
+                    --set last data outputs
+                    stout_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0) <= real_fixed2float_out_tdata;
+                    stout_data(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2) <= imag_fixed2float_out_tdata;
+                    stout_valid <= '1';
+                    
                     receive_index_next <= 0; --reset counter
+                    output_state_next <= OUTPUT_IDLE;
                     
                 elsif (state = OUTPUT_DATA) and (s_out_valid = '1') and (real_fixed2float_out_tvalid = '1') and (imag_fixed2float_out_tvalid = '1') then --check if the output data of the DFT is valid
                     --convert next output data
@@ -465,12 +474,12 @@ begin
                     real_fixed2float_in_tdata <= out_real; --convert float to fixed18
                     real_fixed2float_in_tvalid <= '1';
                     --imaginary part
-                    real_fixed2float_in_tdata <= out_imag; --convert float to fixed18
-                    real_fixed2float_in_tvalid <= '1';
+                    imag_fixed2float_in_tdata <= out_imag; --convert float to fixed18
+                    imag_fixed2float_in_tvalid <= '1';
                     
                     --set data outputs
-                    stout_data <= out_real;
-                    stout_data <= out_imag;
+                    stout_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0) <= real_fixed2float_out_tdata;
+                    stout_data(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2) <= imag_fixed2float_out_tdata;
                     stout_valid <= '1';
                                             
                     --increase index
