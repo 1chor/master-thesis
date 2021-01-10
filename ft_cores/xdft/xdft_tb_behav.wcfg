@@ -10,15 +10,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="655000000fs"></ZoomStartTime>
-      <ZoomEndTime time="12955000001fs"></ZoomEndTime>
-      <Cursor1Time time="2705000000fs"></Cursor1Time>
+      <ZoomStartTime time="896833333fs"></ZoomStartTime>
+      <ZoomEndTime time="1020633334fs"></ZoomEndTime>
+      <Cursor1Time time="1000000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="175"></NameColumnWidth>
-      <ValueColumnWidth column_width="86"></ValueColumnWidth>
+      <ValueColumnWidth column_width="82"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="41" />
+   <WVObjectSize size="46" />
    <wvobject type="logic" fp_name="/xdft_tb/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -26,6 +26,10 @@
    <wvobject fp_name="divider193" type="divider">
       <obj_property name="label">INPUT</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/xdft_tb/uut/input_state">
+      <obj_property name="ElementShortName">input_state</obj_property>
+      <obj_property name="ObjectShortName">input_state</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/xdft_tb/uut/stin_valid">
       <obj_property name="ElementShortName">stin_valid</obj_property>
@@ -67,6 +71,14 @@
       <obj_property name="ElementShortName">exp[7:0]</obj_property>
       <obj_property name="ObjectShortName">exp[7:0]</obj_property>
    </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/uut/shifted_exp_real">
+      <obj_property name="ElementShortName">shifted_exp_real[7:0]</obj_property>
+      <obj_property name="ObjectShortName">shifted_exp_real[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/uut/shifted_exp_imag">
+      <obj_property name="ElementShortName">shifted_exp_imag[7:0]</obj_property>
+      <obj_property name="ObjectShortName">shifted_exp_imag[7:0]</obj_property>
+   </wvobject>
    <wvobject type="array" fp_name="/xdft_tb/uut/out_real">
       <obj_property name="ElementShortName">out_real[17:0]</obj_property>
       <obj_property name="ObjectShortName">out_real[17:0]</obj_property>
@@ -86,6 +98,14 @@
    <wvobject type="array" fp_name="/xdft_tb/uut/real_fixed2float_out_tdata">
       <obj_property name="ElementShortName">real_fixed2float_out_tdata[31:0]</obj_property>
       <obj_property name="ObjectShortName">real_fixed2float_out_tdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/uut/temp_real_float">
+      <obj_property name="ElementShortName">temp_real_float[31:0]</obj_property>
+      <obj_property name="ObjectShortName">temp_real_float[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/uut/temp_imag_float">
+      <obj_property name="ElementShortName">temp_imag_float[31:0]</obj_property>
+      <obj_property name="ObjectShortName">temp_imag_float[31:0]</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/xdft_tb/uut/stout_valid">
       <obj_property name="ElementShortName">stout_valid</obj_property>
