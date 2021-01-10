@@ -99,10 +99,16 @@ architecture arch of xdft_wrapper is
     signal float2fixed_out_tuser    : std_logic_vector(0 downto 0) := (others => '0'); -- exceptions and user-defined payload
         
     -- signals for fixed32_to_float
-    signal fixed2float_in_tvalid     : std_logic := '0'; -- payload is valid
-    signal fixed2float_in_tdata      : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
-    signal fixed2float_out_tvalid    : std_logic := '0';
-    signal fixed2float_out_tdata     : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
+    -- for real output
+    signal real_fixed2float_in_tvalid     : std_logic := '0'; -- payload is valid
+    signal real_fixed2float_in_tdata      : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
+    signal real_fixed2float_out_tvalid    : std_logic := '0';
+    signal real_fixed2float_out_tdata     : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
+    -- for imaginary output
+    signal imag_fixed2float_in_tvalid     : std_logic := '0'; -- payload is valid
+    signal imag_fixed2float_in_tdata      : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
+    signal imag_fixed2float_out_tvalid    : std_logic := '0';
+    signal imag_fixed2float_out_tdata     : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
     
     -- type declaration
     type state_type is (
@@ -184,17 +190,30 @@ begin
         m_axis_result_tuser => float2fixed_out_tuser
     );
     
-    -- implement fixed32_to_float unit
-    fixed32_to_float_inst : component fixed32_to_float_0
+    -- implement fixed32_to_float unit for real output
+    fixed32_to_float_inst_real : component fixed32_to_float_0
     port map (
         -- Global signals
         aclk => clk,
         -- AXI4-Stream slave channel for operand A
-        s_axis_a_tvalid => fixed2float_in_tvalid,
-        s_axis_a_tdata => fixed2float_in_tdata,
+        s_axis_a_tvalid => real_fixed2float_in_tvalid,
+        s_axis_a_tdata => real_fixed2float_in_tdata,
         -- AXI4-Stream master channel for output result
-        m_axis_result_tvalid => fixed2float_out_tvalid,
-        m_axis_result_tdata => fixed2float_out_tdata
+        m_axis_result_tvalid => real_fixed2float_out_tvalid,
+        m_axis_result_tdata => real_fixed2float_out_tdata
+    );
+    
+    -- implement fixed32_to_float unit for imaginary output
+    fixed32_to_float_inst_imag : component fixed32_to_float_0
+    port map (
+        -- Global signals
+        aclk => clk,
+        -- AXI4-Stream slave channel for operand A
+        s_axis_a_tvalid => imag_fixed2float_in_tvalid,
+        s_axis_a_tdata => imag_fixed2float_in_tdata,
+        -- AXI4-Stream master channel for output result
+        m_axis_result_tvalid => imag_fixed2float_out_tvalid,
+        m_axis_result_tdata => imag_fixed2float_out_tdata
     );
 
     -- implement DFT unit
