@@ -475,6 +475,9 @@ begin
                     imag_fixed2float_in_tdata(DFT_DATA_WIDTH downto 0) <= out_imag; --convert float to fixed18
                     imag_fixed2float_in_tvalid <= '1';
                     
+                    --increase index
+                    receive_index_next <= receive_index + 1; 
+                    
                     output_state_next <= OUTPUT_FRAMES;
                 end if;
             
