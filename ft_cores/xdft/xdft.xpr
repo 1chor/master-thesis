@@ -33,7 +33,7 @@
     <Option Name="DSAVendor" Val="xilinx"/>
     <Option Name="DSABoardId" Val="zcu102"/>
     <Option Name="DSANumComputeUnits" Val="60"/>
-    <Option Name="WTXSimLaunchSim" Val="125"/>
+    <Option Name="WTXSimLaunchSim" Val="146"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -107,12 +107,6 @@
           <Attr Name="ImportTime" Val="1610114036"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sim_1/imports/ft_cores/TestData/zeros.txt">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../TestData/zeros.txt"/>
-          <Attr Name="ImportTime" Val="1609516069"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sim_1/imports/ft_cores/TestData/imag_TestData_norm32.txt">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../TestData/imag_TestData_norm32.txt"/>
@@ -141,6 +135,18 @@
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../TestData/result_ones.txt"/>
           <Attr Name="ImportTime" Val="1610113977"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/result_ones_imag.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/result_ones_imag.txt"/>
+          <Attr Name="ImportTime" Val="1610318690"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/result_one_zeros_imag.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/result_one_zeros_imag.txt"/>
+          <Attr Name="ImportTime" Val="1610318802"/>
         </FileInfo>
       </File>
       <Config>
@@ -251,9 +257,7 @@
     </Run>
     <Run Id="fixed18_to_float_0_synth_1" Type="Ft3:Synth" SrcSet="fixed18_to_float_0" Part="xczu9eg-ffvb1156-2-e" ConstrsSet="fixed18_to_float_0" Description="Vivado Synthesis Defaults" WriteIncrSynthDcp="false" Dir="$PRUNDIR/fixed18_to_float_0_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -310,9 +314,7 @@
     </Run>
     <Run Id="fixed18_to_float_0_impl_1" Type="Ft2:EntireDesign" Part="xczu9eg-ffvb1156-2-e" ConstrsSet="fixed18_to_float_0" Description="Default settings for Implementation." WriteIncrSynthDcp="false" SynthRun="fixed18_to_float_0_synth_1" IncludeInArchive="false">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>

@@ -10,15 +10,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="896833333fs"></ZoomStartTime>
-      <ZoomEndTime time="1020633334fs"></ZoomEndTime>
-      <Cursor1Time time="1000000000fs"></Cursor1Time>
+      <ZoomStartTime time="7471833333fs"></ZoomStartTime>
+      <ZoomEndTime time="7595633334fs"></ZoomEndTime>
+      <Cursor1Time time="7575000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="175"></NameColumnWidth>
       <ValueColumnWidth column_width="82"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="46" />
+   <WVObjectSize size="48" />
    <wvobject type="logic" fp_name="/xdft_tb/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -71,6 +71,10 @@
       <obj_property name="ElementShortName">exp[7:0]</obj_property>
       <obj_property name="ObjectShortName">exp[7:0]</obj_property>
    </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/uut/blk_exp">
+      <obj_property name="ElementShortName">blk_exp[7:0]</obj_property>
+      <obj_property name="ObjectShortName">blk_exp[7:0]</obj_property>
+   </wvobject>
    <wvobject type="array" fp_name="/xdft_tb/uut/shifted_exp_real">
       <obj_property name="ElementShortName">shifted_exp_real[7:0]</obj_property>
       <obj_property name="ObjectShortName">shifted_exp_real[7:0]</obj_property>
@@ -114,6 +118,10 @@
    <wvobject type="array" fp_name="/xdft_tb/stout_data">
       <obj_property name="ElementShortName">stout_data[63:0]</obj_property>
       <obj_property name="ObjectShortName">stout_data[63:0]</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/xdft_tb/uut/output_state">
+      <obj_property name="ElementShortName">output_state</obj_property>
+      <obj_property name="ObjectShortName">output_state</obj_property>
    </wvobject>
    <wvobject fp_name="divider10" type="divider">
       <obj_property name="label">DFT Wrapper</obj_property>
