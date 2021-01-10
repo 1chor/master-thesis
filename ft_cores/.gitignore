@@ -56,7 +56,7 @@
 #Do NOT ignore *.xpr files
 !*.xpr
 #Include *.xml files for 2013.4 or earlier version
-!*.xml
+*.xml
 #########
 #Constraint files
 #########
@@ -90,6 +90,7 @@
 #ignore folders generated from vivado
 #########
 *.cache/
+xsim.dir/
 #########
 #ignore TestData folder and files
 #########
@@ -102,4 +103,5 @@ TestData/
 !matlab/*
 #ignore compiled cmodel
 *.mexa64
+#ignore matlab autosave files
 *.asv
