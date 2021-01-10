@@ -98,15 +98,15 @@ architecture arch of xdft_wrapper is
     signal float2fixed_out_tdata    : std_logic_vector(23 downto 0) := (others => '0'); -- data payload
     signal float2fixed_out_tuser    : std_logic_vector(0 downto 0) := (others => '0'); -- exceptions and user-defined payload
         
-    -- signals for fixed32_to_float
+    -- signals for fixed18_to_float
     -- for real output
     signal real_fixed2float_in_tvalid     : std_logic := '0'; -- payload is valid
-    signal real_fixed2float_in_tdata      : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
+    signal real_fixed2float_in_tdata      : std_logic_vector(23 downto 0) := (others => '0'); -- data payload
     signal real_fixed2float_out_tvalid    : std_logic := '0';
     signal real_fixed2float_out_tdata     : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
     -- for imaginary output
     signal imag_fixed2float_in_tvalid     : std_logic := '0'; -- payload is valid
-    signal imag_fixed2float_in_tdata      : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
+    signal imag_fixed2float_in_tdata      : std_logic_vector(23 downto 0) := (others => '0'); -- data payload
     signal imag_fixed2float_out_tvalid    : std_logic := '0';
     signal imag_fixed2float_out_tdata     : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
     
@@ -168,19 +168,19 @@ architecture arch of xdft_wrapper is
         );
     end component float_to_fixed18_0;
     
-    --component for fixed32_to_float converter
-    component fixed32_to_float_0 is
+    --component for fixed18_to_float converter
+    component fixed18_to_float_0 is
         port (
             -- Global signals
             aclk : IN STD_LOGIC;
             -- AXI4-Stream slave channel for operand A
             s_axis_a_tvalid : in std_logic;
-            s_axis_a_tdata : in std_logic_vector(DATA_WIDTH DOWNTO 0);
+            s_axis_a_tdata : in std_logic_vector(23 DOWNTO 0);
             -- AXI4-Stream master channel for output result
             m_axis_result_tvalid : out std_logic;
             m_axis_result_tdata : out std_logic_vector(DATA_WIDTH DOWNTO 0)
       );
-    end component fixed32_to_float_0;
+    end component fixed18_to_float_0;
   
     -- component for DFT IP core
     component dft_0 is
@@ -217,8 +217,8 @@ begin
         m_axis_result_tuser => float2fixed_out_tuser
     );
     
-    -- implement fixed32_to_float unit for real output
-    fixed32_to_float_inst_real : component fixed32_to_float_0
+    -- implement fixed18_to_float unit for real output
+    fixed18_to_float_inst_real : component fixed18_to_float_0
     port map (
         -- Global signals
         aclk => clk,
@@ -230,8 +230,8 @@ begin
         m_axis_result_tdata => real_fixed2float_out_tdata
     );
     
-    -- implement fixed32_to_float unit for imaginary output
-    fixed32_to_float_inst_imag : component fixed32_to_float_0
+    -- implement fixed18_to_float unit for imaginary output
+    fixed18_to_float_inst_imag : component fixed18_to_float_0
     port map (
         -- Global signals
         aclk => clk,
@@ -469,10 +469,10 @@ begin
                 if (state = OUTPUT_DATA) and (s_out_valid = '1') then --check if the output data of the DFT is valid
                     --convert first output data
                     --real part
-                    real_fixed2float_in_tdata <= out_real; --convert float to fixed18
+                    real_fixed2float_in_tdata(DFT_DATA_WIDTH downto 0) <= out_real; --convert float to fixed18
                     real_fixed2float_in_tvalid <= '1';
                     --imaginary part
-                    imag_fixed2float_in_tdata <= out_imag; --convert float to fixed18
+                    imag_fixed2float_in_tdata(DFT_DATA_WIDTH downto 0) <= out_imag; --convert float to fixed18
                     imag_fixed2float_in_tvalid <= '1';
                     
                     output_state_next <= OUTPUT_FRAMES;
@@ -506,10 +506,10 @@ begin
                 elsif (state = OUTPUT_DATA) and (s_out_valid = '1') and (real_fixed2float_out_tvalid = '1') and (imag_fixed2float_out_tvalid = '1') then --check if the output data of the DFT is valid
                     --convert next output data
                     --real part
-                    real_fixed2float_in_tdata <= out_real; --convert float to fixed18
+                    real_fixed2float_in_tdata(DFT_DATA_WIDTH downto 0) <= out_real; --convert float to fixed18
                     real_fixed2float_in_tvalid <= '1';
                     --imaginary part
-                    imag_fixed2float_in_tdata <= out_imag; --convert float to fixed18
+                    imag_fixed2float_in_tdata(DFT_DATA_WIDTH downto 0) <= out_imag; --convert float to fixed18
                     imag_fixed2float_in_tvalid <= '1';
                     
                     --set data outputs

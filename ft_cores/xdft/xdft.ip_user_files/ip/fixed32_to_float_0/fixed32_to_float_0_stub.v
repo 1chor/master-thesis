@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.1 (lin64) Build 2188600 Wed Apr  4 18:39:19 MDT 2018
-// Date        : Sun Jan 10 11:32:48 2021
+// Date        : Sun Jan 10 16:28:06 2021
 // Host        : soc running 64-bit Ubuntu 18.04.5 LTS
 // Command     : write_verilog -force -mode synth_stub
 //               /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed32_to_float_0/fixed32_to_float_0_stub.v
@@ -16,10 +16,10 @@
 (* x_core_info = "floating_point_v7_1_6,Vivado 2018.1" *)
 module fixed32_to_float_0(aclk, s_axis_a_tvalid, s_axis_a_tdata, 
   m_axis_result_tvalid, m_axis_result_tdata)
-/* synthesis syn_black_box black_box_pad_pin="aclk,s_axis_a_tvalid,s_axis_a_tdata[31:0],m_axis_result_tvalid,m_axis_result_tdata[31:0]" */;
+/* synthesis syn_black_box black_box_pad_pin="aclk,s_axis_a_tvalid,s_axis_a_tdata[23:0],m_axis_result_tvalid,m_axis_result_tdata[31:0]" */;
   input aclk;
   input s_axis_a_tvalid;
-  input [31:0]s_axis_a_tdata;
+  input [23:0]s_axis_a_tdata;
   output m_axis_result_tvalid;
   output [31:0]m_axis_result_tdata;
 endmodule

@@ -60,7 +60,7 @@ ENTITY fixed32_to_float_0 IS
   PORT (
     aclk : IN STD_LOGIC;
     s_axis_a_tvalid : IN STD_LOGIC;
-    s_axis_a_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    s_axis_a_tdata : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
     m_axis_result_tvalid : OUT STD_LOGIC;
     m_axis_result_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
   );
@@ -148,17 +148,17 @@ ARCHITECTURE fixed32_to_float_0_arch OF fixed32_to_float_0 IS
       aresetn : IN STD_LOGIC;
       s_axis_a_tvalid : IN STD_LOGIC;
       s_axis_a_tready : OUT STD_LOGIC;
-      s_axis_a_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+      s_axis_a_tdata : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
       s_axis_a_tuser : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
       s_axis_a_tlast : IN STD_LOGIC;
       s_axis_b_tvalid : IN STD_LOGIC;
       s_axis_b_tready : OUT STD_LOGIC;
-      s_axis_b_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+      s_axis_b_tdata : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
       s_axis_b_tuser : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
       s_axis_b_tlast : IN STD_LOGIC;
       s_axis_c_tvalid : IN STD_LOGIC;
       s_axis_c_tready : OUT STD_LOGIC;
-      s_axis_c_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+      s_axis_c_tdata : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
       s_axis_c_tuser : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
       s_axis_c_tlast : IN STD_LOGIC;
       s_axis_operation_tvalid : IN STD_LOGIC;
@@ -179,7 +179,7 @@ ARCHITECTURE fixed32_to_float_0_arch OF fixed32_to_float_0 IS
   ATTRIBUTE X_INTERFACE_PARAMETER OF m_axis_result_tvalid: SIGNAL IS "XIL_INTERFACENAME M_AXIS_RESULT, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 0, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, LAYERED_METADATA undef";
   ATTRIBUTE X_INTERFACE_INFO OF m_axis_result_tvalid: SIGNAL IS "xilinx.com:interface:axis:1.0 M_AXIS_RESULT TVALID";
   ATTRIBUTE X_INTERFACE_INFO OF s_axis_a_tdata: SIGNAL IS "xilinx.com:interface:axis:1.0 S_AXIS_A TDATA";
-  ATTRIBUTE X_INTERFACE_PARAMETER OF s_axis_a_tvalid: SIGNAL IS "XIL_INTERFACENAME S_AXIS_A, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 0, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, LAYERED_METADATA undef";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF s_axis_a_tvalid: SIGNAL IS "XIL_INTERFACENAME S_AXIS_A, TDATA_NUM_BYTES 3, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 0, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, LAYERED_METADATA undef";
   ATTRIBUTE X_INTERFACE_INFO OF s_axis_a_tvalid: SIGNAL IS "xilinx.com:interface:axis:1.0 S_AXIS_A TVALID";
   ATTRIBUTE X_INTERFACE_PARAMETER OF aclk: SIGNAL IS "XIL_INTERFACENAME aclk_intf, ASSOCIATED_BUSIF S_AXIS_OPERATION:M_AXIS_RESULT:S_AXIS_C:S_AXIS_B:S_AXIS_A, ASSOCIATED_RESET aresetn, ASSOCIATED_CLKEN aclken, FREQ_HZ 10000000, PHASE 0.000";
   ATTRIBUTE X_INTERFACE_INFO OF aclk: SIGNAL IS "xilinx.com:signal:clock:1.0 aclk_intf CLK";
@@ -205,12 +205,12 @@ BEGIN
       C_HAS_FMS => 0,
       C_HAS_ACCUMULATOR_A => 0,
       C_HAS_ACCUMULATOR_S => 0,
-      C_A_WIDTH => 32,
-      C_A_FRACTION_WIDTH => 24,
-      C_B_WIDTH => 32,
-      C_B_FRACTION_WIDTH => 24,
-      C_C_WIDTH => 32,
-      C_C_FRACTION_WIDTH => 24,
+      C_A_WIDTH => 18,
+      C_A_FRACTION_WIDTH => 17,
+      C_B_WIDTH => 18,
+      C_B_FRACTION_WIDTH => 17,
+      C_C_WIDTH => 18,
+      C_C_FRACTION_WIDTH => 17,
       C_RESULT_WIDTH => 32,
       C_RESULT_FRACTION_WIDTH => 24,
       C_COMPARE_OPERATION => 8,
@@ -219,9 +219,9 @@ BEGIN
       C_MULT_USAGE => 0,
       C_BRAM_USAGE => 0,
       C_RATE => 1,
-      C_ACCUM_INPUT_MSB => 32,
+      C_ACCUM_INPUT_MSB => 0,
       C_ACCUM_MSB => 32,
-      C_ACCUM_LSB => -31,
+      C_ACCUM_LSB => -15,
       C_HAS_UNDERFLOW => 0,
       C_HAS_OVERFLOW => 0,
       C_HAS_INVALID_OP => 0,
@@ -245,11 +245,11 @@ BEGIN
       C_HAS_RESULT_TUSER => 0,
       C_HAS_RESULT_TLAST => 0,
       C_TLAST_RESOLUTION => 0,
-      C_A_TDATA_WIDTH => 32,
+      C_A_TDATA_WIDTH => 24,
       C_A_TUSER_WIDTH => 1,
-      C_B_TDATA_WIDTH => 32,
+      C_B_TDATA_WIDTH => 24,
       C_B_TUSER_WIDTH => 1,
-      C_C_TDATA_WIDTH => 32,
+      C_C_TDATA_WIDTH => 24,
       C_C_TUSER_WIDTH => 1,
       C_OPERATION_TDATA_WIDTH => 8,
       C_OPERATION_TUSER_WIDTH => 1,
@@ -266,11 +266,11 @@ BEGIN
       s_axis_a_tuser => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 1)),
       s_axis_a_tlast => '0',
       s_axis_b_tvalid => '0',
-      s_axis_b_tdata => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 32)),
+      s_axis_b_tdata => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 24)),
       s_axis_b_tuser => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 1)),
       s_axis_b_tlast => '0',
       s_axis_c_tvalid => '0',
-      s_axis_c_tdata => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 32)),
+      s_axis_c_tdata => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 24)),
       s_axis_c_tuser => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 1)),
       s_axis_c_tlast => '0',
       s_axis_operation_tvalid => '0',
