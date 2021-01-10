@@ -24,7 +24,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
@@ -71,7 +71,7 @@ architecture arch of xdft_wrapper is
     constant zeros : std_logic_vector(DFT_DATA_WIDTH downto 0) := (others => '0');
     
     -- signal declaration
-    --DFT signals
+    -- DFT signals
     signal in_real                  : std_logic_vector(DFT_DATA_WIDTH downto 0);
     signal first_in                 : std_logic;
     signal first_ready_in           : std_logic;
@@ -80,7 +80,7 @@ architecture arch of xdft_wrapper is
     signal out_imag                 : std_logic_vector(DFT_DATA_WIDTH downto 0);
     signal first_out                : std_logic;
     signal s_out_valid              : std_logic;
-    signal exp                      : std_logic_vector(3 downto 0);
+    signal exp                      : std_logic_vector(7 downto 0) := (others => '0');
     
     signal size_s                   : positive := SIZE;
     signal dft_size                 : std_logic_vector(5 downto 0);
@@ -110,6 +110,27 @@ architecture arch of xdft_wrapper is
     signal imag_fixed2float_out_tvalid    : std_logic := '0';
     signal imag_fixed2float_out_tdata     : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
     
+    -- range declaration for IEEE 754 single presicion format
+    constant SIGN_BIT : natural := 31;
+    constant EXPONENT_UPPER_BOUND : natural := 30;
+    constant EXPONENT_LOWER_BOUND : natural := 23;
+    constant MANTISSA_UPPER_BOUND : natural := 22;
+    constant MANTISSA_LOWER_BOUND : natural := 0;
+    
+    subtype exponent_range is std_logic_vector(EXPONENT_UPPER_BOUND downto EXPONENT_LOWER_BOUND);
+    subtype mantissa_range is std_logic_vector(MANTISSA_UPPER_BOUND downto MANTISSA_LOWER_BOUND);
+    
+    --range declaration for stout_data
+    constant STOUT_SIGN_BIT_REAL : natural := C_S_AXI_DATA_WIDTH / 2 - 1;
+    constant STOUT_SIGN_BIT_IMAG : natural := C_S_AXI_DATA_WIDTH - 1;
+    
+    --real range
+    subtype stout_exponent_real_range is std_logic_vector(C_S_AXI_DATA_WIDTH / 2 - 2 downto C_S_AXI_DATA_WIDTH / 2 - 9);
+    subtype stout_mantissa_real_range is std_logic_vector(C_S_AXI_DATA_WIDTH / 2 - 10 downto 0);
+    --imag range
+    subtype stout_exponent_imag_range is std_logic_vector(C_S_AXI_DATA_WIDTH - 2 downto C_S_AXI_DATA_WIDTH - 9);
+    subtype stout_mantissa_imag_range is std_logic_vector(C_S_AXI_DATA_WIDTH - 10 downto C_S_AXI_DATA_WIDTH / 2);
+                
     -- type declaration
     type state_type is (
         TRANSFER_TO_FFT,
@@ -235,7 +256,7 @@ begin
         RFFD        => first_ready_in,
         XK_RE       => out_real,
         XK_IM       => out_imag,
-        BLK_EXP     => exp,
+        BLK_EXP     => exp(3 downto 0),
         FD_OUT      => first_out,
         DATA_VALID  => s_out_valid
     );
@@ -461,8 +482,22 @@ begin
         
                 if (receive_index = SIZE) and (real_fixed2float_out_tvalid = '1') and (imag_fixed2float_out_tvalid = '1') then --independent of valid signals
                     --set last data outputs
-                    stout_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0) <= real_fixed2float_out_tdata;
-                    stout_data(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2) <= imag_fixed2float_out_tdata;
+                    --real part
+                    --sign bit
+                    stout_data(STOUT_SIGN_BIT_REAL) <= real_fixed2float_out_tdata(SIGN_BIT);
+                    --exponent with applied shifts from DFT
+                    stout_data(stout_exponent_real_range'range) <= std_logic_vector(unsigned(real_fixed2float_out_tdata(exponent_range'range)) + unsigned(exp));
+                    --mantissa                    
+                    stout_data(stout_mantissa_real_range'range) <= real_fixed2float_out_tdata(mantissa_range'range);
+                    
+                    --imaginary part
+                    --sign bit
+                    stout_data(STOUT_SIGN_BIT_IMAG) <= imag_fixed2float_out_tdata(SIGN_BIT);
+                    --exponent with applied shifts from DFT
+                    stout_data(stout_exponent_imag_range'range) <= std_logic_vector(unsigned(imag_fixed2float_out_tdata(exponent_range'range)) + unsigned(exp));
+                    --mantissa                    
+                    stout_data(stout_mantissa_imag_range'range) <= imag_fixed2float_out_tdata(mantissa_range'range);
+                    
                     stout_valid <= '1';
                     
                     receive_index_next <= 0; --reset counter
@@ -478,8 +513,22 @@ begin
                     imag_fixed2float_in_tvalid <= '1';
                     
                     --set data outputs
-                    stout_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0) <= real_fixed2float_out_tdata;
-                    stout_data(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2) <= imag_fixed2float_out_tdata;
+                    --real part
+                    --sign bit
+                    stout_data(STOUT_SIGN_BIT_REAL) <= real_fixed2float_out_tdata(SIGN_BIT);
+                    --exponent with applied shifts from DFT
+                    stout_data(stout_exponent_real_range'range) <= std_logic_vector(unsigned(real_fixed2float_out_tdata(exponent_range'range)) + unsigned(exp));
+                    --mantissa                    
+                    stout_data(stout_mantissa_real_range'range) <= real_fixed2float_out_tdata(mantissa_range'range);
+                    
+                    --imaginary part
+                    --sign bit
+                    stout_data(STOUT_SIGN_BIT_IMAG) <= imag_fixed2float_out_tdata(SIGN_BIT);
+                    --exponent with applied shifts from DFT
+                    stout_data(stout_exponent_imag_range'range) <= std_logic_vector(unsigned(imag_fixed2float_out_tdata(exponent_range'range)) + unsigned(exp));
+                    --mantissa                    
+                    stout_data(stout_mantissa_imag_range'range) <= imag_fixed2float_out_tdata(mantissa_range'range);
+                    
                     stout_valid <= '1';
                                             
                     --increase index
