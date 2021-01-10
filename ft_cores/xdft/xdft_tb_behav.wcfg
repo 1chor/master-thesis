@@ -10,41 +10,21 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="61100001fs"></ZoomEndTime>
-      <Cursor1Time time="45000000fs"></Cursor1Time>
+      <ZoomStartTime time="655000000fs"></ZoomStartTime>
+      <ZoomEndTime time="12955000001fs"></ZoomEndTime>
+      <Cursor1Time time="2705000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="175"></NameColumnWidth>
-      <ValueColumnWidth column_width="90"></ValueColumnWidth>
+      <ValueColumnWidth column_width="86"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="47" />
+   <WVObjectSize size="41" />
    <wvobject type="logic" fp_name="/xdft_tb/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
    </wvobject>
-   <wvobject type="other" fp_name="/xdft_tb/SIZE">
-      <obj_property name="ElementShortName">SIZE</obj_property>
-      <obj_property name="ObjectShortName">SIZE</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/xdft_tb/DATA_WIDTH">
-      <obj_property name="ElementShortName">DATA_WIDTH</obj_property>
-      <obj_property name="ObjectShortName">DATA_WIDTH</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/xdft_tb/INPUT_WIDTH">
-      <obj_property name="ElementShortName">INPUT_WIDTH</obj_property>
-      <obj_property name="ObjectShortName">INPUT_WIDTH</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/xdft_tb/CLK_PERIOD">
-      <obj_property name="ElementShortName">CLK_PERIOD</obj_property>
-      <obj_property name="ObjectShortName">CLK_PERIOD</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/xdft_tb/stop_clock">
-      <obj_property name="ElementShortName">stop_clock</obj_property>
-      <obj_property name="ObjectShortName">stop_clock</obj_property>
-   </wvobject>
-   <wvobject fp_name="divider10" type="divider">
-      <obj_property name="label">DFT Wrapper</obj_property>
+   <wvobject fp_name="divider193" type="divider">
+      <obj_property name="label">INPUT</obj_property>
       <obj_property name="DisplayName">label</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/xdft_tb/uut/stin_valid">
@@ -52,8 +32,8 @@
       <obj_property name="ObjectShortName">stin_valid</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/xdft_tb/uut/stin_data">
-      <obj_property name="ElementShortName">stin_data[31:0]</obj_property>
-      <obj_property name="ObjectShortName">stin_data[31:0]</obj_property>
+      <obj_property name="ElementShortName">stin_data[63:0]</obj_property>
+      <obj_property name="ObjectShortName">stin_data[63:0]</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/xdft_tb/uut/float2fixed_in_tvalid">
       <obj_property name="ElementShortName">float2fixed_in_tvalid</obj_property>
@@ -79,6 +59,46 @@
       <obj_property name="ElementShortName">in_real[17:0]</obj_property>
       <obj_property name="ObjectShortName">in_real[17:0]</obj_property>
    </wvobject>
+   <wvobject fp_name="divider194" type="divider">
+      <obj_property name="label">OUTPUT</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/uut/exp">
+      <obj_property name="ElementShortName">exp[7:0]</obj_property>
+      <obj_property name="ObjectShortName">exp[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/uut/out_real">
+      <obj_property name="ElementShortName">out_real[17:0]</obj_property>
+      <obj_property name="ObjectShortName">out_real[17:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/xdft_tb/uut/real_fixed2float_in_tvalid">
+      <obj_property name="ElementShortName">real_fixed2float_in_tvalid</obj_property>
+      <obj_property name="ObjectShortName">real_fixed2float_in_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/uut/real_fixed2float_in_tdata">
+      <obj_property name="ElementShortName">real_fixed2float_in_tdata[23:0]</obj_property>
+      <obj_property name="ObjectShortName">real_fixed2float_in_tdata[23:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/xdft_tb/uut/real_fixed2float_out_tvalid">
+      <obj_property name="ElementShortName">real_fixed2float_out_tvalid</obj_property>
+      <obj_property name="ObjectShortName">real_fixed2float_out_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/uut/real_fixed2float_out_tdata">
+      <obj_property name="ElementShortName">real_fixed2float_out_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">real_fixed2float_out_tdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/xdft_tb/uut/stout_valid">
+      <obj_property name="ElementShortName">stout_valid</obj_property>
+      <obj_property name="ObjectShortName">stout_valid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/xdft_tb/stout_data">
+      <obj_property name="ElementShortName">stout_data[63:0]</obj_property>
+      <obj_property name="ObjectShortName">stout_data[63:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider10" type="divider">
+      <obj_property name="label">DFT Wrapper</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
    <wvobject type="logic" fp_name="/xdft_tb/uut/first_in">
       <obj_property name="ElementShortName">first_in</obj_property>
       <obj_property name="ObjectShortName">first_in</obj_property>
@@ -98,10 +118,6 @@
    <wvobject type="other" fp_name="/xdft_tb/uut/state_next">
       <obj_property name="ElementShortName">state_next</obj_property>
       <obj_property name="ObjectShortName">state_next</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/xdft_tb/uut/out_real">
-      <obj_property name="ElementShortName">out_real[17:0]</obj_property>
-      <obj_property name="ObjectShortName">out_real[17:0]</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/xdft_tb/uut/out_imag">
       <obj_property name="ElementShortName">out_imag[17:0]</obj_property>
@@ -166,45 +182,5 @@
    <wvobject type="logic" fp_name="/xdft_tb/uut/dft_inst/DATA_VALID">
       <obj_property name="ElementShortName">DATA_VALID</obj_property>
       <obj_property name="ObjectShortName">DATA_VALID</obj_property>
-   </wvobject>
-   <wvobject fp_name="divider149" type="divider">
-      <obj_property name="label">Shifted Output</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/xdft_tb/out_shift">
-      <obj_property name="ElementShortName">out_shift[31:0]</obj_property>
-      <obj_property name="ObjectShortName">out_shift[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/xdft_tb/real_out_shifted">
-      <obj_property name="ElementShortName">real_out_shifted[0:107][31:0]</obj_property>
-      <obj_property name="ObjectShortName">real_out_shifted[0:107][31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/xdft_tb/imag_out_shifted">
-      <obj_property name="ElementShortName">imag_out_shifted[0:107][31:0]</obj_property>
-      <obj_property name="ObjectShortName">imag_out_shifted[0:107][31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/xdft_tb/stout_data">
-      <obj_property name="ElementShortName">stout_data[31:0]</obj_property>
-      <obj_property name="ObjectShortName">stout_data[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="divider151" type="divider">
-      <obj_property name="label">Test</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/xdft_tb/signed16">
-      <obj_property name="ElementShortName">signed16[15:0]</obj_property>
-      <obj_property name="ObjectShortName">signed16[15:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/xdft_tb/signed32">
-      <obj_property name="ElementShortName">signed32[31:0]</obj_property>
-      <obj_property name="ObjectShortName">signed32[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/xdft_tb/signed32_shifted">
-      <obj_property name="ElementShortName">signed32_shifted[31:0]</obj_property>
-      <obj_property name="ObjectShortName">signed32_shifted[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/xdft_tb/std_shifted">
-      <obj_property name="ElementShortName">std_shifted[31:0]</obj_property>
-      <obj_property name="ObjectShortName">std_shifted[31:0]</obj_property>
    </wvobject>
 </wave_config>

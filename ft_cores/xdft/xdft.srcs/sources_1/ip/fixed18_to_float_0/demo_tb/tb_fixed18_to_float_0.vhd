@@ -62,7 +62,7 @@
 -- Using this testbench
 --
 -- This testbench instantiates your generated Floating-point core
--- instance named "fixed32_to_float_0".
+-- instance named "fixed18_to_float_0".
 --
 -- Use Vivado's Run Simulation flow to run this testbench.  See the Vivado
 -- documentation for details.
@@ -74,10 +74,10 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
 
-entity tb_fixed32_to_float_0 is
-end tb_fixed32_to_float_0;
+entity tb_fixed18_to_float_0 is
+end tb_fixed18_to_float_0;
 
-architecture tb of tb_fixed32_to_float_0 is
+architecture tb of tb_fixed18_to_float_0 is
 
   -----------------------------------------------------------------------
   -- Timing constants
@@ -353,7 +353,7 @@ begin
   -- Instantiate the DUT
   -----------------------------------------------------------------------
 
-  dut : entity work.fixed32_to_float_0
+  dut : entity work.fixed18_to_float_0
     port map (
       -- Global signals
       aclk                    => aclk,

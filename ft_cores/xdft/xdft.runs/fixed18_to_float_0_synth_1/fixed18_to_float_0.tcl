@@ -31,8 +31,8 @@ set_property target_language VHDL [current_project]
 set_property board_part xilinx.com:zcu102:part0:3.2 [current_project]
 set_property ip_output_repo /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
-read_ip -quiet /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed32_to_float_0/fixed32_to_float_0.xci
-set_property used_in_implementation false [get_files -all /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed32_to_float_0/fixed32_to_float_0_ooc.xdc]
+read_ip -quiet /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed18_to_float_0/fixed18_to_float_0.xci
+set_property used_in_implementation false [get_files -all /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed18_to_float_0/fixed18_to_float_0_ooc.xdc]
 
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -46,12 +46,12 @@ read_xdc dont_touch.xdc
 set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 0
 
-set cached_ip [config_ip_cache -export -no_bom -use_project_ipc -dir /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/fixed32_to_float_0_synth_1 -new_name fixed32_to_float_0 -ip [get_ips fixed32_to_float_0]]
+set cached_ip [config_ip_cache -export -no_bom -use_project_ipc -dir /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/fixed18_to_float_0_synth_1 -new_name fixed18_to_float_0 -ip [get_ips fixed18_to_float_0]]
 
 if { $cached_ip eq {} } {
 close [open __synthesis_is_running__ w]
 
-synth_design -top fixed32_to_float_0 -part xczu9eg-ffvb1156-2-e -mode out_of_context
+synth_design -top fixed18_to_float_0 -part xczu9eg-ffvb1156-2-e -mode out_of_context
 
 #---------------------------------------------------------
 # Generate Checkpoint/Stub/Simulation Files For IP Cache
@@ -60,58 +60,58 @@ synth_design -top fixed32_to_float_0 -part xczu9eg-ffvb1156-2-e -mode out_of_con
 set_param constraints.enableBinaryConstraints false
 
 catch {
- write_checkpoint -force -noxdef -rename_prefix fixed32_to_float_0_ fixed32_to_float_0.dcp
+ write_checkpoint -force -noxdef -rename_prefix fixed18_to_float_0_ fixed18_to_float_0.dcp
 
  set ipCachedFiles {}
- write_verilog -force -mode synth_stub -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ fixed32_to_float_0_stub.v
- lappend ipCachedFiles fixed32_to_float_0_stub.v
+ write_verilog -force -mode synth_stub -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ fixed18_to_float_0_stub.v
+ lappend ipCachedFiles fixed18_to_float_0_stub.v
 
- write_vhdl -force -mode synth_stub -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ fixed32_to_float_0_stub.vhdl
- lappend ipCachedFiles fixed32_to_float_0_stub.vhdl
+ write_vhdl -force -mode synth_stub -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ fixed18_to_float_0_stub.vhdl
+ lappend ipCachedFiles fixed18_to_float_0_stub.vhdl
 
- write_verilog -force -mode funcsim -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ fixed32_to_float_0_sim_netlist.v
- lappend ipCachedFiles fixed32_to_float_0_sim_netlist.v
+ write_verilog -force -mode funcsim -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ fixed18_to_float_0_sim_netlist.v
+ lappend ipCachedFiles fixed18_to_float_0_sim_netlist.v
 
- write_vhdl -force -mode funcsim -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ fixed32_to_float_0_sim_netlist.vhdl
- lappend ipCachedFiles fixed32_to_float_0_sim_netlist.vhdl
+ write_vhdl -force -mode funcsim -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ fixed18_to_float_0_sim_netlist.vhdl
+ lappend ipCachedFiles fixed18_to_float_0_sim_netlist.vhdl
 
- config_ip_cache -add -dcp fixed32_to_float_0.dcp -move_files $ipCachedFiles -use_project_ipc -ip [get_ips fixed32_to_float_0]
+ config_ip_cache -add -dcp fixed18_to_float_0.dcp -move_files $ipCachedFiles -use_project_ipc -ip [get_ips fixed18_to_float_0]
 }
 
-rename_ref -prefix_all fixed32_to_float_0_
+rename_ref -prefix_all fixed18_to_float_0_
 
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
-write_checkpoint -force -noxdef fixed32_to_float_0.dcp
-create_report "fixed32_to_float_0_synth_1_synth_report_utilization_0" "report_utilization -file fixed32_to_float_0_utilization_synth.rpt -pb fixed32_to_float_0_utilization_synth.pb"
+write_checkpoint -force -noxdef fixed18_to_float_0.dcp
+create_report "fixed18_to_float_0_synth_1_synth_report_utilization_0" "report_utilization -file fixed18_to_float_0_utilization_synth.rpt -pb fixed18_to_float_0_utilization_synth.pb"
 
 if { [catch {
-  file copy -force /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/fixed32_to_float_0_synth_1/fixed32_to_float_0.dcp /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed32_to_float_0/fixed32_to_float_0.dcp
+  file copy -force /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/fixed18_to_float_0_synth_1/fixed18_to_float_0.dcp /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed18_to_float_0/fixed18_to_float_0.dcp
 } _RESULT ] } { 
   send_msg_id runtcl-3 error "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
   error "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
 }
 
 if { [catch {
-  write_verilog -force -mode synth_stub /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed32_to_float_0/fixed32_to_float_0_stub.v
+  write_verilog -force -mode synth_stub /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed18_to_float_0/fixed18_to_float_0_stub.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a Verilog synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_vhdl -force -mode synth_stub /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed32_to_float_0/fixed32_to_float_0_stub.vhdl
+  write_vhdl -force -mode synth_stub /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed18_to_float_0/fixed18_to_float_0_stub.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a VHDL synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_verilog -force -mode funcsim /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed32_to_float_0/fixed32_to_float_0_sim_netlist.v
+  write_verilog -force -mode funcsim /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed18_to_float_0/fixed18_to_float_0_sim_netlist.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the Verilog functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_vhdl -force -mode funcsim /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed32_to_float_0/fixed32_to_float_0_sim_netlist.vhdl
+  write_vhdl -force -mode funcsim /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed18_to_float_0/fixed18_to_float_0_sim_netlist.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the VHDL functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
@@ -121,47 +121,47 @@ if { [catch {
 
 
 if { [catch {
-  file copy -force /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/fixed32_to_float_0_synth_1/fixed32_to_float_0.dcp /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed32_to_float_0/fixed32_to_float_0.dcp
+  file copy -force /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/fixed18_to_float_0_synth_1/fixed18_to_float_0.dcp /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed18_to_float_0/fixed18_to_float_0.dcp
 } _RESULT ] } { 
   send_msg_id runtcl-3 error "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
   error "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
 }
 
 if { [catch {
-  file rename -force /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/fixed32_to_float_0_synth_1/fixed32_to_float_0_stub.v /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed32_to_float_0/fixed32_to_float_0_stub.v
+  file rename -force /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/fixed18_to_float_0_synth_1/fixed18_to_float_0_stub.v /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed18_to_float_0/fixed18_to_float_0_stub.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a Verilog synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  file rename -force /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/fixed32_to_float_0_synth_1/fixed32_to_float_0_stub.vhdl /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed32_to_float_0/fixed32_to_float_0_stub.vhdl
+  file rename -force /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/fixed18_to_float_0_synth_1/fixed18_to_float_0_stub.vhdl /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed18_to_float_0/fixed18_to_float_0_stub.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a VHDL synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  file rename -force /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/fixed32_to_float_0_synth_1/fixed32_to_float_0_sim_netlist.v /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed32_to_float_0/fixed32_to_float_0_sim_netlist.v
+  file rename -force /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/fixed18_to_float_0_synth_1/fixed18_to_float_0_sim_netlist.v /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed18_to_float_0/fixed18_to_float_0_sim_netlist.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the Verilog functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
 
 if { [catch {
-  file rename -force /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/fixed32_to_float_0_synth_1/fixed32_to_float_0_sim_netlist.vhdl /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed32_to_float_0/fixed32_to_float_0_sim_netlist.vhdl
+  file rename -force /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/fixed18_to_float_0_synth_1/fixed18_to_float_0_sim_netlist.vhdl /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed18_to_float_0/fixed18_to_float_0_sim_netlist.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the VHDL functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
 
 }; # end if cached_ip 
 
-if {[file isdir /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.ip_user_files/ip/fixed32_to_float_0]} {
+if {[file isdir /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.ip_user_files/ip/fixed18_to_float_0]} {
   catch { 
-    file copy -force /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed32_to_float_0/fixed32_to_float_0_stub.v /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.ip_user_files/ip/fixed32_to_float_0
+    file copy -force /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed18_to_float_0/fixed18_to_float_0_stub.v /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.ip_user_files/ip/fixed18_to_float_0
   }
 }
 
-if {[file isdir /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.ip_user_files/ip/fixed32_to_float_0]} {
+if {[file isdir /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.ip_user_files/ip/fixed18_to_float_0]} {
   catch { 
-    file copy -force /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed32_to_float_0/fixed32_to_float_0_stub.vhdl /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.ip_user_files/ip/fixed32_to_float_0
+    file copy -force /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed18_to_float_0/fixed18_to_float_0_stub.vhdl /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.ip_user_files/ip/fixed18_to_float_0
   }
 }
 file delete __synthesis_is_running__
