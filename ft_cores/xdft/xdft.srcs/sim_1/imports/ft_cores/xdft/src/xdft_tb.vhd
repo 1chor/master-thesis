@@ -45,7 +45,7 @@ architecture bench of xdft_tb is
     component xdft_wrapper is
         generic (
             SIZE : positive := 108; -- default 108
-            C_S_AXI_DATA_WIDTH : positive := 32
+            C_S_AXI_DATA_WIDTH : positive := 64
         );
         port ( 
             clk : in std_logic;
@@ -65,10 +65,11 @@ architecture bench of xdft_tb is
 
     -- constant declaration
     constant SIZE : positive := 108;
-    constant DATA_WIDTH : positive := 32;
-    constant INPUT_WIDTH : positive := 16;
+    constant DATA_WIDTH : positive := 64;
+    constant INPUT_WIDTH : positive := 32;
     constant CLK_PERIOD : time := 10 ns;
     constant stop_clock : boolean := false;
+    constant ZERO_PADDING : std_logic_vector(INPUT_WIDTH - 1 downto 0) := (others => '0');
     
     -- signal declaration
     signal clk : std_logic;
@@ -80,33 +81,33 @@ architecture bench of xdft_tb is
     signal stout_valid : std_logic;
     --signal stout_ready : std_logic;
     
-    signal out_shift : std_logic_vector(DATA_WIDTH -1 downto 0) := (others => '0');
+    --signal out_shift : std_logic_vector(DATA_WIDTH -1 downto 0) := (others => '0');
         
     shared variable my_line : line;
     
     -- type declaration
-    subtype word16_t is std_logic_vector(INPUT_WIDTH -1 downto 0);
-    type array_t is array(integer range 0 to SIZE -1) of word16_t;
+    subtype word32_t is std_logic_vector(INPUT_WIDTH -1 downto 0);
+    type array_t is array(integer range 0 to SIZE -1) of word32_t;
     
-    subtype word32_t is std_logic_vector(DATA_WIDTH -1 downto 0);
-    type output_buf_t is array(integer range 0 to SIZE -1) of word32_t;
+    subtype word64_t is std_logic_vector(DATA_WIDTH -1 downto 0);
+    type output_buf_t is array(integer range 0 to SIZE -1) of word64_t;
     
-    shared variable real_in : output_buf_t;
+    shared variable real_in : array_t;
     
-    shared variable real_out : output_buf_t;
-    shared variable imag_out : output_buf_t;
+    shared variable real_out : array_t;
+    shared variable imag_out : array_t;
     
     shared variable output_buffer : output_buf_t;
     shared variable output_buffer_idx : integer := 0;
     
     --signal declaration for shifted output
-    signal real_out_shifted : output_buf_t := (others => (others => '0'));
-    signal imag_out_shifted : output_buf_t := (others => (others => '0'));
+    --signal real_out_shifted : output_buf_t := (others => (others => '0'));
+    --signal imag_out_shifted : output_buf_t := (others => (others => '0'));
     
-    signal signed16 : signed(INPUT_WIDTH -1 downto 0);
-    signal signed32 : signed(DATA_WIDTH -1 downto 0);
-    signal signed32_shifted : signed(DATA_WIDTH -1 downto 0);
-    signal std_shifted : std_logic_vector(DATA_WIDTH -1 downto 0);
+    --signal signed16 : signed(INPUT_WIDTH -1 downto 0);
+    --signal signed32 : signed(DATA_WIDTH -1 downto 0);
+    --signal signed32_shifted : signed(DATA_WIDTH -1 downto 0);
+    --signal std_shifted : std_logic_vector(DATA_WIDTH -1 downto 0);
 
 begin
 
@@ -129,14 +130,14 @@ begin
     -- testbench process
     stimulus : process
         
-        variable output_real : output_buf_t;
-        variable output_imag : output_buf_t;        
+        variable output_real : array_t;
+        variable output_imag : array_t;        
         
-        -- function to read file content 16 bit
-        impure function read_file16(filename: string) return array_t is
+        -- function to read file content 32 bit
+        impure function read_file32(filename: string) return array_t is
             file FileHandle : text open read_mode is filename;
             variable CurrentLine : line;
-            variable TempWord : word16_t;
+            variable TempWord : word32_t;
             variable Result : array_t := (others => (others => '0'));
         begin
             for i in 0 to SIZE-1 loop
@@ -151,11 +152,11 @@ begin
             return Result;        
         end function;
         
-        -- function to read file content 32 bit
-        impure function read_file32(filename: string) return output_buf_t is
+        -- function to read file content 64 bit
+        impure function read_file64(filename: string) return output_buf_t is
             file FileHandle : text open read_mode is filename;
             variable CurrentLine : line;
-            variable TempWord : word32_t;
+            variable TempWord : word64_t;
             variable Result : output_buf_t := (others => (others => '0'));
         begin
             for i in 0 to SIZE-1 loop
@@ -197,8 +198,8 @@ begin
                 wait until stin_ready = '1';
             end if;
             
-            --send input data
-            stin_data <= val_real;
+            --send input data (only real part)
+            stin_data <= ZERO_PADDING & val_real;
             stin_valid <= '1';
             wait until rising_edge(clk);
             stin_valid <= '0';
@@ -206,7 +207,7 @@ begin
         end procedure;
         
         -- procedure to compare two buffers
-        procedure compare_buffers(buffer_A, buffer_B : output_buf_t; length : integer) is
+        procedure compare_buffers(buffer_A, buffer_B : array_t; length : integer) is
         begin
             for i in 0 to length-1 loop
                 if ( buffer_A(i) /= buffer_B(i) ) then
@@ -271,8 +272,8 @@ begin
         
         for i in 0 to SIZE-1 loop
             -- read output data
-            output_real(i) := x"0000" & output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
-            output_imag(i) := x"0000" & output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
+            output_real(i) := output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
+            output_imag(i) := output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
         end loop;               
 
         write(my_line, string'("Compare results"));
@@ -319,8 +320,8 @@ begin
         
         for i in 0 to SIZE-1 loop
             -- read output data
-            output_real(i) := x"0000" & output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
-            output_imag(i) := x"0000" & output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
+            output_real(i) := output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
+            output_imag(i) := output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
         end loop;               
 
         write(my_line, string'("Compare results"));
@@ -367,15 +368,15 @@ begin
         
         for i in 0 to SIZE-1 loop
             -- read output data
-            output_real(i) := x"0000" & output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
-            output_imag(i) := x"0000" & output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
+            output_real(i) := output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
+            output_imag(i) := output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
         end loop;               
         
         write(my_line, string'("Compare results"));
         writeline(output, my_line);
         
-        compare_buffers(real_out_shifted, real_out, SIZE);
-        compare_buffers(imag_out_shifted, imag_out, SIZE);
+        compare_buffers(output_real, real_out, SIZE);
+        compare_buffers(output_imag, imag_out, SIZE);
         
         write(my_line, string'("Done"));
         writeline(output, my_line);
@@ -396,16 +397,16 @@ begin
             if stout_valid = '1' then
                 output_buffer(output_buffer_idx) := stout_data;
                 
-                signed16 <= signed( stout_data( DATA_WIDTH / 2 -1 downto 0) );
-                signed32 <= resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), out_shift'length);
-                signed32_shifted <= shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), out_shift'length), 7);
-                std_shifted <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), out_shift'length), 7) );
+                --signed16 <= signed( stout_data( DATA_WIDTH / 2 -1 downto 0) );
+                --signed32 <= resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), out_shift'length);
+                --signed32_shifted <= shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), out_shift'length), 7);
+                --std_shifted <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), out_shift'length), 7) );
                 
                 
                 
-                out_shift <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), out_shift'length), 7) );
-                real_out_shifted(output_buffer_idx) <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), DATA_WIDTH), 7) );
-                imag_out_shifted(output_buffer_idx) <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH -1 downto DATA_WIDTH / 2) ), DATA_WIDTH), 7) );
+                --out_shift <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), out_shift'length), 7) );
+                --real_out_shifted(output_buffer_idx) <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH / 2 -1 downto 0) ), DATA_WIDTH), 7) );
+                --imag_out_shifted(output_buffer_idx) <= std_logic_vector( shift_left( resize( signed( stout_data( DATA_WIDTH -1 downto DATA_WIDTH / 2) ), DATA_WIDTH), 7) );
                 output_buffer_idx := output_buffer_idx + 1;
             end if;
         end if;
