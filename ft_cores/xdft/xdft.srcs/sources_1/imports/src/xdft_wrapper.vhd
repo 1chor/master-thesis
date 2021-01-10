@@ -80,6 +80,7 @@ architecture arch of xdft_wrapper is
     signal out_imag                 : std_logic_vector(DFT_DATA_WIDTH downto 0);
     signal first_out                : std_logic;
     signal s_out_valid              : std_logic;
+    signal blk_exp                  : std_logic_vector(7 downto 0) := (others => '0');
     signal exp                      : std_logic_vector(7 downto 0) := (others => '0');
         
     signal size_s                   : positive := SIZE;
@@ -264,7 +265,7 @@ begin
         RFFD        => first_ready_in,
         XK_RE       => out_real,
         XK_IM       => out_imag,
-        BLK_EXP     => exp(3 downto 0),
+        BLK_EXP     => blk_exp(3 downto 0),
         FD_OUT      => first_out,
         DATA_VALID  => s_out_valid
     );
@@ -465,7 +466,7 @@ begin
     shifted_exp_imag <= std_logic_vector(unsigned(imag_fixed2float_out_tdata(exponent_range'range)) + unsigned(exp)) when imag_fixed2float_out_tvalid = '1';
     
     --process to get output of the DFT
-    output_proc: process (output_state, receive_index, state, s_out_valid, out_real, out_imag, real_fixed2float_out_tvalid, imag_fixed2float_out_tvalid)
+    output_proc: process (output_state, receive_index, state, s_out_valid, out_real, out_imag, blk_exp, real_fixed2float_out_tvalid, imag_fixed2float_out_tvalid)
     begin
         --default values to prevent latches
         output_state_next <= output_state;
@@ -481,6 +482,9 @@ begin
         case output_state is
                 
             when OUTPUT_IDLE =>
+                --reset exponent
+                exp <= (others => '0');
+                
                 if (state = OUTPUT_DATA) and (s_out_valid = '1') then --check if the output data of the DFT is valid
                     --convert first output data
                     --real part
@@ -492,6 +496,9 @@ begin
                     
                     --increase index
                     receive_index_next <= receive_index + 1; 
+                    
+                    --set exponent as copy
+                    exp <= blk_exp;
                     
                     output_state_next <= OUTPUT_FIRST;
                 end if;
@@ -515,7 +522,7 @@ begin
                         
             when OUTPUT_FRAMES =>
         
-                if (receive_index = SIZE) and (real_fixed2float_out_tvalid = '1') and (imag_fixed2float_out_tvalid = '1') then --independent of valid signals
+                if (receive_index = SIZE) then --independent of valid signals
                     --set data outputs
                     --real part
                     --sign bit
@@ -571,6 +578,7 @@ begin
                 end if;
             
             when OUTPUT_LAST =>
+                
                 --set data outputs
                 --real part
                 --sign bit
@@ -589,9 +597,9 @@ begin
                 stout_data(stout_mantissa_imag_range'range) <= temp_imag_float(mantissa_range'range);
                 
                 stout_valid <= '1';
-                
+                                
                 output_state_next <= OUTPUT_IDLE;
-            
+               
             when others =>
                 output_state_next <= OUTPUT_IDLE;
         end case;
