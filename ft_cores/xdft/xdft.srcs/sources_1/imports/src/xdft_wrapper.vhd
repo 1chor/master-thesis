@@ -126,6 +126,12 @@ architecture arch of xdft_wrapper is
     );
     signal input_state, input_state_next : input_state_type := INPUT_IDLE;
     
+    type output_state_type is (
+        OUTPUT_IDLE,
+        OUTPUT_FRAMES
+    );
+    signal output_state, output_state_next : output_state_type := OUTPUT_IDLE;
+    
     -- component for float_to_fixed18 converter
     component float_to_fixed18_0 is
         port (
@@ -287,12 +293,14 @@ begin
         if reset = '1' then --Reset signals
             state <= TRANSFER_TO_FFT;
             input_state <= INPUT_IDLE;
+            output_state <= OUTPUT_IDLE;
             index <= 0;
             receive_index <= 0;
             
         elsif rising_edge(clk) then
             state <= state_next;
             input_state <= input_state_next;
+            output_state <= output_state_next;
             index <= index_next;
             receive_index <= receive_index_next;
         end if;
@@ -420,26 +428,58 @@ begin
     end process dft_proc;
     
     --process to get output of the DFT
-    output_proc: process (receive_index, state, s_out_valid, out_real, out_imag)
+    output_proc: process (output_state, receive_index, state, s_out_valid, out_real, out_imag, real_fixed2float_out_tvalid, imag_fixed2float_out_tvalid)
     begin
         --default values to prevent latches
+        output_state_next <= output_state;
         receive_index_next <= receive_index;
         stout_valid <= '0';
+        real_fixed2float_in_tvalid <= '0';
+        imag_fixed2float_in_tvalid <= '0';
         
-        if receive_index = SIZE then --independent of valid signals
-            receive_index_next <= 0; --reset counter
+        stout_data <= (others => '0');
+        
+        case output_state is
+                
+            when OUTPUT_IDLE =>
+                if (state = OUTPUT_DATA) and (s_out_valid = '1') then --check if the output data of the DFT is valid
+                    --convert first output data
+                    --real part
+                    real_fixed2float_in_tdata <= out_real; --convert float to fixed18
+                    real_fixed2float_in_tvalid <= '1';
+                    --imaginary part
+                    real_fixed2float_in_tdata <= out_imag; --convert float to fixed18
+                    real_fixed2float_in_tvalid <= '1';
+                    
+                    output_state_next <= OUTPUT_FRAMES;
+                end if;
             
-        elsif (state = OUTPUT_DATA) and (s_out_valid = '1') then --check if the output data of the DFT is valid
-            stout_valid <= '1';
-            
-            --get data outputs
-            --stout_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0) <= out_real;
-            --stout_data(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2) <= out_imag;
-                                    
-            --increase index
-            receive_index_next <= receive_index + 1;
-            
-        end if;
+            when OUTPUT_FRAMES =>
+        
+                if receive_index = SIZE then --independent of valid signals
+                    receive_index_next <= 0; --reset counter
+                    
+                elsif (state = OUTPUT_DATA) and (s_out_valid = '1') and (real_fixed2float_out_tvalid = '1') and (imag_fixed2float_out_tvalid = '1') then --check if the output data of the DFT is valid
+                    --convert next output data
+                    --real part
+                    real_fixed2float_in_tdata <= out_real; --convert float to fixed18
+                    real_fixed2float_in_tvalid <= '1';
+                    --imaginary part
+                    real_fixed2float_in_tdata <= out_imag; --convert float to fixed18
+                    real_fixed2float_in_tvalid <= '1';
+                    
+                    --set data outputs
+                    stout_data <= out_real;
+                    stout_data <= out_imag;
+                    stout_valid <= '1';
+                                            
+                    --increase index
+                    receive_index_next <= receive_index + 1;            
+                end if;
+        
+            when others =>
+                output_state_next <= OUTPUT_IDLE;
+        end case;
     
     end process output_proc;
     
