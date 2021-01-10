@@ -256,7 +256,7 @@ begin
         writeline(output, my_line);
         
         real_out := read_file32("result_ones.txt");
-        imag_out := read_file32("zeros.txt");
+        imag_out := read_file32("result_ones_imag.txt");
         
         write(my_line, string'("Start DFT Test"));
         writeline(output, my_line);
@@ -304,7 +304,7 @@ begin
         writeline(output, my_line);
         
         real_out := read_file32("result_one_zeros.txt");
-        imag_out := read_file32("zeros.txt");
+        imag_out := read_file32("result_one_zeros_imag.txt.txt");
         
         write(my_line, string'("Start DFT Test"));
         writeline(output, my_line);
