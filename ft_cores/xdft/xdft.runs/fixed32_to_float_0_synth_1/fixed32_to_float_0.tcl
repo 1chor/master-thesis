@@ -32,6 +32,7 @@ set_property board_part xilinx.com:zcu102:part0:3.2 [current_project]
 set_property ip_output_repo /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 read_ip -quiet /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed32_to_float_0/fixed32_to_float_0.xci
+set_property used_in_implementation false [get_files -all /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fixed32_to_float_0/fixed32_to_float_0_ooc.xdc]
 
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -41,6 +42,8 @@ read_ip -quiet /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
+read_xdc dont_touch.xdc
+set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 0
 
 set cached_ip [config_ip_cache -export -no_bom -use_project_ipc -dir /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/fixed32_to_float_0_synth_1 -new_name fixed32_to_float_0 -ip [get_ips fixed32_to_float_0]]

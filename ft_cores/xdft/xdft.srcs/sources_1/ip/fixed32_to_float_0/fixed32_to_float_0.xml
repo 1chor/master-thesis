@@ -958,11 +958,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sat Jan 09 17:19:26 UTC 2021</spirit:value>
+            <spirit:value>Sun Jan 10 10:27:14 UTC 2021</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>8:b3c996a2</spirit:value>
+            <spirit:value>8:8aa7c76b</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1002,11 +1002,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sat Jan 09 17:19:26 UTC 2021</spirit:value>
+            <spirit:value>Sun Jan 10 10:27:14 UTC 2021</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>8:b3c996a2</spirit:value>
+            <spirit:value>8:8aa7c76b</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1014,10 +1014,17 @@
         <spirit:name>xilinx_synthesisconstraints</spirit:name>
         <spirit:displayName>Synthesis Constraints</spirit:displayName>
         <spirit:envIdentifier>:vivado.xilinx.com:synthesis.constraints</spirit:envIdentifier>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_synthesisconstraints_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
         <spirit:parameters>
           <spirit:parameter>
+            <spirit:name>GENtimestamp</spirit:name>
+            <spirit:value>Sun Jan 10 10:27:14 UTC 2021</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>8:b3c996a2</spirit:value>
+            <spirit:value>8:8aa7c76b</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1033,11 +1040,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sat Jan 09 17:19:26 UTC 2021</spirit:value>
+            <spirit:value>Sun Jan 10 10:27:14 UTC 2021</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>8:b3c996a2</spirit:value>
+            <spirit:value>8:8aa7c76b</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1077,11 +1084,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sat Jan 09 17:19:26 UTC 2021</spirit:value>
+            <spirit:value>Sun Jan 10 10:27:14 UTC 2021</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>8:06a9905d</spirit:value>
+            <spirit:value>8:bc5ed388</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1097,11 +1104,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sat Jan 09 17:19:26 UTC 2021</spirit:value>
+            <spirit:value>Sun Jan 10 10:27:14 UTC 2021</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>8:06a9905d</spirit:value>
+            <spirit:value>8:bc5ed388</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1116,11 +1123,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sat Jan 09 17:19:26 UTC 2021</spirit:value>
+            <spirit:value>Sun Jan 10 10:27:14 UTC 2021</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>8:b3c996a2</spirit:value>
+            <spirit:value>8:8aa7c76b</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1136,11 +1143,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sat Jan 09 17:19:27 UTC 2021</spirit:value>
+            <spirit:value>Sun Jan 10 10:27:15 UTC 2021</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>8:b3c996a2</spirit:value>
+            <spirit:value>8:8aa7c76b</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1154,11 +1161,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sat Jan 09 17:19:27 UTC 2021</spirit:value>
+            <spirit:value>Sun Jan 10 10:27:15 UTC 2021</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>8:b3c996a2</spirit:value>
+            <spirit:value>8:8aa7c76b</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1171,12 +1178,8 @@
         </spirit:fileSetRef>
         <spirit:parameters>
           <spirit:parameter>
-            <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sat Jan 09 17:26:33 UTC 2021</spirit:value>
-          </spirit:parameter>
-          <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>8:b3c996a2</spirit:value>
+            <spirit:value>8:8aa7c76b</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1200,7 +1203,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.aclk" xilinx:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_LATENCY&apos;)) > 0)">false</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.aclk" xilinx:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_LATENCY&apos;)) > 0)">true</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -1922,7 +1925,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_A_FRACTION_WIDTH</spirit:name>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_A_FRACTION_WIDTH">25</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_A_FRACTION_WIDTH">24</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_B_WIDTH</spirit:name>
@@ -1930,7 +1933,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_B_FRACTION_WIDTH</spirit:name>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_B_FRACTION_WIDTH">25</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_B_FRACTION_WIDTH">24</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_C_WIDTH</spirit:name>
@@ -1938,7 +1941,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_C_FRACTION_WIDTH</spirit:name>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_C_FRACTION_WIDTH">25</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_C_FRACTION_WIDTH">24</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_RESULT_WIDTH</spirit:name>
@@ -1954,7 +1957,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_LATENCY</spirit:name>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_LATENCY">0</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_LATENCY">1</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_OPTIMIZATION</spirit:name>
@@ -2130,13 +2133,6 @@
       <spirit:enumeration>Subtract</spirit:enumeration>
     </spirit:choice>
     <spirit:choice>
-      <spirit:name>choice_list_4a7739a0</spirit:name>
-      <spirit:enumeration>Half</spirit:enumeration>
-      <spirit:enumeration>Single</spirit:enumeration>
-      <spirit:enumeration>Double</spirit:enumeration>
-      <spirit:enumeration>Custom</spirit:enumeration>
-    </spirit:choice>
-    <spirit:choice>
       <spirit:name>choice_list_4f849371</spirit:name>
       <spirit:enumeration>Blocking</spirit:enumeration>
       <spirit:enumeration>NonBlocking</spirit:enumeration>
@@ -2151,6 +2147,12 @@
       <spirit:enumeration>Int32</spirit:enumeration>
       <spirit:enumeration>Uint64</spirit:enumeration>
       <spirit:enumeration>Int64</spirit:enumeration>
+      <spirit:enumeration>Custom</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_list_c187f11d</spirit:name>
+      <spirit:enumeration>Single</spirit:enumeration>
+      <spirit:enumeration>Double</spirit:enumeration>
       <spirit:enumeration>Custom</spirit:enumeration>
     </spirit:choice>
     <spirit:choice>
@@ -2341,6 +2343,16 @@
         <spirit:name>hdl/floating_point_v7_1_vh_rfs.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:logicalName>floating_point_v7_1_6</spirit:logicalName>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_synthesisconstraints_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>fixed32_to_float_0_ooc.xdc</spirit:name>
+        <spirit:userFileType>xdc</spirit:userFileType>
+        <spirit:userFileType>USED_IN_implementation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_out_of_context</spirit:userFileType>
+        <spirit:userFileType>USED_IN_synthesis</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -2582,15 +2594,15 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_A_Exponent_Width</spirit:name>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_A_Exponent_Width" spirit:order="6" spirit:minimum="1" spirit:maximum="64" spirit:rangeType="long">7</spirit:value>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_A_Exponent_Width" spirit:order="6" spirit:minimum="1" spirit:maximum="64" spirit:rangeType="long">8</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_A_Fraction_Width</spirit:name>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_A_Fraction_Width" spirit:order="7.1" spirit:minimum="0" spirit:maximum="57" spirit:rangeType="long">25</spirit:value>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_A_Fraction_Width" spirit:order="7.1" spirit:minimum="0" spirit:maximum="56" spirit:rangeType="long">24</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>Result_Precision_Type</spirit:name>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Result_Precision_Type" spirit:choiceRef="choice_list_4a7739a0" spirit:order="8">Single</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Result_Precision_Type" spirit:choiceRef="choice_list_c187f11d" spirit:order="8">Single</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_Result_Exponent_Width</spirit:name>
@@ -2602,11 +2614,11 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_Accum_Msb</spirit:name>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_Accum_Msb" spirit:order="11" spirit:minimum="-62" spirit:maximum="117" spirit:rangeType="long">32</spirit:value>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_Accum_Msb" spirit:order="11" spirit:minimum="-126" spirit:maximum="181" spirit:rangeType="long">32</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_Accum_Lsb</spirit:name>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_Accum_Lsb" spirit:order="12" spirit:minimum="-86" spirit:maximum="31" spirit:rangeType="long">-31</spirit:value>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_Accum_Lsb" spirit:order="12" spirit:minimum="-149" spirit:maximum="31" spirit:rangeType="long">-31</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_Accum_Input_Msb</spirit:name>
@@ -2642,11 +2654,11 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_Latency</spirit:name>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_Latency" spirit:order="21" spirit:minimum="0" spirit:maximum="6" spirit:rangeType="long">0</spirit:value>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_Latency" spirit:order="21" spirit:minimum="0" spirit:maximum="6" spirit:rangeType="long">1</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_Rate</spirit:name>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_Rate" spirit:order="22" spirit:minimum="1" spirit:maximum="28" spirit:rangeType="long">1</spirit:value>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_Rate" spirit:order="22" spirit:minimum="1" spirit:maximum="27" spirit:rangeType="long">1</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>Has_ACLKEN</spirit:name>

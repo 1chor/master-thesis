@@ -85,7 +85,7 @@ architecture tb of tb_fixed32_to_float_0 is
   constant CLOCK_PERIOD : time := 100 ns;
   constant T_HOLD       : time := 10 ns;
   constant T_STROBE     : time := CLOCK_PERIOD - (1 ns);
-  constant DUT_DELAY    : time := CLOCK_PERIOD * 0;
+  constant DUT_DELAY    : time := CLOCK_PERIOD * 1;
 
   -----------------------------------------------------------------------
   -- Testbench types and signals
@@ -316,7 +316,7 @@ architecture tb of tb_fixed32_to_float_0 is
   -----------------------------------------------------------------------
 
   -- Global signals
-  signal aclk                    : std_logic := '0';  -- the master clock (used by this testbench, not the DUT)
+  signal aclk                    : std_logic := '0';  -- the master clock
 
   -- A operand slave channel signals
   signal s_axis_a_tvalid         : std_logic := '0';  -- payload is valid
@@ -335,8 +335,8 @@ architecture tb of tb_fixed32_to_float_0 is
 
   -- A operand slave channel alias signals
   signal s_axis_a_tdata_real    : real := 0.0;  -- fixed-point value using VHDL 'real' data type
-  signal s_axis_a_tdata_int     : std_logic_vector(6 downto 0) := (others => '0');  -- integer part (including sign bit)
-  signal s_axis_a_tdata_fract   : std_logic_vector(24 downto 0) := (others => '0');  -- fractional part
+  signal s_axis_a_tdata_int     : std_logic_vector(7 downto 0) := (others => '0');  -- integer part (including sign bit)
+  signal s_axis_a_tdata_fract   : std_logic_vector(23 downto 0) := (others => '0');  -- fractional part
 
 
 
@@ -356,6 +356,7 @@ begin
   dut : entity work.fixed32_to_float_0
     port map (
       -- Global signals
+      aclk                    => aclk,
     -- AXI4-Stream slave channel for operand A
       s_axis_a_tvalid         => s_axis_a_tvalid,
       s_axis_a_tdata          => s_axis_a_tdata,
@@ -455,7 +456,7 @@ begin
     begin
       count_loop : loop
         -- Convert data from real to std_logic_vector
-        value_slv := real_to_fix(value, 32, 25);
+        value_slv := real_to_fix(value, 32, 24);
         -- Set up AXI signals
         tdata := value_slv;
         -- Drive AXI transaction
@@ -564,9 +565,9 @@ begin
   -----------------------------------------------------------------------
 
   -- A operand slave channel alias signals
-  s_axis_a_tdata_real    <= fix_to_real(s_axis_a_tdata(31 downto 0), 32, 25);
-  s_axis_a_tdata_int     <= s_axis_a_tdata(31 downto 25);
-  s_axis_a_tdata_fract   <= s_axis_a_tdata(24 downto 0);
+  s_axis_a_tdata_real    <= fix_to_real(s_axis_a_tdata(31 downto 0), 32, 24);
+  s_axis_a_tdata_int     <= s_axis_a_tdata(31 downto 24);
+  s_axis_a_tdata_fract   <= s_axis_a_tdata(23 downto 0);
 
   -- Result master channel alias signals
   m_axis_result_tdata_real     <= flt_to_real(m_axis_result_tdata(31 downto 0), 32, 24) when m_axis_result_tvalid = '1';
