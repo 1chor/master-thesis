@@ -34,7 +34,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity xdft_wrapper is
     generic (
         SIZE : positive := 108; -- default 108
-        C_S_AXI_DATA_WIDTH : positive := 32
+        C_S_AXI_DATA_WIDTH : positive := 64
     );
     port ( 
         clk : in std_logic;
@@ -307,7 +307,7 @@ begin
                 
                 if (stin_valid = '1') then
                     --convert first input data
-                    float2fixed_in_tdata <= stin_data; --convert float to fixed18
+                    float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
                     float2fixed_in_tvalid <= '1';
                     
                     input_state_next <= FIRST_FRAME;
@@ -318,7 +318,7 @@ begin
                 
                 if (state = TRANSFER_TO_FFT) and (first_ready_in = '1') and (stin_valid = '1') and (float2fixed_out_tvalid = '1') then --check if DFT is ready to process data and data_in is valid
                     --convert next input
-                    float2fixed_in_tdata <= stin_data; --convert float to fixed18
+                    float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
                     float2fixed_in_tvalid <= '1';
                                         
                     --set real data input
@@ -338,7 +338,7 @@ begin
                    
                 if (state = TRANSFER_TO_FFT) and (stin_valid = '1') and (float2fixed_out_tvalid = '1') then --check if DFT is ready to process data and data_in is valid
                     --convert next input
-                    float2fixed_in_tdata <= stin_data; --convert float to fixed18
+                    float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
                     float2fixed_in_tvalid <= '1';
                                         
                     --set real data input
