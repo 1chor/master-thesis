@@ -24,7 +24,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
@@ -34,7 +34,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity xdft_wrapper is
     generic (
         SIZE : positive := 108; -- default 108
-        C_S_AXI_DATA_WIDTH : positive := 32
+        C_S_AXI_DATA_WIDTH : positive := 64
     );
     port ( 
         clk : in std_logic;
@@ -58,8 +58,7 @@ begin
                 or (SIZE = 300) or (SIZE = 324) or (SIZE = 360) or (SIZE = 384) or (SIZE = 432) or (SIZE = 480) or (SIZE = 540)
                 or (SIZE = 576) or (SIZE = 600) or (SIZE = 648) or (SIZE = 720) or (SIZE = 768) or (SIZE = 864) or (SIZE = 900)
                 or (SIZE = 960) or (SIZE = 972) or (SIZE = 1080) or (SIZE = 1152) or (SIZE = 1200) or (SIZE = 1296))
-    report "The selected transform size (SIZE) is not supported!"
-    severity failure;
+    report ("The selected transform size (" & integer'image(SIZE) & ") is not supported!") severity failure;
     
 end xdft_wrapper;
 
@@ -67,28 +66,78 @@ architecture arch of xdft_wrapper is
 
     -- constant declaration
     constant FWD : std_logic := '1'; -- use forward transformation
+    constant DATA_WIDTH : positive := 31;
+    constant DFT_DATA_WIDTH : positive := 17;
+    constant zeros : std_logic_vector(DFT_DATA_WIDTH downto 0) := (others => '0');
     
     -- signal declaration
-    signal in_real              : std_logic_vector(15 downto 0);
-    signal in_imag              : std_logic_vector(15 downto 0);
-    signal first_in             : std_logic;
-    signal first_ready_in             : std_logic;
+    -- DFT signals
+    signal in_real                  : std_logic_vector(DFT_DATA_WIDTH downto 0);
+    signal first_in                 : std_logic;
+    signal first_ready_in           : std_logic;
     
-    signal out_real             : std_logic_vector(15 downto 0);
-    signal out_imag             : std_logic_vector(15 downto 0);
-    signal first_out            : std_logic;
-    signal s_out_valid          : std_logic;
-    signal exp                  : std_logic_vector(3 downto 0);
-    
-    signal size_s               : positive := SIZE;
-    signal dft_size             : std_logic_vector(5 downto 0);
-    
-    signal index                : natural range 0 to SIZE := 0;
-    signal index_next           : natural range 0 to SIZE := 0;
-    
-    signal receive_index        : natural range 0 to SIZE := 0;
-    signal receive_index_next   : natural range 0 to SIZE := 0;
+    signal out_real                 : std_logic_vector(DFT_DATA_WIDTH downto 0);
+    signal out_imag                 : std_logic_vector(DFT_DATA_WIDTH downto 0);
+    signal first_out                : std_logic;
+    signal s_out_valid              : std_logic;
+    signal blk_exp                  : std_logic_vector(7 downto 0) := (others => '0');
+    signal exp                      : std_logic_vector(7 downto 0) := (others => '0');
         
+    signal size_s                   : positive := SIZE;
+    signal dft_size                 : std_logic_vector(5 downto 0);
+    
+    signal index                    : natural range 0 to SIZE := 0;
+    signal index_next               : natural range 0 to SIZE := 0;
+    
+    signal receive_index            : natural range 0 to SIZE := 0;
+    signal receive_index_next       : natural range 0 to SIZE := 0;
+    
+    -- signals for float_to_fixed18
+    signal float2fixed_in_tvalid    : std_logic := '0'; -- payload is valid
+    signal float2fixed_in_tdata     : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
+    signal float2fixed_out_tvalid   : std_logic := '0';
+    signal float2fixed_out_tdata    : std_logic_vector(23 downto 0) := (others => '0'); -- data payload
+    signal float2fixed_out_tuser    : std_logic_vector(0 downto 0) := (others => '0'); -- exceptions and user-defined payload
+        
+    -- signals for fixed18_to_float
+    -- for real output
+    signal real_fixed2float_in_tvalid     : std_logic := '0'; -- payload is valid
+    signal real_fixed2float_in_tdata      : std_logic_vector(23 downto 0) := (others => '0'); -- data payload
+    signal real_fixed2float_out_tvalid    : std_logic := '0';
+    signal real_fixed2float_out_tdata     : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
+    -- for imaginary output
+    signal imag_fixed2float_in_tvalid     : std_logic := '0'; -- payload is valid
+    signal imag_fixed2float_in_tdata      : std_logic_vector(23 downto 0) := (others => '0'); -- data payload
+    signal imag_fixed2float_out_tvalid    : std_logic := '0';
+    signal imag_fixed2float_out_tdata     : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
+    
+    signal temp_real_float : std_logic_vector(31 downto 0) := (others => '0');
+    signal temp_imag_float : std_logic_vector(31 downto 0) := (others => '0');    
+        
+    signal shifted_exp_real : std_logic_vector(7 downto 0) := (others => '0');
+    signal shifted_exp_imag : std_logic_vector(7 downto 0) := (others => '0');       
+    
+    -- range declaration for IEEE 754 single presicion format
+    constant SIGN_BIT : natural := 31;
+    constant EXPONENT_UPPER_BOUND : natural := 30;
+    constant EXPONENT_LOWER_BOUND : natural := 23;
+    constant MANTISSA_UPPER_BOUND : natural := 22;
+    constant MANTISSA_LOWER_BOUND : natural := 0;
+    
+    subtype exponent_range is std_logic_vector(EXPONENT_UPPER_BOUND downto EXPONENT_LOWER_BOUND);
+    subtype mantissa_range is std_logic_vector(MANTISSA_UPPER_BOUND downto MANTISSA_LOWER_BOUND);
+    
+    --range declaration for stout_data
+    constant STOUT_SIGN_BIT_REAL : natural := C_S_AXI_DATA_WIDTH / 2 - 1;
+    constant STOUT_SIGN_BIT_IMAG : natural := C_S_AXI_DATA_WIDTH - 1;
+    
+    --real range
+    subtype stout_exponent_real_range is std_logic_vector(C_S_AXI_DATA_WIDTH / 2 - 2 downto C_S_AXI_DATA_WIDTH / 2 - 9);
+    subtype stout_mantissa_real_range is std_logic_vector(C_S_AXI_DATA_WIDTH / 2 - 10 downto 0);
+    --imag range
+    subtype stout_exponent_imag_range is std_logic_vector(C_S_AXI_DATA_WIDTH - 2 downto C_S_AXI_DATA_WIDTH - 9);
+    subtype stout_mantissa_imag_range is std_logic_vector(C_S_AXI_DATA_WIDTH - 10 downto C_S_AXI_DATA_WIDTH / 2);
+                
     -- type declaration
     type state_type is (
         TRANSFER_TO_FFT,
@@ -98,24 +147,63 @@ architecture arch of xdft_wrapper is
     
     type input_state_type is (
         INPUT_IDLE,
+        PRE_CONVERT,
         FIRST_FRAME,
-        OTHER_FRAMES
+        OTHER_FRAMES,
+        LAST_FRAME
     );
     signal input_state, input_state_next : input_state_type := INPUT_IDLE;
+    
+    type output_state_type is (
+        OUTPUT_IDLE,
+        OUTPUT_FIRST,
+        OUTPUT_FRAMES,
+        OUTPUT_LAST
+    );
+    signal output_state, output_state_next : output_state_type := OUTPUT_IDLE;
+    
+    -- component for float_to_fixed18 converter
+    component float_to_fixed18_0 is
+        port (
+            -- Global signals
+            aclk : IN STD_LOGIC;
+            -- AXI4-Stream slave channel for operand A
+            s_axis_a_tvalid : in std_logic;
+            s_axis_a_tdata : in std_logic_vector(DATA_WIDTH downto 0);
+            -- AXI4-Stream master channel for output result
+            m_axis_result_tvalid : out std_logic;
+            m_axis_result_tdata : out std_logic_vector(23 downto 0);
+            m_axis_result_tuser :out std_logic_vector(0 downto 0)
+        );
+    end component float_to_fixed18_0;
+    
+    --component for fixed18_to_float converter
+    component fixed18_to_float_0 is
+        port (
+            -- Global signals
+            aclk : IN STD_LOGIC;
+            -- AXI4-Stream slave channel for operand A
+            s_axis_a_tvalid : in std_logic;
+            s_axis_a_tdata : in std_logic_vector(23 DOWNTO 0);
+            -- AXI4-Stream master channel for output result
+            m_axis_result_tvalid : out std_logic;
+            m_axis_result_tdata : out std_logic_vector(DATA_WIDTH DOWNTO 0)
+      );
+    end component fixed18_to_float_0;
   
     -- component for DFT IP core
     component dft_0 is
         port (
             CLK : in std_logic;                             -- clock
             SCLR : in std_logic;                            -- syncronous clear (reset)
-            XN_RE : in std_logic_vector(15 downto 0);       -- real data input
-            XN_IM : in std_logic_vector(15 downto 0);       -- imaginary data input
+            XN_RE : in std_logic_vector(DFT_DATA_WIDTH downto 0);       -- real data input
+            XN_IM : in std_logic_vector(DFT_DATA_WIDTH downto 0);       -- imaginary data input
             FD_IN : in std_logic;                           -- first data in
             FWD_INV : in std_logic;                         -- transform direction
             SIZE : in std_logic_vector(5 downto 0);         -- size of transform to be performed
             RFFD : out std_logic;                           -- ready for first data
-            XK_RE : out std_logic_vector(15 downto 0);      -- real data output
-            XK_IM : out std_logic_vector(15 downto 0);      -- imaginary data output
+            XK_RE : out std_logic_vector(DFT_DATA_WIDTH downto 0);      -- real data output
+            XK_IM : out std_logic_vector(DFT_DATA_WIDTH downto 0);      -- imaginary data output
             BLK_EXP : out std_logic_vector(3 downto 0);     -- block exponent
             FD_OUT : out std_logic;                         -- first data out
             DATA_VALID : out std_logic                      -- data valid
@@ -124,20 +212,60 @@ architecture arch of xdft_wrapper is
 
 begin
 
+    -- implement float_to_fixed18 unit
+    float_to_fixed18_inst : component float_to_fixed18_0
+    port map (
+        -- Global signals
+        aclk => clk,
+        -- AXI4-Stream slave channel for operand A
+        s_axis_a_tvalid => float2fixed_in_tvalid,
+        s_axis_a_tdata => float2fixed_in_tdata,
+        -- AXI4-Stream master channel for output result
+        m_axis_result_tvalid => float2fixed_out_tvalid,
+        m_axis_result_tdata => float2fixed_out_tdata,
+        m_axis_result_tuser => float2fixed_out_tuser
+    );
+    
+    -- implement fixed18_to_float unit for real output
+    fixed18_to_float_inst_real : component fixed18_to_float_0
+    port map (
+        -- Global signals
+        aclk => clk,
+        -- AXI4-Stream slave channel for operand A
+        s_axis_a_tvalid => real_fixed2float_in_tvalid,
+        s_axis_a_tdata => real_fixed2float_in_tdata,
+        -- AXI4-Stream master channel for output result
+        m_axis_result_tvalid => real_fixed2float_out_tvalid,
+        m_axis_result_tdata => real_fixed2float_out_tdata
+    );
+    
+    -- implement fixed18_to_float unit for imaginary output
+    fixed18_to_float_inst_imag : component fixed18_to_float_0
+    port map (
+        -- Global signals
+        aclk => clk,
+        -- AXI4-Stream slave channel for operand A
+        s_axis_a_tvalid => imag_fixed2float_in_tvalid,
+        s_axis_a_tdata => imag_fixed2float_in_tdata,
+        -- AXI4-Stream master channel for output result
+        m_axis_result_tvalid => imag_fixed2float_out_tvalid,
+        m_axis_result_tdata => imag_fixed2float_out_tdata
+    );
+
     -- implement DFT unit
     dft_inst : component dft_0
     port map (
         CLK         => clk,
         SCLR        => reset,
-        XN_RE       => in_real,
-        XN_IM       => in_imag,
+        XN_RE       => in_real, -- real input without imaginary part
+        XN_IM       => zeros,   -- constant 0
         FD_IN       => first_in,
         FWD_INV     => FWD,
         SIZE        => dft_size,
         RFFD        => first_ready_in,
         XK_RE       => out_real,
         XK_IM       => out_imag,
-        BLK_EXP     => exp,
+        BLK_EXP     => blk_exp(3 downto 0),
         FD_OUT      => first_out,
         DATA_VALID  => s_out_valid
     );
@@ -195,12 +323,14 @@ begin
         if reset = '1' then --Reset signals
             state <= TRANSFER_TO_FFT;
             input_state <= INPUT_IDLE;
+            output_state <= OUTPUT_IDLE;
             index <= 0;
             receive_index <= 0;
             
         elsif rising_edge(clk) then
             state <= state_next;
             input_state <= input_state_next;
+            output_state <= output_state_next;
             index <= index_next;
             receive_index <= receive_index_next;
         end if;
@@ -208,62 +338,85 @@ begin
     end process sync_state_proc;
     
     -----------------------------------------------------------------------
+      
+    --signal is set outside the process due to delay
+    --set real data input
+    in_real <= float2fixed_out_tdata(DFT_DATA_WIDTH downto 0) when float2fixed_out_tvalid = '1';
         
     --process to feed the DFT
-    input_proc: process (input_state, index, state, first_ready_in, stin_valid, stin_data)
+    input_proc: process (input_state, index, state, first_ready_in, stin_valid, stin_data, float2fixed_out_tvalid)
     begin
         --default values to prevent latches
         input_state_next <= input_state;
         index_next <= index;
         first_in <= '0';
         stin_ready <= '0';
+        float2fixed_in_tvalid <= '0';
         
-        in_real <= (others => '0');
-        in_imag <= (others => '0');
+        float2fixed_in_tdata <= (others => '0');
+        --in_real <= (others => '0');
         
         case input_state is
         
             when INPUT_IDLE =>
                 if (state = TRANSFER_TO_FFT) and (first_ready_in = '1') then --forward back pressure
                     stin_ready <= '1';
+                    input_state_next <= PRE_CONVERT;
+                end if;
+                
+            when PRE_CONVERT =>
+                stin_ready <= '1';
+                
+                if (state = TRANSFER_TO_FFT) and (first_ready_in = '1') and (stin_valid = '1') then
+                    --convert first input data
+                    float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
+                    float2fixed_in_tvalid <= '1';
+                    
                     input_state_next <= FIRST_FRAME;
                 end if;
         
             when FIRST_FRAME =>
                 stin_ready <= '1';
                 
-                if (state = TRANSFER_TO_FFT) and (first_ready_in = '1') and (stin_valid = '1') then --check if DFT is ready to process data and data_in is valid
-                    --set data inputs
-                    in_real <= stin_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0); -- (15 - 0)
-                    in_imag <= stin_data(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2); -- (32 - 16)
+                if (state = TRANSFER_TO_FFT) and (first_ready_in = '1') and (stin_valid = '1') and (float2fixed_out_tvalid = '1') then --check if DFT is ready to process data and data_in is valid
+                    --convert next input
+                    float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
+                    float2fixed_in_tvalid <= '1';
                     
-                    if index = 0 then
-                        first_in <= '1'; --set flag for first data input
-                    end if;
-                    
+                    --set flag for first data input
+                    first_in <= '1'; 
+                                        
                     --increase index
                     index_next <= index + 1;
                     
                     input_state_next <= OTHER_FRAMES;                    
                 end if;
             
-            when OTHER_FRAMES =>    
+            when OTHER_FRAMES => 
+                stin_ready <= '1';
+                   
+                if (state = TRANSFER_TO_FFT) and (stin_valid = '1') and (float2fixed_out_tvalid = '1') then --check if DFT is ready to process data and data_in is valid
+                    --convert next input
+                    float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
+                    float2fixed_in_tvalid <= '1';
+                                          
+                    --increase index
+                    index_next <= index + 1;
+                    
+                    if (index = SIZE-2) then
+                        input_state_next <= LAST_FRAME;
+                    end if;
+                end if;
+                
+            when LAST_FRAME =>    
                 if index = SIZE then --independent of valid signals
                     stin_ready <= '0';
                     index_next <= 0; --reset counter
                     input_state_next <= INPUT_IDLE;
                     
-                elsif (state = TRANSFER_TO_FFT) and (stin_valid = '1') then --check if DFT is ready to process data and data_in is valid
+                elsif (state = TRANSFER_TO_FFT) and (float2fixed_out_tvalid = '1') then --check if DFT is ready to process data and data_in is valid
                     stin_ready <= '1';
-                    
-                    --set data inputs
-                    in_real <= stin_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0); -- (15 - 0)
-                    in_imag <= stin_data(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2); -- (32 - 16)
-                    
-                    if index = 0 then
-                        first_in <= '1'; --set flag for first data input
-                    end if;
-                    
+                       
                     --increase index
                     index_next <= index + 1;
                 end if;
@@ -300,27 +453,156 @@ begin
                 
     end process dft_proc;
     
+    
+    -----------------------------------------------------------------------
+    
+    --signal is set outside the process due to delay
+    --temporary save float values
+    temp_real_float <= real_fixed2float_out_tdata when real_fixed2float_out_tvalid = '1';
+    temp_imag_float <= imag_fixed2float_out_tdata when imag_fixed2float_out_tvalid = '1';
+        
+    --apply shifts to exponent
+    shifted_exp_real <= std_logic_vector(unsigned(real_fixed2float_out_tdata(exponent_range'range)) + unsigned(exp)) when real_fixed2float_out_tvalid = '1';
+    shifted_exp_imag <= std_logic_vector(unsigned(imag_fixed2float_out_tdata(exponent_range'range)) + unsigned(exp)) when imag_fixed2float_out_tvalid = '1';
+    
     --process to get output of the DFT
-    output_proc: process (receive_index, state, s_out_valid, out_real, out_imag)
+    output_proc: process (output_state, receive_index, state, s_out_valid, out_real, out_imag, blk_exp, real_fixed2float_out_tvalid, imag_fixed2float_out_tvalid)
     begin
         --default values to prevent latches
+        output_state_next <= output_state;
         receive_index_next <= receive_index;
         stout_valid <= '0';
+        real_fixed2float_in_tvalid <= '0';
+        imag_fixed2float_in_tvalid <= '0';
         
-        if receive_index = SIZE then --independent of valid signals
-            receive_index_next <= 0; --reset counter
+        real_fixed2float_in_tdata <= (others => '0');
+        imag_fixed2float_in_tdata <= (others => '0');
+        stout_data <= (others => '0');
+        
+        case output_state is
+                
+            when OUTPUT_IDLE =>
+                --reset exponent
+                exp <= (others => '0');
+                
+                if (state = OUTPUT_DATA) and (s_out_valid = '1') then --check if the output data of the DFT is valid
+                    --convert first output data
+                    --real part
+                    real_fixed2float_in_tdata(DFT_DATA_WIDTH downto 0) <= out_real; --convert float to fixed18
+                    real_fixed2float_in_tvalid <= '1';
+                    --imaginary part
+                    imag_fixed2float_in_tdata(DFT_DATA_WIDTH downto 0) <= out_imag; --convert float to fixed18
+                    imag_fixed2float_in_tvalid <= '1';
+                    
+                    --increase index
+                    receive_index_next <= receive_index + 1; 
+                    
+                    --set exponent as copy
+                    exp <= blk_exp;
+                    
+                    output_state_next <= OUTPUT_FIRST;
+                end if;
+                
+            when OUTPUT_FIRST =>
+                
+                if (state = OUTPUT_DATA) and (s_out_valid = '1') and (real_fixed2float_out_tvalid = '1') and (imag_fixed2float_out_tvalid = '1') then --check if the output data of the DFT is valid
+                    --convert next output data
+                    --real part
+                    real_fixed2float_in_tdata(DFT_DATA_WIDTH downto 0) <= out_real; --convert float to fixed18
+                    real_fixed2float_in_tvalid <= '1';
+                    --imaginary part
+                    imag_fixed2float_in_tdata(DFT_DATA_WIDTH downto 0) <= out_imag; --convert float to fixed18
+                    imag_fixed2float_in_tvalid <= '1';
+                                        
+                    --increase index
+                    receive_index_next <= receive_index + 1; 
+                    
+                    output_state_next <= OUTPUT_FRAMES;
+                end if;
+                        
+            when OUTPUT_FRAMES =>
+        
+                if (receive_index = SIZE) then --independent of valid signals
+                    --set data outputs
+                    --real part
+                    --sign bit
+                    stout_data(STOUT_SIGN_BIT_REAL) <= temp_real_float(SIGN_BIT);
+                    --exponent with applied shifts from DFT
+                    stout_data(stout_exponent_real_range'range) <= shifted_exp_real;
+                    --mantissa                    
+                    stout_data(stout_mantissa_real_range'range) <= temp_real_float(mantissa_range'range);
+                    
+                    --imaginary part
+                    --sign bit
+                    stout_data(STOUT_SIGN_BIT_IMAG) <= temp_imag_float(SIGN_BIT);
+                    --exponent with applied shifts from DFT
+                    stout_data(stout_exponent_imag_range'range) <= shifted_exp_imag;
+                    --mantissa                    
+                    stout_data(stout_mantissa_imag_range'range) <= temp_imag_float(mantissa_range'range);
+                    
+                    stout_valid <= '1';
+                       
+                    receive_index_next <= 0; --reset counter
+                    output_state_next <= OUTPUT_LAST;
+                    
+                elsif (state = OUTPUT_DATA) and (s_out_valid = '1') and (real_fixed2float_out_tvalid = '1') and (imag_fixed2float_out_tvalid = '1') then --check if the output data of the DFT is valid
+                    --set data outputs
+                    --real part
+                    --sign bit
+                    stout_data(STOUT_SIGN_BIT_REAL) <= temp_real_float(SIGN_BIT);
+                    --exponent with applied shifts from DFT
+                    stout_data(stout_exponent_real_range'range) <= shifted_exp_real;
+                    --mantissa                    
+                    stout_data(stout_mantissa_real_range'range) <= temp_real_float(mantissa_range'range);
+                    
+                    --imaginary part
+                    --sign bit
+                    stout_data(STOUT_SIGN_BIT_IMAG) <= temp_imag_float(SIGN_BIT);
+                    --exponent with applied shifts from DFT
+                    stout_data(stout_exponent_imag_range'range) <= shifted_exp_imag;
+                    --mantissa                    
+                    stout_data(stout_mantissa_imag_range'range) <= temp_imag_float(mantissa_range'range);
+                    
+                    stout_valid <= '1';
+                    
+                    --convert next output data
+                    --real part
+                    real_fixed2float_in_tdata(DFT_DATA_WIDTH downto 0) <= out_real; --convert float to fixed18
+                    real_fixed2float_in_tvalid <= '1';
+                    --imaginary part
+                    imag_fixed2float_in_tdata(DFT_DATA_WIDTH downto 0) <= out_imag; --convert float to fixed18
+                    imag_fixed2float_in_tvalid <= '1';
+                                   
+                    --increase index
+                    receive_index_next <= receive_index + 1;            
+                end if;
             
-        elsif (state = OUTPUT_DATA) and (s_out_valid = '1') then --check if the output data of the DFT is valid
-            stout_valid <= '1';
-            
-            --get data outputs
-            stout_data(C_S_AXI_DATA_WIDTH / 2 -1 downto 0) <= out_real;
-            stout_data(C_S_AXI_DATA_WIDTH -1 downto C_S_AXI_DATA_WIDTH / 2) <= out_imag;
-                                    
-            --increase index
-            receive_index_next <= receive_index + 1;
-            
-        end if;
+            when OUTPUT_LAST =>
+                
+                --set data outputs
+                --real part
+                --sign bit
+                stout_data(STOUT_SIGN_BIT_REAL) <= temp_real_float(SIGN_BIT);
+                --exponent with applied shifts from DFT
+                stout_data(stout_exponent_real_range'range) <= shifted_exp_real;
+                --mantissa                    
+                stout_data(stout_mantissa_real_range'range) <= temp_real_float(mantissa_range'range);
+                
+                --imaginary part
+                --sign bit
+                stout_data(STOUT_SIGN_BIT_IMAG) <= temp_imag_float(SIGN_BIT);
+                --exponent with applied shifts from DFT
+                stout_data(stout_exponent_imag_range'range) <= shifted_exp_imag;
+                --mantissa                    
+                stout_data(stout_mantissa_imag_range'range) <= temp_imag_float(mantissa_range'range);
+                
+                stout_valid <= '1';
+                                
+                output_state_next <= OUTPUT_IDLE;
+               
+            when others =>
+                output_state_next <= OUTPUT_IDLE;
+        end case;
     
     end process output_proc;
     
