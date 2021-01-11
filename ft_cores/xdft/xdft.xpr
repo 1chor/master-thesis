@@ -107,28 +107,10 @@
           <Attr Name="ImportTime" Val="1610114036"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sim_1/imports/ft_cores/TestData/imag_TestData_norm32.txt">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../TestData/imag_TestData_norm32.txt"/>
-          <Attr Name="ImportTime" Val="1610117162"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sim_1/imports/ft_cores/TestData/one_zeros.txt">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../TestData/one_zeros.txt"/>
           <Attr Name="ImportTime" Val="1610106471"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sim_1/imports/ft_cores/TestData/input_TestData_norm16.txt">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../TestData/input_TestData_norm16.txt"/>
-          <Attr Name="ImportTime" Val="1610048881"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sim_1/imports/ft_cores/TestData/real_TestData_norm32.txt">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../TestData/real_TestData_norm32.txt"/>
-          <Attr Name="ImportTime" Val="1610117163"/>
         </FileInfo>
       </File>
       <File Path="$PSRCDIR/sim_1/imports/ft_cores/TestData/result_ones.txt">
@@ -147,6 +129,24 @@
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/TestData/result_one_zeros_imag.txt"/>
           <Attr Name="ImportTime" Val="1610318802"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/imag_TestData_norm.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/imag_TestData_norm.txt"/>
+          <Attr Name="ImportTime" Val="1610396162"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/real_TestData_norm.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/real_TestData_norm.txt"/>
+          <Attr Name="ImportTime" Val="1610396161"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/input_TestData_norm.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/input_TestData_norm.txt"/>
+          <Attr Name="ImportTime" Val="1610396164"/>
         </FileInfo>
       </File>
       <Config>

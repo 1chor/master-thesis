@@ -335,13 +335,13 @@ begin
         write(my_line, string'("Load Input Buffers"));
         writeline(output, my_line);
         
-        real_in := read_file32("input_TestData_norm16.txt");
+        real_in := read_file32("input_TestData_norm.txt");
         
         write(my_line, string'("Load Reference Output Buffers"));
         writeline(output, my_line);
         
-        real_out := read_file32("real_TestData_norm32.txt");
-        imag_out := read_file32("imag_TestData_norm32.txt");
+        real_out := read_file32("real_TestData_norm.txt");
+        imag_out := read_file32("imag_TestData_norm.txt");
         
         write(my_line, string'("Start DFT Test"));
         writeline(output, my_line);
