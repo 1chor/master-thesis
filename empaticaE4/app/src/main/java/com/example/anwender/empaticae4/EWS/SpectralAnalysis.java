@@ -23,8 +23,22 @@ public class SpectralAnalysis {
 
     //Constructor: Requires input signal
     public SpectralAnalysis(List<float[]> inputSignal) {
+
+        //variable declaration
+        Complex[] dft;
+        List<double[]> spd;
+
         switch (ConfigActivity.repo_name) {
             case "SDFT": //Software DFT
+                this.signalSize = inputSignal.size();
+                this.argConstantPart = (Math.PI * 2) / signalSize;
+                dft = calculateDFT(inputSignal);
+                spd = SPD(dft);
+                this.expSPD = spd;
+                this.domF = dominantFrequency(spd);
+                break;
+
+            case "HDFT": //Hardware DFT
                 this.signalSize = inputSignal.size();
                 this.argConstantPart = (Math.PI * 2) / signalSize;
 
@@ -128,7 +142,7 @@ public class SpectralAnalysis {
                 Log.i("TestData", "Created input hex TestData: " + input_file + " & " + input_norm_file + " & " + input_norm_16_file + " !");
                 Log.i("TestData", "Created input float TestData: " + input_float_file + " & " + input_norm_float_file + " !");
 
-                Complex[] dft = calculateDFT(inputSignal);
+                dft = calculateDFT(inputSignal);
 
                 //Write output values to files
                 for (int i=0; i<signalSize; i++) {
@@ -179,12 +193,9 @@ public class SpectralAnalysis {
                 Log.i("TestData", "Created real output TestData: " + real_file + " & " + real_norm_file  + " & " + real_norm_32_file  +" !");
                 Log.i("TestData", "Created imaginary output TestData: " + imag_file + " & " + imag_norm_file  + " & " + imag_norm_32_file  +" !");
 
-                List<double[]> spd = SPD(dft);
+                spd = SPD(dft);
                 this.expSPD = spd;
                 this.domF = dominantFrequency(spd);
-                break;
-
-            case "HDFT": //Hardware DFT
                 break;
 
             case "HFFT": //Hardware FFT
