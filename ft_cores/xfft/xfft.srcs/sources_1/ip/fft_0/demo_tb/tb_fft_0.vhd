@@ -94,7 +94,7 @@ architecture tb of tb_fft_0 is
   -- Config slave channel signals
   signal s_axis_config_tvalid        : std_logic := '0';  -- payload is valid
   signal s_axis_config_tready        : std_logic := '1';  -- slave is ready
-  signal s_axis_config_tdata         : std_logic_vector(15 downto 0) := (others => '0');  -- data payload
+  signal s_axis_config_tdata         : std_logic_vector(23 downto 0) := (others => '0');  -- data payload
 
   -- Data slave channel signals
   signal s_axis_data_tvalid          : std_logic := '0';  -- payload is valid
@@ -124,6 +124,7 @@ architecture tb of tb_fft_0 is
   -----------------------------------------------------------------------
 
   -- Config slave channel alias signals
+  signal s_axis_config_tdata_nfft         : std_logic_vector(2 downto 0) := (others => '0');  -- point size
   signal s_axis_config_tdata_fwd_inv      : std_logic                    := '0';              -- forward or inverse
   signal s_axis_config_tdata_scale_sch    : std_logic_vector(7 downto 0) := (others => '0');  -- scaling schedule
 
@@ -279,6 +280,7 @@ architecture tb of tb_fft_0 is
   -- Communication between processes regarding DUT configuration
   type T_DO_CONFIG is (NONE, IMMEDIATE, AFTER_START, DONE);
   shared variable do_config : T_DO_CONFIG := NONE;  -- instruction for driving config slave channel
+  signal cfg_nfft : integer := 7;
   type T_CFG_FWD_INV is (FWD, INV);
   signal cfg_fwd_inv : T_CFG_FWD_INV := FWD;
   type T_CFG_SCALE_SCH is (ZERO, DEFAULT);
@@ -382,21 +384,32 @@ begin
     -- Procedure to drive an input frame with a table of data
     -- data is the data table containing input data
     -- valid_mode defines how to drive TVALID: 0 = TVALID always high, 1 = TVALID low occasionally
+    -- length is the number of samples in the frame (0 means the whole data table)
+    -- if length is less than the size of data, steps through data
     procedure drive_frame ( data         : T_IP_TABLE;
-                            valid_mode   : integer := 0 ) is
+                            valid_mode   : integer := 0;
+                            length       : integer := 0 ) is
       variable samples : integer;
+      variable stride  : integer;
       variable index   : integer;
       variable sample_data : std_logic_vector(63 downto 0);
       variable sample_last : std_logic;
     begin
-      samples := data'length;
+      if length = 0 then
+        samples := data'length;
+      else
+        samples := length;
+      end if;
+      assert data'length mod samples = 0
+        report "ERROR: drive_frame: length " & integer'image(length) & " must be a factor of data table size " & integer'image(data'length) severity failure;
+      stride := data'length / samples;
       index  := 0;
       while index < data'length loop
         -- Look up sample data in data table, construct TDATA value
         sample_data(31 downto 0)  := data(index).re;                  -- real data
         sample_data(63 downto 32) := data(index).im;                  -- imaginary data
         -- Construct TLAST's value
-        index := index + 1;
+        index := index + stride;
         if index >= data'length then
           sample_last := '1';
         else
@@ -488,6 +501,7 @@ begin
     -- First queue up 2 configurations: these will be applied successively over the next 2 transforms.
     -- 1st configuration
     ip_frame <= 4;
+    cfg_nfft <= 6;  -- smaller point size
     cfg_fwd_inv <= FWD;  -- forward transform
     cfg_scale_sch <= DEFAULT;  -- default scaling schedule
     do_config := IMMEDIATE;
@@ -507,16 +521,17 @@ begin
     wait for T_HOLD;
 
     -- Drive the 1st data frame
-    drive_frame(IP_DATA);
+    drive_frame(IP_DATA, 0, 64);
 
     -- Request a 3rd configuration, to be sent after 2nd data frame starts
     ip_frame <= 6;
+    cfg_nfft <= 7;  -- back to largest point size
     cfg_fwd_inv <= FWD;  -- forward transform
     cfg_scale_sch <= ZERO;  -- no scaling
     do_config := AFTER_START;
 
     -- Drive the 2nd data frame
-    drive_frame(op_data_saved);
+    drive_frame(op_data_saved, 0, 64);
 
     -- Request a 4th configuration, to be sent after 3rd data frame starts: same as 3rd, except:
     ip_frame <= 7;
@@ -565,23 +580,32 @@ begin
 
     -- Construct the config slave channel TDATA signal
     s_axis_config_tdata <= (others => '0');  -- clear unused bits
+    -- Format the FFT point size configuration
+    s_axis_config_tdata(2 downto 0) <= std_logic_vector(to_unsigned(cfg_nfft, 3));
     -- Format the transform direction
     if cfg_fwd_inv = FWD then
-      s_axis_config_tdata(0) <= '1';  -- forward
+      s_axis_config_tdata(8) <= '1';  -- forward
     elsif cfg_fwd_inv = INV then
-      s_axis_config_tdata(0) <= '0';  -- inverse
+      s_axis_config_tdata(8) <= '0';  -- inverse
     end if;
     -- Format the scaling schedule
     if cfg_scale_sch = ZERO then  -- no scaling
       scale_sch := (others => '0');
     elsif cfg_scale_sch = DEFAULT then  -- default scaling, for largest magnitude output with no overflow guaranteed
       scale_sch(1 downto 0) := "11";  -- largest scaling at first stage
-      for s in 2 to 3 loop
+      for s in 2 to cfg_nfft/2 loop
         scale_sch(s*2-1 downto s*2-2) := "10";  -- less scaling at later stages
       end loop;
-      scale_sch(7 downto 6) := "01";  -- least scaling at last stage
+      if cfg_nfft mod 2 = 1 then
+        scale_sch(cfg_nfft downto cfg_nfft-1) := "01";  -- least scaling at last stage with odd NFFT
+      end if;
+      if cfg_nfft/2 < 3 then
+        for s in cfg_nfft/2+1 to 3 loop
+          scale_sch(s*2-1 downto s*2-2) := "00";  -- unused stages
+        end loop;
+      end if;
     end if;
-    s_axis_config_tdata(8 downto 1) <= scale_sch;
+    s_axis_config_tdata(16 downto 9) <= scale_sch;
 
     -- Drive the transaction on the config slave channel
     s_axis_config_tvalid <= '1';
@@ -682,8 +706,9 @@ begin
   -----------------------------------------------------------------------
 
   -- Config slave channel alias signals
-  s_axis_config_tdata_fwd_inv    <= s_axis_config_tdata(0);
-  s_axis_config_tdata_scale_sch  <= s_axis_config_tdata(8 downto 1);
+  s_axis_config_tdata_nfft       <= s_axis_config_tdata(2 downto 0);
+  s_axis_config_tdata_fwd_inv    <= s_axis_config_tdata(8);
+  s_axis_config_tdata_scale_sch  <= s_axis_config_tdata(16 downto 9);
 
   -- Data slave channel alias signals
   s_axis_data_tdata_re           <= s_axis_data_tdata(31 downto 0);

@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.1 (lin64) Build 2188600 Wed Apr  4 18:39:19 MDT 2018
-// Date        : Mon Jan 11 23:01:00 2021
+// Date        : Tue Jan 12 00:36:22 2021
 // Host        : soc running 64-bit Ubuntu 18.04.5 LTS
 // Command     : write_verilog -force -mode synth_stub
 //               /media/soc/Volume/master-thesis/ft_cores/xfft/xfft.srcs/sources_1/ip/fft_0/fft_0_stub.v
@@ -20,10 +20,10 @@ module fft_0(aclk, aresetn, s_axis_config_tdata,
   m_axis_data_tready, m_axis_data_tlast, event_frame_started, event_tlast_unexpected, 
   event_tlast_missing, event_status_channel_halt, event_data_in_channel_halt, 
   event_data_out_channel_halt)
-/* synthesis syn_black_box black_box_pad_pin="aclk,aresetn,s_axis_config_tdata[15:0],s_axis_config_tvalid,s_axis_config_tready,s_axis_data_tdata[63:0],s_axis_data_tvalid,s_axis_data_tready,s_axis_data_tlast,m_axis_data_tdata[63:0],m_axis_data_tvalid,m_axis_data_tready,m_axis_data_tlast,event_frame_started,event_tlast_unexpected,event_tlast_missing,event_status_channel_halt,event_data_in_channel_halt,event_data_out_channel_halt" */;
+/* synthesis syn_black_box black_box_pad_pin="aclk,aresetn,s_axis_config_tdata[23:0],s_axis_config_tvalid,s_axis_config_tready,s_axis_data_tdata[63:0],s_axis_data_tvalid,s_axis_data_tready,s_axis_data_tlast,m_axis_data_tdata[63:0],m_axis_data_tvalid,m_axis_data_tready,m_axis_data_tlast,event_frame_started,event_tlast_unexpected,event_tlast_missing,event_status_channel_halt,event_data_in_channel_halt,event_data_out_channel_halt" */;
   input aclk;
   input aresetn;
-  input [15:0]s_axis_config_tdata;
+  input [23:0]s_axis_config_tdata;
   input s_axis_config_tvalid;
   output s_axis_config_tready;
   input [63:0]s_axis_data_tdata;

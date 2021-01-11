@@ -60,7 +60,7 @@ ENTITY fft_0 IS
   PORT (
     aclk : IN STD_LOGIC;
     aresetn : IN STD_LOGIC;
-    s_axis_config_tdata : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+    s_axis_config_tdata : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
     s_axis_config_tvalid : IN STD_LOGIC;
     s_axis_config_tready : OUT STD_LOGIC;
     s_axis_data_tdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
@@ -123,7 +123,7 @@ ARCHITECTURE fft_0_arch OF fft_0 IS
       aclk : IN STD_LOGIC;
       aclken : IN STD_LOGIC;
       aresetn : IN STD_LOGIC;
-      s_axis_config_tdata : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+      s_axis_config_tdata : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
       s_axis_config_tvalid : IN STD_LOGIC;
       s_axis_config_tready : OUT STD_LOGIC;
       s_axis_data_tdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
@@ -173,7 +173,7 @@ ARCHITECTURE fft_0_arch OF fft_0 IS
   ATTRIBUTE X_INTERFACE_INFO OF s_axis_data_tdata: SIGNAL IS "xilinx.com:interface:axis:1.0 S_AXIS_DATA TDATA";
   ATTRIBUTE X_INTERFACE_INFO OF s_axis_config_tready: SIGNAL IS "xilinx.com:interface:axis:1.0 S_AXIS_CONFIG TREADY";
   ATTRIBUTE X_INTERFACE_INFO OF s_axis_config_tvalid: SIGNAL IS "xilinx.com:interface:axis:1.0 S_AXIS_CONFIG TVALID";
-  ATTRIBUTE X_INTERFACE_PARAMETER OF s_axis_config_tdata: SIGNAL IS "XIL_INTERFACENAME S_AXIS_CONFIG, TDATA_NUM_BYTES 2, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, LAYERED_METADATA undef";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF s_axis_config_tdata: SIGNAL IS "XIL_INTERFACENAME S_AXIS_CONFIG, TDATA_NUM_BYTES 3, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, LAYERED_METADATA undef";
   ATTRIBUTE X_INTERFACE_INFO OF s_axis_config_tdata: SIGNAL IS "xilinx.com:interface:axis:1.0 S_AXIS_CONFIG TDATA";
   ATTRIBUTE X_INTERFACE_PARAMETER OF aresetn: SIGNAL IS "XIL_INTERFACENAME aresetn_intf, POLARITY ACTIVE_LOW";
   ATTRIBUTE X_INTERFACE_INFO OF aresetn: SIGNAL IS "xilinx.com:signal:reset:1.0 aresetn_intf RST";
@@ -183,7 +183,7 @@ BEGIN
   U0 : xfft_v9_1_0
     GENERIC MAP (
       C_XDEVICEFAMILY => "zynquplus",
-      C_S_AXIS_CONFIG_TDATA_WIDTH => 16,
+      C_S_AXIS_CONFIG_TDATA_WIDTH => 24,
       C_S_AXIS_DATA_TDATA_WIDTH => 64,
       C_M_AXIS_DATA_TDATA_WIDTH => 64,
       C_M_AXIS_DATA_TUSER_WIDTH => 1,
@@ -192,7 +192,7 @@ BEGIN
       C_CHANNELS => 1,
       C_NFFT_MAX => 7,
       C_ARCH => 3,
-      C_HAS_NFFT => 0,
+      C_HAS_NFFT => 1,
       C_USE_FLT_PT => 1,
       C_INPUT_WIDTH => 32,
       C_TWIDDLE_WIDTH => 24,
