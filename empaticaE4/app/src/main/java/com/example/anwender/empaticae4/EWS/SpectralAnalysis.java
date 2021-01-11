@@ -127,7 +127,7 @@ public class SpectralAnalysis {
                     //Write hex string to file
                     writeTestDatatoFile(MainActivity.path, input_file, st);
 
-                    //Write normalised hex string to file
+                    //Write normalised hex string to file (IEEE 754 float single precision format)
                     writeTestDatatoFile(MainActivity.path, input_norm_file, norm_st);
 
                     //Write normalised 1q15 format hex string to file
@@ -151,18 +151,18 @@ public class SpectralAnalysis {
                     double norm_dval = 2 * dval / norm_abs; //normalise output value, range [-1 1]
 
                     //Convert double to hex string
-                    long intval = Double.doubleToRawLongBits(dval); //integer value
-                    long norm_intval = Double.doubleToRawLongBits(norm_dval); //normalised integer value
+                    int intval = Float.floatToRawIntBits((float)dval); //integer value, convert to float for IEEE 754 float single precision
+                    int norm_intval = Float.floatToRawIntBits((float)norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
                     long norm_intval32 = convert_to_fixed_9q23(norm_dval); //normalised integer value in 9q23 format
 
-                    String st = String.format("%16s", Long.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
-                    String norm_st = String.format("%16s", Long.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
-                    String norm_st32 = String.format("%8s", Integer.toHexString((int)norm_intval32)).replace(' ', '0') + "00000000\n"; //normalised hex string in 9q23 format
+                    String st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
+                    String norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
+                    String norm_st32 = String.format("%8s", Integer.toHexString((int)norm_intval32)).replace(' ', '0') + "\n"; //normalised hex string in 9q23 format
 
                     //Write hex string to file
                     writeTestDatatoFile(MainActivity.path, real_file, st);
 
-                    //Write normalised hex string to file
+                    //Write normalised hex string to file (IEEE 754 float single precision format)
                     writeTestDatatoFile(MainActivity.path, real_norm_file, norm_st);
 
                     //Write normalised 1q15 format hex string to file
@@ -173,12 +173,12 @@ public class SpectralAnalysis {
                     norm_dval = 2 * dval / norm_abs; //normalise output value, range [-1 1]
 
                     //Convert double to hex string
-                    intval = Double.doubleToRawLongBits(dval); //integer value
-                    norm_intval = Double.doubleToRawLongBits(norm_dval); //normalised integer value
+                    intval = Float.floatToRawIntBits((float)dval); //integer value, convert to float for IEEE 754 float single precision
+                    norm_intval = Float.floatToRawIntBits((float)norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
                     norm_intval32 = convert_to_fixed_9q23(norm_dval); //normalised integer value in 9q23 format
 
-                    st = String.format("%16s", Long.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
-                    norm_st = String.format("%16s", Long.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
+                    st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
+                    norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
                     norm_st32 = String.format("%8s", Integer.toHexString((int)norm_intval32)).replace(' ', '0') + "00000000\n"; //normalised hex string in 9q23 format
 
                     //Write hex string to file
