@@ -54,7 +54,8 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
     private boolean enable_hash;
 
     //public variables
-    public static String repo_name = "SDFT"; //set default name of server repository
+    public static String repo_name = "HDFT"; //set default name of server repository
+    //public static String repo_name = "SDFT"; //set default name of server repository
     public static int windowSize = 108;
 
     @Override
