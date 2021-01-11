@@ -42,7 +42,7 @@ end xdft_tb;
 architecture bench of xdft_tb is
 
      -- component for DFT wrapper
-    component xdft_wrapper is
+    component ft_wrapper is
         generic (
             SIZE : positive := 108; -- default 108
             C_S_AXI_DATA_WIDTH : positive := 64
@@ -100,7 +100,7 @@ architecture bench of xdft_tb is
     
 begin
 
-    uut : xdft_wrapper
+    uut : ft_wrapper
         generic map(
             SIZE => SIZE,
             C_S_AXI_DATA_WIDTH => DATA_WIDTH

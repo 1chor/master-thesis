@@ -4,7 +4,7 @@
 -- 
 -- Create Date: 12/10/2020 09:51:34 PM
 -- Design Name: 
--- Module Name: xdft_wrapper - arch
+-- Module Name: ft_wrapper - arch
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,7 +31,7 @@ use IEEE.NUMERIC_STD.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity xdft_wrapper is
+entity ft_wrapper is
     generic (
         SIZE : positive := 108; -- default 108
         C_S_AXI_DATA_WIDTH : positive := 64
@@ -60,9 +60,9 @@ begin
                 or (SIZE = 960) or (SIZE = 972) or (SIZE = 1080) or (SIZE = 1152) or (SIZE = 1200) or (SIZE = 1296))
     report ("The selected transform size (" & integer'image(SIZE) & ") is not supported!") severity failure;
     
-end xdft_wrapper;
+end ft_wrapper;
 
-architecture arch of xdft_wrapper is
+architecture arch of ft_wrapper is
 
     -- constant declaration
     constant FWD : std_logic := '1'; -- use forward transformation
