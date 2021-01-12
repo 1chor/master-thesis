@@ -53,54 +53,54 @@ public class SpectralAnalysis {
 
                 //define file names
                 //input TestData files (hex)
-                String input_file = "input_TestData.txt";
-                String input_norm_file = "input_TestData_norm.txt";
-                String input_norm_16_file = "input_TestData_norm16.txt";
+                String xdft_input_file = "xdft_input_TestData.txt";
+                String xdft_input_norm_file = "xdft_input_TestData_norm.txt";
+                String xdft_input_norm_16_file = "xdft_input_TestData_norm16.txt";
 
                 //input TestData files (float)
-                String input_float_file = "input_TestData_float.txt";
-                String input_norm_float_file = "input_TestData_norm_float.txt";
+                String xdft_input_float_file = "xdft_input_TestData_float.txt";
+                String xdft_input_norm_float_file = "xdft_input_TestData_norm_float.txt";
 
                 //real output TestData files (hex)
-                String real_file = "real_TestData.txt";
-                String real_norm_file = "real_TestData_norm.txt";
-                String real_norm_32_file = "real_TestData_norm32.txt";
+                String xdft_real_file = "xdft_real_TestData.txt";
+                String xdft_real_norm_file = "xdft_real_TestData_norm.txt";
+                String xdft_real_norm_32_file = "xdft_real_TestData_norm32.txt";
 
                 //imaginary output TestData files (hex)
-                String imag_file = "imag_TestData.txt";
-                String imag_norm_file = "imag_TestData_norm.txt";
-                String imag_norm_32_file = "imag_TestData_norm32.txt";
+                String xdft_imag_file = "xdft_imag_TestData.txt";
+                String xdft_imag_norm_file = "xdft_imag_TestData_norm.txt";
+                String xdft_imag_norm_32_file = "xdft_imag_TestData_norm32.txt";
 
                 //check if TestData exists and delete it
                 //input TestData files (hex)
-                if (checkFileExists(MainActivity.path, input_file, true))
-                    Log.i("TestData", "Deleted " + input_file + " !");
-                if (checkFileExists(MainActivity.path, input_norm_file, true))
-                    Log.i("TestData", "Deleted " + input_norm_file + " !");
-                if (checkFileExists(MainActivity.path, input_norm_16_file, true))
-                    Log.i("TestData", "Deleted " + input_norm_16_file + " !");
+                if (checkFileExists(MainActivity.path, xdft_input_file, true))
+                    Log.i("TestData", "Deleted " + xdft_input_file + " !");
+                if (checkFileExists(MainActivity.path, xdft_input_norm_file, true))
+                    Log.i("TestData", "Deleted " + xdft_input_norm_file + " !");
+                if (checkFileExists(MainActivity.path, xdft_input_norm_16_file, true))
+                    Log.i("TestData", "Deleted " + xdft_input_norm_16_file + " !");
 
                 //input TestData files (float)
-                if (checkFileExists(MainActivity.path, input_float_file, true))
-                    Log.i("TestData", "Deleted " + input_float_file + " !");
-                if (checkFileExists(MainActivity.path, input_norm_float_file, true))
-                    Log.i("TestData", "Deleted " + input_norm_float_file + " !");
+                if (checkFileExists(MainActivity.path, xdft_input_float_file, true))
+                    Log.i("TestData", "Deleted " + xdft_input_float_file + " !");
+                if (checkFileExists(MainActivity.path, xdft_input_norm_float_file, true))
+                    Log.i("TestData", "Deleted " + xdft_input_norm_float_file + " !");
 
                 //real output TestData files (hex)
-                if (checkFileExists(MainActivity.path, real_file, true))
-                    Log.i("TestData", "Deleted " + real_file + " !");
-                if (checkFileExists(MainActivity.path, real_norm_file, true))
-                    Log.i("TestData", "Deleted " + real_norm_file + " !");
-                if (checkFileExists(MainActivity.path, real_norm_32_file, true))
-                    Log.i("TestData", "Deleted " + real_norm_32_file + " !");
+                if (checkFileExists(MainActivity.path, xdft_real_file, true))
+                    Log.i("TestData", "Deleted " + xdft_real_file + " !");
+                if (checkFileExists(MainActivity.path, xdft_real_norm_file, true))
+                    Log.i("TestData", "Deleted " + xdft_real_norm_file + " !");
+                if (checkFileExists(MainActivity.path, xdft_real_norm_32_file, true))
+                    Log.i("TestData", "Deleted " + xdft_real_norm_32_file + " !");
 
                 //imaginary output TestData files (hex)
-                if (checkFileExists(MainActivity.path, imag_file, true))
-                    Log.i("TestData", "Deleted " + imag_file + " !");
-                if (checkFileExists(MainActivity.path, imag_norm_file, true))
-                    Log.i("TestData", "Deleted " + imag_norm_file + " !");
-                if (checkFileExists(MainActivity.path, imag_norm_32_file, true))
-                    Log.i("TestData", "Deleted " + imag_norm_32_file + " !");
+                if (checkFileExists(MainActivity.path, xdft_imag_file, true))
+                    Log.i("TestData", "Deleted " + xdft_imag_file + " !");
+                if (checkFileExists(MainActivity.path, xdft_imag_norm_file, true))
+                    Log.i("TestData", "Deleted " + xdft_imag_norm_file + " !");
+                if (checkFileExists(MainActivity.path, xdft_imag_norm_32_file, true))
+                    Log.i("TestData", "Deleted " + xdft_imag_norm_32_file + " !");
 
                 //normalise input values to be between -1 and 1
                 //original sign of the values are maintained
@@ -128,22 +128,22 @@ public class SpectralAnalysis {
                     String norm_st16 = String.format("%4s", Integer.toHexString(norm_intval16)).replace(' ', '0') + "0000\n"; //normalised hex string in 1q15 format
 
                     //Write hex string to file
-                    writeTestDatatoFile(MainActivity.path, input_file, st);
+                    writeTestDatatoFile(MainActivity.path, xdft_input_file, st);
 
                     //Write normalised hex string to file (IEEE 754 float single precision format)
-                    writeTestDatatoFile(MainActivity.path, input_norm_file, norm_st);
+                    writeTestDatatoFile(MainActivity.path, xdft_input_norm_file, norm_st);
 
                     //Write normalised 1q15 format hex string to file
-                    writeTestDatatoFile(MainActivity.path, input_norm_16_file, norm_st16);
+                    writeTestDatatoFile(MainActivity.path, xdft_input_norm_16_file, norm_st16);
 
                     //Write float values to file
-                    writeTestDatatoFile(MainActivity.path, input_float_file, fval + "\n");
+                    writeTestDatatoFile(MainActivity.path, xdft_input_float_file, fval + "\n");
 
                     //Write normalised float values to file
-                    writeTestDatatoFile(MainActivity.path, input_norm_float_file, norm_fval + "\n");
+                    writeTestDatatoFile(MainActivity.path, xdft_input_norm_float_file, norm_fval + "\n");
                 }
-                Log.i("TestData", "Created input hex TestData: " + input_file + " & " + input_norm_file + " & " + input_norm_16_file + " !");
-                Log.i("TestData", "Created input float TestData: " + input_float_file + " & " + input_norm_float_file + " !");
+                Log.i("TestData", "Created input hex TestData: " + xdft_input_file + " & " + xdft_input_norm_file + " & " + xdft_input_norm_16_file + " !");
+                Log.i("TestData", "Created input float TestData: " + xdft_input_float_file + " & " + xdft_input_norm_float_file + " !");
 
                 dft = calculateDFT(inputSignal);
 
@@ -163,13 +163,13 @@ public class SpectralAnalysis {
                     String norm_st32 = String.format("%8s", Integer.toHexString((int)norm_intval32)).replace(' ', '0') + "\n"; //normalised hex string in 9q23 format
 
                     //Write hex string to file
-                    writeTestDatatoFile(MainActivity.path, real_file, st);
+                    writeTestDatatoFile(MainActivity.path, xdft_real_file, st);
 
                     //Write normalised hex string to file (IEEE 754 float single precision format)
-                    writeTestDatatoFile(MainActivity.path, real_norm_file, norm_st);
+                    writeTestDatatoFile(MainActivity.path, xdft_real_norm_file, norm_st);
 
                     //Write normalised 1q15 format hex string to file
-                    writeTestDatatoFile(MainActivity.path, real_norm_32_file, norm_st32);
+                    writeTestDatatoFile(MainActivity.path, xdft_real_norm_32_file, norm_st32);
 
                     //Imaginary component
                     dval = dft[i].getI(); //get imaginary output value
@@ -185,16 +185,16 @@ public class SpectralAnalysis {
                     norm_st32 = String.format("%8s", Integer.toHexString((int)norm_intval32)).replace(' ', '0') + "00000000\n"; //normalised hex string in 9q23 format
 
                     //Write hex string to file
-                    writeTestDatatoFile(MainActivity.path, imag_file, st);
+                    writeTestDatatoFile(MainActivity.path, xdft_imag_file, st);
 
                     //Write normalised hex string to file
-                    writeTestDatatoFile(MainActivity.path, imag_norm_file, norm_st);
+                    writeTestDatatoFile(MainActivity.path, xdft_imag_norm_file, norm_st);
 
                     //Write normalised 1q15 format hex string to file
-                    writeTestDatatoFile(MainActivity.path, imag_norm_32_file, norm_st32);
+                    writeTestDatatoFile(MainActivity.path, xdft_imag_norm_32_file, norm_st32);
                 }
-                Log.i("TestData", "Created real output TestData: " + real_file + " & " + real_norm_file  + " & " + real_norm_32_file  +" !");
-                Log.i("TestData", "Created imaginary output TestData: " + imag_file + " & " + imag_norm_file  + " & " + imag_norm_32_file  +" !");
+                Log.i("TestData", "Created real output TestData: " + xdft_real_file + " & " + xdft_real_norm_file  + " & " + xdft_real_norm_32_file  +" !");
+                Log.i("TestData", "Created imaginary output TestData: " + xdft_imag_file + " & " + xdft_imag_norm_file  + " & " + xdft_imag_norm_32_file  +" !");
 
                 spd = SPD(dft);
                 this.expSPD = spd;
