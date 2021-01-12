@@ -44,7 +44,7 @@ architecture bench of xfft_tb is
      -- component for FFT wrapper
     component ft_wrapper is
         generic (
-            SIZE : positive := 108; -- default 108
+            SIZE : positive := 128; -- default 128
             C_S_AXI_DATA_WIDTH : positive := 64
         );
         port ( 
@@ -64,7 +64,7 @@ architecture bench of xfft_tb is
     end component;
 
     -- constant declaration
-    constant SIZE : positive := 108;
+    constant SIZE : positive := 128;
     constant DATA_WIDTH : positive := 64;
     constant INPUT_WIDTH : positive := 32;
     constant CLK_PERIOD : time := 10 ns;
