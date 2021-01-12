@@ -28,6 +28,13 @@ public class SpectralAnalysis {
         Complex[] dft;
         List<double[]> spd;
 
+        //variable declaration for file generation
+        boundaries bound;
+
+        float norm_abs = 0;
+        float max_range_value = 0;
+        float min_range_value = 0;
+
         switch (ConfigActivity.repo_name) {
             case "SDFT": //Software DFT
                 this.signalSize = inputSignal.size();
@@ -42,11 +49,7 @@ public class SpectralAnalysis {
                 this.signalSize = inputSignal.size();
                 this.argConstantPart = (Math.PI * 2) / signalSize;
 
-                boundaries bound = new boundaries(inputSignal); //search for boundaries
-
-                float norm_abs = 0;
-                float max_range_value = 0;
-                float min_range_value = 0;
+                bound = new boundaries(inputSignal); //search for boundaries
 
                 //define file names
                 //input TestData files (hex)
