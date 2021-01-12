@@ -45,7 +45,7 @@ public class SpectralAnalysis {
                 this.domF = dominantFrequency(spd);
                 break;
 
-            case "HDFT": //Hardware DFT
+            case "XDFT": //Hardware Xilinx DFT
                 this.signalSize = inputSignal.size();
                 this.argConstantPart = (Math.PI * 2) / signalSize;
 
@@ -201,7 +201,7 @@ public class SpectralAnalysis {
                 this.domF = dominantFrequency(spd);
                 break;
 
-            case "HFFT": //Hardware FFT
+            case "XFFT": //Hardware Xilinx FFT
                 break;
 
             case "custom_FFT": //Custom FFT

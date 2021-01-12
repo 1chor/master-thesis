@@ -54,7 +54,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
     private boolean enable_hash;
 
     //public variables
-    public static String repo_name = "HFFT"; //set default name of server repository
+    public static String repo_name = "XFFT"; //set default name of server repository
     //public static String repo_name = "SDFT"; //set default name of server repository
     public static int windowSize = 128;
 
@@ -151,12 +151,12 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
                 break;
 
             case R.id.radioButton_HDFT:
-                repo_name = "HDFT"; //set name of server repository
+                repo_name = "XDFT"; //set name of server repository
                 windowSize = 108; //set WindowSize
                 break;
 
             case R.id.radioButton_HFFT:
-                repo_name = "HFFT"; //set name of server repository
+                repo_name = "XFFT"; //set name of server repository
                 windowSize = 128; //set WindowSize
                 break;
 
