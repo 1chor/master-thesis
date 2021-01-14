@@ -358,7 +358,8 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                         filtersInit++;
                         if (filtersInit > 9 || !firstWindow) {
                             bvpSamples.add(filters.filteredData(bvp));
-                            if (bvpSamples.size() == 1728) {
+                            //if (bvpSamples.size() == 1728) {
+                            if (bvpSamples.size() == 1878) { // needed for XFFT
                                 RRScore analyze = new RRScore(bvpSamples);
                                 rrSamples.add(new Entry(rrSamples.size(), analyze.runAnalysis()));
                                 rrScores.add(new Entry(rrScores.size(), getRREWScore(analyze.runAnalysis())));
