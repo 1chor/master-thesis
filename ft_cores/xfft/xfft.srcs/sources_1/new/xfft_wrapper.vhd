@@ -128,12 +128,12 @@ architecture arch of ft_wrapper is
         s_axis_config_tvalid : in std_logic;                                    -- configuration data valid
         s_axis_config_tready : out std_logic;                                   -- configuration data ready
         -- AXI4-Stream slave data input channel
-        s_axis_data_tdata : in std_logic_vector(C_S_AXI_DATA_WIDTH DOWNTO 0);   -- input data (imaginary, real)
+        s_axis_data_tdata : in std_logic_vector(C_S_AXI_DATA_WIDTH -1 DOWNTO 0);   -- input data (imaginary, real)
         s_axis_data_tvalid : in std_logic;                                      -- input data valid
         s_axis_data_tready : out std_logic;                                     -- input data ready        
         s_axis_data_tlast : in std_logic;                                       -- last data in
         -- AXI4-Stream master data output channel
-        m_axis_data_tdata : out std_logic_vector(C_S_AXI_DATA_WIDTH DOWNTO 0);  -- output data (imaginary, real)
+        m_axis_data_tdata : out std_logic_vector(C_S_AXI_DATA_WIDTH -1 DOWNTO 0);  -- output data (imaginary, real)
         m_axis_data_tvalid : out std_logic;                                     -- output data valid
         m_axis_data_tready : in std_logic;                                      -- output data ready
         m_axis_data_tlast : out std_logic;                                      -- last data out
