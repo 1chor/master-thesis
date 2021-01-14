@@ -236,8 +236,9 @@ begin
         config_valid <= '0';
         in_valid <= '0';
         in_last <= '0';
+        config_data <= (others => '0');
         
-        if (state = TRANSFER_TO_FFT) and (in_ready = '1') then -- forward back pressure
+        if (state = TRANSFER_TO_FFT) and (in_ready = '1') and (input_state = INPUT_IDLE_TRANSFORM) then -- forward back pressure
             stin_ready <= '1';
         else
             stin_ready <= '0';
