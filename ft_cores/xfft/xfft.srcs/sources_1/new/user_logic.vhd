@@ -39,7 +39,6 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
 
 ------------------------------------------------------------------------------
 -- Entity section
@@ -65,12 +64,24 @@ use IEEE.NUMERIC_STD.ALL;
 entity user_logic is
     generic
     (
+        -- ADD USER GENERICS BELOW THIS LINE ---------------
+        --USER generics added here
+        -- ADD USER GENERICS ABOVE THIS LINE ---------------
+        
+        -- DO NOT EDIT BELOW THIS LINE ---------------------
         -- Bus protocol parameters, do not add to or delete
         C_NUM_REG                      : integer              := 2;
         C_SLV_DWIDTH                   : integer              := 64
+        -- DO NOT EDIT ABOVE THIS LINE ---------------------
     );
     port
     (
+        -- ADD USER PORTS BELOW THIS LINE ------------------
+        --USER ports added here
+        -- ADD USER PORTS ABOVE THIS LINE ------------------
+    
+        -- DO NOT EDIT BELOW THIS LINE ---------------------
+        -- Bus protocol ports, do not add to or delete
         Bus2IP_Clk                     : in  std_logic;
         Bus2IP_Resetn                  : in  std_logic;
         Bus2IP_Data                    : in  std_logic_vector(C_SLV_DWIDTH-1 downto 0);
@@ -81,6 +92,7 @@ entity user_logic is
         IP2Bus_RdAck                   : out std_logic;
         IP2Bus_WrAck                   : out std_logic;
         IP2Bus_Error                   : out std_logic
+        -- DO NOT EDIT ABOVE THIS LINE ---------------------
     );
     
     attribute MAX_FANOUT : string;

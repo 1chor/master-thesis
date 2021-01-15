@@ -287,6 +287,4 @@ architecture IMP of fourier_transform is
     user_Bus2IP_RdCE <= ipif_Bus2IP_RdCE(USER_NUM_REG-1 downto 0);
     user_Bus2IP_WrCE <= ipif_Bus2IP_WrCE(USER_NUM_REG-1 downto 0);
     
-
-
 end IMP;
