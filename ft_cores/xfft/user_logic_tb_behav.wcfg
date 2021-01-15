@@ -10,15 +10,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="212000001fs"></ZoomEndTime>
-      <Cursor1Time time="87500000fs"></Cursor1Time>
+      <ZoomStartTime time="12755000000fs"></ZoomStartTime>
+      <ZoomEndTime time="44105000001fs"></ZoomEndTime>
+      <Cursor1Time time="25455000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="175"></NameColumnWidth>
-      <ValueColumnWidth column_width="78"></ValueColumnWidth>
+      <ValueColumnWidth column_width="74"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="19" />
+   <WVObjectSize size="24" />
    <wvobject type="logic" fp_name="/user_logic_tb/Bus2IP_Clk">
       <obj_property name="ElementShortName">Bus2IP_Clk</obj_property>
       <obj_property name="ObjectShortName">Bus2IP_Clk</obj_property>
@@ -63,36 +63,56 @@
       <obj_property name="label">DUT</obj_property>
       <obj_property name="DisplayName">label</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/user_logic_tb/dut/data_in">
+   <wvobject type="array" fp_name="/user_logic_tb/uut/data_in">
       <obj_property name="ElementShortName">data_in[63:0]</obj_property>
       <obj_property name="ObjectShortName">data_in[63:0]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/user_logic_tb/dut/in_valid">
+   <wvobject type="logic" fp_name="/user_logic_tb/uut/in_valid">
       <obj_property name="ElementShortName">in_valid</obj_property>
       <obj_property name="ObjectShortName">in_valid</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/user_logic_tb/dut/in_ready">
+   <wvobject type="logic" fp_name="/user_logic_tb/uut/in_ready">
       <obj_property name="ElementShortName">in_ready</obj_property>
       <obj_property name="ObjectShortName">in_ready</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/user_logic_tb/dut/data_out">
+   <wvobject type="array" fp_name="/user_logic_tb/uut/data_out">
       <obj_property name="ElementShortName">data_out[63:0]</obj_property>
       <obj_property name="ObjectShortName">data_out[63:0]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/user_logic_tb/dut/out_valid">
+   <wvobject type="logic" fp_name="/user_logic_tb/uut/out_valid">
       <obj_property name="ElementShortName">out_valid</obj_property>
       <obj_property name="ObjectShortName">out_valid</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/user_logic_tb/dut/input_reg">
+   <wvobject type="array" fp_name="/user_logic_tb/uut/input_reg">
       <obj_property name="ElementShortName">input_reg[63:0]</obj_property>
       <obj_property name="ObjectShortName">input_reg[63:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/user_logic_tb/dut/output_reg">
+   <wvobject type="array" fp_name="/user_logic_tb/uut/output_reg">
       <obj_property name="ElementShortName">output_reg[63:0]</obj_property>
       <obj_property name="ObjectShortName">output_reg[63:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/user_logic_tb/dut/ft_wrapper_0/fft_inst/s_axis_data_tdata">
+   <wvobject type="array" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/s_axis_data_tdata">
       <obj_property name="ElementShortName">s_axis_data_tdata[63:0]</obj_property>
       <obj_property name="ObjectShortName">s_axis_data_tdata[63:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/m_axis_data_tdata">
+      <obj_property name="ElementShortName">m_axis_data_tdata[63:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_data_tdata[63:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/m_axis_data_tvalid">
+      <obj_property name="ElementShortName">m_axis_data_tvalid</obj_property>
+      <obj_property name="ObjectShortName">m_axis_data_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/user_logic_tb/uut/ft_wrapper_0/index">
+      <obj_property name="ElementShortName">index</obj_property>
+      <obj_property name="ObjectShortName">index</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/user_logic_tb/uut/ft_wrapper_0/index_next">
+      <obj_property name="ElementShortName">index_next</obj_property>
+      <obj_property name="ObjectShortName">index_next</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/out_last">
+      <obj_property name="ElementShortName">out_last</obj_property>
+      <obj_property name="ObjectShortName">out_last</obj_property>
    </wvobject>
 </wave_config>
