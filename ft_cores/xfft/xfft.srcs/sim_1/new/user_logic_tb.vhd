@@ -212,6 +212,17 @@ begin
             wait for 0 ns;
         end procedure;
         
+        -- procedure to read data
+        procedure read_data(output_buffer_idx : integer) is
+        begin
+            Bus2IP_RdCE <= "01";
+            output_buffer(output_buffer_idx) := IP2Bus_Data;            
+            wait until rising_edge(Bus2IP_Clk);
+            Bus2IP_RdCE <= "00";
+            output_buffer(output_buffer_idx) := IP2Bus_Data;   
+            wait until rising_edge(Bus2IP_Clk);
+        end procedure;
+        
         -- procedure to compare two buffers
         procedure compare_buffers(buffer_A, buffer_B : array_t; length : integer) is
         begin
@@ -247,6 +258,9 @@ begin
         wait until rising_edge(Bus2IP_Clk);
         Bus2IP_Resetn <= '1';
         wait until rising_edge(Bus2IP_Clk);
+--        wait until rising_edge(Bus2IP_Clk);
+--        wait until rising_edge(Bus2IP_Clk);
+--        wait until rising_edge(Bus2IP_Clk);
         
         write(my_line, string'("All Ones Test:"));
         writeline(output, my_line);
@@ -266,14 +280,21 @@ begin
         writeline(output, my_line);
         
         output_buffer_idx := 0;
-        
+                
         for i in 0 to SIZE-1 loop
             --send input data
             write_data(real_in(i));
         end loop;
+                
+        --wait_for_output_buffer_fill_level(SIZE);
+        wait for 3.84 us;
         
-        wait_for_output_buffer_fill_level(SIZE);
-        
+        for i in 0 to SIZE-1 loop
+            --read output data
+            read_data(output_buffer_idx);
+            output_buffer_idx := output_buffer_idx + 1;
+        end loop;
+                
         for i in 0 to SIZE-1 loop
             -- read output data
             output_real(i) := output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);

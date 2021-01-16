@@ -10,98 +10,150 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="12755000000fs"></ZoomStartTime>
-      <ZoomEndTime time="44105000001fs"></ZoomEndTime>
-      <Cursor1Time time="25455000000fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="35707310471fs"></ZoomEndTime>
+      <Cursor1Time time="1000000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="175"></NameColumnWidth>
-      <ValueColumnWidth column_width="74"></ValueColumnWidth>
+      <ValueColumnWidth column_width="70"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="24" />
-   <wvobject type="logic" fp_name="/user_logic_tb/Bus2IP_Clk">
-      <obj_property name="ElementShortName">Bus2IP_Clk</obj_property>
-      <obj_property name="ObjectShortName">Bus2IP_Clk</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/user_logic_tb/Bus2IP_Resetn">
-      <obj_property name="ElementShortName">Bus2IP_Resetn</obj_property>
-      <obj_property name="ObjectShortName">Bus2IP_Resetn</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/user_logic_tb/Bus2IP_Data">
-      <obj_property name="ElementShortName">Bus2IP_Data[63:0]</obj_property>
-      <obj_property name="ObjectShortName">Bus2IP_Data[63:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/user_logic_tb/Bus2IP_BE">
-      <obj_property name="ElementShortName">Bus2IP_BE[7:0]</obj_property>
-      <obj_property name="ObjectShortName">Bus2IP_BE[7:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/user_logic_tb/Bus2IP_RdCE">
-      <obj_property name="ElementShortName">Bus2IP_RdCE[1:0]</obj_property>
-      <obj_property name="ObjectShortName">Bus2IP_RdCE[1:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/user_logic_tb/Bus2IP_WrCE">
-      <obj_property name="ElementShortName">Bus2IP_WrCE[1:0]</obj_property>
-      <obj_property name="ObjectShortName">Bus2IP_WrCE[1:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/user_logic_tb/IP2Bus_Data">
-      <obj_property name="ElementShortName">IP2Bus_Data[63:0]</obj_property>
-      <obj_property name="ObjectShortName">IP2Bus_Data[63:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/user_logic_tb/IP2Bus_RdAck">
-      <obj_property name="ElementShortName">IP2Bus_RdAck</obj_property>
-      <obj_property name="ObjectShortName">IP2Bus_RdAck</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/user_logic_tb/IP2Bus_WrAck">
-      <obj_property name="ElementShortName">IP2Bus_WrAck</obj_property>
-      <obj_property name="ObjectShortName">IP2Bus_WrAck</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/user_logic_tb/IP2Bus_Error">
-      <obj_property name="ElementShortName">IP2Bus_Error</obj_property>
-      <obj_property name="ObjectShortName">IP2Bus_Error</obj_property>
+   <WVObjectSize size="18" />
+   <wvobject type="group" fp_name="group86">
+      <obj_property name="label">User Logic</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/user_logic_tb/Bus2IP_Clk">
+         <obj_property name="ElementShortName">Bus2IP_Clk</obj_property>
+         <obj_property name="ObjectShortName">Bus2IP_Clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/user_logic_tb/Bus2IP_Resetn">
+         <obj_property name="ElementShortName">Bus2IP_Resetn</obj_property>
+         <obj_property name="ObjectShortName">Bus2IP_Resetn</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/user_logic_tb/Bus2IP_Data">
+         <obj_property name="ElementShortName">Bus2IP_Data[63:0]</obj_property>
+         <obj_property name="ObjectShortName">Bus2IP_Data[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/user_logic_tb/Bus2IP_BE">
+         <obj_property name="ElementShortName">Bus2IP_BE[7:0]</obj_property>
+         <obj_property name="ObjectShortName">Bus2IP_BE[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/user_logic_tb/Bus2IP_RdCE">
+         <obj_property name="ElementShortName">Bus2IP_RdCE[1:0]</obj_property>
+         <obj_property name="ObjectShortName">Bus2IP_RdCE[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/user_logic_tb/Bus2IP_WrCE">
+         <obj_property name="ElementShortName">Bus2IP_WrCE[1:0]</obj_property>
+         <obj_property name="ObjectShortName">Bus2IP_WrCE[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/user_logic_tb/IP2Bus_Data">
+         <obj_property name="ElementShortName">IP2Bus_Data[63:0]</obj_property>
+         <obj_property name="ObjectShortName">IP2Bus_Data[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/user_logic_tb/IP2Bus_RdAck">
+         <obj_property name="ElementShortName">IP2Bus_RdAck</obj_property>
+         <obj_property name="ObjectShortName">IP2Bus_RdAck</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/user_logic_tb/IP2Bus_WrAck">
+         <obj_property name="ElementShortName">IP2Bus_WrAck</obj_property>
+         <obj_property name="ObjectShortName">IP2Bus_WrAck</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/user_logic_tb/IP2Bus_Error">
+         <obj_property name="ElementShortName">IP2Bus_Error</obj_property>
+         <obj_property name="ObjectShortName">IP2Bus_Error</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject fp_name="divider141" type="divider">
       <obj_property name="label">DUT</obj_property>
       <obj_property name="DisplayName">label</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/user_logic_tb/uut/data_in">
-      <obj_property name="ElementShortName">data_in[63:0]</obj_property>
-      <obj_property name="ObjectShortName">data_in[63:0]</obj_property>
+   <wvobject type="group" fp_name="group151">
+      <obj_property name="label">DUT</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="array" fp_name="/user_logic_tb/uut/data_in">
+         <obj_property name="ElementShortName">data_in[63:0]</obj_property>
+         <obj_property name="ObjectShortName">data_in[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/user_logic_tb/uut/in_valid">
+         <obj_property name="ElementShortName">in_valid</obj_property>
+         <obj_property name="ObjectShortName">in_valid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/user_logic_tb/uut/in_ready">
+         <obj_property name="ElementShortName">in_ready</obj_property>
+         <obj_property name="ObjectShortName">in_ready</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/user_logic_tb/uut/data_out">
+         <obj_property name="ElementShortName">data_out[63:0]</obj_property>
+         <obj_property name="ObjectShortName">data_out[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/user_logic_tb/uut/out_valid">
+         <obj_property name="ElementShortName">out_valid</obj_property>
+         <obj_property name="ObjectShortName">out_valid</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/user_logic_tb/uut/input_reg">
+         <obj_property name="ElementShortName">input_reg[63:0]</obj_property>
+         <obj_property name="ObjectShortName">input_reg[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/user_logic_tb/uut/output_reg">
+         <obj_property name="ElementShortName">output_reg[63:0]</obj_property>
+         <obj_property name="ObjectShortName">output_reg[63:0]</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject type="logic" fp_name="/user_logic_tb/uut/in_valid">
-      <obj_property name="ElementShortName">in_valid</obj_property>
-      <obj_property name="ObjectShortName">in_valid</obj_property>
+   <wvobject fp_name="divider160" type="divider">
+      <obj_property name="label">Wrapper</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/user_logic_tb/uut/in_ready">
-      <obj_property name="ElementShortName">in_ready</obj_property>
-      <obj_property name="ObjectShortName">in_ready</obj_property>
+   <wvobject type="group" fp_name="group156">
+      <obj_property name="label">Input</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="array" fp_name="/user_logic_tb/uut/ft_wrapper_0/stin_data">
+         <obj_property name="ElementShortName">stin_data[63:0]</obj_property>
+         <obj_property name="ObjectShortName">stin_data[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/stin_valid">
+         <obj_property name="ElementShortName">stin_valid</obj_property>
+         <obj_property name="ObjectShortName">stin_valid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/stin_ready">
+         <obj_property name="ElementShortName">stin_ready</obj_property>
+         <obj_property name="ObjectShortName">stin_ready</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject type="array" fp_name="/user_logic_tb/uut/data_out">
-      <obj_property name="ElementShortName">data_out[63:0]</obj_property>
-      <obj_property name="ObjectShortName">data_out[63:0]</obj_property>
+   <wvobject type="group" fp_name="group159">
+      <obj_property name="label">Output</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="array" fp_name="/user_logic_tb/uut/ft_wrapper_0/stout_data">
+         <obj_property name="ElementShortName">stout_data[63:0]</obj_property>
+         <obj_property name="ObjectShortName">stout_data[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/stout_valid">
+         <obj_property name="ElementShortName">stout_valid</obj_property>
+         <obj_property name="ObjectShortName">stout_valid</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject type="logic" fp_name="/user_logic_tb/uut/out_valid">
-      <obj_property name="ElementShortName">out_valid</obj_property>
-      <obj_property name="ObjectShortName">out_valid</obj_property>
+   <wvobject fp_name="divider162" type="divider">
+      <obj_property name="label">States</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/user_logic_tb/uut/input_reg">
-      <obj_property name="ElementShortName">input_reg[63:0]</obj_property>
-      <obj_property name="ObjectShortName">input_reg[63:0]</obj_property>
+   <wvobject type="other" fp_name="/user_logic_tb/uut/ft_wrapper_0/state">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/user_logic_tb/uut/output_reg">
-      <obj_property name="ElementShortName">output_reg[63:0]</obj_property>
-      <obj_property name="ObjectShortName">output_reg[63:0]</obj_property>
+   <wvobject type="other" fp_name="/user_logic_tb/uut/ft_wrapper_0/state_next">
+      <obj_property name="ElementShortName">state_next</obj_property>
+      <obj_property name="ObjectShortName">state_next</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/s_axis_data_tdata">
-      <obj_property name="ElementShortName">s_axis_data_tdata[63:0]</obj_property>
-      <obj_property name="ObjectShortName">s_axis_data_tdata[63:0]</obj_property>
+   <wvobject type="other" fp_name="/user_logic_tb/uut/ft_wrapper_0/input_state">
+      <obj_property name="ElementShortName">input_state</obj_property>
+      <obj_property name="ObjectShortName">input_state</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/m_axis_data_tdata">
-      <obj_property name="ElementShortName">m_axis_data_tdata[63:0]</obj_property>
-      <obj_property name="ObjectShortName">m_axis_data_tdata[63:0]</obj_property>
+   <wvobject type="other" fp_name="/user_logic_tb/uut/ft_wrapper_0/input_state_next">
+      <obj_property name="ElementShortName">input_state_next</obj_property>
+      <obj_property name="ObjectShortName">input_state_next</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/m_axis_data_tvalid">
-      <obj_property name="ElementShortName">m_axis_data_tvalid</obj_property>
-      <obj_property name="ObjectShortName">m_axis_data_tvalid</obj_property>
+   <wvobject fp_name="divider164" type="divider">
+      <obj_property name="label">Indices</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
    </wvobject>
    <wvobject type="other" fp_name="/user_logic_tb/uut/ft_wrapper_0/index">
       <obj_property name="ElementShortName">index</obj_property>
@@ -111,8 +163,104 @@
       <obj_property name="ElementShortName">index_next</obj_property>
       <obj_property name="ObjectShortName">index_next</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/out_last">
-      <obj_property name="ElementShortName">out_last</obj_property>
-      <obj_property name="ObjectShortName">out_last</obj_property>
+   <wvobject type="other" fp_name="/user_logic_tb/uut/ft_wrapper_0/receive_index">
+      <obj_property name="ElementShortName">receive_index</obj_property>
+      <obj_property name="ObjectShortName">receive_index</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/user_logic_tb/uut/ft_wrapper_0/receive_index_next">
+      <obj_property name="ElementShortName">receive_index_next</obj_property>
+      <obj_property name="ObjectShortName">receive_index_next</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider173" type="divider">
+      <obj_property name="label">FFT instance</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group195">
+      <obj_property name="label">FFT instance</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="group" fp_name="group191">
+         <obj_property name="label">Config Channel</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="array" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/s_axis_config_tdata">
+            <obj_property name="ElementShortName">s_axis_config_tdata[23:0]</obj_property>
+            <obj_property name="ObjectShortName">s_axis_config_tdata[23:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/s_axis_config_tvalid">
+            <obj_property name="ElementShortName">s_axis_config_tvalid</obj_property>
+            <obj_property name="ObjectShortName">s_axis_config_tvalid</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/s_axis_config_tready">
+            <obj_property name="ElementShortName">s_axis_config_tready</obj_property>
+            <obj_property name="ObjectShortName">s_axis_config_tready</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="group" fp_name="group192">
+         <obj_property name="label">Input Channel</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="array" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/s_axis_data_tdata">
+            <obj_property name="ElementShortName">s_axis_data_tdata[63:0]</obj_property>
+            <obj_property name="ObjectShortName">s_axis_data_tdata[63:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/s_axis_data_tvalid">
+            <obj_property name="ElementShortName">s_axis_data_tvalid</obj_property>
+            <obj_property name="ObjectShortName">s_axis_data_tvalid</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/s_axis_data_tready">
+            <obj_property name="ElementShortName">s_axis_data_tready</obj_property>
+            <obj_property name="ObjectShortName">s_axis_data_tready</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/s_axis_data_tlast">
+            <obj_property name="ElementShortName">s_axis_data_tlast</obj_property>
+            <obj_property name="ObjectShortName">s_axis_data_tlast</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="group" fp_name="group193">
+         <obj_property name="label">Output Channel</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="array" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/m_axis_data_tdata">
+            <obj_property name="ElementShortName">m_axis_data_tdata[63:0]</obj_property>
+            <obj_property name="ObjectShortName">m_axis_data_tdata[63:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/m_axis_data_tvalid">
+            <obj_property name="ElementShortName">m_axis_data_tvalid</obj_property>
+            <obj_property name="ObjectShortName">m_axis_data_tvalid</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/m_axis_data_tready">
+            <obj_property name="ElementShortName">m_axis_data_tready</obj_property>
+            <obj_property name="ObjectShortName">m_axis_data_tready</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/m_axis_data_tlast">
+            <obj_property name="ElementShortName">m_axis_data_tlast</obj_property>
+            <obj_property name="ObjectShortName">m_axis_data_tlast</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="group" fp_name="group194">
+         <obj_property name="label">Events</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/event_frame_started">
+            <obj_property name="ElementShortName">event_frame_started</obj_property>
+            <obj_property name="ObjectShortName">event_frame_started</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/event_tlast_unexpected">
+            <obj_property name="ElementShortName">event_tlast_unexpected</obj_property>
+            <obj_property name="ObjectShortName">event_tlast_unexpected</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/event_tlast_missing">
+            <obj_property name="ElementShortName">event_tlast_missing</obj_property>
+            <obj_property name="ObjectShortName">event_tlast_missing</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/event_status_channel_halt">
+            <obj_property name="ElementShortName">event_status_channel_halt</obj_property>
+            <obj_property name="ObjectShortName">event_status_channel_halt</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/event_data_in_channel_halt">
+            <obj_property name="ElementShortName">event_data_in_channel_halt</obj_property>
+            <obj_property name="ObjectShortName">event_data_in_channel_halt</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/user_logic_tb/uut/ft_wrapper_0/fft_inst/event_data_out_channel_halt">
+            <obj_property name="ElementShortName">event_data_out_channel_halt</obj_property>
+            <obj_property name="ObjectShortName">event_data_out_channel_halt</obj_property>
+         </wvobject>
+      </wvobject>
    </wvobject>
 </wave_config>
