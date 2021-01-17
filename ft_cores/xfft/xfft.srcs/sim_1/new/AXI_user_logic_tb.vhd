@@ -20,8 +20,12 @@
 
 
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use IEEE.std_logic_textio.all;
+
+library STD;
+use STD.textio.all;
 
 
 entity AXI_user_logic_tb is
@@ -68,11 +72,13 @@ architecture bench of AXI_user_logic_tb is
     
     -- constant declaration
     constant SIZE : positive := 128;
-    constant INPUT_WIDTH : positive := 32;
+    constant DATA_WIDTH : positive := C_S_AXI_DATA_WIDTH;
+    constant INPUT_WIDTH : positive := C_S_AXI_DATA_WIDTH/2;
     constant CLK_PERIOD : time := 10 ns;
     constant stop_clock : boolean := false;
     constant ZERO_PADDING : std_logic_vector(INPUT_WIDTH - 1 downto 0) := (others => '0');
-            
+           
+    -- signal declaration
     signal S_AXI_ACLK                     :  std_logic;
     signal S_AXI_ARESETN                  :  std_logic;
     signal S_AXI_AWADDR                   :  std_logic_vector(C_S_AXI_ADDR_WIDTH-1 downto 0);
@@ -98,6 +104,23 @@ architecture bench of AXI_user_logic_tb is
     shared variable ClockCount : integer range 0 to 50_000 := 10;
     signal sendIt : std_logic := '0';
     signal readIt : std_logic := '0';
+    
+    shared variable my_line : line;
+        
+    -- type declaration
+    subtype word32_t is std_logic_vector(INPUT_WIDTH -1 downto 0);
+    type array_t is array(integer range 0 to SIZE -1) of word32_t;
+    
+    subtype word64_t is std_logic_vector(DATA_WIDTH -1 downto 0);
+    type output_buf_t is array(integer range 0 to SIZE -1) of word64_t;
+    
+    shared variable real_in : array_t;
+    
+    shared variable real_out : array_t;
+    shared variable imag_out : array_t;
+    
+    shared variable output_buffer : output_buf_t;
+    shared variable output_buffer_idx : integer := 0;
 
 begin
 
@@ -189,61 +212,177 @@ begin
 
     -- 
     tb : process
-    begin
-        S_AXI_ARESETN <= '0';
-        sendIt <= '0';
-        wait for 15 ns;
-        S_AXI_ARESETN <= '1';
         
-        for i in 0 to SIZE-1 loop
+        variable output_real : array_t;
+        variable output_imag : array_t;        
+        
+        -- function to read file content 32 bit
+        impure function read_file32(filename: string) return array_t is
+            file FileHandle : text open read_mode is filename;
+            variable CurrentLine : line;
+            variable TempWord : word32_t;
+            variable Result : array_t := (others => (others => '0'));
+        begin
+            for i in 0 to SIZE-1 loop
+                exit when endfile(FileHandle);
+                
+                readline(FileHandle, CurrentLine);
+                hread(CurrentLine, TempWord);
+                --report "TempWord: " & to_hstring(TempWord);
+                Result(i) := TempWord;
+            end loop;
+            
+            return Result;        
+        end function;
+        
+        -- function to read file content 64 bit
+        impure function read_file64(filename: string) return output_buf_t is
+            file FileHandle : text open read_mode is filename;
+            variable CurrentLine : line;
+            variable TempWord : word64_t;
+            variable Result : output_buf_t := (others => (others => '0'));
+        begin
+            for i in 0 to SIZE-1 loop
+                exit when endfile(FileHandle);
+                
+                readline(FileHandle, CurrentLine);
+                hread(CurrentLine, TempWord);
+                --report "TempWord: " & to_hstring(TempWord);
+                Result(i) := TempWord;
+            end loop;
+            
+            return Result;        
+        end function;
+        
+        -- function to convert std_logic_vector to hex string
+        function slv_to_hex(slv : in std_logic_vector) return string is
+            constant hex_digits : string(1 to 16) := "0123456789abcdef";
+            constant num_hex_digits : integer := integer((slv'length+3)/4);
+            variable ret_value : string(1 to num_hex_digits);
+            variable zero_padded_slv : std_logic_vector((4*num_hex_digits)-1 downto 0) := (others => '0');
+            variable r : integer := 0;
+        begin
+            zero_padded_slv(slv'range) := slv;
+            loop
+                ret_value(num_hex_digits-r) := hex_digits(to_integer(unsigned( zero_padded_slv( (r+1)*4-1 downto 4*r) ))+1);
+                r := r + 1;
+                if num_hex_digits-r = 0 then
+                    exit;
+                end if;
+            end loop;
+            
+            return ret_value;
+        end function;
+        
+        -- procedure to write data
+        procedure write_data(val_real : std_logic_vector) is
+        begin
             S_AXI_AWADDR <= b"00";
-            S_AXI_WDATA <= ZERO_PADDING & x"3f800000";
+            --send input data (only real part)
+            S_AXI_WDATA <= ZERO_PADDING & val_real;
             S_AXI_WSTRB <= b"11111111";
             sendIt <= '1';                --Start AXI Write to Slave
             wait for 1 ns; sendIt <= '0'; --Clear Start Send Flag
             wait until S_AXI_BVALID = '1';
             wait until S_AXI_BVALID = '0';  --AXI Write finished
             S_AXI_WSTRB <= (others => '0');
+        end procedure;
+        
+        -- procedure to read data
+        procedure read_data(output_buffer_idx : integer) is
+        begin
+            S_AXI_ARADDR <= b"01";
+            readIt <= '1';                --Start AXI Read from Slave
+            wait for 1 ns; readIt <= '0'; --Clear "Start Read" Flag
+            wait until S_AXI_RVALID = '1';
+            output_buffer(output_buffer_idx) := S_AXI_RDATA;
+            wait until S_AXI_RVALID = '0';
+        end procedure;
+        
+        -- procedure to compare two buffers
+        procedure compare_buffers(buffer_A, buffer_B : array_t; length : integer) is
+        begin
+            for i in 0 to length-1 loop
+                if ( buffer_A(i) /= buffer_B(i) ) then
+                    report ("Buffers don't match (index = " & integer'image(i) & ", " & slv_to_hex(buffer_A(i)) & " vs. " & slv_to_hex(buffer_B(i))) severity error;
+                end if;
+            end loop;
+        end procedure;        
+        
+        -- procedure to check output fill level
+--        procedure wait_for_output_buffer_fill_level(fill_level : integer) is
+--        begin
+--            loop
+--                wait for 100 ns;
+--                if(output_buffer_idx = fill_level) then
+--                    exit;
+--                end if;
+--            end loop;
+--        end procedure;
+        
+    begin
+    
+        write(my_line, string'("-----------------------------------"));
+        writeline(output, my_line);
+        
+        --Test Reset
+        S_AXI_ARESETN <= '0';
+        sendIt <= '0';
+        
+        wait until rising_edge(S_AXI_ACLK);
+        wait until rising_edge(S_AXI_ACLK);
+        wait until rising_edge(S_AXI_ACLK);
+        S_AXI_ARESETN <= '1';
+        wait until rising_edge(S_AXI_ACLK);
+        
+        write(my_line, string'("All Ones Test:"));
+        writeline(output, my_line);
+        
+        write(my_line, string'("Load Input Buffers"));
+        writeline(output, my_line);
+        
+        real_in := read_file32("ones.txt");
+        
+        write(my_line, string'("Load Reference Output Buffers"));
+        writeline(output, my_line);
+        
+        real_out := read_file32("result_ones.txt");
+        imag_out := read_file32("result_ones_imag.txt");
+        
+        write(my_line, string'("Start FFT Test"));
+        writeline(output, my_line);
+        
+        output_buffer_idx := 0;
+        
+        for i in 0 to SIZE-1 loop
+            --send input data
+            write_data(real_in(i));
         end loop;
         
---        S_AXI_AWADDR <= b"00";
---        S_AXI_WDATA <= ZERO_PADDING & x"00000001";
---        S_AXI_WSTRB <= b"11111111";
---        sendIt <= '1';                --Start AXI Write to Slave
---        wait for 1 ns; sendIt <= '0'; --Clear Start Send Flag
---        wait until S_AXI_BVALID = '1';
---        wait until S_AXI_BVALID = '0';  --AXI Write finished
---        S_AXI_WSTRB <= (others => '0');
+        for i in 0 to SIZE-1 loop
+            --read output data
+            read_data(output_buffer_idx);
+            output_buffer_idx := output_buffer_idx + 1;
+        end loop;
         
---        S_AXI_AWADDR <= b"00";
---        S_AXI_WDATA <= ZERO_PADDING & x"00000002";
---        S_AXI_WSTRB <= b"11111111";
---        sendIt <= '1';                --Start AXI Write to Slave
---        wait for 1 ns; sendIt <= '0'; --Clear Start Send Flag
---        wait until S_AXI_BVALID = '1';
---        wait until S_AXI_BVALID = '0';  --AXI Write finished
---        S_AXI_WSTRB <= (others => '0');
+        for i in 0 to SIZE-1 loop
+            -- read output data
+            output_real(i) := output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
+            output_imag(i) := output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
+        end loop;    
         
---        S_AXI_AWADDR <= b"01";
---        S_AXI_WDATA <= ZERO_PADDING & x"A5A5A5A5";
---        S_AXI_WSTRB <= b"11111111";
---        sendIt <= '1';                --Start AXI Write to Slave
---        wait for 1 ns; sendIt <= '0'; --Clear Start Send Flag
---        wait until S_AXI_BVALID = '1';
---        wait until S_AXI_BVALID = '0';  --AXI Write finished
---        S_AXI_WSTRB <= (others => '0');
+        compare_buffers(output_real, real_out, SIZE);
+        compare_buffers(output_imag, imag_out, SIZE);
         
-        S_AXI_ARADDR <= b"00";
-        readIt <= '1';                --Start AXI Read from Slave
-        wait for 1 ns; readIt <= '0'; --Clear "Start Read" Flag
-        wait until S_AXI_RVALID = '1';
-        wait until S_AXI_RVALID = '0';
+        write(my_line, string'("Done"));
+        writeline(output, my_line);
         
-        S_AXI_ARADDR <= b"01";
-        readIt <= '1';                --Start AXI Read from Slave
-        wait for 1 ns; readIt <= '0'; --Clear "Start Read" Flag
-        wait until S_AXI_RVALID = '1';
-        wait until S_AXI_RVALID = '0';
+        --------------------------------------------------------------
+        write(my_line, string'("-----------------------------------"));
+        writeline(output, my_line);
+        write(my_line, string'("-----------------------------------"));
+        writeline(output, my_line);
+        --------------------------------------------------------------
         
         -- End of simulation
         report "Not a real failure. Simulation finished successfully. Test completed successfully" severity failure;
