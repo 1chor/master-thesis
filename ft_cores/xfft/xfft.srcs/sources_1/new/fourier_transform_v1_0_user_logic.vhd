@@ -426,7 +426,7 @@ begin
         reset       => reset_n,
         
         -- streaming sink (input)
-        stin_data   => input_reg,
+        stin_data   => S_AXI_WDATA,
         stin_valid  => S_AXI_WVALID,
         stin_ready  => in_ready,
         
