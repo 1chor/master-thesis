@@ -11,11 +11,11 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="1146209387fs"></ZoomEndTime>
-      <Cursor1Time time="1000000000fs"></Cursor1Time>
+      <ZoomEndTime time="38395000001fs"></ZoomEndTime>
+      <Cursor1Time time="38395000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="175"></NameColumnWidth>
+      <NameColumnWidth column_width="171"></NameColumnWidth>
       <ValueColumnWidth column_width="66"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="23" />
@@ -195,6 +195,7 @@
    <wvobject type="group" fp_name="group128">
       <obj_property name="label">AXI signals</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/axi_awaddr">
          <obj_property name="ElementShortName">axi_awaddr[1:0]</obj_property>
          <obj_property name="ObjectShortName">axi_awaddr[1:0]</obj_property>
@@ -279,6 +280,7 @@
    <wvobject type="group" fp_name="group141">
       <obj_property name="label">Input</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/stin_data">
          <obj_property name="ElementShortName">stin_data[63:0]</obj_property>
          <obj_property name="ObjectShortName">stin_data[63:0]</obj_property>
@@ -295,6 +297,7 @@
    <wvobject type="group" fp_name="group144">
       <obj_property name="label">Output</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/stout_data">
          <obj_property name="ElementShortName">stout_data[63:0]</obj_property>
          <obj_property name="ObjectShortName">stout_data[63:0]</obj_property>
@@ -302,6 +305,10 @@
       <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/stout_valid">
          <obj_property name="ElementShortName">stout_valid</obj_property>
          <obj_property name="ObjectShortName">stout_valid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/stout_ready">
+         <obj_property name="ElementShortName">stout_ready</obj_property>
+         <obj_property name="ObjectShortName">stout_ready</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="divider145" type="divider">
@@ -387,6 +394,7 @@
    <wvobject type="group" fp_name="group175">
       <obj_property name="label">Output Channel</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fft_inst/m_axis_data_tdata">
          <obj_property name="ElementShortName">m_axis_data_tdata[63:0]</obj_property>
          <obj_property name="ObjectShortName">m_axis_data_tdata[63:0]</obj_property>
@@ -407,6 +415,7 @@
    <wvobject type="group" fp_name="group176">
       <obj_property name="label">Events</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fft_inst/event_frame_started">
          <obj_property name="ElementShortName">event_frame_started</obj_property>
          <obj_property name="ObjectShortName">event_frame_started</obj_property>
