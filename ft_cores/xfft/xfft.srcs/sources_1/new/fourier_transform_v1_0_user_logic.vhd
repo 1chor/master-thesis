@@ -141,6 +141,7 @@ architecture arch_imp of user_logic is
 	signal reset_n      : std_logic;   
 	  
     signal in_ready     : std_logic;
+    signal in_valid     : std_logic;
     
     signal data_out     : std_logic_vector(C_S_AXI_DATA_WIDTH-1 downto 0);
     signal out_valid    : std_logic;
@@ -237,10 +238,11 @@ begin
 	    if S_AXI_ARESETN = '0' then
 	      axi_wready <= '0';
 	    else
-	      if (axi_wready = '0' and S_AXI_WVALID = '1' and S_AXI_AWVALID = '1' and aw_en = '1') then
+	      if (axi_wready = '0' and S_AXI_WVALID = '1' and S_AXI_AWVALID = '1' and aw_en = '1' and in_ready = '1') then
 	          -- slave is ready to accept write data when 
 	          -- there is a valid write address and write data
-	          -- on the write address and data bus. This design 
+	          -- on the write address and data bus and the 
+              -- ft_wrapper is ready for input data. This design 
 	          -- expects no outstanding transactions.           
 	          axi_wready <= '1';
 	      else
@@ -266,8 +268,10 @@ begin
 	    if S_AXI_ARESETN = '0' then
 	      input_reg <= (others => '0');
 	      output_reg <= (others => '0');
+	      in_valid <= '0';
 	    else
 	      loc_addr := axi_awaddr(ADDR_LSB + OPT_MEM_ADDR_BITS downto ADDR_LSB);
+	      in_valid <= '0';
 	      if (slv_reg_wren = '1') then
 	        case loc_addr is
 	          when b"00" =>
@@ -276,6 +280,7 @@ begin
 	                -- Respective byte enables are asserted as per write strobes                   
 	                -- slave registor 0
 	                input_reg(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
+                    in_valid <= '1';
 	              end if;
 	            end loop;
 	          when b"01" =>
@@ -289,6 +294,7 @@ begin
 	          when others =>
 	            input_reg <= input_reg;
 	            output_reg <= output_reg;
+	            in_valid <= in_valid;
 	        end case;
 	      end if;
 	    end if;
@@ -332,7 +338,7 @@ begin
 	      axi_arready <= '0';
 	      axi_araddr  <= (others => '1');
 	    else
-	      if (axi_arready = '0' and S_AXI_ARVALID = '1' and out_valid = '1') then
+	      if (axi_arready = '0' and S_AXI_ARVALID = '1') then
 	        -- indicates that the slave has acceped the valid read address
 	        axi_arready <= '1';
 	        -- Read Address latching 
@@ -355,11 +361,11 @@ begin
 	process (S_AXI_ACLK)
 	begin
 	  if rising_edge(S_AXI_ACLK) then
-	    if S_AXI_ARESETN = '0' then
+        if S_AXI_ARESETN = '0' then
 	      axi_rvalid <= '0';
 	      axi_rresp  <= "00";
 	    else
-	      if (axi_arready = '1' and S_AXI_ARVALID = '1' and axi_rvalid = '0') then
+	      if (axi_arready = '1' and S_AXI_ARVALID = '1' and axi_rvalid = '0' and out_valid = '1') then
 	        -- Valid read data is available at the read data bus
 	        axi_rvalid <= '1';
 	        axi_rresp  <= "00"; -- 'OKAY' response
@@ -374,7 +380,7 @@ begin
 	-- Implement memory mapped register select and read logic generation
 	-- Slave register read enable is asserted when valid address is available
 	-- and the slave is ready to accept the read address.
-	slv_reg_rden <= axi_arready and S_AXI_ARVALID and (not axi_rvalid) ;
+	slv_reg_rden <= axi_arready and S_AXI_ARVALID and (not axi_rvalid) and out_valid;
 
 	process (input_reg, data_out, axi_araddr, S_AXI_ARESETN, slv_reg_rden)
 	variable loc_addr :std_logic_vector(OPT_MEM_ADDR_BITS downto 0);
@@ -426,14 +432,13 @@ begin
         reset       => reset_n,
         
         -- streaming sink (input)
-        stin_data   => S_AXI_WDATA,
-        stin_valid  => S_AXI_WVALID,
+        stin_data   => input_reg,
+        stin_valid  => in_valid,
         stin_ready  => in_ready,
         
         -- streaming source (ouput)
         stout_data  => data_out,
-        stout_valid => out_valid
-        --stout_ready
+        stout_valid => out_valid,
         stout_ready => axi_arready
     );
     
