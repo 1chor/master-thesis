@@ -47,8 +47,8 @@ entity ft_wrapper is
         
         -- streaming source (ouput)
         stout_data : out std_logic_vector(C_S_AXI_DATA_WIDTH -1 downto 0);
-        stout_valid : out std_logic
-        --stout_ready : in std_logic        
+        stout_valid : out std_logic;
+        stout_ready : in std_logic        
     );
 begin
     -- check if SIZE is valid    
@@ -288,7 +288,7 @@ begin
     -----------------------------------------------------------------------
     
     --FFT status process
-    fft_proc: process (state, index, receive_index)
+    fft_proc: process (state, index, receive_index, stout_ready)
     begin
         --default values to prevent latches
         state_next <= state;
@@ -303,7 +303,7 @@ begin
                end if;
                
             when OUTPUT_DATA =>
-                out_ready <= '1'; --ready for output
+                out_ready <= stout_ready; --ready for output
                 
                 if receive_index = SIZE then                    
                     state_next <= TRANSFER_TO_FFT;
@@ -318,7 +318,7 @@ begin
     -----------------------------------------------------------------------
     
     --process to get output of the FFT
-    output_proc: process (receive_index, state, out_valid)
+    output_proc: process (receive_index, state, stout_ready, out_valid)
     begin
         --default values to prevent latches
         receive_index_next <= receive_index;
@@ -327,7 +327,7 @@ begin
         if (receive_index = SIZE) then --independent of valid signals
             receive_index_next <= 0; --reset counter
         
-        elsif (state = OUTPUT_DATA) and (out_valid = '1') then --check if the output data of the FFT is valid
+        elsif (stout_ready = '1') and (state = OUTPUT_DATA) and (out_valid = '1') then --check if the output data of the FFT is valid
             --set output data valid
             stout_valid <= '1';
             

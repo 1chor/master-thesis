@@ -162,8 +162,8 @@ architecture arch_imp of user_logic is
         
         -- streaming source (ouput)
         stout_data    : out std_logic_vector(63 downto 0);
-        stout_valid   : out std_logic
-        --stout_ready : in std_logic        
+        stout_valid   : out std_logic;
+        stout_ready : in std_logic        
     );
     end component ft_wrapper;
 
@@ -434,6 +434,7 @@ begin
         stout_data  => data_out,
         stout_valid => out_valid
         --stout_ready
+        stout_ready => axi_arready
     );
     
 	-- User logic ends
