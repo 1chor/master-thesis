@@ -47,8 +47,8 @@ entity ft_wrapper is
         
         -- streaming source (ouput)
         stout_data : out std_logic_vector(C_S_AXI_DATA_WIDTH -1 downto 0);
-        stout_valid : out std_logic
-        --stout_ready : in std_logic        
+        stout_valid : out std_logic;
+        stout_ready : in std_logic        
     );
 begin
     -- check if SIZE is valid    
