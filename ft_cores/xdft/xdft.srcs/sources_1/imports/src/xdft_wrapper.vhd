@@ -354,7 +354,6 @@ begin
         float2fixed_in_tvalid <= '0';
         
         float2fixed_in_tdata <= (others => '0');
-        --in_real <= (others => '0');
         
         case input_state is
         
@@ -378,7 +377,7 @@ begin
             when FIRST_FRAME =>
                 stin_ready <= '1';
                 
-                if (state = TRANSFER_TO_FFT) and (first_ready_in = '1') and (stin_valid = '1') and (float2fixed_out_tvalid = '1') then --check if DFT is ready to process data and data_in is valid
+                if (state = TRANSFER_TO_FFT) and (first_ready_in = '1') and (stin_valid = '1') then --check if DFT is ready to process data and data_in is valid
                     --convert next input
                     float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
                     float2fixed_in_tvalid <= '1';
@@ -395,7 +394,7 @@ begin
             when OTHER_FRAMES => 
                 stin_ready <= '1';
                    
-                if (state = TRANSFER_TO_FFT) and (stin_valid = '1') and (float2fixed_out_tvalid = '1') then --check if DFT is ready to process data and data_in is valid
+                if (state = TRANSFER_TO_FFT) and (stin_valid = '1') then --check if DFT is ready to process data and data_in is valid
                     --convert next input
                     float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
                     float2fixed_in_tvalid <= '1';
@@ -414,7 +413,7 @@ begin
                     index_next <= 0; --reset counter
                     input_state_next <= INPUT_IDLE;
                     
-                elsif (state = TRANSFER_TO_FFT) and (float2fixed_out_tvalid = '1') then --check if DFT is ready to process data and data_in is valid
+                elsif (state = TRANSFER_TO_FFT) then --check if DFT is ready to process data and data_in is valid
                     stin_ready <= '1';
                        
                     --increase index
