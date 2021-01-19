@@ -71,7 +71,7 @@ architecture bench of AXI_user_logic_tb is
 	end component user_logic;
     
     -- constant declaration
-    constant SIZE : positive := 128;
+    constant SIZE : positive := 108;
     constant DATA_WIDTH : positive := C_S_AXI_DATA_WIDTH;
     constant INPUT_WIDTH : positive := C_S_AXI_DATA_WIDTH/2;
     constant CLK_PERIOD : time := 10 ns;
