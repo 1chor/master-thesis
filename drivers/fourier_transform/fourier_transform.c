@@ -39,19 +39,29 @@ static u64 data_read[MAX_SIZE];
 */
 static ssize_t proc_fourier_transform_write(struct file *file, const char __user * buf, size_t count, loff_t * ppos)
 {	
+	char input[64];
 	int ret;
 	u64 data;
 	
 	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
 	
-	//Convert input hex string to integer
-	ret = kstrtoull_from_user(buf, count, 16, &data);
+	if (count < 64) {
+		if (copy_from_user(input, buf, count))
+			return -EFAULT;
+		input[count-1] = '\0';
+	}
 	
+	printk(KERN_DEBUG "Input: %s\n", input);
+	
+	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
+	
+	//Convert input hex string to integer
+	ret = kstrtoull(input, 16, &data);
 	if (ret) {
-		printk(KERN_ERR "Input %s is invalid!!\n", buf);
+		printk("Input %s is invalid\n", input);
 		return ret;
 	}
-		
+	
 	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
 	
 	printk(KERN_DEBUG "Data: %lld | %llx\n", data, data);
