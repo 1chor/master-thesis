@@ -38,6 +38,11 @@ insmod /data/modules/simple_filters.ko
 
 echo > /dev/kmsg # empty line
 
+echo "++ Loading fourier_transform module ++" > /dev/kmsg
+insmod /data/modules/fourier_transform.ko
+
+echo > /dev/kmsg # empty line
+
 #remount filesystem rw
 mount -o remount,rw /
 
