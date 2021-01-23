@@ -24,112 +24,43 @@ unsigned long *output_reg_addr;
 struct resource *res;		/* Device Resource Structure */
 unsigned long remap_size;	/* Device Memory Size */
 
-static u64 data_write[MAX_SIZE];
 static u64 data_read[MAX_SIZE];
 
-static u64 input[MAX_SIZE];
-static u8 output[4 * MAX_SIZE];
+//~ static u8 output[4 * MAX_SIZE];
   
-static struct file *filp = NULL;
-static u32 filesize = 0;
+//~ static struct file *filp = NULL;
+//~ static u32 filesize = 0;
 
 /* Write operation for /proc/fourier_transform
 * -----------------------------------
 * When user cat a string to /proc/fourier_transform file, the string will be stored in
-* const char __user *buf. The File in that path will be opened and the fourier_transform
-* hash will be generated in the logic fabric.
+* const char __user *buf. The string will be send to the fourier_transform 
+* unit in the logic fabric.
 */
 static ssize_t proc_fourier_transform_write(struct file *file, const char __user * buf, size_t count, loff_t * ppos)
-{
-	char filename[64];
-	mm_segment_t oldfs;
+{	
 	int ret;
-	u32 i;
-
+	u64 data;
+	
 	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
 	
-	if(filp > 0 && !IS_ERR(filp))
-	{
-		printk("fourier_transform Module busy");
-		return -EFAULT;
-	}
-
-	if (count < 64) {
-		if (copy_from_user(filename, buf, count))
-			return -EFAULT;
-		filename[count-1] = '\0';
-	}
+	//Convert input hex string to integer
+	ret = kstrtoull_from_user(buf, count, 16, &data);
 	
-	printk(KERN_DEBUG "Filename: %s\n", filename);
-	
-	filp = filp_open(filename, O_RDONLY, 0);
-
+	if (ret) {
+		printk(KERN_ERR "Input %s is invalid!!\n", buf);
+		return ret;
+	}
+		
 	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
 	
-	if(IS_ERR(filp))
-	{
-		printk("File \"%s\" is invalid\n", filename);
-		return -EFAULT;
-	}
-
-	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
+	printk(KERN_DEBUG "Data: %lld | %llx\n", data, data);
 	
-	filesize = vfs_llseek(filp, 0, SEEK_END);
-	vfs_llseek(filp, 0, 0);
-	printk("File %s is %u (0x%x) bytes long\n", filename, filesize, filesize);
-
 	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
 		
-	if ((filesize/4) > MAX_SIZE)
-	{
-		printk("Size of the file (%u bytes) is bigger than actual configured size (%u bytes) in device driver!\n", filesize, (MAX_SIZE*4));
-	}
-	
-	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
-	
-	//read from file
-	oldfs = get_fs();
-	set_fs(get_ds());
-	ret = kernel_read(filp, &input, filesize, &filp->f_pos);
-	set_fs(oldfs);
-	
-	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
-	
-	//close file
-	if(filp > 0)
-		filp_close(filp, 0);
-	filp = NULL;
-	
-	if(filesize != ret)
-	{
-		printk("Could only read %u bytes, need %u\n",ret,filesize);
-	}
-	
-	for (i = 0; i < (filesize); i++)
-	{
-		printk("Input[%d]: %llx\n", i, input[i]);
-	}
-	
-	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
-	
-	for (i = 0; i < (filesize/4); i++)
-	{
-		data_write[i] = (((u64)input[4*i]) << 56u) | (((u64)input[(4*i) + 1u]) << 48u) | (((u64)input[(4*i) + 2u]) << 40u) | (((u64)input[(4*i) + 3u]) << 32u) | (((u64)input[(4*i) + 4u]) << 24u) | (((u64)input[(4*i) + 5u]) << 16u) | (((u64)input[(4*i) + 6u]) << 8u) | (((u64)input[(4*i) + 7u])); 
-	}
-	
-	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
-	
-	//for (i = 0; i < (filesize/4); i++)
-	//{
-		//printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
-		////Write data to fourier transformation
-		//wmb();
-		//iowrite64(data_write[i], input_reg_addr);
-		////udelay(10);
-		////wmb();
-		////image_data_read[i] = ioread32(output_reg_addr);
-		////udelay(10);
-	//}
+	//Write data to fourier transformation
+	wmb();
+	iowrite64(data, input_reg_addr);
 
 	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
 
@@ -144,10 +75,10 @@ static ssize_t proc_fourier_transform_write(struct file *file, const char __user
 static int proc_fourier_transform_show(struct seq_file *p, void *v)
 {
 	int i;
-	for(i = 0; i < (filesize/4); i++)
+	for(i = 0; i < (128); i++)
 	{
-		//wmb();
-		//data_read[i] = ioread32(output_reg_addr);
+		wmb();
+		data_read[i] = ioread64(output_reg_addr);
 		seq_printf(p, "%16llx", data_read[i]);
 	}
 	return 0;
@@ -259,8 +190,8 @@ err_release_region:
 */
 static void fourier_transform_shutdown(struct platform_device *pdev)
 {
-	if(filp > 0)
-		filp_close(filp, 0);
+	//~ if(filp > 0)
+		//~ filp_close(filp, 0);
 	printk("Exit fourier_transform Module. \n");	// print unload message
 }
 
