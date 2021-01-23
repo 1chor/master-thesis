@@ -64,7 +64,7 @@ architecture arch of ft_wrapper is
     constant PADDING_NFFT : std_logic_vector(2 downto 0) := (others => '0'); -- padding bits for FFT size
     constant FWD : std_logic := '1'; -- use forward transformation
     constant SCALE_SCH : std_logic_vector(7 downto 0) := (others => '0'); -- scaling schedule, not required for floating point processing
-    constant PADDING_SCALE : std_logic_vector(5 downto 0) := (others => '0'); -- padding for scaling schedule
+    constant PADDING_SCALE : std_logic_vector(6 downto 0) := (others => '0'); -- padding for scaling schedule
     
     -- signal declaration
     -- FFT signals
