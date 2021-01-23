@@ -17,7 +17,12 @@ start adbd
 
 echo > /dev/kmsg # empty line
 
--echo "++ List IP address ++" > /dev/kmsg
+echo "Activate debugging" > /dev/kmsg
+echo 8 > /proc/sys/kernel/printk
+
+echo > /dev/kmsg # empty line
+
+echo "++ List IP address ++" > /dev/kmsg
 echo "IPv4 address: " > /dev/kmsg
 ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | cut -d" " -f1 > /dev/kmsg
 
