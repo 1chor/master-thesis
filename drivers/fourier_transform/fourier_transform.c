@@ -19,8 +19,7 @@
 #define MAX_SIZE 50000
 
 //unsigned long *base_addr;	/* Vitual Base Address */
-unsigned long *input_reg_addr;
-unsigned long *output_reg_addr;
+unsigned long *reg_addr;
 struct resource *res;		/* Device Resource Structure */
 unsigned long remap_size;	/* Device Memory Size */
 
@@ -70,10 +69,10 @@ static ssize_t proc_fourier_transform_write(struct file *file, const char __user
 		
 	//Write data to fourier transformation
 	wmb();
-	iowrite64(data, input_reg_addr);
 
 	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
 
+	iowrite64(data, reg_addr);
 	return count;
 }
 
@@ -85,13 +84,15 @@ static ssize_t proc_fourier_transform_write(struct file *file, const char __user
 static int proc_fourier_transform_show(struct seq_file *p, void *v)
 {
 	int i;
-	for(i = 0; i < (128); i++)
-	{
-		wmb();
-		data_read[i] = ioread64(output_reg_addr);
-		seq_printf(p, "%16llx", data_read[i]);
 	}
 	return 0;
+		
+	for (i = 0; i < (FT_SIZE); i++)
+	{		
+		wmb();	
+		data_read[i] = ioread64(reg_addr);	
+		seq_printf(p, "%016llx\n", data_read[i]);
+	}
 }
 
 /* Open function for /proc/fourier_transform
@@ -139,8 +140,7 @@ static int fourier_transform_remove(struct platform_device *pdev)
 	/* Remove /proc/fourier_transform entry */
 	remove_proc_entry(DRIVER_NAME, NULL);
 	/* Release mapped virtual address */
-	iounmap(input_reg_addr);
-	iounmap(output_reg_addr);
+	iounmap(reg_addr);
 	/* Release the region */
 	release_mem_region(res->start, remap_size);
 	return 0;
@@ -169,11 +169,9 @@ static int fourier_transform_probe(struct platform_device *pdev)
 	return -ENXIO;
 	}
 	printk("base_addr is at %#x, device is %#x bytes long\n", (unsigned int)res->start, (unsigned int)remap_size);
-	input_reg_addr = ioremap_nocache(res->start, 0x4);
-	output_reg_addr = ioremap_nocache(res->start+0x4, 0x4);
-	if (input_reg_addr == NULL || output_reg_addr == NULL) {
-		dev_err(&pdev->dev, "Couldn't ioremap memory at 0x%08lx\n",
-		(unsigned long)res->start);
+	reg_addr = ioremap_nocache(res->start, 0x4);
+	if (reg_addr == NULL) {
+		dev_err(&pdev->dev, "Couldn't ioremap memory at 0x%08lx\n", (unsigned long)res->start);
 		ret = -ENOMEM;
 		goto err_release_region;
 	}
@@ -184,12 +182,11 @@ static int fourier_transform_probe(struct platform_device *pdev)
 		ret = -ENOMEM;
 		goto err_create_proc_entry;
 	}
-	printk(KERN_INFO DRIVER_NAME " probed at VA 0x%08lx\n",(unsigned long) input_reg_addr);
+	printk(KERN_INFO DRIVER_NAME " probed at VA 0x%08lx\n",(unsigned long) reg_addr);
 	return 0;
 
 err_create_proc_entry:
-	iounmap(input_reg_addr);
-	iounmap(output_reg_addr);
+	iounmap(reg_addr);
 err_release_region:
 	release_mem_region(res->start, remap_size);
 	return ret;
