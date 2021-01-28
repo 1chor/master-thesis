@@ -99,7 +99,9 @@ static int proc_fourier_transform_show(struct seq_file *p, void *v)
 	for (i = 0; i < (FT_SIZE); i++)
 	{		
 		wmb();	
+		//Read data from fourier transformation
 		data_read[i] = ioread64(reg_addr);	
+		//Write data to seq_file (console)
 		seq_printf(p, "%016llx\n", data_read[i]);
 	}
 			
