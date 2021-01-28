@@ -32,13 +32,10 @@
 		#~ echo "filter.txt exists." > /dev/kmsg
 		
 		#~ rm $Filepath/fBitmap.bin
-		n=1
 		while read line; do
-			echo "Line No. $n"
 			# read each line from file
 			# and forward it to the fourier_transform module
 			echo $line > /proc/fourier_transform
-			n=$((n+1))
 		done < /data/test.txt
 		
 		#~ # wait for filter to complete
