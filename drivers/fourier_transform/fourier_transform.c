@@ -25,14 +25,10 @@ unsigned long remap_size;	/* Device Memory Size */
 
 static u64 data_read[MAX_SIZE];
 
-//~ static u8 output[4 * MAX_SIZE];
-  
-//~ static struct file *filp = NULL;
-//~ static u32 filesize = 0;
 
 /* Write operation for /proc/fourier_transform
 * -----------------------------------
-* When user cat a string to /proc/fourier_transform file, the string will be stored in
+* When user echo a string to /proc/fourier_transform file, the string will be stored in
 * const char __user *buf. The string will be send to the fourier_transform 
 * unit in the logic fabric.
 */
@@ -41,44 +37,28 @@ static ssize_t proc_fourier_transform_write(struct file *file, const char __user
 	char input[64];
 	int ret;
 	u64 data;
-	
-	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
-	
 	if (count < 64) {
 		if (copy_from_user(input, buf, count))
 			return -EFAULT;
 		input[count-1] = '\0';
 	}
 	
-	printk(KERN_DEBUG "Input: %s\n", input);
-	
-	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
-	
 	//Convert input hex string to integer
 	ret = kstrtoull(input, 16, &data);
 	if (ret) {
 		printk("Input %s is invalid\n", input);
 		return ret;
-	}
-	
-	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
-	
-	printk(KERN_DEBUG "Data: %lld | %llx\n", data, data);
-	
-	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
+	}	
 		
 	//Write data to fourier transformation
 	wmb();
-
-	printk(KERN_DEBUG "Here I am: %s:%i\n", __FILE__, __LINE__);
-
 	iowrite64(data, reg_addr);
 	return count;
 }
 
-/* Callback function when opening file /proc/fourier_transform
+/* Callback function when reading file /proc/fourier_transform
 * ------------------------------------------------------
-* Return the generated hash
+* Return the transformed data
 */
 
 static int proc_fourier_transform_show(struct seq_file *p, void *v)
@@ -95,12 +75,13 @@ static int proc_fourier_transform_show(struct seq_file *p, void *v)
 	}
 }
 
-/* Open function for /proc/fourier_transform
+/* Read operation for /proc/fourier_transform
 * ------------------------------------
 * When user want to read /proc/fourier_transform (i.e. cat /proc/fourier_transform), the open function
 * will be called first. In the open function, a seq_file will be prepared and the
 * status of fourier_transform will be filled into the seq_file by proc_fourier_transform_show function.
 */
+//~ static ssize_t proc_fourier_transform_read(struct file *file, char * buf, size_t count, loff_t * ppos)
 static int proc_fourier_transform_open(struct inode *inode, struct file *file)
 {
 	unsigned int size = 16;
@@ -197,8 +178,6 @@ err_release_region:
 */
 static void fourier_transform_shutdown(struct platform_device *pdev)
 {
-	//~ if(filp > 0)
-		//~ filp_close(filp, 0);
 	printk("Exit fourier_transform Module. \n");	// print unload message
 }
 
