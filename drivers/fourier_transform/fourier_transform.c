@@ -31,6 +31,9 @@ static int written_count = 0;
 
 static int FT_SIZE = 128;
 
+module_param(FT_SIZE, int, 0644);
+MODULE_PARM_DESC(FT_SIZE, "Size of the Fourier Transformation");
+
 /* Write operation for /proc/fourier_transform
 * -----------------------------------
 * When user echo a string to /proc/fourier_transform file, the string will be stored in
@@ -92,7 +95,6 @@ static int proc_fourier_transform_show(struct seq_file *p, void *v)
 		printk(KERN_INFO "Write the input first before reading!\n");
 		return 0;
 	}
-	return 0;
 		
 	for (i = 0; i < (FT_SIZE); i++)
 	{		
@@ -200,6 +202,7 @@ static int fourier_transform_probe(struct platform_device *pdev)
 		goto err_create_proc_entry;
 	}
 	printk(KERN_INFO DRIVER_NAME " probed at VA 0x%08lx\n",(unsigned long) reg_addr);
+	printk(KERN_INFO DRIVER_NAME "is configured with FT_SIZE = %d\n", FT_SIZE);
 	return 0;
 
 err_create_proc_entry:
