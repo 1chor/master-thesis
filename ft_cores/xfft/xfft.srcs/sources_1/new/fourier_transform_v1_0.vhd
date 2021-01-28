@@ -33,7 +33,7 @@ entity fourier_transform_v1_0 is
 
 		-- Parameters of Axi Slave Bus Interface S00_AXI
 		C_S00_AXI_DATA_WIDTH	: integer	:= 64;
-		C_S00_AXI_ADDR_WIDTH	: integer	:= 2
+		C_S00_AXI_ADDR_WIDTH	: integer	:= 1
 	);
 	port (
 		-- Users to add ports here
@@ -73,7 +73,7 @@ architecture arch_imp of fourier_transform_v1_0 is
 	component user_logic is
 		generic (
 		C_S_AXI_DATA_WIDTH	: integer	:= 64;
-		C_S_AXI_ADDR_WIDTH	: integer	:= 2
+		C_S_AXI_ADDR_WIDTH	: integer	:= 1
 		);
 		port (
 		S_AXI_ACLK	: in std_logic;

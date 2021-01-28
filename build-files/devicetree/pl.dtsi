@@ -28,7 +28,7 @@
 		fourier_transform_v1_0: fourier_transform_v1_0@94000000 {
 			compatible = "xlnx,fourier-transform-v1-0-1.0";
 			reg = <0x0 0x94000000 0x0 0x10000>;
-			xlnx,s00-axi-addr-width = <0x2>;
+			xlnx,s00-axi-addr-width = <0x1>;
 			xlnx,s00-axi-data-width = <0x40>;
 		};
 		hdmi_output_v_hdmi_tx_ss_0: v_hdmi_tx_ss@80020000 {
