@@ -15,8 +15,8 @@
 
 /* Define Driver Name */
 #define DRIVER_NAME	"fourier_transform"
-
 #define MAX_SIZE 50000
+#define SUCCESS 0
 
 //unsigned long *base_addr;	/* Vitual Base Address */
 unsigned long *reg_addr;
@@ -25,6 +25,11 @@ unsigned long remap_size;	/* Device Memory Size */
 
 static u64 data_read[MAX_SIZE];
 
+//Flags
+static int Device_written = 0;
+static int written_count = 0;
+
+static int FT_SIZE = 128;
 
 /* Write operation for /proc/fourier_transform
 * -----------------------------------
@@ -37,6 +42,12 @@ static ssize_t proc_fourier_transform_write(struct file *file, const char __user
 	char input[64];
 	int ret;
 	u64 data;
+		
+	if ((Device_written == 1) && (written_count == 0)) {
+		printk(KERN_INFO "Read the result first before writing again!\n");
+		return -EBUSY;
+	}
+		
 	if (count < 64) {
 		if (copy_from_user(input, buf, count))
 			return -EFAULT;
@@ -53,6 +64,18 @@ static ssize_t proc_fourier_transform_write(struct file *file, const char __user
 	//Write data to fourier transformation
 	wmb();
 	iowrite64(data, reg_addr);
+	
+	//Increment the written count
+	written_count++;
+	
+	if (written_count == FT_SIZE) {
+		//reset written count
+		written_count = 0;
+		
+		//Increment the ready count
+		Device_written++;
+	}
+	
 	return count;
 }
 
@@ -64,6 +87,10 @@ static ssize_t proc_fourier_transform_write(struct file *file, const char __user
 static int proc_fourier_transform_show(struct seq_file *p, void *v)
 {
 	int i;
+		
+	if (Device_written == 0) {
+		printk(KERN_INFO "Write the input first before reading!\n");
+		return 0;
 	}
 	return 0;
 		
@@ -73,6 +100,11 @@ static int proc_fourier_transform_show(struct seq_file *p, void *v)
 		data_read[i] = ioread64(reg_addr);	
 		seq_printf(p, "%016llx\n", data_read[i]);
 	}
+			
+	//Decrement the ready count
+	Device_written--;
+	
+	return SUCCESS;
 }
 
 /* Read operation for /proc/fourier_transform
@@ -83,14 +115,16 @@ static int proc_fourier_transform_show(struct seq_file *p, void *v)
 */
 //~ static ssize_t proc_fourier_transform_read(struct file *file, char * buf, size_t count, loff_t * ppos)
 static int proc_fourier_transform_open(struct inode *inode, struct file *file)
-{
-	unsigned int size = 16;
+{	
+	unsigned int size = FT_SIZE*18;
 	char *buf;
 	struct seq_file *m;
 	int res;
-	buf = (char *)kmalloc(size * sizeof(char), GFP_KERNEL);
+
+	buf = (char *)kmalloc(size * sizeof(u64), GFP_KERNEL);
 	if (!buf)
 		return -ENOMEM;
+		
 	res = single_open(file, proc_fourier_transform_show, NULL);
 	if (!res) {
 		m = file->private_data;
@@ -98,8 +132,10 @@ static int proc_fourier_transform_open(struct inode *inode, struct file *file)
 		m->size = size;
 	} else {
 		kfree(buf);
+		return res;
 	}
-	return res;
+	
+	return SUCCESS;
 }
 
 /* File Operations for /proc/fourier_transform */
