@@ -6,8 +6,6 @@ import com.example.anwender.empaticae4.Configuration.ConfigActivity;
 import com.example.anwender.empaticae4.Main.MainActivity;
 import com.example.anwender.empaticae4.Main.Utility;
 
-import org.apache.commons.math3.linear.DefaultIterativeLinearSolverEvent;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -31,9 +29,9 @@ public class SpectralAnalysis {
         //variable declaration for file generation
         boundaries bound;
 
-        float norm_abs = 0;
-        float max_range_value = 0;
-        float min_range_value = 0;
+        float norm_abs;
+        float max_range_value;
+        float min_range_value;
 
         switch (ConfigActivity.repo_name) {
             case "SDFT": //Software DFT
@@ -106,7 +104,7 @@ public class SpectralAnalysis {
                     String st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
                     String norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
 
-                    //Write hex string to file
+                    //Write hex string to file (IEEE 754 float single precision format)
                     writeTestDatatoFile(MainActivity.path, xdft_input_file, st);
 
                     //Write normalised hex string to file (IEEE 754 float single precision format)
@@ -129,7 +127,7 @@ public class SpectralAnalysis {
                     String st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
                     String norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
 
-                    //Write hex string to file
+                    //Write hex string to file (IEEE 754 float single precision format)
                     writeTestDatatoFile(MainActivity.path, xdft_real_file, st);
 
                     //Write normalised hex string to file (IEEE 754 float single precision format)
@@ -146,10 +144,10 @@ public class SpectralAnalysis {
                     st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
                     norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
 
-                    //Write hex string to file
+                    //Write hex string to file (IEEE 754 float single precision format)
                     writeTestDatatoFile(MainActivity.path, xdft_imag_file, st);
 
-                    //Write normalised hex string to file
+                    //Write normalised hex string to file (IEEE 754 float single precision format)
                     writeTestDatatoFile(MainActivity.path, xdft_imag_norm_file, norm_st);
 
                 }
@@ -163,9 +161,6 @@ public class SpectralAnalysis {
 
             case "XFFT": //Hardware Xilinx FFT
                 this.signalSize = inputSignal.size();
-                this.argConstantPart = (Math.PI * 2) / signalSize;
-
-                bound = new boundaries(inputSignal); //search for boundaries
 
                 //define file names
                 //input TestData files (hex)
