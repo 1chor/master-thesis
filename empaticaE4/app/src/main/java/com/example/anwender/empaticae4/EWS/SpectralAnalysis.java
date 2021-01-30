@@ -55,21 +55,14 @@ public class SpectralAnalysis {
                 //input TestData files (hex)
                 String xdft_input_file = "xdft_input_TestData.txt";
                 String xdft_input_norm_file = "xdft_input_TestData_norm.txt";
-                String xdft_input_norm_16_file = "xdft_input_TestData_norm16.txt";
-
-                //input TestData files (float)
-                String xdft_input_float_file = "xdft_input_TestData_float.txt";
-                String xdft_input_norm_float_file = "xdft_input_TestData_norm_float.txt";
 
                 //real output TestData files (hex)
                 String xdft_real_file = "xdft_real_TestData.txt";
                 String xdft_real_norm_file = "xdft_real_TestData_norm.txt";
-                String xdft_real_norm_32_file = "xdft_real_TestData_norm32.txt";
 
                 //imaginary output TestData files (hex)
                 String xdft_imag_file = "xdft_imag_TestData.txt";
                 String xdft_imag_norm_file = "xdft_imag_TestData_norm.txt";
-                String xdft_imag_norm_32_file = "xdft_imag_TestData_norm32.txt";
 
                 //check if TestData exists and delete it
                 //input TestData files (hex)
@@ -77,30 +70,18 @@ public class SpectralAnalysis {
                     Log.i("TestData", "Deleted " + xdft_input_file + " !");
                 if (checkFileExists(MainActivity.path, xdft_input_norm_file, true))
                     Log.i("TestData", "Deleted " + xdft_input_norm_file + " !");
-                if (checkFileExists(MainActivity.path, xdft_input_norm_16_file, true))
-                    Log.i("TestData", "Deleted " + xdft_input_norm_16_file + " !");
-
-                //input TestData files (float)
-                if (checkFileExists(MainActivity.path, xdft_input_float_file, true))
-                    Log.i("TestData", "Deleted " + xdft_input_float_file + " !");
-                if (checkFileExists(MainActivity.path, xdft_input_norm_float_file, true))
-                    Log.i("TestData", "Deleted " + xdft_input_norm_float_file + " !");
 
                 //real output TestData files (hex)
                 if (checkFileExists(MainActivity.path, xdft_real_file, true))
                     Log.i("TestData", "Deleted " + xdft_real_file + " !");
                 if (checkFileExists(MainActivity.path, xdft_real_norm_file, true))
                     Log.i("TestData", "Deleted " + xdft_real_norm_file + " !");
-                if (checkFileExists(MainActivity.path, xdft_real_norm_32_file, true))
-                    Log.i("TestData", "Deleted " + xdft_real_norm_32_file + " !");
 
                 //imaginary output TestData files (hex)
                 if (checkFileExists(MainActivity.path, xdft_imag_file, true))
                     Log.i("TestData", "Deleted " + xdft_imag_file + " !");
                 if (checkFileExists(MainActivity.path, xdft_imag_norm_file, true))
                     Log.i("TestData", "Deleted " + xdft_imag_norm_file + " !");
-                if (checkFileExists(MainActivity.path, xdft_imag_norm_32_file, true))
-                    Log.i("TestData", "Deleted " + xdft_imag_norm_32_file + " !");
 
                 //normalise input values to be between -1 and 1
                 //original sign of the values are maintained
@@ -121,29 +102,17 @@ public class SpectralAnalysis {
                     //Convert float to hex string
                     int intval = Float.floatToRawIntBits(fval); //integer value
                     int norm_intval = Float.floatToRawIntBits(norm_fval); //normalised integer value
-                    int norm_intval16 = convert_to_fixed_1q15(norm_fval); //normalised integer value in 1q15 format
 
                     String st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
                     String norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
-                    String norm_st16 = String.format("%4s", Integer.toHexString(norm_intval16)).replace(' ', '0') + "0000\n"; //normalised hex string in 1q15 format
 
                     //Write hex string to file
                     writeTestDatatoFile(MainActivity.path, xdft_input_file, st);
 
                     //Write normalised hex string to file (IEEE 754 float single precision format)
                     writeTestDatatoFile(MainActivity.path, xdft_input_norm_file, norm_st);
-
-                    //Write normalised 1q15 format hex string to file
-                    writeTestDatatoFile(MainActivity.path, xdft_input_norm_16_file, norm_st16);
-
-                    //Write float values to file
-                    writeTestDatatoFile(MainActivity.path, xdft_input_float_file, fval + "\n");
-
-                    //Write normalised float values to file
-                    writeTestDatatoFile(MainActivity.path, xdft_input_norm_float_file, norm_fval + "\n");
                 }
-                Log.i("TestData", "Created input hex TestData: " + xdft_input_file + " & " + xdft_input_norm_file + " & " + xdft_input_norm_16_file + " !");
-                Log.i("TestData", "Created input float TestData: " + xdft_input_float_file + " & " + xdft_input_norm_float_file + " !");
+                Log.i("TestData", "Created input hex TestData: " + xdft_input_file + " & " + xdft_input_norm_file + " !");
 
                 dft = calculateDFT(inputSignal);
 
@@ -156,20 +125,15 @@ public class SpectralAnalysis {
                     //Convert double to hex string
                     int intval = Float.floatToRawIntBits((float)dval); //integer value, convert to float for IEEE 754 float single precision
                     int norm_intval = Float.floatToRawIntBits((float)norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
-                    long norm_intval32 = convert_to_fixed_9q23(norm_dval); //normalised integer value in 9q23 format
 
                     String st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
                     String norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
-                    String norm_st32 = String.format("%8s", Integer.toHexString((int)norm_intval32)).replace(' ', '0') + "\n"; //normalised hex string in 9q23 format
 
                     //Write hex string to file
                     writeTestDatatoFile(MainActivity.path, xdft_real_file, st);
 
                     //Write normalised hex string to file (IEEE 754 float single precision format)
                     writeTestDatatoFile(MainActivity.path, xdft_real_norm_file, norm_st);
-
-                    //Write normalised 1q15 format hex string to file
-                    writeTestDatatoFile(MainActivity.path, xdft_real_norm_32_file, norm_st32);
 
                     //Imaginary component
                     dval = dft[i].getI(); //get imaginary output value
@@ -178,11 +142,9 @@ public class SpectralAnalysis {
                     //Convert double to hex string
                     intval = Float.floatToRawIntBits((float)dval); //integer value, convert to float for IEEE 754 float single precision
                     norm_intval = Float.floatToRawIntBits((float)norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
-                    norm_intval32 = convert_to_fixed_9q23(norm_dval); //normalised integer value in 9q23 format
 
                     st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
                     norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
-                    norm_st32 = String.format("%8s", Integer.toHexString((int)norm_intval32)).replace(' ', '0') + "00000000\n"; //normalised hex string in 9q23 format
 
                     //Write hex string to file
                     writeTestDatatoFile(MainActivity.path, xdft_imag_file, st);
@@ -190,11 +152,9 @@ public class SpectralAnalysis {
                     //Write normalised hex string to file
                     writeTestDatatoFile(MainActivity.path, xdft_imag_norm_file, norm_st);
 
-                    //Write normalised 1q15 format hex string to file
-                    writeTestDatatoFile(MainActivity.path, xdft_imag_norm_32_file, norm_st32);
                 }
-                Log.i("TestData", "Created real output TestData: " + xdft_real_file + " & " + xdft_real_norm_file  + " & " + xdft_real_norm_32_file  +" !");
-                Log.i("TestData", "Created imaginary output TestData: " + xdft_imag_file + " & " + xdft_imag_norm_file  + " & " + xdft_imag_norm_32_file  +" !");
+                Log.i("TestData", "Created real output TestData: " + xdft_real_file + " & " + xdft_real_norm_file  + " !");
+                Log.i("TestData", "Created imaginary output TestData: " + xdft_imag_file + " & " + xdft_imag_norm_file + " !");
 
                 spd = SPD(dft);
                 this.expSPD = spd;
@@ -424,97 +384,5 @@ public class SpectralAnalysis {
             Log.e("checkFileExists", "Cannot read from storage!");
             return false;
         }
-    }
-
-    //convert float value to integer fixed 1q15 format
-    private int convert_to_fixed_1q15(float num) {
-        return (int)(num * (1 << 15));
-    }
-
-    //convert double value to integer fixed 9q23 format
-    private long convert_to_fixed_9q23(double num) {
-        return (long)(num * (1 << 23));
-    }
-
-    //convert integer fixed 1q15 format to float
-    private float convert_1q15(int num) {
-        byte i = 0;
-        byte shift_by = 0;
-        byte invert = 0;
-
-        float num_float = 0;
-
-        //if num is negativ, num will be inverted (2's complement)
-        if (num < 0) {
-            invert = 1;
-
-            num = ~num;
-            num += 1;
-        }
-
-        //for the 1q15 format we have to start at 15
-        //the smallest part is 2^⁻15
-        for (i = 15; i > 0; i--) {
-
-            // if lsb is 1
-            if ( ( (num >> shift_by) & 1) == 1) {
-                //then add 2^-i
-                num_float += Math.pow(2, i*(-1));
-            }
-            shift_by += 1;
-
-            //calculate integer part to the left of the comma
-            if ((i == 1) && ((num >> shift_by) > 0)) {
-                num_float += num >> shift_by;
-            }
-        }
-
-        if (invert == 1) {
-            num_float *= -1;
-        }
-
-        return num_float;
-    }
-
-    //convert integer fixed 9q23 format to double
-    private double convert_9q23(long num) {
-        byte i = 0;
-        byte shift_by = 0;
-        byte invert = 0;
-
-        double num_float = 0;
-
-        //if num is negativ, num will be inverted (2's complement)
-        if (num < 0) {
-            invert = 1;
-
-            num = ~num;
-            num += 1;
-        }
-
-        //num_float += num >> 23;
-
-        //for the 9q23 format we have to start at 23
-        //the smallest part is 2^⁻23
-        for (i = 23; i > 0; i--) {
-
-            // if lsb is 1
-            if ( ( (num >> shift_by) & 1) == 1) {
-                //then add 2^-i
-                num_float += Math.pow(2, i*(-1));
-            }
-            shift_by += 1;
-
-            //calculate integer part to the left of the comma
-            if ((i == 1) && ((num >> shift_by) > 0)) {
-                num_float += num >> shift_by;
-            }
-        }
-
-        if (invert == 1) {
-            num_float *= -1;
-        }
-
-        return num_float;
     }
 }
