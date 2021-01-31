@@ -26,28 +26,26 @@ cd $Filepath
 #~ while [ 1 ]; do
 	#~ sleep 10
 		
-	# control for fourier transform
-	#~ if [ -f "$Filepath/filter.txt" ]; then
-		#~ echo "filter.txt exists." > /dev/kmsg
+	# control for Xilinx FFT
+	if [ -f "xfft_input.txt" ]; then
+		echo "xfft_input.txt exists." > /dev/kmsg
 		
-		#~ rm $Filepath/fBitmap.bin
+		# delete old output file
+		rm xfft_output.txt
+		
 		while read line; do
 			# read each line from file
 			# and forward it to the fourier_transform module
 			echo $line > /proc/fourier_transform
-		done < /data/test.txt
+		done < xfft_input.txt
 		
-		#~ # wait for filter to complete
-		#~ sleep 0.05
+		# read fft output into file
+		cat /proc/fourier_transform > xfft_output.txt
 		
-		#~ # rename filtered bitmap for app
-		#~ cp filtered.bin fBitmap.bin 
-		
-		#~ rm "$( < filter.txt )"
-		#~ rm $Filepath/filter.txt
+		rm xfft_input.txt
 		
 		echo "fourier transformation done." > /dev/kmsg
-	#~ fi
+	fi
 		
 	# control for blake2b
 	#~ if [ -f "$Filepath/blake2b.txt" ]; then
