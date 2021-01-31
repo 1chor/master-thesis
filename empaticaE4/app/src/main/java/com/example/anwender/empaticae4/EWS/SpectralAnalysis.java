@@ -6,8 +6,10 @@ import com.example.anwender.empaticae4.Configuration.ConfigActivity;
 import com.example.anwender.empaticae4.Main.MainActivity;
 import com.example.anwender.empaticae4.Main.Utility;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -321,6 +323,55 @@ public class SpectralAnalysis {
         else{
             Log.e("writeDataToFile", "Cannot write to storage!");
         }
+    }
+
+    //Read data from file
+    private Complex[] readDataFromFile(File path, String Filename){
+
+        Complex[] value = new Complex[signalSize];
+
+        if (Utility.isExternalStorageWritable()) { //If it is writable, it is readable too
+            try {
+                String line;
+                String s_real;
+                String s_imag;
+                int linenumber = 0;
+
+                //open file @ path/filename
+                File file = new File(path, Filename);
+
+                if (file.exists()) {
+                    FileReader fr = new FileReader(file);
+                    BufferedReader in = new BufferedReader(fr);
+
+                    //read line
+                    line = in.readLine();
+
+                    while (line != null) {
+                        s_real = line.substring(8);    //get real part
+                        s_imag = line.substring(0, 8); //get imaginary part
+
+                        //convert Strings to double values
+                        value[linenumber].setR(Double.parseDouble(s_real)); //set real part
+                        value[linenumber].setI(Double.parseDouble(s_imag)); //set imaginary part
+
+                        //Increment linenumber
+                        linenumber++;
+
+                        //read next line
+                        line = in.readLine();
+                    }
+                    in.close();
+                }
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            Log.e("readDataFromFile", "Cannot read from storage!");
+        }
+        return value;
     }
 
     //Check if file exists
