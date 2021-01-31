@@ -20,6 +20,8 @@ function pretty_header() {
 if [ "$1" == "clean" ]; then
 	pretty_header "Cleaning repository"
 	
+	cd ..
+	
 	#Android
 	cd android 
 	make clean
