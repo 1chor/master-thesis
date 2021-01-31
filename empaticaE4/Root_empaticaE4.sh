@@ -1,7 +1,7 @@
 #!/bin/sh
 
 package_name=com.example.anwender.empaticae4
-APK_file=/system/app/EmpaticaE4/EmpaticaE4.apk
+APK_file=/system/app/empaticaE4/empaticaE4.apk
 Filepath=/sdcard/Documents/E4
 #~ emptyhash="00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
 
@@ -23,8 +23,8 @@ fi
 cd $Filepath
 #~ rm *
 
-#~ while [ 1 ]; do
-	#~ sleep 10
+while [ 1 ]; do
+	sleep 10
 		
 	# control for Xilinx FFT
 	if [ -f "xfft_input.txt" ]; then
@@ -118,4 +118,4 @@ cd $Filepath
 		
 		#~ echo "partial operation done." > /dev/kmsg
 	#~ fi		
-#~ done
+done
