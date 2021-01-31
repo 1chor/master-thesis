@@ -204,7 +204,7 @@ static int fourier_transform_probe(struct platform_device *pdev)
 		goto err_create_proc_entry;
 	}
 	printk(KERN_INFO DRIVER_NAME " probed at VA 0x%08lx\n",(unsigned long) reg_addr);
-	printk(KERN_INFO DRIVER_NAME "is configured with FT_SIZE = %d\n", FT_SIZE);
+	printk(KERN_INFO DRIVER_NAME " is configured with FT_SIZE = %d\n", FT_SIZE);
 	return 0;
 
 err_create_proc_entry:
