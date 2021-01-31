@@ -168,6 +168,8 @@ public class SpectralAnalysis {
                 //input data files (hex)
                 String xfft_input_file = "xfft_input.txt";
 
+                String xfft_output_file = "xfft_output.txt";
+
                 //real output data files (hex)
                 String xfft_real_file = "xfft_real.txt";
 
@@ -201,6 +203,12 @@ public class SpectralAnalysis {
                 }
                 Log.i("Input data", "Created input hex data: " + xfft_input_file + " !");
 
+                //wait until output file exists
+                File file = new File(xfft_output_file);
+                while (!file.exists());
+
+                //get FFT results
+                dft = readDataFromFile(MainActivity.path, xfft_output_file);
                 dft = calculateDFT(inputSignal);
 
                 //Write output values to files
