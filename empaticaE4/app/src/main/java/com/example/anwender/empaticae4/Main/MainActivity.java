@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                 Log.i("Start RR Test", "Use " + ConfigActivity.repo_name + " method");
                 //Start test
                 test_didReceiveBVP();
-                Utility.toastie(getApplicationContext(),"RR Test finished!");
+                Utility.toastie(getApplicationContext(),"RR Test started!");
                 break;
             case R.id.button_config_RR:
                 final Intent ConfigActivity = new Intent(MainActivity.this, com.example.anwender.empaticae4.Configuration.ConfigActivity.class);
@@ -381,6 +381,9 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                         public void run() {
                             //Set progress bar
                             progressBar.setProgress((progress * 100) / max);
+
+                            if ( progressBar.getProgress() == progressBar.getMax())
+                                Utility.toastie(getApplicationContext(),"RR Test finished!");
                         }
                     });
                 }
