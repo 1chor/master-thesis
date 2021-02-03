@@ -215,6 +215,7 @@ if [ $populate ]; then
 		cp -rfv modules/*.ko /tmp/$$/data_part/modules/
 		cp -rfv ../client/Root_Client.sh /tmp/$$/data_part/
 		cp -rfv ../empaticaE4/Root_empaticaE4.sh /tmp/$$/data_part/
+		cp -rfv ../empaticaE4/TestData/BVP1.csv /tmp/$$/data_part/
 		sync
 		umount /tmp/$$/data_part
 		rm -rf /tmp/$$/data_part
