@@ -2,7 +2,7 @@
 
 package_name=com.example.anwender.empaticae4
 APK_file=/system/app/empaticaE4/empaticaE4.apk
-Filepath=/sdcard/Documents/E4
+Filepath=/storage/emulated/0/E4
 #~ emptyhash="00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
 
 # check if app is already installed
@@ -16,9 +16,10 @@ else
 fi
 
 # make work dir if not exists
-#~ if [ ! -d $Filepath ]; then
-	#~ mkdir -p $Filepath
-#~ fi
+if [ ! -d $Filepath ]; then
+	mkdir -p $Filepath
+fi
+
 
 cd $Filepath
 #~ rm *
