@@ -42,6 +42,8 @@ while [ 1 ]; do
 			echo $line > /proc/fourier_transform
 		done < xfft_input.txt
 				
+		sleep 0.5
+		
 		# read fft output into file
 		cat /proc/fourier_transform > xfft_output.txt
 		
