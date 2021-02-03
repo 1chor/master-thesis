@@ -46,13 +46,13 @@ while [ 1 ]; do
 			# and forward it to the fourier_transform module
 			echo $line > /proc/fourier_transform
 		done < xfft_input.txt
+				
+		# read fft output into file
+		cat /proc/fourier_transform > xfft_output.txt
 		
 		if [ -f xfft_input.txt ]; then
 			rm xfft_input.txt
 		fi
-		
-		# read fft output into file
-		cat /proc/fourier_transform > xfft_output.txt
 		
 		echo "fourier transformation done." > /dev/kmsg
 	fi
