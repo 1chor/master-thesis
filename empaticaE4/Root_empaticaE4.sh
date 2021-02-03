@@ -3,6 +3,7 @@
 package_name=com.example.anwender.empaticae4
 APK_file=/system/app/empaticaE4/empaticaE4.apk
 Filepath=/storage/emulated/0/E4
+TestData=BVP1.csv
 #~ emptyhash="00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
 
 # check if app is already installed
@@ -20,6 +21,8 @@ if [ ! -d $Filepath ]; then
 	mkdir -p $Filepath
 fi
 
+	cp /data/$TestData $Filepath
+fi
 
 cd $Filepath
 #~ rm *
