@@ -56,6 +56,11 @@ sh /data/Root_Client.sh &
 
 echo > /dev/kmsg # empty line
 
+echo "++ Starting Root empaticaE4 script ++" > /dev/kmsg
+sh /data/Root_empaticaE4.sh &
+
+echo > /dev/kmsg # empty line
+
 echo "+++++++++++++++++++++++++++++++" > /dev/kmsg
 echo "++                           ++" > /dev/kmsg
 echo "++ End user startup script ++" > /dev/kmsg
