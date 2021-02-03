@@ -95,7 +95,7 @@ public class SpectralAnalysis {
                 norm_abs = (max_range_value - min_range_value);
 
                 //Write input values to file
-                for (int i=0; i<signalSize; i++) {
+                for (int i = 0; i < signalSize; i++) {
                     float fval = inputSignal.get(i)[0]; //get input value
                     float norm_fval = 2 * fval / norm_abs; //normalise input value, range [-1 1]
 
@@ -117,14 +117,14 @@ public class SpectralAnalysis {
                 dft = calculateDFT(inputSignal);
 
                 //Write output values to files
-                for (int i=0; i<signalSize; i++) {
+                for (int i = 0; i < signalSize; i++) {
                     //Real component
                     double dval = dft[i].getR(); //get real output value
                     double norm_dval = 2 * dval / norm_abs; //normalise output value, range [-1 1]
 
                     //Convert double to hex string
-                    int intval = Float.floatToRawIntBits((float)dval); //integer value, convert to float for IEEE 754 float single precision
-                    int norm_intval = Float.floatToRawIntBits((float)norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
+                    int intval = Float.floatToRawIntBits((float) dval); //integer value, convert to float for IEEE 754 float single precision
+                    int norm_intval = Float.floatToRawIntBits((float) norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
 
                     String st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
                     String norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
@@ -140,8 +140,8 @@ public class SpectralAnalysis {
                     norm_dval = 2 * dval / norm_abs; //normalise output value, range [-1 1]
 
                     //Convert double to hex string
-                    intval = Float.floatToRawIntBits((float)dval); //integer value, convert to float for IEEE 754 float single precision
-                    norm_intval = Float.floatToRawIntBits((float)norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
+                    intval = Float.floatToRawIntBits((float) dval); //integer value, convert to float for IEEE 754 float single precision
+                    norm_intval = Float.floatToRawIntBits((float) norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
 
                     st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
                     norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
@@ -153,7 +153,7 @@ public class SpectralAnalysis {
                     writeDataToFile(MainActivity.path, xdft_imag_norm_file, norm_st);
 
                 }
-                Log.i("Output data", "Created real output data: " + xdft_real_file + " & " + xdft_real_norm_file  + " !");
+                Log.i("Output data", "Created real output data: " + xdft_real_file + " & " + xdft_real_norm_file + " !");
                 Log.i("Output data", "Created imaginary output data: " + xdft_imag_file + " & " + xdft_imag_norm_file + " !");
 
                 spd = SPD(dft);
@@ -190,7 +190,7 @@ public class SpectralAnalysis {
                     Log.i("Output data", "Deleted " + xfft_imag_file + " !");
 
                 //Write input values to file
-                for (int i=0; i<signalSize; i++) {
+                for (int i = 0; i < signalSize; i++) {
                     float fval = inputSignal.get(i)[0]; //get input value
 
                     //Convert float to hex string
