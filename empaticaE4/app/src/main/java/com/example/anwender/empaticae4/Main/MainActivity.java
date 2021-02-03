@@ -339,7 +339,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                final int max = 40920;
+                final int max = 9297;
                 float bvp = 0;
 
                 for (int i = 0; i < max; i++) {
