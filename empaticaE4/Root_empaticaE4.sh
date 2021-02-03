@@ -21,6 +21,8 @@ if [ ! -d $Filepath ]; then
 	mkdir -p $Filepath
 fi
 
+# copy TestData file if not exists in work dir
+if [ ! -f $Filepath/$TestData ]; then
 	cp /data/$TestData $Filepath
 fi
 
