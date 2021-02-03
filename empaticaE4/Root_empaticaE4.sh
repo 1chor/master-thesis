@@ -37,7 +37,9 @@ while [ 1 ]; do
 		echo "xfft_input.txt exists." > /dev/kmsg
 		
 		# delete old output file
-		rm xfft_output.txt
+		if [ -f xfft_output.txt ]; then
+			rm xfft_output.txt
+		fi
 		
 		while read line; do
 			# read each line from file
@@ -45,10 +47,12 @@ while [ 1 ]; do
 			echo $line > /proc/fourier_transform
 		done < xfft_input.txt
 		
+		if [ -f xfft_input.txt ]; then
+			rm xfft_input.txt
+		fi
+		
 		# read fft output into file
 		cat /proc/fourier_transform > xfft_output.txt
-		
-		rm xfft_input.txt
 		
 		echo "fourier transformation done." > /dev/kmsg
 	fi
