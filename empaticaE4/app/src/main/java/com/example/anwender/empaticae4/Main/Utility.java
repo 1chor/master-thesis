@@ -42,7 +42,8 @@ public final class Utility {
     //Get the path to the Documents Folder
     public static File getStorageDir(String folderName) {
         // Get the directory for the user's public documents directory.
-        File documents = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+        // File documents = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+        File documents = Environment.getExternalStorageDirectory();
         //path will be storage/sdcard/documents/foldername
         File path = new File(documents, folderName);
         Log.d("getStorageDir", path.toString());
