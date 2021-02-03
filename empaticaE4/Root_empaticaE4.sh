@@ -30,7 +30,7 @@ cd $Filepath
 #~ rm *
 
 while [ 1 ]; do
-	sleep 10
+	sleep 1
 		
 	# control for Xilinx FFT
 	if [ -f "xfft_input.txt" ]; then
