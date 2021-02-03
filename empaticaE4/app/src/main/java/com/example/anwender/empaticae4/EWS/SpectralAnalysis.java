@@ -343,7 +343,10 @@ public class SpectralAnalysis {
                 String line;
                 String s_real;
                 String s_imag;
-                int linenumber = 0;
+                double real;
+                double imag;
+                //Complex temp = new Complex(0,0);
+                //int linenumber = 0;
 
                 //open file @ path/filename
                 File file = new File(path, Filename);
@@ -355,21 +358,36 @@ public class SpectralAnalysis {
                     //read line
                     line = in.readLine();
 
-                    while (line != null) {
+                    //while (line != null) {
+                    for (int linenumber = 0; linenumber < signalSize; linenumber++) {
+
+                        if (line == null) {
+                            Log.i("readDataFromFile", "EOF!");
+                            break;
+                        }
+
+                        Complex temp = new Complex(0,0);
+
                         s_real = line.substring(8);    //get real part
                         s_imag = line.substring(0, 8); //get imaginary part
 
                         //convert Strings to double values
-                        value[linenumber].setR(Double.parseDouble(s_real)); //set real part
-                        value[linenumber].setI(Double.parseDouble(s_imag)); //set imaginary part
+                        real = Float.intBitsToFloat((int)Long.parseLong(s_real, 16));
+                        imag = Float.intBitsToFloat((int)Long.parseLong(s_imag, 16));
+
+                        //set values
+                        temp.setR(real); //set real part
+                        temp.setI(imag); //set imaginary part
+                        value[linenumber] = temp;
 
                         //Increment linenumber
-                        linenumber++;
+                        //linenumber++;
 
                         //read next line
                         line = in.readLine();
                     }
                     in.close();
+                    return value;
                 }
             }
             catch (IOException e) {
