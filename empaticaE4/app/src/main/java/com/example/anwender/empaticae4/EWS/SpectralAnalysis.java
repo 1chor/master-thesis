@@ -181,6 +181,11 @@ public class SpectralAnalysis {
                 if (checkFileExists(MainActivity.path, xfft_input_file, true))
                     Log.i("Input data", "Deleted " + xfft_input_file + " !");
 
+                //output data file (hex)
+                if (checkFileExists(MainActivity.path, xfft_output_file, true))
+                    Log.i("Output data", "Deleted " + xfft_output_file + " !");
+
+                /*
                 //real output data files (hex)
                 if (checkFileExists(MainActivity.path, xfft_real_file, true))
                     Log.i("Output data", "Deleted " + xfft_real_file + " !");
@@ -204,12 +209,23 @@ public class SpectralAnalysis {
                 Log.i("Input data", "Created input hex data: " + xfft_input_file + " !");
 
                 //wait until output file exists
-                File file = new File(xfft_output_file);
-                while (!file.exists());
+                File file = new File(MainActivity.path, xfft_output_file);
+                while (!file.exists()) {
+                    try {
+                        //Thread.Sleep(1000);
+                        java.lang.Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
 
                 //get FFT results
                 dft = readDataFromFile(MainActivity.path, xfft_output_file);
                 dft = calculateDFT(inputSignal);
+
+                //delete output file
+                if (checkFileExists(MainActivity.path, xfft_output_file, true))
+                    Log.i("Output data", "Deleted " + xfft_output_file + " !");
 
                 //Write output values to files
                 for (int i=0; i<signalSize; i++) {
