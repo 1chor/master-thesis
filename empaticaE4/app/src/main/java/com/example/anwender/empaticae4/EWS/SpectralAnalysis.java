@@ -103,8 +103,8 @@ public class SpectralAnalysis {
                     int intval = Float.floatToRawIntBits(fval); //integer value
                     int norm_intval = Float.floatToRawIntBits(norm_fval); //normalised integer value
 
-                    String st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
-                    String norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
+                    String st = String.format("%16s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
+                    String norm_st = String.format("%16s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
 
                     //Write hex string to file (IEEE 754 float single precision format)
                     writeDataToFile(MainActivity.path, xdft_input_file, st);
@@ -196,7 +196,7 @@ public class SpectralAnalysis {
                     //Convert float to hex string
                     int intval = Float.floatToRawIntBits(fval); //integer value
 
-                    String st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
+                    String st = String.format("%16s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
 
                     //Write hex string to file (IEEE 754 float single precision format)
                     writeDataToFile(MainActivity.path, xfft_input_file, st);
