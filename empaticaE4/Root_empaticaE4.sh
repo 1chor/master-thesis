@@ -36,11 +36,6 @@ while [ 1 ]; do
 	if [ -f "xfft_input.txt" ]; then
 		echo "xfft_input.txt exists." > /dev/kmsg
 		
-		# delete old output file
-		if [ -f xfft_output.txt ]; then
-			rm xfft_output.txt
-		fi
-		
 		while read line; do
 			# read each line from file
 			# and forward it to the fourier_transform module
@@ -50,6 +45,7 @@ while [ 1 ]; do
 		# read fft output into file
 		cat /proc/fourier_transform > xfft_output.txt
 		
+		# delete input file
 		if [ -f xfft_input.txt ]; then
 			rm xfft_input.txt
 		fi
