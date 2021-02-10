@@ -56,6 +56,11 @@ mount -o rw,remount -t auto /data
 
 echo > /dev/kmsg # empty line
 
+#~ echo "++ Starting Root client script ++" > /dev/kmsg
+#~ sh /data/Root_Client.sh &
+
+#~ echo > /dev/kmsg # empty line
+
 echo "++ Starting Root empaticaE4 script ++" > /dev/kmsg
 sh /data/Root_empaticaE4.sh &
 
