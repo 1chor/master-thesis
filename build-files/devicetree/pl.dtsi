@@ -25,6 +25,12 @@
 			xlnx,slv-dwidth = <0x20>;
 			xlnx,use-wstrb = <0x0>;
 		};
+		fourier_transform_df_0: fourier_transform_dft_v1_0@95000000 {
+			compatible = "xlnx,fourier-transform-dft-v1-0-1.0";
+			reg = <0x0 0x95000000 0x0 0x10000>;
+			xlnx,s00-axi-addr-width = <0x1>;
+			xlnx,s00-axi-data-width = <0x40>;
+		};
 		fourier_transform_v1_0: fourier_transform_v1_0@94000000 {
 			compatible = "xlnx,fourier-transform-v1-0-1.0";
 			reg = <0x0 0x94000000 0x0 0x10000>;
