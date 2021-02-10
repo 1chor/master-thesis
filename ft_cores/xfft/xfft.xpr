@@ -105,14 +105,6 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/proc_common_v3_00_a/pselect_f.vhd">
-        <FileInfo>
-          <Attr Name="Library" Val="proc_common_v3_00_a"/>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../ip_repo/proc_common_v3_00_a/pselect_f.vhd"/>
-          <Attr Name="ImportTime" Val="1599817585"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sources_1/imports/proc_common_v3_00_a/ipif_pkg.vhd">
         <FileInfo>
           <Attr Name="Library" Val="proc_common_v3_00_a"/>
@@ -121,50 +113,6 @@
           <Attr Name="ImportTime" Val="1599817585"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/axi_lite_ipif_v1_01_a/address_decoder.vhd">
-        <FileInfo>
-          <Attr Name="Library" Val="axi_lite_ipif_v1_01_a"/>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../ip_repo/axi_lite_ipif_v1_01_a/address_decoder.vhd"/>
-          <Attr Name="ImportTime" Val="1599817584"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/proc_common_v3_00_a/counter_f.vhd">
-        <FileInfo>
-          <Attr Name="Library" Val="proc_common_v3_00_a"/>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../ip_repo/proc_common_v3_00_a/counter_f.vhd"/>
-          <Attr Name="ImportTime" Val="1381700144"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/axi_lite_ipif_v1_01_a/slave_attachment.vhd">
-        <FileInfo>
-          <Attr Name="Library" Val="axi_lite_ipif_v1_01_a"/>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../ip_repo/axi_lite_ipif_v1_01_a/slave_attachment.vhd"/>
-          <Attr Name="ImportTime" Val="1599817584"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/axi_lite_ipif_v1_01_a/axi_lite_ipif.vhd">
-        <FileInfo>
-          <Attr Name="Library" Val="axi_lite_ipif_v1_01_a"/>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../ip_repo/axi_lite_ipif_v1_01_a/axi_lite_ipif.vhd"/>
-          <Attr Name="ImportTime" Val="1599817584"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/new/user_logic.vhd">
-        <FileInfo>
-          <Attr Name="Library" Val="fourier_transform_v1_00_a"/>
-          <Attr Name="AutoDisabled" Val="1"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/new/fourier_transform.vhd">
-        <FileInfo>
-          <Attr Name="Library" Val="xil_defaultlib"/>
-          <Attr Name="AutoDisabled" Val="1"/>
         </FileInfo>
       </File>
       <File Path="$PPRDIR/component.xml">
