@@ -179,7 +179,6 @@ architecture arch of ft_wrapper is
     
     type output_state_type is (
         OUTPUT_IDLE,
-        CONVERT,
         STORE,
         OUTPUT_DATA
     );
@@ -542,7 +541,7 @@ begin
     shifted_exp_imag <= std_logic_vector(unsigned(imag_fixed2float_out_tdata(exponent_range'range)) + unsigned(exp)) when imag_fixed2float_out_tvalid = '1';
     
     --process to get output of the DFT
-    output_proc: process (output_state, fifo_index, receive_index, state, s_out_valid, out_real, out_imag, blk_exp, real_fixed2float_out_tvalid, imag_fixed2float_out_tvalid, temp_real_float, temp_imag_float, shifted_exp_real, shifted_exp_imag)
+    output_proc: process (output_state, fifo_index, receive_index, state, s_out_valid, out_real, out_imag, blk_exp, temp_real_float, temp_imag_float, shifted_exp_real, shifted_exp_imag, prog_full_o, stout_ready)
     begin
         --default values to prevent latches
         output_state_next <= output_state;
@@ -556,6 +555,7 @@ begin
         
         real_fixed2float_in_tdata <= (others => '0');
         imag_fixed2float_in_tdata <= (others => '0');
+        fifo_in_o <= (others => '0');
         
         case output_state is
                 
@@ -578,39 +578,22 @@ begin
                     --set exponent as copy
                     exp <= blk_exp;
                     
-                    output_state_next <= CONVERT;
-                end if;
-                
-            when CONVERT =>
-                
-                if (state = OUTPUT_DATA) and (s_out_valid = '1') and (real_fixed2float_out_tvalid = '1') and (imag_fixed2float_out_tvalid = '1') then --check if the output data of the DFT is valid
-                    --convert next output data
-                    --real part
-                    real_fixed2float_in_tdata(DFT_DATA_WIDTH downto 0) <= out_real; --convert float to fixed18
-                    real_fixed2float_in_tvalid <= '1';
-                    --imaginary part
-                    imag_fixed2float_in_tdata(DFT_DATA_WIDTH downto 0) <= out_imag; --convert float to fixed18
-                    imag_fixed2float_in_tvalid <= '1';
-                                        
-                    --increase index
-                    fifo_index_next <= fifo_index + 1; 
-                    
                     output_state_next <= STORE;
-                end if;
-                
+                end if;               
+            
             when STORE =>
             
                 if (fifo_index = SIZE) then
                     
                     if (prog_full_o = '1') and (stout_ready = '1') then -- all output values are stored in the FIFO and master is ready to read
+                        fifo_index_next <= 0; --reset counter
+                        
                         -- read FIFO data
                         rd_en_o <= '1';
                         
                         output_state_next <= OUTPUT_DATA;
                     
-                    else
-                        fifo_index_next <= 0; --reset counter
-                        
+                    else 
                         --write data to FIFO
                         --real part
                         --sign bit
@@ -631,7 +614,7 @@ begin
                         wr_en_o <= '1';
                     end if;
                     
-                elsif (state = OUTPUT_DATA) and (s_out_valid = '1') and (real_fixed2float_out_tvalid = '1') and (imag_fixed2float_out_tvalid = '1') then --check if the output data of the DFT is valid
+                elsif (state = OUTPUT_DATA) and (s_out_valid = '1') then --check if the output data of the DFT is valid
                     --write data to FIFO
                     --real part
                     --sign bit
