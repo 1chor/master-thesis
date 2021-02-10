@@ -391,7 +391,14 @@ public class SpectralAnalysis {
                     for (int linenumber = 0; linenumber < signalSize; linenumber++) {
 
                         if (line == null) {
-                            Log.i("readDataFromFile", "EOF!");
+                            Log.i("readDataFromFile", "EOF, linenumber: " + linenumber);
+
+                            for (int i = 0; i < signalSize; i++) {
+                                Complex zero = new Complex(0, 0);
+                                zero.setR(0.0);
+                                zero.setI(0.0);
+                                value[i] = zero;
+                            }
                             break;
                         }
 
