@@ -32,7 +32,7 @@ entity AXI_user_logic_tb is
 generic
 (
     C_S_AXI_DATA_WIDTH             : integer              := 64;
-    C_S_AXI_ADDR_WIDTH             : integer              := 2
+    C_S_AXI_ADDR_WIDTH             : integer              := 1
 );
 
 end AXI_user_logic_tb;
@@ -43,7 +43,7 @@ architecture bench of AXI_user_logic_tb is
 	component user_logic is
 		generic (
 		C_S_AXI_DATA_WIDTH	: integer	:= 64;
-		C_S_AXI_ADDR_WIDTH	: integer	:= 2
+		C_S_AXI_ADDR_WIDTH	: integer	:= 1
 		);
 		port (
 		S_AXI_ACLK	: in std_logic;
@@ -279,7 +279,7 @@ begin
         -- procedure to write data
         procedure write_data(val_real : std_logic_vector) is
         begin
-            S_AXI_AWADDR <= b"00";
+            S_AXI_AWADDR <= b"0";
             --send input data (only real part)
             S_AXI_WDATA <= ZERO_PADDING & val_real;
             S_AXI_WSTRB <= b"11111111";
@@ -293,7 +293,7 @@ begin
         -- procedure to read data
         procedure read_data(output_buffer_idx : integer) is
         begin
-            S_AXI_ARADDR <= b"01";
+            S_AXI_ARADDR <= b"0";
             readIt <= '1';                --Start AXI Read from Slave
             wait for 1 ns; readIt <= '0'; --Clear "Start Read" Flag
             wait until S_AXI_RVALID = '1';
@@ -430,53 +430,53 @@ begin
         writeline(output, my_line);
         --------------------------------------------------------------
         
-        write(my_line, string'("Real Input Test:"));
-        writeline(output, my_line);
+--        write(my_line, string'("Real Input Test:"));
+--        writeline(output, my_line);
         
-        write(my_line, string'("Load Input Buffers"));
-        writeline(output, my_line);
+--        write(my_line, string'("Load Input Buffers"));
+--        writeline(output, my_line);
         
-        real_in := read_file32("input_TestData_norm.txt");
+--        real_in := read_file32("xfft_input_TestData.txt");
         
-        write(my_line, string'("Load Reference Output Buffers"));
-        writeline(output, my_line);
+--        write(my_line, string'("Load Reference Output Buffers"));
+--        writeline(output, my_line);
         
-        real_out := read_file32("real_TestData_norm.txt");
-        imag_out := read_file32("imag_TestData_norm.txt");
+--        real_out := read_file32("xfft_real_TestData.txt");
+--        imag_out := read_file32("xfft_imag_TestData.txt");
         
-        write(my_line, string'("Start FFT Test"));
-        writeline(output, my_line);
+--        write(my_line, string'("Start FFT Test"));
+--        writeline(output, my_line);
         
-        output_buffer_idx := 0;
+--        output_buffer_idx := 0;
         
-        for i in 0 to SIZE-1 loop
-            --send input data
-            write_data(real_in(i));
-        end loop;
+--        for i in 0 to SIZE-1 loop
+--            --send input data
+--            write_data(real_in(i));
+--        end loop;
         
-        for i in 0 to SIZE-1 loop
-            --read output data
-            read_data(output_buffer_idx);
-            output_buffer_idx := output_buffer_idx + 1;
-        end loop;
+--        for i in 0 to SIZE-1 loop
+--            --read output data
+--            read_data(output_buffer_idx);
+--            output_buffer_idx := output_buffer_idx + 1;
+--        end loop;
         
-        for i in 0 to SIZE-1 loop
-            -- read output data
-            output_real(i) := output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
-            output_imag(i) := output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
-        end loop;               
+--        for i in 0 to SIZE-1 loop
+--            -- read output data
+--            output_real(i) := output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
+--            output_imag(i) := output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
+--        end loop;               
         
-        write(my_line, string'("Compare results"));
-        writeline(output, my_line);
+--        write(my_line, string'("Compare results"));
+--        writeline(output, my_line);
         
-        compare_buffers(output_real, real_out, SIZE);
-        compare_buffers(output_imag, imag_out, SIZE);
+--        compare_buffers(output_real, real_out, SIZE);
+--        compare_buffers(output_imag, imag_out, SIZE);
         
-        write(my_line, string'("Done"));
-        writeline(output, my_line);
+--        write(my_line, string'("Done"));
+--        writeline(output, my_line);
         
-        write(my_line, string'("-----------------------------------"));
-        writeline(output, my_line);
+--        write(my_line, string'("-----------------------------------"));
+--        writeline(output, my_line);
         
         -- End of simulation
         report "Not a real failure. Simulation finished successfully. Test completed successfully" severity failure;
