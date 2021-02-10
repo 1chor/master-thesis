@@ -136,24 +136,24 @@ fi
 
 ########################################################################
 
-#~ if [ -f empaticaE4/app/build/outputs/apk/debug/app-debug.apk ]; then
+if [ -f empaticaE4/app/build/outputs/apk/debug/app-debug.apk ]; then
 	
-	#~ pretty_header "Preparing empaticaE4 app"
+	pretty_header "Preparing empaticaE4 app"
 	
-	#~ cd android
+	cd android
 	
-	#~ if [ ! -d packages/apps/empaticaE4 ]; then
-		#~ mkdir packages/apps/empaticaE4
-	#~ fi
+	if [ ! -d packages/apps/empaticaE4 ]; then
+		mkdir packages/apps/empaticaE4
+	fi
 	
-	#~ cp ../empaticaE4/app/build/outputs/apk/debug/app-debug.apk packages/apps/empaticaE4/empaticaE4.apk
-	#~ cp ../build-files/app/empaticaE4/Android.mk packages/apps/empaticaE4/
-	#~ cp ../build-files/app/core.mk build/target/product/
+	cp ../empaticaE4/app/build/outputs/apk/debug/app-debug.apk packages/apps/empaticaE4/empaticaE4.apk
+	cp ../build-files/app/empaticaE4/Android.mk packages/apps/empaticaE4/
+	cp ../build-files/app/core.mk build/target/product/
 	
-	#~ cd ..
+	cd ..
 
-	#~ echo_green "Preparing empaticaE4 app done"
-#~ fi
+	echo_green "Preparing empaticaE4 app done"
+fi
 
 ########################################################################
 
