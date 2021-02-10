@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.1 (lin64) Build 2188600 Wed Apr  4 18:39:19 MDT 2018
-// Date        : Mon Feb  8 21:56:37 2021
+// Date        : Wed Feb 10 09:58:06 2021
 // Host        : soc running 64-bit Ubuntu 18.04.5 LTS
 // Command     : write_verilog -force -mode synth_stub
 //               /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fifo_out_0/fifo_out_0_stub.v
