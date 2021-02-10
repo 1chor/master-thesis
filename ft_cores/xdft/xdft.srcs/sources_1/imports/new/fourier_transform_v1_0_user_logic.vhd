@@ -33,7 +33,7 @@ entity user_logic is
 		-- Width of S_AXI data bus
 		C_S_AXI_DATA_WIDTH	: integer	:= 64;
 		-- Width of S_AXI address bus
-		C_S_AXI_ADDR_WIDTH	: integer	:= 2
+		C_S_AXI_ADDR_WIDTH	: integer	:= 1
 	);
 	port (
 		-- Users to add ports here
@@ -125,7 +125,6 @@ architecture arch_imp of user_logic is
 	-- ADDR_LSB = 3 for 64 bits (n downto 3)
 	--constant ADDR_LSB  : integer := (C_S_AXI_DATA_WIDTH/32)+ 1;
 	constant ADDR_LSB  : integer := 0;
-	constant OPT_MEM_ADDR_BITS : integer := 1;
 	------------------------------------------------
 	---- Signals for user logic register space example
 	--------------------------------------------------
@@ -262,7 +261,7 @@ begin
 	slv_reg_wren <= axi_wready and S_AXI_WVALID and axi_awready and S_AXI_AWVALID ;
 
 	process (S_AXI_ACLK)
-	variable loc_addr :std_logic_vector(OPT_MEM_ADDR_BITS downto 0); 
+	variable loc_addr :std_logic_vector(C_S_AXI_ADDR_WIDTH-1 downto 0); 
 	begin
 	  if rising_edge(S_AXI_ACLK) then 
 	    if S_AXI_ARESETN = '0' then
@@ -270,25 +269,17 @@ begin
 	      output_reg <= (others => '0');
 	      in_valid <= '0';
 	    else
-	      loc_addr := axi_awaddr(ADDR_LSB + OPT_MEM_ADDR_BITS downto ADDR_LSB);
+	      loc_addr := axi_awaddr(ADDR_LSB downto ADDR_LSB);
 	      in_valid <= '0';
 	      if (slv_reg_wren = '1') then
 	        case loc_addr is
-	          when b"00" =>
+	          when b"0" =>
 	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
 	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
 	                -- Respective byte enables are asserted as per write strobes                   
 	                -- slave registor 0
 	                input_reg(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
                     in_valid <= '1';
-	              end if;
-	            end loop;
-	          when b"01" =>
-	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
-	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
-	                -- Respective byte enables are asserted as per write strobes                   
-	                -- slave registor 1
-	                output_reg(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
 	              end if;
 	            end loop;	          
 	          when others =>
@@ -382,15 +373,13 @@ begin
 	-- and the slave is ready to accept the read address.
 	slv_reg_rden <= axi_arready and S_AXI_ARVALID and (not axi_rvalid) and out_valid;
 
-	process (input_reg, data_out, axi_araddr, S_AXI_ARESETN, slv_reg_rden)
-	variable loc_addr :std_logic_vector(OPT_MEM_ADDR_BITS downto 0);
+	process (axi_araddr, data_out)
+	variable loc_addr :std_logic_vector(C_S_AXI_ADDR_WIDTH-1 downto 0);
 	begin
 	    -- Address decoding for reading registers
-	    loc_addr := axi_araddr(ADDR_LSB + OPT_MEM_ADDR_BITS downto ADDR_LSB);
+	    loc_addr := axi_araddr(ADDR_LSB downto ADDR_LSB);
 	    case loc_addr is
-	      when b"00" =>
-	        reg_data_out <= input_reg;
-	      when b"01" =>
+	      when b"0" =>
 	        reg_data_out <= data_out;
 	      when others =>
 	        reg_data_out  <= (others => '0');
