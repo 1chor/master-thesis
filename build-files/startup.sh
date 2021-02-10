@@ -49,8 +49,6 @@ insmod /data/modules/fourier_transform.ko
 echo > /dev/kmsg # empty line
 
 #remount filesystem rw
-echo "++ Starting Root client script ++" > /dev/kmsg
-sh /data/Root_Client.sh &
 chmod 777 data
 mount -o rw,remount -t auto /data
 
