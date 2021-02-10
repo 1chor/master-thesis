@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../xdft.srcs/sources_1/ip/fifo_out_0/sim/fifo_out_0.v" \
+"../../../../xdft.srcs/sources_1/ip/fifo_in_0/sim/fifo_in_0.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
