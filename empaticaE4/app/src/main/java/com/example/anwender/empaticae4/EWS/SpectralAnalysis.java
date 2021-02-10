@@ -26,6 +26,7 @@ public class SpectralAnalysis {
 
         //variable declaration
         Complex[] dft;
+        Complex[] dft_sw;
         List<double[]> spd;
 
         //variable declaration for file generation
@@ -163,6 +164,7 @@ public class SpectralAnalysis {
 
             case "XFFT": //Hardware Xilinx FFT
                 this.signalSize = inputSignal.size();
+                this.argConstantPart = (Math.PI * 2) / signalSize;
 
                 //define file names
                 //input data files (hex)
@@ -171,10 +173,10 @@ public class SpectralAnalysis {
                 String xfft_output_file = "xfft_output.txt";
 
                 //real output data files (hex)
-                String xfft_real_file = "xfft_real.txt";
+                //String xfft_real_file = "xfft_real.txt";
 
                 //imaginary output data files (hex)
-                String xfft_imag_file = "xfft_imag.txt";
+                //String xfft_imag_file = "xfft_imag.txt";
 
                 //check if file exists and delete it
                 //input data files (hex)
@@ -193,6 +195,7 @@ public class SpectralAnalysis {
                 //imaginary output data files (hex)
                 if (checkFileExists(MainActivity.path, xfft_imag_file, true))
                     Log.i("Output data", "Deleted " + xfft_imag_file + " !");
+                 */
 
                 //Write input values to file
                 for (int i = 0; i < signalSize; i++) {
@@ -227,6 +230,16 @@ public class SpectralAnalysis {
                 if (checkFileExists(MainActivity.path, xfft_output_file, true))
                     Log.i("Output data", "Deleted " + xfft_output_file + " !");
 
+                //dft_sw = calculateDFT(inputSignal);
+
+                //for (int i = 0; i < signalSize; i++) {
+                    //if (! String.format("%1.3f", dft[i].getR()).equals(String.format("%1.3f", dft_sw[i].getR())))
+                        //Log.d("Compare", "Real[" + i + "]: " + String.format("%1.3f", dft[i].getR()) + " vs " + String.format("%1.3f", dft_sw[i].getR()));
+                    //if (! String.format("%1.3f", dft[i].getI()).equals(String.format("%1.3f", dft_sw[i].getI())))
+                        //Log.d("Compare", "Imag[" + i + "]: " + String.format("%1.3f", dft[i].getI()) + " vs " + String.format("%1.3f", dft_sw[i].getI()));
+                //}
+
+                /*
                 //Write output values to files
                 for (int i=0; i<signalSize; i++) {
                     //Real component
@@ -253,6 +266,7 @@ public class SpectralAnalysis {
                 }
                 Log.i("Output data", "Created real output data: " + xfft_real_file + " !");
                 Log.i("Output data", "Created imaginary output data: " + xfft_imag_file + " !");
+                */
 
                 spd = SPD(dft);
                 this.expSPD = spd;
