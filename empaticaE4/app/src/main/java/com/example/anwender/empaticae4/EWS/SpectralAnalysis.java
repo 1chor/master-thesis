@@ -224,7 +224,6 @@ public class SpectralAnalysis {
 
                 //get FFT results
                 dft = readDataFromFile(MainActivity.path, xfft_output_file);
-                dft = calculateDFT(inputSignal);
 
                 //delete output file
                 if (checkFileExists(MainActivity.path, xfft_output_file, true))
