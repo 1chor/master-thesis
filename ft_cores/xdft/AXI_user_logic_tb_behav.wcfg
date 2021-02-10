@@ -6,19 +6,21 @@
       <db_ref path="AXI_user_logic_tb_behav.wdb" id="1">
          <top_modules>
             <top_module name="AXI_user_logic_tb" />
+            <top_module name="glbl" />
+            <top_module name="vcomponents" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="12780000001fs"></ZoomEndTime>
-      <Cursor1Time time="3315000000fs"></Cursor1Time>
+      <ZoomStartTime time="5938583000fs"></ZoomStartTime>
+      <ZoomEndTime time="6067183001fs"></ZoomEndTime>
+      <Cursor1Time time="5969783000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="171"></NameColumnWidth>
+      <NameColumnWidth column_width="167"></NameColumnWidth>
       <ValueColumnWidth column_width="66"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="31" />
+   <WVObjectSize size="48" />
    <wvobject type="group" fp_name="group53">
       <obj_property name="label">user logic</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -32,8 +34,8 @@
          <obj_property name="ObjectShortName">S_AXI_ARESETN</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/AXI_user_logic_tb/S_AXI_AWADDR">
-         <obj_property name="ElementShortName">S_AXI_AWADDR[1:0]</obj_property>
-         <obj_property name="ObjectShortName">S_AXI_AWADDR[1:0]</obj_property>
+         <obj_property name="ElementShortName">S_AXI_AWADDR[0:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_AWADDR[0:0]</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/AXI_user_logic_tb/S_AXI_AWVALID">
          <obj_property name="ElementShortName">S_AXI_AWVALID</obj_property>
@@ -56,8 +58,8 @@
          <obj_property name="ObjectShortName">S_AXI_BREADY</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/AXI_user_logic_tb/S_AXI_ARADDR">
-         <obj_property name="ElementShortName">S_AXI_ARADDR[1:0]</obj_property>
-         <obj_property name="ObjectShortName">S_AXI_ARADDR[1:0]</obj_property>
+         <obj_property name="ElementShortName">S_AXI_ARADDR[0:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_ARADDR[0:0]</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/AXI_user_logic_tb/S_AXI_ARVALID">
          <obj_property name="ElementShortName">S_AXI_ARVALID</obj_property>
@@ -124,8 +126,8 @@
          <obj_property name="ObjectShortName">S_AXI_ARESETN</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/S_AXI_AWADDR">
-         <obj_property name="ElementShortName">S_AXI_AWADDR[1:0]</obj_property>
-         <obj_property name="ObjectShortName">S_AXI_AWADDR[1:0]</obj_property>
+         <obj_property name="ElementShortName">S_AXI_AWADDR[0:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_AWADDR[0:0]</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/S_AXI_AWPROT">
          <obj_property name="ElementShortName">S_AXI_AWPROT[2:0]</obj_property>
@@ -168,8 +170,8 @@
          <obj_property name="ObjectShortName">S_AXI_BREADY</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/S_AXI_ARADDR">
-         <obj_property name="ElementShortName">S_AXI_ARADDR[1:0]</obj_property>
-         <obj_property name="ObjectShortName">S_AXI_ARADDR[1:0]</obj_property>
+         <obj_property name="ElementShortName">S_AXI_ARADDR[0:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_ARADDR[0:0]</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/S_AXI_ARPROT">
          <obj_property name="ElementShortName">S_AXI_ARPROT[2:0]</obj_property>
@@ -204,8 +206,8 @@
       <obj_property name="label">AXI signals</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/axi_awaddr">
-         <obj_property name="ElementShortName">axi_awaddr[1:0]</obj_property>
-         <obj_property name="ObjectShortName">axi_awaddr[1:0]</obj_property>
+         <obj_property name="ElementShortName">axi_awaddr[0:0]</obj_property>
+         <obj_property name="ObjectShortName">axi_awaddr[0:0]</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/axi_awready">
          <obj_property name="ElementShortName">axi_awready</obj_property>
@@ -224,8 +226,8 @@
          <obj_property name="ObjectShortName">axi_bvalid</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/axi_araddr">
-         <obj_property name="ElementShortName">axi_araddr[1:0]</obj_property>
-         <obj_property name="ObjectShortName">axi_araddr[1:0]</obj_property>
+         <obj_property name="ElementShortName">axi_araddr[0:0]</obj_property>
+         <obj_property name="ObjectShortName">axi_araddr[0:0]</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/axi_arready">
          <obj_property name="ElementShortName">axi_arready</obj_property>
@@ -369,6 +371,74 @@
    <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/receive_index_next">
       <obj_property name="ElementShortName">receive_index_next</obj_property>
       <obj_property name="ObjectShortName">receive_index_next</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fifo_index">
+      <obj_property name="ElementShortName">fifo_index</obj_property>
+      <obj_property name="ObjectShortName">fifo_index</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fifo_index_next">
+      <obj_property name="ElementShortName">fifo_index_next</obj_property>
+      <obj_property name="ObjectShortName">fifo_index_next</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider116" type="divider">
+      <obj_property name="label">FIFO IN</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/wr_en_i">
+      <obj_property name="ElementShortName">wr_en_i</obj_property>
+      <obj_property name="ObjectShortName">wr_en_i</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/rd_en_i">
+      <obj_property name="ElementShortName">rd_en_i</obj_property>
+      <obj_property name="ObjectShortName">rd_en_i</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/full_i">
+      <obj_property name="ElementShortName">full_i</obj_property>
+      <obj_property name="ObjectShortName">full_i</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/empty_i">
+      <obj_property name="ElementShortName">empty_i</obj_property>
+      <obj_property name="ObjectShortName">empty_i</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/prog_full_i">
+      <obj_property name="ElementShortName">prog_full_i</obj_property>
+      <obj_property name="ObjectShortName">prog_full_i</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fifo_in_i">
+      <obj_property name="ElementShortName">fifo_in_i[17:0]</obj_property>
+      <obj_property name="ObjectShortName">fifo_in_i[17:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fifo_out_i">
+      <obj_property name="ElementShortName">fifo_out_i[17:0]</obj_property>
+      <obj_property name="ObjectShortName">fifo_out_i[17:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider124" type="divider">
+      <obj_property name="label">FIFO OUT</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/wr_en_o">
+      <obj_property name="ElementShortName">wr_en_o</obj_property>
+      <obj_property name="ObjectShortName">wr_en_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/rd_en_o">
+      <obj_property name="ElementShortName">rd_en_o</obj_property>
+      <obj_property name="ObjectShortName">rd_en_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/full_o">
+      <obj_property name="ElementShortName">full_o</obj_property>
+      <obj_property name="ObjectShortName">full_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/empty_o">
+      <obj_property name="ElementShortName">empty_o</obj_property>
+      <obj_property name="ObjectShortName">empty_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/prog_full_o">
+      <obj_property name="ElementShortName">prog_full_o</obj_property>
+      <obj_property name="ObjectShortName">prog_full_o</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fifo_in_o">
+      <obj_property name="ElementShortName">fifo_in_o[63:0]</obj_property>
+      <obj_property name="ObjectShortName">fifo_in_o[63:0]</obj_property>
    </wvobject>
    <wvobject fp_name="divider117" type="divider">
       <obj_property name="label">DFT instance</obj_property>
