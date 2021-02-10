@@ -351,6 +351,8 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                     if (!flagBVP) {
                         flagBVP = true;
                         firstWindow = true;
+                        //Clear all elements in the array
+                        bvpSamples.clear();
 
                     } else {
 
