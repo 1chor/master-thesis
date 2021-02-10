@@ -64,10 +64,10 @@ sh /data/Root_empaticaE4.sh &
 
 echo > /dev/kmsg # empty line
 
-echo "+++++++++++++++++++++++++++++++" > /dev/kmsg
-echo "++                           ++" > /dev/kmsg
+echo "+++++++++++++++++++++++++++++" > /dev/kmsg
+echo "++                         ++" > /dev/kmsg
 echo "++ End user startup script ++" > /dev/kmsg
-echo "++                           ++" > /dev/kmsg
-echo "+++++++++++++++++++++++++++++++" > /dev/kmsg
+echo "++                         ++" > /dev/kmsg
+echo "+++++++++++++++++++++++++++++" > /dev/kmsg
 
 echo > /dev/kmsg # empty line
