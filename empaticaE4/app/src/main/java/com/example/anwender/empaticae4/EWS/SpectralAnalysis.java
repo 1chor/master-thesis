@@ -55,34 +55,31 @@ public class SpectralAnalysis {
                 //define file names
                 //input data files (hex)
                 String xdft_input_file = "xdft_input.txt";
-                String xdft_input_norm_file = "xdft_input_norm.txt";
+
+                String xdft_output_file = "xdft_output.txt";
 
                 //real output data files (hex)
                 String xdft_real_file = "xdft_real.txt";
-                String xdft_real_norm_file = "xdft_real_norm.txt";
 
                 //imaginary output data files (hex)
                 String xdft_imag_file = "xdft_imag.txt";
-                String xdft_imag_norm_file = "xdft_imag_norm.txt";
 
                 //check if file exists and delete it
                 //input data files (hex)
                 if (checkFileExists(MainActivity.path, xdft_input_file, true))
                     Log.i("Input data", "Deleted " + xdft_input_file + " !");
-                if (checkFileExists(MainActivity.path, xdft_input_norm_file, true))
-                    Log.i("Input data", "Deleted " + xdft_input_norm_file + " !");
+
+                //output data file (hex)
+                if (checkFileExists(MainActivity.path, xdft_output_file, true))
+                    Log.i("Output data", "Deleted " + xdft_output_file + " !");
 
                 //real output data files (hex)
                 if (checkFileExists(MainActivity.path, xdft_real_file, true))
                     Log.i("Output data", "Deleted " + xdft_real_file + " !");
-                if (checkFileExists(MainActivity.path, xdft_real_norm_file, true))
-                    Log.i("Output data", "Deleted " + xdft_real_norm_file + " !");
 
                 //imaginary output data files (hex)
                 if (checkFileExists(MainActivity.path, xdft_imag_file, true))
                     Log.i("Output data", "Deleted " + xdft_imag_file + " !");
-                if (checkFileExists(MainActivity.path, xdft_imag_norm_file, true))
-                    Log.i("Output data", "Deleted " + xdft_imag_norm_file + " !");
 
                 //normalise input values to be between -1 and 1
                 //original sign of the values are maintained
@@ -97,65 +94,47 @@ public class SpectralAnalysis {
 
                 //Write input values to file
                 for (int i = 0; i < signalSize; i++) {
-                    float fval = inputSignal.get(i)[0]; //get input value
-                    float norm_fval = 2 * fval / norm_abs; //normalise input value, range [-1 1]
+                    float norm_fval = 2 * inputSignal.get(i)[0] / norm_abs; //normalise input value, range [-1 1]
 
                     //Convert float to hex string
-                    int intval = Float.floatToRawIntBits(fval); //integer value
                     int norm_intval = Float.floatToRawIntBits(norm_fval); //normalised integer value
 
-                    String st = String.format("%16s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
                     String norm_st = String.format("%16s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
 
-                    //Write hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path, xdft_input_file, st);
-
                     //Write normalised hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path, xdft_input_norm_file, norm_st);
+                    writeDataToFile(MainActivity.path, xdft_input_file, norm_st);
                 }
-                Log.i("Input data", "Created input hex data: " + xdft_input_file + " & " + xdft_input_norm_file + " !");
+                Log.i("Input data", "Created input hex data: " + xdft_input_file + " !");
 
                 dft = calculateDFT(inputSignal);
 
                 //Write output values to files
                 for (int i = 0; i < signalSize; i++) {
                     //Real component
-                    double dval = dft[i].getR(); //get real output value
-                    double norm_dval = 2 * dval / norm_abs; //normalise output value, range [-1 1]
+                    double norm_dval = 2 * dft[i].getR() / norm_abs; //normalise output value, range [-1 1]
 
                     //Convert double to hex string
-                    int intval = Float.floatToRawIntBits((float) dval); //integer value, convert to float for IEEE 754 float single precision
                     int norm_intval = Float.floatToRawIntBits((float) norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
 
-                    String st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
                     String norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
 
-                    //Write hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path, xdft_real_file, st);
-
                     //Write normalised hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path, xdft_real_norm_file, norm_st);
+                    writeDataToFile(MainActivity.path, xdft_real_file, norm_st);
 
                     //Imaginary component
-                    dval = dft[i].getI(); //get imaginary output value
-                    norm_dval = 2 * dval / norm_abs; //normalise output value, range [-1 1]
+                    norm_dval = 2 * dft[i].getI() / norm_abs; //normalise output value, range [-1 1]
 
                     //Convert double to hex string
-                    intval = Float.floatToRawIntBits((float) dval); //integer value, convert to float for IEEE 754 float single precision
                     norm_intval = Float.floatToRawIntBits((float) norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
 
-                    st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
                     norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
 
-                    //Write hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path, xdft_imag_file, st);
-
                     //Write normalised hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path, xdft_imag_norm_file, norm_st);
+                    writeDataToFile(MainActivity.path, xdft_imag_file, norm_st);
 
                 }
-                Log.i("Output data", "Created real output data: " + xdft_real_file + " & " + xdft_real_norm_file + " !");
-                Log.i("Output data", "Created imaginary output data: " + xdft_imag_file + " & " + xdft_imag_norm_file + " !");
+                Log.i("Output data", "Created real output data: " + xdft_real_file + " !");
+                Log.i("Output data", "Created imaginary output data: " + xdft_imag_file + " !");
 
                 spd = SPD(dft);
                 this.expSPD = spd;
