@@ -30,6 +30,7 @@ public class SpectralAnalysis {
         List<double[]> spd;
 
         //variable declaration for file generation
+        File file;
         boundaries bound;
 
         float norm_abs;
@@ -106,7 +107,32 @@ public class SpectralAnalysis {
                 }
                 Log.i("Input data", "Created input hex data: " + xdft_input_file + " !");
 
-                dft = calculateDFT(inputSignal);
+                //wait until output file exists
+                file = new File(MainActivity.path, xdft_output_file);
+                while (!file.exists()) {
+                    try {
+                        //Thread.Sleep(1000);
+                        java.lang.Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                //get FFT results
+                dft = readDataFromFile(MainActivity.path, xdft_output_file);
+
+                //delete output file
+                if (checkFileExists(MainActivity.path, xdft_output_file, true))
+                    Log.i("Output data", "Deleted " + xdft_output_file + " !");
+
+                dft_sw = calculateDFT(inputSignal);
+
+                for (int i = 0; i < signalSize; i++) {
+                if (! String.format("%1.3f", dft[i].getR()).equals(String.format("%1.3f", dft_sw[i].getR())))
+                Log.d("Compare", "Real[" + i + "]: " + String.format("%1.3f", dft[i].getR()) + " vs " + String.format("%1.3f", dft_sw[i].getR()));
+                if (! String.format("%1.3f", dft[i].getI()).equals(String.format("%1.3f", dft_sw[i].getI())))
+                Log.d("Compare", "Imag[" + i + "]: " + String.format("%1.3f", dft[i].getI()) + " vs " + String.format("%1.3f", dft_sw[i].getI()));
+                }
 
                 //Write output values to files
                 for (int i = 0; i < signalSize; i++) {
@@ -191,7 +217,7 @@ public class SpectralAnalysis {
                 Log.i("Input data", "Created input hex data: " + xfft_input_file + " !");
 
                 //wait until output file exists
-                File file = new File(MainActivity.path, xfft_output_file);
+                file = new File(MainActivity.path, xfft_output_file);
                 while (!file.exists()) {
                     try {
                         //Thread.Sleep(1000);
