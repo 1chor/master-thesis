@@ -29,7 +29,7 @@ static u64 data_read[MAX_SIZE];
 static int Device_written = 0;
 static int written_count = 0;
 
-static int FT_SIZE = 128;
+static int FT_SIZE = 108;
 
 module_param(FT_SIZE, int, 0644);
 MODULE_PARM_DESC(FT_SIZE, "Size of the Fourier Transformation");
