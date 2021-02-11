@@ -30,6 +30,7 @@ set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY} [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language VHDL [current_project]
 set_property board_part xilinx.com:zcu102:part0:3.2 [current_project]
+set_property ip_repo_paths /media/soc/Volume/master-thesis/ft_cores/xdft [current_project]
 set_property ip_output_repo /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 read_ip -quiet /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/ip/fifo_out_0/fifo_out_0.xci

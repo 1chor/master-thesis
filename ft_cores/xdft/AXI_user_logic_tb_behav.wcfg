@@ -12,15 +12,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="5938583000fs"></ZoomStartTime>
-      <ZoomEndTime time="6067183001fs"></ZoomEndTime>
-      <Cursor1Time time="5969783000fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="323500001fs"></ZoomEndTime>
+      <Cursor1Time time="72500000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="167"></NameColumnWidth>
+      <NameColumnWidth column_width="163"></NameColumnWidth>
       <ValueColumnWidth column_width="66"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="48" />
+   <WVObjectSize size="50" />
    <wvobject type="group" fp_name="group53">
       <obj_property name="label">user logic</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -311,6 +311,7 @@
    <wvobject type="group" fp_name="group106">
       <obj_property name="label">Output</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/stout_data">
          <obj_property name="ElementShortName">stout_data[63:0]</obj_property>
          <obj_property name="ObjectShortName">stout_data[63:0]</obj_property>
@@ -371,6 +372,14 @@
    <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/receive_index_next">
       <obj_property name="ElementShortName">receive_index_next</obj_property>
       <obj_property name="ObjectShortName">receive_index_next</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fifo_i_index">
+      <obj_property name="ElementShortName">fifo_i_index</obj_property>
+      <obj_property name="ObjectShortName">fifo_i_index</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fifo_i_index_next">
+      <obj_property name="ElementShortName">fifo_i_index_next</obj_property>
+      <obj_property name="ObjectShortName">fifo_i_index_next</obj_property>
    </wvobject>
    <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fifo_index">
       <obj_property name="ElementShortName">fifo_index</obj_property>

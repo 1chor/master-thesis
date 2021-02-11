@@ -92,8 +92,11 @@ architecture arch of ft_wrapper is
     signal receive_index            : natural range 0 to SIZE := 0;
     signal receive_index_next       : natural range 0 to SIZE := 0;
     
-    signal fifo_index               : natural range 0 to SIZE := 0;
-    signal fifo_index_next          : natural range 0 to SIZE := 0;
+    signal fifo_i_index             : natural range 0 to SIZE := 0;
+    signal fifo_i_index_next        : natural range 0 to SIZE := 0;
+    
+    signal fifo_o_index             : natural range 0 to SIZE := 0;
+    signal fifo_o_index_next        : natural range 0 to SIZE := 0;
     
     -- signals for float_to_fixed18
     signal float2fixed_in_tvalid    : std_logic := '0'; -- payload is valid
@@ -127,7 +130,6 @@ architecture arch of ft_wrapper is
     signal rd_en_i       : std_logic; -- read enable
     signal full_i        : std_logic; -- FIFO full
     signal empty_i       : std_logic; -- FIFO empty
-    signal prog_full_i   : std_logic; -- FIFO has all input values
     signal fifo_in_i     : std_logic_vector(17 DOWNTO 0); -- FIFO input data
     signal fifo_out_i    : std_logic_vector(17 DOWNTO 0); -- FIFO output data
     
@@ -138,7 +140,6 @@ architecture arch of ft_wrapper is
     signal rd_en_o       : std_logic; -- read enable
     signal full_o        : std_logic; -- FIFO full
     signal empty_o       : std_logic; -- FIFO empty
-    signal prog_full_o   : std_logic; -- FIFO has all input values
     signal fifo_in_o     : std_logic_vector(63 DOWNTO 0); -- FIFO input data
     
     -- range declaration for IEEE 754 single presicion format
@@ -224,7 +225,6 @@ architecture arch of ft_wrapper is
         dout : out std_logic_vector(17 DOWNTO 0);
         full : out std_logic;
         empty : out std_logic;
-        prog_full : out std_logic;
         wr_rst_busy : out std_logic;
         rd_rst_busy : out std_logic
     );
@@ -241,7 +241,6 @@ architecture arch of ft_wrapper is
         dout : out std_logic_vector(63 DOWNTO 0);
         full : out std_logic;
         empty : out std_logic;
-        prog_full : out std_logic;
         wr_rst_busy : out std_logic;
         rd_rst_busy : out std_logic
     );
@@ -319,7 +318,6 @@ begin
         dout => fifo_out_i,
         full => full_i,
         empty => empty_i,
-        prog_full => prog_full_i,
         wr_rst_busy => wr_rst_busy_i,
         rd_rst_busy => rd_rst_busy_i
     );
@@ -335,7 +333,6 @@ begin
         dout => stout_data,
         full => full_o,
         empty => empty_o,
-        prog_full => prog_full_o,
         wr_rst_busy => wr_rst_busy_o,
         rd_rst_busy => rd_rst_busy_o
     );
@@ -414,7 +411,8 @@ begin
             output_state <= OUTPUT_IDLE;
             index <= 0;
             receive_index <= 0;
-            fifo_index <= 0;
+            fifo_i_index <= 0;
+            fifo_o_index <= 0;
             
         elsif rising_edge(clk) then
             state <= state_next;
@@ -422,7 +420,8 @@ begin
             output_state <= output_state_next;
             index <= index_next;
             receive_index <= receive_index_next;
-            fifo_index <= fifo_index_next;
+            fifo_i_index <= fifo_i_index_next;
+            fifo_o_index <= fifo_o_index_next;
         end if;
         
     end process sync_state_proc;
@@ -434,11 +433,12 @@ begin
     wr_en_i <= float2fixed_out_tvalid; -- set FIFO write enable
         
     --process to feed the DFT
-    input_proc: process (input_state, index, state, empty_i, prog_full_i, first_ready_in, stin_valid, stin_data)
+    input_proc: process (input_state, index, fifo_i_index, state, empty_i, first_ready_in, stin_valid, stin_data)
     begin
         --default values to prevent latches
         input_state_next <= input_state;
         index_next <= index;
+        fifo_i_index_next <= fifo_i_index;
         first_in <= '0';
         stin_ready <= '0';
         float2fixed_in_tvalid <= '0';
@@ -457,16 +457,26 @@ begin
             when CONVERT =>
                 stin_ready <= '1';
                 
-                if (prog_full_i = '1') and (first_ready_in = '1') then -- all input values are stored in the FIFO and DFT is ready to process data
+                if (fifo_i_index = SIZE-1) and (first_ready_in = '1') then  -- all input values are stored in the FIFO and DFT is ready to process data
+                    fifo_i_index_next <= 0; --reset counter
+                    
                     -- read FIFO data
                     rd_en_i <= '1';
                     
                     input_state_next <= FIRST_FRAME;
-                
-                elsif (state = TRANSFER_TO_FFT) and (stin_valid = '1') then
+                    
+                elsif (state = TRANSFER_TO_FFT) and (stin_valid = '1') and (empty_i = '1') then
                     --convert first input data
                     float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
-                    float2fixed_in_tvalid <= '1';                                        
+                    float2fixed_in_tvalid <= '1';                                                                                      
+                                        
+                elsif (state = TRANSFER_TO_FFT) and (stin_valid = '1') then
+                    --convert input data
+                    float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
+                    float2fixed_in_tvalid <= '1';   
+                    
+                    --increase index
+                    fifo_i_index_next <= fifo_i_index + 1;                                     
                 end if;
         
             when FIRST_FRAME =>                
@@ -487,6 +497,10 @@ begin
                 if index = SIZE then --independent of valid signals
                     index_next <= 0; --reset counter
                     input_state_next <= INPUT_IDLE;
+                    
+                elsif (index = SIZE-1) and (state = TRANSFER_TO_FFT) then
+                    --increase index
+                    index_next <= index + 1;
                     
                 elsif (state = TRANSFER_TO_FFT) then --check if DFT is ready to process data
                     -- read FIFO data
@@ -541,11 +555,11 @@ begin
     shifted_exp_imag <= std_logic_vector(unsigned(imag_fixed2float_out_tdata(exponent_range'range)) + unsigned(exp)) when imag_fixed2float_out_tvalid = '1';
     
     --process to get output of the DFT
-    output_proc: process (output_state, fifo_index, receive_index, state, s_out_valid, out_real, out_imag, blk_exp, temp_real_float, temp_imag_float, shifted_exp_real, shifted_exp_imag, prog_full_o, stout_ready)
+    output_proc: process (output_state, fifo_o_index, receive_index, state, s_out_valid, out_real, out_imag, blk_exp, temp_real_float, temp_imag_float, shifted_exp_real, shifted_exp_imag, stout_ready)
     begin
         --default values to prevent latches
         output_state_next <= output_state;
-        fifo_index_next <= fifo_index;
+        fifo_o_index_next <= fifo_o_index;
         receive_index_next <= receive_index;
         stout_valid <= '0';
         real_fixed2float_in_tvalid <= '0';
@@ -573,7 +587,7 @@ begin
                     imag_fixed2float_in_tvalid <= '1';
                     
                     --increase index
-                    fifo_index_next <= fifo_index + 1; 
+                    fifo_o_index_next <= fifo_o_index + 1; 
                     
                     --set exponent as copy
                     exp <= blk_exp;
@@ -583,36 +597,32 @@ begin
             
             when STORE =>
             
-                if (fifo_index = SIZE) then
+                if (fifo_o_index = SIZE) then -- all input values are stored in the FIFO and master is ready to read data                    
+                    --write last data to FIFO
+                    --real part
+                    --sign bit
+                    fifo_in_o(STOUT_SIGN_BIT_REAL) <= temp_real_float(SIGN_BIT);
+                    --exponent with applied shifts from DFT
+                    fifo_in_o(stout_exponent_real_range'range) <= shifted_exp_real;
+                    --mantissa                    
+                    fifo_in_o(stout_mantissa_real_range'range) <= temp_real_float(mantissa_range'range);
                     
-                    if (prog_full_o = '1') and (stout_ready = '1') then -- all output values are stored in the FIFO and master is ready to read
-                        fifo_index_next <= 0; --reset counter
-                        
-                        -- read FIFO data
-                        rd_en_o <= '1';
-                        
-                        output_state_next <= OUTPUT_DATA;
+                    --imaginary part
+                    --sign bit
+                    fifo_in_o(STOUT_SIGN_BIT_IMAG) <= temp_imag_float(SIGN_BIT);
+                    --exponent with applied shifts from DFT
+                    fifo_in_o(stout_exponent_imag_range'range) <= shifted_exp_imag;
+                    --mantissa                    
+                    fifo_in_o(stout_mantissa_imag_range'range) <= temp_imag_float(mantissa_range'range);
+                
+                    wr_en_o <= '1';
                     
-                    else 
-                        --write data to FIFO
-                        --real part
-                        --sign bit
-                        fifo_in_o(STOUT_SIGN_BIT_REAL) <= temp_real_float(SIGN_BIT);
-                        --exponent with applied shifts from DFT
-                        fifo_in_o(stout_exponent_real_range'range) <= shifted_exp_real;
-                        --mantissa                    
-                        fifo_in_o(stout_mantissa_real_range'range) <= temp_real_float(mantissa_range'range);
-                        
-                        --imaginary part
-                        --sign bit
-                        fifo_in_o(STOUT_SIGN_BIT_IMAG) <= temp_imag_float(SIGN_BIT);
-                        --exponent with applied shifts from DFT
-                        fifo_in_o(stout_exponent_imag_range'range) <= shifted_exp_imag;
-                        --mantissa                    
-                        fifo_in_o(stout_mantissa_imag_range'range) <= temp_imag_float(mantissa_range'range);
+                    fifo_o_index_next <= 0; --reset counter
+                                            
+                    -- read FIFO data
+                    rd_en_o <= '1';
                     
-                        wr_en_o <= '1';
-                    end if;
+                    output_state_next <= OUTPUT_DATA;
                     
                 elsif (state = OUTPUT_DATA) and (s_out_valid = '1') then --check if the output data of the DFT is valid
                     --write data to FIFO
@@ -643,7 +653,7 @@ begin
                     imag_fixed2float_in_tvalid <= '1';
                                    
                     --increase index
-                    fifo_index_next <= fifo_index + 1;            
+                    fifo_o_index_next <= fifo_o_index + 1;            
                 end if;              
                         
             when OUTPUT_DATA =>
