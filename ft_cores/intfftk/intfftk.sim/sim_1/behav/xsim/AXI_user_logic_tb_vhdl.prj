@@ -1,0 +1,37 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../intfftk.srcs/sources_1/ip/fixed25_to_float_0/sim/fixed25_to_float_0.vhd" \
+"../../../../intfftk.srcs/sources_1/ip/float_to_fixed18_0/sim/float_to_fixed18_0.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/buffers/inbuf_half_path.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/math/int_addsub_dsp48.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/math/cmult/int_cmult18x25_dsp48.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/math/mults/mlt42x18_dsp48e1.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/math/mults/mlt44x18_dsp48e2.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/math/cmult/int_cmult_dbl18_dsp48.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/math/mults/mlt59x18_dsp48e1.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/math/mults/mlt61x18_dsp48e2.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/math/cmult/int_cmult_trpl18_dsp48.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/math/mults/mlt35x25_dsp48e1.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/math/mults/mlt35x27_dsp48e2.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/math/cmult/int_cmult_dbl35_dsp48.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/math/mults/mlt52x25_dsp48e1.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/math/mults/mlt52x27_dsp48e2.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/math/cmult/int_cmult_trpl52_dsp48.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/math/cmult/int_cmult_dsp48.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/fft/int_dif2_fly.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/twiddle/row_twiddle_tay.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/twiddle/rom_twiddle_int.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/delay/int_align_fft.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/delay/int_delay_line.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/delay/int_delay_wrap.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/fft/int_fftNk.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/buffers/outbuf_half_path.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/buffers/int_bitrev_order.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/vhdl/main/int_fft_single_path.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/new/fourier_transform_v1_0_user_logic.vhd" \
+"../../../../intfftk.srcs/sources_1/imports/intfftk/math_pkg.vhd" \
+"../../../../intfftk.srcs/sources_1/new/intfftk_wrapper.vhd" \
+"../../../../intfftk.srcs/sim_1/imports/new/AXI_user_logic_tb.vhd" \
+
+# Do not sort compile order
+nosort
