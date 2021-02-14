@@ -38,6 +38,12 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
     private TextView mServerIP;
     private CheckBox checkBoxhash;
 
+    private RadioButton radioButtonSDFT;
+    private RadioButton radioButtonXDFT;
+    private RadioButton radioButtonXFFT;
+    private RadioButton radioButtonXFFT_fixed;
+    private RadioButton radioButtonCustomFFT;
+
     //filenames
     private String blake2bDriver;
     private String blake2bHash;
@@ -69,13 +75,12 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
 
         //initialise RadioButtons
         RadioGroup radioGroupConfig = (RadioGroup) findViewById(R.id.radioGroup);
-        RadioButton radioButtonSDFT = (RadioButton) findViewById(R.id.radioButton_SDFT);
-        RadioButton radioButtonXDFT = (RadioButton) findViewById(R.id.radioButton_XDFT);
-        RadioButton radioButtonXFFT = (RadioButton) findViewById(R.id.radioButton_XFFT);
-        RadioButton radioButtonXFFT_fixed = (RadioButton) findViewById(R.id.radioButton_XFFT_fixed);
-        RadioButton radioButtonCustomFFT = (RadioButton) findViewById(R.id.radioButton_custom_FFT);
-        radioButtonSDFT.setChecked(true); //default value
-
+        radioButtonSDFT = (RadioButton) findViewById(R.id.radioButton_SDFT);
+        radioButtonXDFT = (RadioButton) findViewById(R.id.radioButton_XDFT);
+        radioButtonXFFT = (RadioButton) findViewById(R.id.radioButton_XFFT);
+        radioButtonXFFT_fixed = (RadioButton) findViewById(R.id.radioButton_XFFT_fixed);
+        radioButtonCustomFFT = (RadioButton) findViewById(R.id.radioButton_custom_FFT);
+        
         //When RadioGroup "Configuration" checked change
         radioGroupConfig.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -119,6 +124,34 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
                 }
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        //Set current radioButton setting
+        switch (repo_name) {
+            case "SDFT":
+                radioButtonSDFT.setChecked(true);
+                break;
+
+            case "XDFT":
+                radioButtonXDFT.setChecked(true);
+                break;
+
+            case "XFFT":
+                radioButtonXFFT.setChecked(true);
+                break;
+
+            case "XFFT_fixed":
+                radioButtonXFFT_fixed.setChecked(true);
+                break;
+
+            case "custom_FFT":
+                radioButtonCustomFFT.setChecked(true);
+                break;
+        }
     }
 
     @Override
@@ -299,7 +332,4 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
     public void onFilterApplied() {
         //change
     }
-
-
-
 }
