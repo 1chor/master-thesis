@@ -167,7 +167,7 @@ public class SpectralAnalysis {
                 this.domF = dominantFrequency(spd);
                 break;
 
-            case "XFFT": //Hardware Xilinx FFT
+            case "XFFT": //Hardware Xilinx FFT  (floating-point)
                 this.signalSize = inputSignal.size();
                 this.argConstantPart = (Math.PI * 2) / signalSize;
 
@@ -271,6 +271,128 @@ public class SpectralAnalysis {
                 Log.i("Output data", "Created real output data: " + xfft_real_file + " !");
                 Log.i("Output data", "Created imaginary output data: " + xfft_imag_file + " !");
                 */
+
+                spd = SPD(dft);
+                this.expSPD = spd;
+                this.domF = dominantFrequency(spd);
+                break;
+
+            case "XFFT_fixed": //Hardware Xilinx FFT (fixed-point)
+                this.signalSize = inputSignal.size();
+                this.argConstantPart = (Math.PI * 2) / signalSize;
+
+                bound = new boundaries(inputSignal); //search for boundaries
+
+                //define file names
+                //input data files (hex)
+                String xfft_fixed_input_file = "xfft_fixed_input.txt";
+
+                String xfft_fixed_output_file = "xfft_fixed_output.txt";
+
+                //real output data files (hex)
+                String xfft_fixed_real_file = "xfft_fixed_real.txt";
+
+                //imaginary output data files (hex)
+                String xfft_fixed_imag_file = "xfft_fixed_imag.txt";
+
+                //check if file exists and delete it
+                //input data files (hex)
+                if (checkFileExists(MainActivity.path, xfft_fixed_input_file, true))
+                    Log.i("Input data", "Deleted " + xfft_fixed_input_file + " !");
+
+                //output data file (hex)
+                if (checkFileExists(MainActivity.path, xfft_fixed_output_file, true))
+                    Log.i("Output data", "Deleted " + xfft_fixed_output_file + " !");
+
+
+                //real output data files (hex)
+                if (checkFileExists(MainActivity.path, xfft_fixed_real_file, true))
+                    Log.i("Output data", "Deleted " + xfft_fixed_real_file + " !");
+
+                //imaginary output data files (hex)
+                if (checkFileExists(MainActivity.path, xfft_fixed_imag_file, true))
+                    Log.i("Output data", "Deleted " + xfft_fixed_imag_file + " !");
+
+                //normalise input values to be between -1 and 1
+                //original sign of the values are maintained
+                if (Math.abs(bound.getMin()) > bound.getMax()) {
+                    max_range_value = Math.abs(bound.getMin());
+                    min_range_value = bound.getMin();
+                } else {
+                    max_range_value = bound.getMax();
+                    min_range_value = -bound.getMax();
+                }
+                norm_abs = (max_range_value - min_range_value);
+
+                //Write input values to file
+                for (int i = 0; i < signalSize; i++) {
+                    float norm_fval = 2 * inputSignal.get(i)[0] / norm_abs; //normalise input value, range [-1, 1]
+
+                    //Convert float to hex string
+                    int norm_intval = Float.floatToRawIntBits(norm_fval); //normalised integer value
+
+                    String norm_st = String.format("%16s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
+
+                    //Write normalised hex string to file (IEEE 754 float single precision format)
+                    writeDataToFile(MainActivity.path, xfft_fixed_input_file, norm_st);
+                }
+                Log.i("Input data", "Created input hex data: " + xfft_fixed_input_file + " !");
+/*
+                //wait until output file exists
+                file = new File(MainActivity.path, xfft_fixed_output_file);
+                while (!file.exists()) {
+                    try {
+                        //Thread.Sleep(1000);
+                        java.lang.Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                //get FFT results
+                dft = readDataFromFile(MainActivity.path, xfft_fixed_output_file);
+
+                //delete output file
+                if (checkFileExists(MainActivity.path, xfft_fixed_output_file, true))
+                    Log.i("Output data", "Deleted " + xfft_fixed_output_file + " !");
+*/
+                //dft_sw = calculateDFT(inputSignal);
+                dft = calculateDFT(inputSignal);
+
+                //for (int i = 0; i < signalSize; i++) {
+                //if (! String.format("%1.3f", dft[i].getR()).equals(String.format("%1.3f", dft_sw[i].getR())))
+                //Log.d("Compare", "Real[" + i + "]: " + String.format("%1.3f", dft[i].getR()) + " vs " + String.format("%1.3f", dft_sw[i].getR()));
+                //if (! String.format("%1.3f", dft[i].getI()).equals(String.format("%1.3f", dft_sw[i].getI())))
+                //Log.d("Compare", "Imag[" + i + "]: " + String.format("%1.3f", dft[i].getI()) + " vs " + String.format("%1.3f", dft_sw[i].getI()));
+                //}
+
+                //Write output values to files
+                for (int i=0; i<signalSize; i++) {
+                    //Real component
+                    double norm_dval = 2 * dft[i].getR() / norm_abs; //normalise real output value, range [-1, 1]
+
+                    //Convert double to hex string
+                    int norm_intval = Float.floatToRawIntBits((float)norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
+
+                    String norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
+
+                    //Write normalised hex string to file (IEEE 754 float single precision format)
+                    writeDataToFile(MainActivity.path, xfft_fixed_real_file, norm_st);
+
+                    //Imaginary component
+                    norm_dval = 2 * dft[i].getI() / norm_abs; //normalise imaginary output value, range [-1, 1]
+
+                    //Convert double to hex string
+                    norm_intval = Float.floatToRawIntBits((float)norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
+
+                    norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
+
+                    //Write normalised hex string to file (IEEE 754 float single precision format)
+                    writeDataToFile(MainActivity.path, xfft_fixed_imag_file, norm_st);
+                }
+                Log.i("Output data", "Created real output data: " + xfft_fixed_real_file + " !");
+                Log.i("Output data", "Created imaginary output data: " + xfft_fixed_imag_file + " !");
+
 
                 spd = SPD(dft);
                 this.expSPD = spd;
