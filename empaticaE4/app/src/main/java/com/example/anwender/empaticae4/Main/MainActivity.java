@@ -47,6 +47,8 @@ import com.example.anwender.empaticae4.HttpUpload.FileUpload;
 import com.example.anwender.empaticae4.R;
 import com.github.mikephil.charting.data.Entry;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -88,6 +90,8 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
     private TextView connectionStatus;
     private TextView batteryLevel;
     private TextView connectedDevice;
+    private TextView configuration;
+    private TextView configuration_name;
 
     private ProgressBar progressBar;
     private Handler handler = new Handler();
@@ -183,6 +187,10 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
         connectionStatus = (TextView) findViewById(R.id.text_connection_status);
         batteryLevel = (TextView) findViewById(R.id.text_battery_level);
         connectedDevice = (TextView) findViewById(R.id.text_device_name);
+        configuration = (TextView) findViewById(R.id.text_config);
+        configuration_name = (TextView) findViewById(R.id.text_config_name);
+
+        updateTextView(configuration_name, ConfigActivity.repo_name);
 
         //Initialize Buttons
         btnStart = findViewById(R.id.button_start);
@@ -319,6 +327,12 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
+    }
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        updateTextView(configuration_name, ConfigActivity.repo_name);
     }
 
     @Override
@@ -594,7 +608,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
         }
     }
 
-    private void updateTextView(final TextView id, final String text) {
+    public void updateTextView(final TextView id, final String text) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

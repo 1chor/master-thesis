@@ -162,6 +162,8 @@
     <string name="EWS">EWS</string>
     <string name="validation">• Validate results</string>
 
+    <string name="text_config_main">Current configuration:</string>
+    <string name="text_config_fft">-</string>
     <string name="test_RR">• Test Respiratory Rate</string>
     <string name="button_test_RR">Test RR</string>
     <string name="config_RR">Config RR</string>
