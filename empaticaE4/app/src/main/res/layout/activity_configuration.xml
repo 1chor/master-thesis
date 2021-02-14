@@ -154,16 +154,22 @@
             android:text="@string/radio_SDFT" />
 
         <RadioButton
-            android:id="@+id/radioButton_HDFT"
+            android:id="@+id/radioButton_XDFT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/radio_HDFT" />
+            android:text="@string/radio_XDFT" />
 
         <RadioButton
-            android:id="@+id/radioButton_HFFT"
+            android:id="@+id/radioButton_XFFT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/radio_HFFT" />
+            android:text="@string/radio_XFFT" />
+
+        <RadioButton
+            android:id="@+id/radioButton_XFFT_fixed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_XFFT_fixed" />
 
         <RadioButton
             android:id="@+id/radioButton_custom_FFT"

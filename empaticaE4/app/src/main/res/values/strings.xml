@@ -171,8 +171,9 @@
     <string name="select_config">Select the configuration for RR:</string>
     <string name="text_config">Configure</string>
     <string name="radio_SDFT">Software DFT</string>
-    <string name="radio_HDFT">Xilinx Hardware DFT</string>
-    <string name="radio_HFFT">Xilinx Hardware FFT</string>
+    <string name="radio_XDFT">Xilinx Hardware DFT</string>
+    <string name="radio_XFFT">Xilinx Hardware FFT (floating-point)</string>
+    <string name="radio_XFFT_fixed">Xilinx Hardware FFT (fixed-point)</string>
     <string name="radio_custom_FFT">Custom FFT</string>
     <string name="hash">Hash calculation:</string>
     <string name="enable_hash">enable hash calculation</string>
