@@ -36,12 +36,6 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
     //layout
     private TextView mConsole;
     private TextView mServerIP;
-    private Button mButtonConfig;
-    private RadioGroup radioGroupConfig;
-    private RadioButton radioButtonSDFT;
-    private RadioButton radioButtonHDFT;
-    private RadioButton radioButtonHFFT;
-    private RadioButton radioButtonCustomFFT;
     private CheckBox checkBoxhash;
 
     //filenames
@@ -71,14 +65,15 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         mServerIP = (TextView) findViewById(R.id.edit_serverIP);
 
         //initialise Button
-        mButtonConfig = (Button) findViewById(R.id.button_config);
+        Button mButtonConfig = (Button) findViewById(R.id.button_config);
 
         //initialise RadioButtons
-        radioGroupConfig = (RadioGroup) findViewById(R.id.radioGroup);
-        radioButtonSDFT = (RadioButton) findViewById(R.id.radioButton_SDFT);
-        radioButtonHDFT = (RadioButton) findViewById(R.id.radioButton_HDFT);
-        radioButtonHFFT = (RadioButton) findViewById(R.id.radioButton_HFFT);
-        radioButtonCustomFFT = (RadioButton) findViewById(R.id.radioButton_custom_FFT);
+        RadioGroup radioGroupConfig = (RadioGroup) findViewById(R.id.radioGroup);
+        RadioButton radioButtonSDFT = (RadioButton) findViewById(R.id.radioButton_SDFT);
+        RadioButton radioButtonXDFT = (RadioButton) findViewById(R.id.radioButton_XDFT);
+        RadioButton radioButtonXFFT = (RadioButton) findViewById(R.id.radioButton_XFFT);
+        RadioButton radioButtonXFFT_fixed = (RadioButton) findViewById(R.id.radioButton_XFFT_fixed);
+        RadioButton radioButtonCustomFFT = (RadioButton) findViewById(R.id.radioButton_custom_FFT);
         radioButtonSDFT.setChecked(true); //default value
 
         //When RadioGroup "Configuration" checked change
@@ -150,13 +145,18 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
                 windowSize = 100; //set WindowSize
                 break;
 
-            case R.id.radioButton_HDFT:
+            case R.id.radioButton_XDFT:
                 repo_name = "XDFT"; //set name of server repository
                 windowSize = 108; //set WindowSize
                 break;
 
-            case R.id.radioButton_HFFT:
+            case R.id.radioButton_XFFT:
                 repo_name = "XFFT"; //set name of server repository
+                windowSize = 128; //set WindowSize
+                break;
+
+            case R.id.radioButton_XFFT_fixed:
+                repo_name = "XFFT_fixed"; //set name of server repository
                 windowSize = 128; //set WindowSize
                 break;
 
