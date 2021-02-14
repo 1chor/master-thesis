@@ -436,13 +436,13 @@ begin
         write(my_line, string'("Load Input Buffers"));
         writeline(output, my_line);
         
-        real_in := read_file32("xfft_input_TestData.txt");
+        real_in := read_file32("xfft_fixed_input.txt");
         
         write(my_line, string'("Load Reference Output Buffers"));
         writeline(output, my_line);
         
-        real_out := read_file32("xfft_real_TestData.txt");
-        imag_out := read_file32("xfft_imag_TestData.txt");
+        real_out := read_file32("xfft_fixed_real.txt");
+        imag_out := read_file32("xfft_fixed_imag.txt");
         
         write(my_line, string'("Start FFT Test"));
         writeline(output, my_line);
