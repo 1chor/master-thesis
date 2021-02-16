@@ -18,6 +18,8 @@
 [submodule "ft_cores/intfft_spdf/fft-core"]
 	path = ft_cores/intfft_spdf/fft-core
 	url = https://github.com/capitanov/intfft_spdf.git
+	ignore = untracked
 [submodule "ft_cores/intfftk/fft-core"]
 	path = ft_cores/intfftk/fft-core
 	url = https://github.com/capitanov/intfftk.git
+	ignore = untracked
