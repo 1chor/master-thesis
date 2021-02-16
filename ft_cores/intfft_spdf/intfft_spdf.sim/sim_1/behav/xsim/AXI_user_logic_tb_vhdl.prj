@@ -1,0 +1,38 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../intfft_spdf.srcs/sources_1/ip/fixed25_to_float_0/sim/fixed25_to_float_0.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/ip/float_to_fixed18_0/sim/float_to_fixed18_0.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/imports/new/fourier_transform_v1_0_user_logic.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/math/int_addsub_dsp48.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/buffers/int_bitrev_order.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/math/cmult/int_cmult18x25_dsp48.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/math/mults/mlt42x18_dsp48e1.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/math/mults/mlt44x18_dsp48e2.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/math/cmult/int_cmult_dbl18_dsp48.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/math/mults/mlt35x25_dsp48e1.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/math/mults/mlt35x27_dsp48e2.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/math/cmult/int_cmult_dbl35_dsp48.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/math/mults/mlt59x18_dsp48e1.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/math/mults/mlt61x18_dsp48e2.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/math/cmult/int_cmult_trpl18_dsp48.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/math/mults/mlt52x25_dsp48e1.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/math/mults/mlt52x27_dsp48e2.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/math/cmult/int_cmult_trpl52_dsp48.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/math/cmult/int_cmult_dsp48.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/butterflies/int_fly_fd.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/butterflies/int_fly_fd2.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/buffers/ramb_dp_one_clk.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/butterflies/int_fly_spd.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/butterflies/int_fly_addsub.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/butterflies/int_fly_twd.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/twiddle/row_twiddle_tay.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/twiddle/rom_twiddle_int.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/butterflies/int_spdf_dif2.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/butterflies/int_spdf_fftNk.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/src/main/int_spdf_fft_only.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/imports/imports/intfftk/math_pkg.vhd" \
+"../../../../intfft_spdf.srcs/sources_1/new/intfft_spdf_wrapper.vhd" \
+"../../../../intfft_spdf.srcs/sim_1/imports/new/AXI_user_logic_tb.vhd" \
+
+# Do not sort compile order
+nosort
