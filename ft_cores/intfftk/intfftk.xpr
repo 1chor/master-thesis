@@ -33,20 +33,20 @@
     <Option Name="DSAVendor" Val="xilinx"/>
     <Option Name="DSABoardId" Val="zcu102"/>
     <Option Name="DSANumComputeUnits" Val="60"/>
-    <Option Name="WTXSimLaunchSim" Val="42"/>
+    <Option Name="WTXSimLaunchSim" Val="163"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
     <Option Name="WTVcsLaunchSim" Val="0"/>
     <Option Name="WTRivieraLaunchSim" Val="0"/>
     <Option Name="WTActivehdlLaunchSim" Val="0"/>
-    <Option Name="WTXSimExportSim" Val="7"/>
-    <Option Name="WTModelSimExportSim" Val="7"/>
-    <Option Name="WTQuestaExportSim" Val="7"/>
-    <Option Name="WTIesExportSim" Val="7"/>
-    <Option Name="WTVcsExportSim" Val="7"/>
-    <Option Name="WTRivieraExportSim" Val="7"/>
-    <Option Name="WTActivehdlExportSim" Val="7"/>
+    <Option Name="WTXSimExportSim" Val="15"/>
+    <Option Name="WTModelSimExportSim" Val="15"/>
+    <Option Name="WTQuestaExportSim" Val="15"/>
+    <Option Name="WTIesExportSim" Val="15"/>
+    <Option Name="WTVcsExportSim" Val="15"/>
+    <Option Name="WTRivieraExportSim" Val="15"/>
+    <Option Name="WTActivehdlExportSim" Val="15"/>
     <Option Name="GenerateIPUpgradeLog" Val="TRUE"/>
     <Option Name="XSimRadix" Val="hex"/>
     <Option Name="XSimTimeUnit" Val="ns"/>
@@ -57,6 +57,13 @@
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
       <Filter Type="Srcs"/>
+      <File Path="$PSRCDIR/sources_1/ip/fixed25_to_float_0/fixed25_to_float_0.xci">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/imports/new/fourier_transform_v1_0_user_logic.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../xdft/xdft.srcs/sources_1/imports/new/fourier_transform_v1_0_user_logic.vhd"/>
@@ -308,6 +315,7 @@
       </Config>
     </FileSet>
     <FileSet Name="sim_1" Type="SimulationSrcs" RelSrcDir="$PSRCDIR/sim_1">
+      <Filter Type="Srcs"/>
       <File Path="$PSRCDIR/sim_1/imports/new/AXI_user_logic_tb.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../xdft/xdft.srcs/sim_1/imports/new/AXI_user_logic_tb.vhd"/>
@@ -323,18 +331,6 @@
           <Attr Name="ImportTime" Val="1613145386"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sim_1/imports/TestData/intfftk_input_TestData.txt">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/TestData/intfftk_input_TestData.txt"/>
-          <Attr Name="ImportTime" Val="1610659780"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sim_1/imports/TestData/intfftk_real_TestData.txt">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/TestData/intfftk_real_TestData.txt"/>
-          <Attr Name="ImportTime" Val="1610659780"/>
         </FileInfo>
       </File>
       <File Path="$PSRCDIR/sim_1/imports/TestData/result_ones.txt">
@@ -367,12 +363,6 @@
           <Attr Name="ImportTime" Val="1610663682"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sim_1/imports/TestData/intfftk_imag_TestData.txt">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/TestData/intfftk_imag_TestData.txt"/>
-          <Attr Name="ImportTime" Val="1610659778"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sim_1/imports/TestData/result_ones_imag.txt">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/TestData/result_ones_imag.txt"/>
@@ -399,6 +389,24 @@
           <Attr Name="ImportTime" Val="1613158313"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/intfftk_real.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/intfftk_real.txt"/>
+          <Attr Name="ImportTime" Val="1613331438"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/intfftk_imag.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/intfftk_imag.txt"/>
+          <Attr Name="ImportTime" Val="1613331436"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/TestData/intfftk_input.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/TestData/intfftk_input.txt"/>
+          <Attr Name="ImportTime" Val="1613336894"/>
         </FileInfo>
       </File>
       <Config>
@@ -449,19 +457,6 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="fixed25_to_float_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/fixed25_to_float_0">
-      <File Path="$PSRCDIR/sources_1/ip/fixed25_to_float_0/fixed25_to_float_0.xci">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <Config>
-        <Option Name="TopModule" Val="fixed25_to_float_0"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
-      </Config>
-    </FileSet>
   </FileSets>
   <Simulators>
     <Simulator Name="XSim">
@@ -490,9 +485,7 @@
   <Runs Version="1" Minor="10">
     <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xczu9eg-ffvb1156-2-e" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" WriteIncrSynthDcp="false" State="current" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
         <Step Id="synth_design"/>
       </Strategy>
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2018"/>
@@ -500,9 +493,7 @@
     </Run>
     <Run Id="fifo_in_0_synth_1" Type="Ft3:Synth" SrcSet="fifo_in_0" Part="xczu9eg-ffvb1156-2-e" ConstrsSet="fifo_in_0" Description="Vivado Synthesis Defaults" WriteIncrSynthDcp="false" Dir="$PRUNDIR/fifo_in_0_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -511,9 +502,7 @@
     </Run>
     <Run Id="fifo_out_0_synth_1" Type="Ft3:Synth" SrcSet="fifo_out_0" Part="xczu9eg-ffvb1156-2-e" ConstrsSet="fifo_out_0" Description="Vivado Synthesis Defaults" WriteIncrSynthDcp="false" Dir="$PRUNDIR/fifo_out_0_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -522,20 +511,7 @@
     </Run>
     <Run Id="float_to_fixed18_0_synth_1" Type="Ft3:Synth" SrcSet="float_to_fixed18_0" Part="xczu9eg-ffvb1156-2-e" ConstrsSet="float_to_fixed18_0" Description="Vivado Synthesis Defaults" WriteIncrSynthDcp="false" Dir="$PRUNDIR/float_to_fixed18_0_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2018"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-    </Run>
-    <Run Id="fixed25_to_float_0_synth_1" Type="Ft3:Synth" SrcSet="fixed25_to_float_0" Part="xczu9eg-ffvb1156-2-e" ConstrsSet="fixed25_to_float_0" Description="Vivado Synthesis Defaults" WriteIncrSynthDcp="false" Dir="$PRUNDIR/fixed25_to_float_0_synth_1" IncludeInArchive="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -544,9 +520,7 @@
     </Run>
     <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xczu9eg-ffvb1156-2-e" ConstrsSet="constrs_1" Description="Default settings for Implementation." WriteIncrSynthDcp="false" State="current" SynthRun="synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -562,9 +536,7 @@
     </Run>
     <Run Id="fifo_in_0_impl_1" Type="Ft2:EntireDesign" Part="xczu9eg-ffvb1156-2-e" ConstrsSet="fifo_in_0" Description="Default settings for Implementation." WriteIncrSynthDcp="false" SynthRun="fifo_in_0_synth_1" IncludeInArchive="false">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -580,9 +552,7 @@
     </Run>
     <Run Id="fifo_out_0_impl_1" Type="Ft2:EntireDesign" Part="xczu9eg-ffvb1156-2-e" ConstrsSet="fifo_out_0" Description="Default settings for Implementation." WriteIncrSynthDcp="false" SynthRun="fifo_out_0_synth_1" IncludeInArchive="false">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -598,27 +568,7 @@
     </Run>
     <Run Id="float_to_fixed18_0_impl_1" Type="Ft2:EntireDesign" Part="xczu9eg-ffvb1156-2-e" ConstrsSet="float_to_fixed18_0" Description="Default settings for Implementation." WriteIncrSynthDcp="false" SynthRun="float_to_fixed18_0_synth_1" IncludeInArchive="false">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2018"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-    </Run>
-    <Run Id="fixed25_to_float_0_impl_1" Type="Ft2:EntireDesign" Part="xczu9eg-ffvb1156-2-e" ConstrsSet="fixed25_to_float_0" Description="Default settings for Implementation." WriteIncrSynthDcp="false" SynthRun="fixed25_to_float_0_synth_1" IncludeInArchive="false">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>

@@ -544,7 +544,7 @@ begin
                 
             when OUTPUT_IDLE =>
             
-                if fifo_o_index = SIZE-6 then
+                if fifo_o_index = SIZE-6 then --does not need full SIZE as output starts earlier
                     fifo_o_index_next <= 0; --reset counter
                     output_state_next <= OUTPUT_START;
                 
