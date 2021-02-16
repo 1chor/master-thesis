@@ -12,28 +12,26 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="6700000001fs"></ZoomEndTime>
-      <Cursor1Time time="1385000000fs"></Cursor1Time>
+      <ZoomEndTime time="13480000001fs"></ZoomEndTime>
+      <Cursor1Time time="1370000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="140"></NameColumnWidth>
+      <NameColumnWidth column_width="136"></NameColumnWidth>
       <ValueColumnWidth column_width="66"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="17" />
    <wvobject type="array" fp_name="/fft_signle_test/di_re">
-      <obj_property name="ElementShortName">di_re[15:0]</obj_property>
-      <obj_property name="ObjectShortName">di_re[15:0]</obj_property>
-      <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
-      <obj_property name="CellHeight">100</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      <obj_property name="ElementShortName">di_re[17:0]</obj_property>
+      <obj_property name="ObjectShortName">di_re[17:0]</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
       <obj_property name="CustomSignalColor">#FF0080</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/fft_signle_test/di_im">
-      <obj_property name="ElementShortName">di_im[15:0]</obj_property>
-      <obj_property name="ObjectShortName">di_im[15:0]</obj_property>
-      <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
-      <obj_property name="CellHeight">100</obj_property>
+      <obj_property name="ElementShortName">di_im[17:0]</obj_property>
+      <obj_property name="ObjectShortName">di_im[17:0]</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       <obj_property name="CustomSignalColor">#0000FF</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
@@ -55,12 +53,12 @@
       <obj_property name="DisplayName">label</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/fft_signle_test/xuut/un_re">
-      <obj_property name="ElementShortName">un_re[22:0]</obj_property>
-      <obj_property name="ObjectShortName">un_re[22:0]</obj_property>
+      <obj_property name="ElementShortName">un_re[24:0]</obj_property>
+      <obj_property name="ObjectShortName">un_re[24:0]</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/fft_signle_test/xuut/un_im">
-      <obj_property name="ElementShortName">un_im[22:0]</obj_property>
-      <obj_property name="ObjectShortName">un_im[22:0]</obj_property>
+      <obj_property name="ElementShortName">un_im[24:0]</obj_property>
+      <obj_property name="ObjectShortName">un_im[24:0]</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/fft_signle_test/xuut/un_vl">
       <obj_property name="ElementShortName">un_vl</obj_property>
@@ -71,12 +69,12 @@
       <obj_property name="DisplayName">label</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/fft_signle_test/xuut/sc_re">
-      <obj_property name="ElementShortName">sc_re[15:0]</obj_property>
-      <obj_property name="ObjectShortName">sc_re[15:0]</obj_property>
+      <obj_property name="ElementShortName">sc_re[17:0]</obj_property>
+      <obj_property name="ObjectShortName">sc_re[17:0]</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/fft_signle_test/xuut/sc_im">
-      <obj_property name="ElementShortName">sc_im[15:0]</obj_property>
-      <obj_property name="ObjectShortName">sc_im[15:0]</obj_property>
+      <obj_property name="ElementShortName">sc_im[17:0]</obj_property>
+      <obj_property name="ObjectShortName">sc_im[17:0]</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/fft_signle_test/xuut/sc_vl">
       <obj_property name="ElementShortName">sc_vl</obj_property>
@@ -87,12 +85,12 @@
       <obj_property name="DisplayName">label</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/fft_signle_test/xuut/rn_re">
-      <obj_property name="ElementShortName">rn_re[15:0]</obj_property>
-      <obj_property name="ObjectShortName">rn_re[15:0]</obj_property>
+      <obj_property name="ElementShortName">rn_re[17:0]</obj_property>
+      <obj_property name="ObjectShortName">rn_re[17:0]</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/fft_signle_test/xuut/rn_im">
-      <obj_property name="ElementShortName">rn_im[15:0]</obj_property>
-      <obj_property name="ObjectShortName">rn_im[15:0]</obj_property>
+      <obj_property name="ElementShortName">rn_im[17:0]</obj_property>
+      <obj_property name="ObjectShortName">rn_im[17:0]</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/fft_signle_test/xuut/rn_vl">
       <obj_property name="ElementShortName">rn_vl</obj_property>

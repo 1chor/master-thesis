@@ -92,15 +92,15 @@ end function;
 -- **************************************************************** --
 constant NFFT            : integer:=7; -- Number of stages = log2(FFT LENGTH)
 
-constant DATA_WIDTH      : integer:=16; -- Data width for signal imitator    : 8-32.
-constant TWDL_WIDTH      : integer:=16; -- Data width for twiddle factor     : 16-24.
+constant DATA_WIDTH      : integer:=18; -- Data width for signal imitator    : 8-32.
+constant TWDL_WIDTH      : integer:=18; -- Data width for twiddle factor     : 16-24.
 
 constant FLY_FWD         : std_logic:='1'; -- 1 - Use butterflies for Forward FFT    
 
 constant XSERIES         : string:="NEW"; -- FPGA Series: ULTRA / 7SERIES
 constant USE_MLT         : boolean:=FALSE; -- 1 - Use Multiplier for calculation M_PI
 
-constant RAMB_TYPE       : string:="WRAP"; -- Cross-commutation type: WRAP / CONT
+constant RAMB_TYPE       : string:="CONT"; -- Cross-commutation type: WRAP / CONT
 ----------------------------------------------------------------
 constant MODE1           : string:="UNSCALED";
 constant MODE2           : string:="TRUNCATE";
@@ -141,6 +141,7 @@ read_signal: process is
     variable l        : line;    
     variable lt1      : integer:=0; 
     variable lt2      : integer:=0; 
+    variable linenumber : integer := 0;
 begin            
     wait for 5 ns;
     if (rstp = '1') then    
@@ -150,9 +151,87 @@ begin
     else    
         -- wait for 100 ns;
         wait until (start = '1');
-        
+                
         lp_inf: for jj in 0 to 63 loop
+---------------------------------------------------------
+            -- ones
+            -- send data to FFT
+            for i in 0 to 2**NFFT-1 loop
+                wait until rising_edge(clk);
+                    di_re <= "011111111111111111";
+                    di_im <= (others => '0');
+                    di_en <= '1'; 
+            end loop;
+                 
+            -- flush FFT
+            for i in 0 to 2**NFFT-1 loop
+                wait until rising_edge(clk);
+                    di_re <= (others => '0');
+                    di_im <= (others => '0');
+                    di_en <= '1'; 
+            end loop;
+            
+            wait until rising_edge(clk);
+            di_en <= '0';
+            di_re <= (others => '0');
+            di_im <= (others => '0');
 
+            wait for 10 us;
+            
+---------------------------------------------------------
+            -- one_zeros
+            -- send data to FFT
+            wait until rising_edge(clk);
+                di_re <= "011111111111111111";
+                di_im <= (others => '0');
+                di_en <= '1'; 
+            
+            -- send data to FFT
+            for i in 0 to 2**NFFT-2 loop
+                wait until rising_edge(clk);
+                    di_re <= (others => '0');
+                    di_im <= (others => '0');
+                    di_en <= '1'; 
+            end loop;
+                 
+            -- flush FFT
+            for i in 0 to 2**NFFT-1 loop
+                wait until rising_edge(clk);
+                    di_re <= (others => '0');
+                    di_im <= (others => '0');
+                    di_en <= '1'; 
+            end loop;
+            
+            wait until rising_edge(clk);
+            di_en <= '0';
+            di_re <= (others => '0');
+            di_im <= (others => '0');
+            
+            wait for 10 us;
+            wait;
+            
+            file_open( fl_data, fl_path, read_mode );
+
+            while not endfile(fl_data) loop
+                wait until rising_edge(clk);
+                    readline( fl_data, l );
+                    read( l, lt1 ); read( l, lt2 );
+
+                    di_re <= conv_std_logic_vector( lt1, DATA_WIDTH );
+                    --di_im <= conv_std_logic_vector( lt2, DATA_WIDTH );
+                    di_im <= (others => '0');
+                    di_en <= '1'; 
+            end loop;
+
+            wait until rising_edge(clk);
+            di_en <= '0';
+            di_re <= (others => '0');
+            di_im <= (others => '0');
+
+            file_close( fl_data);
+            
+            wait for 10 us;
+            
             file_open( fl_data, fl_path, read_mode );
 
             while not endfile(fl_data) loop
@@ -171,43 +250,9 @@ begin
             di_im <= (others => '0');
 
             file_close( fl_data);
-            file_open( fl_data, fl_path, read_mode );
-
-            while not endfile(fl_data) loop
-                wait until rising_edge(clk);
-                    readline( fl_data, l );
-                    read( l, lt1 ); read( l, lt2 );
-
-                    di_re <= conv_std_logic_vector( lt1, DATA_WIDTH );
-                    di_im <= conv_std_logic_vector( lt2, DATA_WIDTH );
-                    di_en <= '1'; 
-            end loop;
-
-            wait until rising_edge(clk);
-            di_en <= '0';
-            di_re <= (others => '0');
-            di_im <= (others => '0');
-
-            file_close( fl_data);
-            file_open( fl_data, fl_path, read_mode );
-
-            while not endfile(fl_data) loop
-                wait until rising_edge(clk);
-                    readline( fl_data, l );
-                    read( l, lt1 ); read( l, lt2 );
-
-                    di_re <= conv_std_logic_vector( lt1, DATA_WIDTH );
-                    di_im <= conv_std_logic_vector( lt2, DATA_WIDTH );
-                    di_en <= '1'; 
-            end loop;
-        
-            wait until rising_edge(clk);
-            di_en <= '0';
-            di_re <= (others => '0');
-            di_im <= (others => '0');
-
-
-            file_close( fl_data);
+            
+            wait for 10 us;
+            
             file_open( fl_data, fl_path, read_mode );
 
             while not endfile(fl_data) loop
@@ -462,7 +507,17 @@ UUT_ROUND: entity work.int_fft_single_path
         ---- Butterflies ----
         FLY_FWD     => fly_fwd
     );
-end generate;
 
+    count_output : process(clk)
+        variable count : integer := 0;
+    begin
+        if (rising_edge(clk)) then
+            if (un_vl = '1') then
+                report "Output: " & integer'image(count);
+                count := count + 1;
+            end if;
+        end if;
+    end process;
+end generate;
 ------------------------------------------------
 end fft_signle_test; 

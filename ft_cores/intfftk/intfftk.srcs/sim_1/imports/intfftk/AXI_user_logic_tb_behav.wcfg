@@ -14,14 +14,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="130200001fs"></ZoomEndTime>
-      <Cursor1Time time="11500000fs"></Cursor1Time>
+      <ZoomEndTime time="32750000001fs"></ZoomEndTime>
+      <Cursor1Time time="4345000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="159"></NameColumnWidth>
+      <NameColumnWidth column_width="155"></NameColumnWidth>
       <ValueColumnWidth column_width="66"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="47" />
+   <WVObjectSize size="51" />
    <wvobject type="group" fp_name="group53">
       <obj_property name="label">user logic</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -366,13 +366,13 @@
       <obj_property name="ElementShortName">index_next</obj_property>
       <obj_property name="ObjectShortName">index_next</obj_property>
    </wvobject>
-   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/receive_index">
-      <obj_property name="ElementShortName">receive_index</obj_property>
-      <obj_property name="ObjectShortName">receive_index</obj_property>
-   </wvobject>
    <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/receive_index_next">
       <obj_property name="ElementShortName">receive_index_next</obj_property>
       <obj_property name="ObjectShortName">receive_index_next</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/receive_index">
+      <obj_property name="ElementShortName">receive_index</obj_property>
+      <obj_property name="ObjectShortName">receive_index</obj_property>
    </wvobject>
    <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fifo_i_index">
       <obj_property name="ElementShortName">fifo_i_index</obj_property>
@@ -381,6 +381,22 @@
    <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fifo_i_index_next">
       <obj_property name="ElementShortName">fifo_i_index_next</obj_property>
       <obj_property name="ObjectShortName">fifo_i_index_next</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/flush_index">
+      <obj_property name="ElementShortName">flush_index</obj_property>
+      <obj_property name="ObjectShortName">flush_index</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/flush_index_next">
+      <obj_property name="ElementShortName">flush_index_next</obj_property>
+      <obj_property name="ObjectShortName">flush_index_next</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fifo_o_index">
+      <obj_property name="ElementShortName">fifo_o_index</obj_property>
+      <obj_property name="ObjectShortName">fifo_o_index</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fifo_o_index_next">
+      <obj_property name="ElementShortName">fifo_o_index_next</obj_property>
+      <obj_property name="ObjectShortName">fifo_o_index_next</obj_property>
    </wvobject>
    <wvobject fp_name="divider116" type="divider">
       <obj_property name="label">FIFO IN</obj_property>
@@ -446,6 +462,10 @@
       <obj_property name="label">Input</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/in_data">
+         <obj_property name="ElementShortName">in_data[17:0]</obj_property>
+         <obj_property name="ObjectShortName">in_data[17:0]</obj_property>
+      </wvobject>
       <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fft_inst/DI_RE">
          <obj_property name="ElementShortName">DI_RE[17:0]</obj_property>
          <obj_property name="ObjectShortName">DI_RE[17:0]</obj_property>

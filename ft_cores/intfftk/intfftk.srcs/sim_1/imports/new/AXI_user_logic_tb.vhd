@@ -369,7 +369,6 @@ begin
         compare_buffers(output_imag, imag_out, SIZE);
         
         write(my_line, string'("Done"));
-        writeline(output, my_line);
         
         --------------------------------------------------------------
         write(my_line, string'("-----------------------------------"));
@@ -436,13 +435,13 @@ begin
         write(my_line, string'("Load Input Buffers"));
         writeline(output, my_line);
         
-        real_in := read_file32("intfftk_input_norm.txt");
+        real_in := read_file32("intfftk_input.txt");
         
         write(my_line, string'("Load Reference Output Buffers"));
         writeline(output, my_line);
         
-        real_out := read_file32("intfftk_real_norm.txt");
-        imag_out := read_file32("intfftk_imag_norm.txt");
+        real_out := read_file32("intfftk_real.txt");
+        imag_out := read_file32("intfftk_imag.txt");
         
         write(my_line, string'("Start FFT Test"));
         writeline(output, my_line);
