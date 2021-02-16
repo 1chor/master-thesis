@@ -1,10 +1,10 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.1 (lin64) Build 2188600 Wed Apr  4 18:39:19 MDT 2018
-// Date        : Fri Feb 12 19:14:11 2021
+// Date        : Tue Feb 16 14:37:09 2021
 // Host        : soc running 64-bit Ubuntu 18.04.5 LTS
-// Command     : write_verilog -force -mode synth_stub
-//               /media/soc/Volume/master-thesis/ft_cores/intfftk/intfftk.srcs/sources_1/ip/fixed25_to_float_0/fixed25_to_float_0_stub.v
+// Command     : write_verilog -force -mode synth_stub -rename_top fixed25_to_float_0 -prefix
+//               fixed25_to_float_0_ fixed25_to_float_0_stub.v
 // Design      : fixed25_to_float_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xczu9eg-ffvb1156-2-e

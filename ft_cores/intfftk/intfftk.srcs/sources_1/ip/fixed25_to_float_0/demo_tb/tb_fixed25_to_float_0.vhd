@@ -335,8 +335,8 @@ architecture tb of tb_fixed25_to_float_0 is
 
   -- A operand slave channel alias signals
   signal s_axis_a_tdata_real    : real := 0.0;  -- fixed-point value using VHDL 'real' data type
-  signal s_axis_a_tdata_int     : std_logic_vector(4 downto 0) := (others => '0');  -- integer part (including sign bit)
-  signal s_axis_a_tdata_fract   : std_logic_vector(19 downto 0) := (others => '0');  -- fractional part
+  signal s_axis_a_tdata_int     : std_logic_vector(8 downto 0) := (others => '0');  -- integer part (including sign bit)
+  signal s_axis_a_tdata_fract   : std_logic_vector(15 downto 0) := (others => '0');  -- fractional part
 
 
 
@@ -456,7 +456,7 @@ begin
     begin
       count_loop : loop
         -- Convert data from real to std_logic_vector
-        value_slv := real_to_fix(value, 25, 20);
+        value_slv := real_to_fix(value, 25, 16);
         -- Set up AXI signals
         tdata(24 downto 0) := value_slv;
         tdata(31 downto 25) := (others => value_slv(24));  -- sign-extend
@@ -566,9 +566,9 @@ begin
   -----------------------------------------------------------------------
 
   -- A operand slave channel alias signals
-  s_axis_a_tdata_real    <= fix_to_real(s_axis_a_tdata(24 downto 0), 25, 20);
-  s_axis_a_tdata_int     <= s_axis_a_tdata(24 downto 20);
-  s_axis_a_tdata_fract   <= s_axis_a_tdata(19 downto 0);
+  s_axis_a_tdata_real    <= fix_to_real(s_axis_a_tdata(24 downto 0), 25, 16);
+  s_axis_a_tdata_int     <= s_axis_a_tdata(24 downto 16);
+  s_axis_a_tdata_fract   <= s_axis_a_tdata(15 downto 0);
 
   -- Result master channel alias signals
   m_axis_result_tdata_real     <= flt_to_real(m_axis_result_tdata(31 downto 0), 32, 24) when m_axis_result_tvalid = '1';
