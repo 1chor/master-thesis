@@ -70,6 +70,7 @@ architecture arch of ft_wrapper is
     
     -- signal declaration
     -- intFFTk signals
+    signal in_data                  : std_logic_vector(FFT_DATA_WIDTH-1 downto 0);
     signal in_valid                 : std_logic;
     
     signal out_real                 : std_logic_vector(FFT_OUT_WIDTH-1 downto 0);
@@ -84,6 +85,9 @@ architecture arch of ft_wrapper is
     
     signal fifo_i_index             : natural range 0 to SIZE := 0;
     signal fifo_i_index_next        : natural range 0 to SIZE := 0;
+    
+    signal flush_index             : natural range 0 to SIZE := 0;
+    signal flush_index_next        : natural range 0 to SIZE := 0;
     
     signal fifo_o_index             : natural range 0 to SIZE := 0;
     signal fifo_o_index_next        : natural range 0 to SIZE := 0;
@@ -137,14 +141,17 @@ architecture arch of ft_wrapper is
     signal state, state_next : state_type := TRANSFER_TO_FFT;
         
     type input_state_type is (
+        INPUT_INIT,
         INPUT_IDLE,
         CONVERT,
-        SEND
+        SEND,
+        FLUSH
     );
-    signal input_state, input_state_next : input_state_type := INPUT_IDLE;
+    signal input_state, input_state_next : input_state_type := INPUT_INIT;
     
     type output_state_type is (
         OUTPUT_IDLE,
+        OUTPUT_START,
         STORE,
         OUTPUT_DATA
     );
@@ -331,7 +338,7 @@ begin
         ---- Butterflies ----
         FLY_FWD        => FLY_FWD,
         ---- Input data ----
-        DI_RE          => fifo_out_i,
+        DI_RE          => in_data,
         DI_IM          => zeros,
         DI_EN          => in_valid,
         ---- Output data ----
@@ -347,11 +354,12 @@ begin
     begin
         if reset = '1' then --Reset signals
             state <= TRANSFER_TO_FFT;
-            input_state <= INPUT_IDLE;
+            input_state <= INPUT_INIT;
             output_state <= OUTPUT_IDLE;
             index <= 0;
             receive_index <= 0;
             fifo_i_index <= 0;
+            flush_index <= 0;
             fifo_o_index <= 0;
             
         elsif rising_edge(clk) then
@@ -361,6 +369,7 @@ begin
             index <= index_next;
             receive_index <= receive_index_next;
             fifo_i_index <= fifo_i_index_next;
+            flush_index <= flush_index_next;
             fifo_o_index <= fifo_o_index_next;
         end if;
         
@@ -371,14 +380,18 @@ begin
     --signal is set outside the process due to delay    
     fifo_in_i <= float2fixed_out_tdata(FFT_DATA_WIDTH-1 downto 0) when float2fixed_out_tvalid = '1'; -- set FIFO input data
     wr_en_i <= float2fixed_out_tvalid; -- set FIFO write enable
+    
+    --set intFFTk input
+    in_data <= fifo_out_i when index < SIZE else (others => '0');
         
     --process to feed the intFFTk
-    input_proc: process (input_state, index, fifo_i_index, state, empty_i, stin_valid, stin_data)
+    input_proc: process (input_state, index, fifo_i_index, flush_index, state, empty_i, stin_valid, stin_data)
     begin
         --default values to prevent latches
         input_state_next <= input_state;
         index_next <= index;
         fifo_i_index_next <= fifo_i_index;
+        flush_index_next <= flush_index;
         stin_ready <= '0';
         float2fixed_in_tvalid <= '0';
         rd_en_i <= '0';
@@ -388,6 +401,20 @@ begin
         
         case input_state is
         
+            when INPUT_INIT =>
+                if index = SIZE then
+                    index_next <= 0; --reset counter
+                    input_state_next <= INPUT_IDLE;
+                
+                elsif (state = TRANSFER_TO_FFT) then --check if intFFTk is ready for initialisation
+                    --flush input data (send zeros to get results)
+                    --set data input valid
+                    in_valid <= '1'; 
+                    
+                    --increase index
+                    index_next <= index + 1;
+               end if;
+            
             when INPUT_IDLE =>
                 if (state = TRANSFER_TO_FFT) and (empty_i = '1') then --forward back pressure
                     stin_ready <= '1';
@@ -421,8 +448,7 @@ begin
             
             when SEND => 
                 if index = SIZE then --independent of valid signals
-                    index_next <= 0; --reset counter
-                    input_state_next <= INPUT_IDLE;
+                    input_state_next <= FLUSH;
                     
                 elsif (index = SIZE-1) and (state = TRANSFER_TO_FFT) then
                     --set data input valid
@@ -441,7 +467,22 @@ begin
                     --increase index
                     index_next <= index + 1;
                 end if;
-                           
+                
+            when FLUSH => 
+                if flush_index = SIZE then
+                    index_next <= 0; --reset counter
+                    flush_index_next <= 0; --reset counter
+                    input_state_next <= INPUT_IDLE;
+                
+                elsif (state = TRANSFER_TO_FFT) then --check if intFFTk is ready to process data
+                    --flush input data (send zeros to get results)
+                    --set data input valid
+                    in_valid <= '1'; 
+                    
+                    --increase index
+                    flush_index_next <= flush_index + 1;
+               end if;
+               
             when others =>
                 input_state_next <= INPUT_IDLE; 
         end case;
@@ -451,7 +492,7 @@ begin
     -----------------------------------------------------------------------
         
     --process to feed the intFFTk
-    fft_proc: process (state, index, receive_index)
+    fft_proc: process (state, flush_index, receive_index)
     begin
         --default values to prevent latches
         state_next <= state;
@@ -459,7 +500,7 @@ begin
         case state is
         
             when TRANSFER_TO_FFT =>
-                if index = SIZE then
+                if flush_index = SIZE then
                     state_next <= OUTPUT_DATA;
                end if;
                
@@ -502,6 +543,19 @@ begin
         case output_state is
                 
             when OUTPUT_IDLE =>
+            
+                if fifo_o_index = SIZE-6 then
+                    fifo_o_index_next <= 0; --reset counter
+                    output_state_next <= OUTPUT_START;
+                
+                elsif (state = OUTPUT_DATA) and (s_out_valid = '1') then --check if the output data of the intFFTk is valid
+                    --flush output data (ignore results)
+                                        
+                    --increase index
+                    fifo_o_index_next <= fifo_o_index + 1;
+               end if;
+               
+            when OUTPUT_START =>
                             
                 if (state = OUTPUT_DATA) and (s_out_valid = '1') then --check if the output data of the intFFTk is valid
                     --convert first output data
