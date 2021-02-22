@@ -22,3 +22,10 @@
 	path = ft_cores/intfftk/fft-core
 	url = https://github.com/capitanov/intfftk.git
 	ignore = dirty
+[submodule "ft_cores/fpga-fft/fft-core"]
+	path = ft_cores/fpga-fft/fft-core
+	url = https://github.com/owocomm-0/fpga-fft
+	ignore = untracked
+[submodule "ft_cores/dblclkfft/fft-core"]
+	path = ft_cores/dblclkfft/fft-core
+	url = https://github.com/ZipCPU/dblclockfft.git
