@@ -25,7 +25,8 @@
 [submodule "ft_cores/fpga-fft/fft-core"]
 	path = ft_cores/fpga-fft/fft-core
 	url = https://github.com/owocomm-0/fpga-fft
-	ignore = untracked
+	ignore = dirty
 [submodule "ft_cores/dblclkfft/fft-core"]
 	path = ft_cores/dblclkfft/fft-core
 	url = https://github.com/ZipCPU/dblclockfft.git
+	ignore = dirty
