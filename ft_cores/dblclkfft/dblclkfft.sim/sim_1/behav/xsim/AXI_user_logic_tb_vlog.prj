@@ -1,0 +1,18 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../dblclkfft.srcs/sources_1/imports/generated_core/bimpy.v" \
+"../../../../dblclkfft.srcs/sources_1/imports/generated_core/bitreverse.v" \
+"../../../../dblclkfft.srcs/sources_1/imports/generated_core/butterfly.v" \
+"../../../../dblclkfft.srcs/sources_1/imports/generated_core/convround.v" \
+"../../../../dblclkfft.srcs/sources_1/imports/generated_core/fftmain.v" \
+"../../../../dblclkfft.srcs/sources_1/imports/generated_core/fftstage.v" \
+"../../../../dblclkfft.srcs/sources_1/imports/generated_core/hwbfly.v" \
+"../../../../dblclkfft.srcs/sources_1/imports/generated_core/laststage.v" \
+"../../../../dblclkfft.srcs/sources_1/imports/generated_core/longbimpy.v" \
+"../../../../dblclkfft.srcs/sources_1/imports/generated_core/qtrstage.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

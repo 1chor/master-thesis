@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="AXI_user_logic_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="AXI_user_logic_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="449445510fs"></ZoomEndTime>
+      <Cursor1Time time="72500000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="155"></NameColumnWidth>
+      <ValueColumnWidth column_width="66"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="32" />
+   <wvobject type="group" fp_name="group53">
+      <obj_property name="label">user logic</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/S_AXI_ACLK">
+         <obj_property name="ElementShortName">S_AXI_ACLK</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_ACLK</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/S_AXI_ARESETN">
+         <obj_property name="ElementShortName">S_AXI_ARESETN</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_ARESETN</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/S_AXI_AWADDR">
+         <obj_property name="ElementShortName">S_AXI_AWADDR[0:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_AWADDR[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/S_AXI_AWVALID">
+         <obj_property name="ElementShortName">S_AXI_AWVALID</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_AWVALID</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/S_AXI_WDATA">
+         <obj_property name="ElementShortName">S_AXI_WDATA[63:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_WDATA[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/S_AXI_WSTRB">
+         <obj_property name="ElementShortName">S_AXI_WSTRB[7:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_WSTRB[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/S_AXI_WVALID">
+         <obj_property name="ElementShortName">S_AXI_WVALID</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_WVALID</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/S_AXI_BREADY">
+         <obj_property name="ElementShortName">S_AXI_BREADY</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_BREADY</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/S_AXI_ARADDR">
+         <obj_property name="ElementShortName">S_AXI_ARADDR[0:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_ARADDR[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/S_AXI_ARVALID">
+         <obj_property name="ElementShortName">S_AXI_ARVALID</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_ARVALID</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/S_AXI_RREADY">
+         <obj_property name="ElementShortName">S_AXI_RREADY</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_RREADY</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/S_AXI_ARREADY">
+         <obj_property name="ElementShortName">S_AXI_ARREADY</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_ARREADY</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/S_AXI_RDATA">
+         <obj_property name="ElementShortName">S_AXI_RDATA[63:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_RDATA[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/S_AXI_RRESP">
+         <obj_property name="ElementShortName">S_AXI_RRESP[1:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_RRESP[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/S_AXI_RVALID">
+         <obj_property name="ElementShortName">S_AXI_RVALID</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_RVALID</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/S_AXI_WREADY">
+         <obj_property name="ElementShortName">S_AXI_WREADY</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_WREADY</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/S_AXI_BRESP">
+         <obj_property name="ElementShortName">S_AXI_BRESP[1:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_BRESP[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/S_AXI_BVALID">
+         <obj_property name="ElementShortName">S_AXI_BVALID</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_BVALID</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/S_AXI_AWREADY">
+         <obj_property name="ElementShortName">S_AXI_AWREADY</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_AWREADY</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/S_AXI_AWPROT">
+         <obj_property name="ElementShortName">S_AXI_AWPROT[2:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_AWPROT[2:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/S_AXI_ARPROT">
+         <obj_property name="ElementShortName">S_AXI_ARPROT[2:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_ARPROT[2:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="divider54" type="divider">
+      <obj_property name="label">DUT</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group76">
+      <obj_property name="label">AXI Lite</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/S_AXI_ACLK">
+         <obj_property name="ElementShortName">S_AXI_ACLK</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_ACLK</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/S_AXI_ARESETN">
+         <obj_property name="ElementShortName">S_AXI_ARESETN</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_ARESETN</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/S_AXI_AWADDR">
+         <obj_property name="ElementShortName">S_AXI_AWADDR[0:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_AWADDR[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/S_AXI_AWPROT">
+         <obj_property name="ElementShortName">S_AXI_AWPROT[2:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_AWPROT[2:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/S_AXI_AWVALID">
+         <obj_property name="ElementShortName">S_AXI_AWVALID</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_AWVALID</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/S_AXI_AWREADY">
+         <obj_property name="ElementShortName">S_AXI_AWREADY</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_AWREADY</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/S_AXI_WDATA">
+         <obj_property name="ElementShortName">S_AXI_WDATA[63:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_WDATA[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/S_AXI_WSTRB">
+         <obj_property name="ElementShortName">S_AXI_WSTRB[7:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_WSTRB[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/S_AXI_WVALID">
+         <obj_property name="ElementShortName">S_AXI_WVALID</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_WVALID</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/S_AXI_WREADY">
+         <obj_property name="ElementShortName">S_AXI_WREADY</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_WREADY</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/S_AXI_BRESP">
+         <obj_property name="ElementShortName">S_AXI_BRESP[1:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_BRESP[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/S_AXI_BVALID">
+         <obj_property name="ElementShortName">S_AXI_BVALID</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_BVALID</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/S_AXI_BREADY">
+         <obj_property name="ElementShortName">S_AXI_BREADY</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_BREADY</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/S_AXI_ARADDR">
+         <obj_property name="ElementShortName">S_AXI_ARADDR[0:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_ARADDR[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/S_AXI_ARPROT">
+         <obj_property name="ElementShortName">S_AXI_ARPROT[2:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_ARPROT[2:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/S_AXI_ARVALID">
+         <obj_property name="ElementShortName">S_AXI_ARVALID</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_ARVALID</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/S_AXI_ARREADY">
+         <obj_property name="ElementShortName">S_AXI_ARREADY</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_ARREADY</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/S_AXI_RDATA">
+         <obj_property name="ElementShortName">S_AXI_RDATA[63:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_RDATA[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/S_AXI_RRESP">
+         <obj_property name="ElementShortName">S_AXI_RRESP[1:0]</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_RRESP[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/S_AXI_RVALID">
+         <obj_property name="ElementShortName">S_AXI_RVALID</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_RVALID</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/S_AXI_RREADY">
+         <obj_property name="ElementShortName">S_AXI_RREADY</obj_property>
+         <obj_property name="ObjectShortName">S_AXI_RREADY</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group89">
+      <obj_property name="label">AXI signals</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/axi_awaddr">
+         <obj_property name="ElementShortName">axi_awaddr[0:0]</obj_property>
+         <obj_property name="ObjectShortName">axi_awaddr[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/axi_awready">
+         <obj_property name="ElementShortName">axi_awready</obj_property>
+         <obj_property name="ObjectShortName">axi_awready</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/axi_wready">
+         <obj_property name="ElementShortName">axi_wready</obj_property>
+         <obj_property name="ObjectShortName">axi_wready</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/axi_bresp">
+         <obj_property name="ElementShortName">axi_bresp[1:0]</obj_property>
+         <obj_property name="ObjectShortName">axi_bresp[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/axi_bvalid">
+         <obj_property name="ElementShortName">axi_bvalid</obj_property>
+         <obj_property name="ObjectShortName">axi_bvalid</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/axi_araddr">
+         <obj_property name="ElementShortName">axi_araddr[0:0]</obj_property>
+         <obj_property name="ObjectShortName">axi_araddr[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/axi_arready">
+         <obj_property name="ElementShortName">axi_arready</obj_property>
+         <obj_property name="ObjectShortName">axi_arready</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/axi_rdata">
+         <obj_property name="ElementShortName">axi_rdata[63:0]</obj_property>
+         <obj_property name="ObjectShortName">axi_rdata[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/axi_rresp">
+         <obj_property name="ElementShortName">axi_rresp[1:0]</obj_property>
+         <obj_property name="ObjectShortName">axi_rresp[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/axi_rvalid">
+         <obj_property name="ElementShortName">axi_rvalid</obj_property>
+         <obj_property name="ObjectShortName">axi_rvalid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/slv_reg_rden">
+         <obj_property name="ElementShortName">slv_reg_rden</obj_property>
+         <obj_property name="ObjectShortName">slv_reg_rden</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/slv_reg_wren">
+         <obj_property name="ElementShortName">slv_reg_wren</obj_property>
+         <obj_property name="ObjectShortName">slv_reg_wren</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group97">
+      <obj_property name="label">FFT signals</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/input_reg">
+         <obj_property name="ElementShortName">input_reg[63:0]</obj_property>
+         <obj_property name="ObjectShortName">input_reg[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/output_reg">
+         <obj_property name="ElementShortName">output_reg[63:0]</obj_property>
+         <obj_property name="ObjectShortName">output_reg[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/reg_data_out">
+         <obj_property name="ElementShortName">reg_data_out[63:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_data_out[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/in_ready">
+         <obj_property name="ElementShortName">in_ready</obj_property>
+         <obj_property name="ObjectShortName">in_ready</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/in_valid">
+         <obj_property name="ElementShortName">in_valid</obj_property>
+         <obj_property name="ObjectShortName">in_valid</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/data_out">
+         <obj_property name="ElementShortName">data_out[63:0]</obj_property>
+         <obj_property name="ObjectShortName">data_out[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/out_valid">
+         <obj_property name="ElementShortName">out_valid</obj_property>
+         <obj_property name="ObjectShortName">out_valid</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="divider98" type="divider">
+      <obj_property name="label">FFT wrapper</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group105">
+      <obj_property name="label">Input</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/stin_data">
+         <obj_property name="ElementShortName">stin_data[63:0]</obj_property>
+         <obj_property name="ObjectShortName">stin_data[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/stin_ready">
+         <obj_property name="ElementShortName">stin_ready</obj_property>
+         <obj_property name="ObjectShortName">stin_ready</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/stin_valid">
+         <obj_property name="ElementShortName">stin_valid</obj_property>
+         <obj_property name="ObjectShortName">stin_valid</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group106">
+      <obj_property name="label">Output</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/stout_data">
+         <obj_property name="ElementShortName">stout_data[63:0]</obj_property>
+         <obj_property name="ObjectShortName">stout_data[63:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/stout_valid">
+         <obj_property name="ElementShortName">stout_valid</obj_property>
+         <obj_property name="ObjectShortName">stout_valid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/stout_ready">
+         <obj_property name="ElementShortName">stout_ready</obj_property>
+         <obj_property name="ObjectShortName">stout_ready</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="divider107" type="divider">
+      <obj_property name="label">States</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/state">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/state_next">
+      <obj_property name="ElementShortName">state_next</obj_property>
+      <obj_property name="ObjectShortName">state_next</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/input_state">
+      <obj_property name="ElementShortName">input_state</obj_property>
+      <obj_property name="ObjectShortName">input_state</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/input_state_next">
+      <obj_property name="ElementShortName">input_state_next</obj_property>
+      <obj_property name="ObjectShortName">input_state_next</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/output_state">
+      <obj_property name="ElementShortName">output_state</obj_property>
+      <obj_property name="ObjectShortName">output_state</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/output_state_next">
+      <obj_property name="ElementShortName">output_state_next</obj_property>
+      <obj_property name="ObjectShortName">output_state_next</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider108" type="divider">
+      <obj_property name="label">Indices</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/index">
+      <obj_property name="ElementShortName">index</obj_property>
+      <obj_property name="ObjectShortName">index</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/index_next">
+      <obj_property name="ElementShortName">index_next</obj_property>
+      <obj_property name="ObjectShortName">index_next</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/receive_index">
+      <obj_property name="ElementShortName">receive_index</obj_property>
+      <obj_property name="ObjectShortName">receive_index</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/receive_index_next">
+      <obj_property name="ElementShortName">receive_index_next</obj_property>
+      <obj_property name="ObjectShortName">receive_index_next</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider117" type="divider">
+      <obj_property name="label">FFT instance</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group127">
+      <obj_property name="label">Input</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fft_in">
+         <obj_property name="ElementShortName">fft_in[35:0]</obj_property>
+         <obj_property name="ObjectShortName">fft_in[35:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group128">
+      <obj_property name="label">Output</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fft_out">
+         <obj_property name="ElementShortName">fft_out[43:0]</obj_property>
+         <obj_property name="ObjectShortName">fft_out[43:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/first_out">
+         <obj_property name="ElementShortName">first_out</obj_property>
+         <obj_property name="ObjectShortName">first_out</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/gppfft_inst/stage_128/\FWBFLY.bfly /\genblk1.p1 /i_ce">
+      <obj_property name="ElementShortName">i_ce</obj_property>
+      <obj_property name="ObjectShortName">i_ce</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider102" type="divider">
+      <obj_property name="label">float to fixed18</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/float_to_fixed18_inst/s_axis_a_tvalid">
+      <obj_property name="ElementShortName">s_axis_a_tvalid</obj_property>
+      <obj_property name="ObjectShortName">s_axis_a_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/float_to_fixed18_inst/s_axis_a_tdata">
+      <obj_property name="ElementShortName">s_axis_a_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axis_a_tdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/float_to_fixed18_inst/m_axis_result_tvalid">
+      <obj_property name="ElementShortName">m_axis_result_tvalid</obj_property>
+      <obj_property name="ObjectShortName">m_axis_result_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/float_to_fixed18_inst/m_axis_result_tdata">
+      <obj_property name="ElementShortName">m_axis_result_tdata[23:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_result_tdata[23:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider103" type="divider">
+      <obj_property name="label">fixed18 to float</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group112">
+      <obj_property name="label">Real</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fixed22_to_float_inst_real/s_axis_a_tvalid">
+         <obj_property name="ElementShortName">s_axis_a_tvalid</obj_property>
+         <obj_property name="ObjectShortName">s_axis_a_tvalid</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fixed22_to_float_inst_real/s_axis_a_tdata">
+         <obj_property name="ElementShortName">s_axis_a_tdata[23:0]</obj_property>
+         <obj_property name="ObjectShortName">s_axis_a_tdata[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fixed22_to_float_inst_real/m_axis_result_tvalid">
+         <obj_property name="ElementShortName">m_axis_result_tvalid</obj_property>
+         <obj_property name="ObjectShortName">m_axis_result_tvalid</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fixed22_to_float_inst_real/m_axis_result_tdata">
+         <obj_property name="ElementShortName">m_axis_result_tdata[31:0]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_result_tdata[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group117">
+      <obj_property name="label">Imag</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fixed22_to_float_inst_imag/s_axis_a_tvalid">
+         <obj_property name="ElementShortName">s_axis_a_tvalid</obj_property>
+         <obj_property name="ObjectShortName">s_axis_a_tvalid</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fixed22_to_float_inst_imag/s_axis_a_tdata">
+         <obj_property name="ElementShortName">s_axis_a_tdata[23:0]</obj_property>
+         <obj_property name="ObjectShortName">s_axis_a_tdata[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fixed22_to_float_inst_imag/m_axis_result_tvalid">
+         <obj_property name="ElementShortName">m_axis_result_tvalid</obj_property>
+         <obj_property name="ObjectShortName">m_axis_result_tvalid</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fixed22_to_float_inst_imag/m_axis_result_tdata">
+         <obj_property name="ElementShortName">m_axis_result_tdata[31:0]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_result_tdata[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>
