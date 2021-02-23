@@ -73,9 +73,10 @@ architecture STRUCTURE of zcu102_wrapper is
     TX_DDC_OUT_sda_i : in STD_LOGIC;
     TX_DDC_OUT_sda_o : out STD_LOGIC;
     TX_DDC_OUT_sda_t : out STD_LOGIC;
-    -- S_AXI interface for simple_filter
+    -- S_AXI clock and reset
     s_axi_aclk : out STD_LOGIC;
     peripheral_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 );
+    -- S_AXI interface for simple_filter
     M05_AXI_awaddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
     M05_AXI_awprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
     M05_AXI_awvalid : out STD_LOGIC;
@@ -94,7 +95,27 @@ architecture STRUCTURE of zcu102_wrapper is
     M05_AXI_rdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
     M05_AXI_rresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
     M05_AXI_rvalid : in STD_LOGIC;
-    M05_AXI_rready : out STD_LOGIC
+    M05_AXI_rready : out STD_LOGIC;
+    -- S_AXI interface for Fourier transform
+    M07_AXI_awaddr : out STD_LOGIC_VECTOR ( 39 downto 0 );
+    M07_AXI_awprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    M07_AXI_awvalid : out STD_LOGIC;
+    M07_AXI_awready : in STD_LOGIC;
+    M07_AXI_wdata : out STD_LOGIC_VECTOR ( 63 downto 0 );
+    M07_AXI_wstrb : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    M07_AXI_wvalid : out STD_LOGIC;
+    M07_AXI_wready : in STD_LOGIC;
+    M07_AXI_bresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    M07_AXI_bvalid : in STD_LOGIC;
+    M07_AXI_bready : out STD_LOGIC;
+    M07_AXI_araddr : out STD_LOGIC_VECTOR ( 39 downto 0 );
+    M07_AXI_arprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    M07_AXI_arvalid : out STD_LOGIC;
+    M07_AXI_arready : in STD_LOGIC;
+    M07_AXI_rdata : in STD_LOGIC_VECTOR ( 63 downto 0 );
+    M07_AXI_rresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    M07_AXI_rvalid : in STD_LOGIC;
+    M07_AXI_rready : out STD_LOGIC
   );
   end component zcu102;
   
@@ -167,7 +188,49 @@ architecture STRUCTURE of zcu102_wrapper is
     -- DO NOT EDIT ABOVE THIS LINE ---------------------
   );
   end component simple_filter;
+
+  ------------------------------------------
+  -- declare fourier transform instance
+  ------------------------------------------
   
+  component fourier_transform_v1_0 is
+  generic (
+	-- Users to add parameters here
+	-- User parameters ends
+	-- Do not modify the parameters beyond this line
+	-- Parameters of Axi Slave Bus Interface S00_AXI
+	C_S00_AXI_DATA_WIDTH	: integer	:= 64;
+	C_S00_AXI_ADDR_WIDTH	: integer	:= 1
+  );
+  port (
+	-- Users to add ports here
+	-- User ports ends
+	-- Do not modify the ports beyond this line
+	-- Ports of Axi Slave Bus Interface S00_AXI
+	s00_axi_aclk	: in std_logic;
+	s00_axi_aresetn	: in std_logic;
+	s00_axi_awaddr	: in std_logic_vector(C_S00_AXI_ADDR_WIDTH-1 downto 0);
+	s00_axi_awprot	: in std_logic_vector(2 downto 0);
+	s00_axi_awvalid	: in std_logic;
+	s00_axi_awready	: out std_logic;
+	s00_axi_wdata	: in std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0);
+	s00_axi_wstrb	: in std_logic_vector((C_S00_AXI_DATA_WIDTH/8)-1 downto 0);
+	s00_axi_wvalid	: in std_logic;
+	s00_axi_wready	: out std_logic;
+	s00_axi_bresp	: out std_logic_vector(1 downto 0);
+	s00_axi_bvalid	: out std_logic;
+	s00_axi_bready	: in std_logic;
+	s00_axi_araddr	: in std_logic_vector(C_S00_AXI_ADDR_WIDTH-1 downto 0);
+	s00_axi_arprot	: in std_logic_vector(2 downto 0);
+	s00_axi_arvalid	: in std_logic;
+	s00_axi_arready	: out std_logic;
+	s00_axi_rdata	: out std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0);
+	s00_axi_rresp	: out std_logic_vector(1 downto 0);
+	s00_axi_rvalid	: out std_logic;
+    s00_axi_rready	: in std_logic
+  );
+  end component fourier_transform_v1_0;
+
   ------------------------------------------
   -- external signal declarations
   ------------------------------------------
@@ -212,6 +275,30 @@ architecture STRUCTURE of zcu102_wrapper is
   signal M05_AXI_rvalid : STD_LOGIC;
   signal M05_AXI_rready : STD_LOGIC;
 
+  ------------------------------------------
+  -- fourier transform signal declarations
+  ------------------------------------------
+  
+  signal M07_AXI_awaddr : STD_LOGIC_VECTOR ( 39 downto 0 );
+  signal M07_AXI_awprot : STD_LOGIC_VECTOR ( 2 downto 0 );
+  signal M07_AXI_awvalid : STD_LOGIC;
+  signal M07_AXI_awready : STD_LOGIC;
+  signal M07_AXI_wdata : STD_LOGIC_VECTOR ( 63 downto 0 );
+  signal M07_AXI_wstrb : STD_LOGIC_VECTOR ( 7 downto 0 );
+  signal M07_AXI_wvalid : STD_LOGIC;
+  signal M07_AXI_wready : STD_LOGIC;
+  signal M07_AXI_bresp : STD_LOGIC_VECTOR ( 1 downto 0 );
+  signal M07_AXI_bvalid : STD_LOGIC;
+  signal M07_AXI_bready : STD_LOGIC;
+  signal M07_AXI_araddr : STD_LOGIC_VECTOR ( 39 downto 0 );
+  signal M07_AXI_arprot : STD_LOGIC_VECTOR ( 2 downto 0 );
+  signal M07_AXI_arvalid : STD_LOGIC;
+  signal M07_AXI_arready : STD_LOGIC;
+  signal M07_AXI_rdata : STD_LOGIC_VECTOR ( 63 downto 0 );
+  signal M07_AXI_rresp : STD_LOGIC_VECTOR ( 1 downto 0 );
+  signal M07_AXI_rvalid : STD_LOGIC;
+  signal M07_AXI_rready : STD_LOGIC;    
+        
 begin
 
   ------------------------------------------
@@ -292,6 +379,25 @@ begin
       M05_AXI_wready => M05_AXI_wready,
       M05_AXI_wstrb(3 downto 0) => M05_AXI_wstrb(3 downto 0),
       M05_AXI_wvalid => M05_AXI_wvalid,
+      M07_AXI_araddr(39 downto 0) => M07_AXI_araddr(39 downto 0),
+      M07_AXI_arprot(2 downto 0) => M07_AXI_arprot(2 downto 0),
+      M07_AXI_arready => M07_AXI_arready,
+      M07_AXI_arvalid => M07_AXI_arvalid,
+      M07_AXI_awaddr(39 downto 0) => M07_AXI_awaddr(39 downto 0),
+      M07_AXI_awprot(2 downto 0) => M07_AXI_awprot(2 downto 0),
+      M07_AXI_awready => M07_AXI_awready,
+      M07_AXI_awvalid => M07_AXI_awvalid,
+      M07_AXI_bready => M07_AXI_bready,
+      M07_AXI_bresp(1 downto 0) => M07_AXI_bresp(1 downto 0),
+      M07_AXI_bvalid => M07_AXI_bvalid,
+      M07_AXI_rdata(63 downto 0) => M07_AXI_rdata(63 downto 0),
+      M07_AXI_rready => M07_AXI_rready,
+      M07_AXI_rresp(1 downto 0) => M07_AXI_rresp(1 downto 0),
+      M07_AXI_rvalid => M07_AXI_rvalid,
+      M07_AXI_wdata(63 downto 0) => M07_AXI_wdata(63 downto 0),
+      M07_AXI_wready => M07_AXI_wready,
+      M07_AXI_wstrb(7 downto 0) => M07_AXI_wstrb(7 downto 0),
+      M07_AXI_wvalid => M07_AXI_wvalid,
       SI5324_LOL_IN => SI5324_LOL_IN,
       SI5324_RST_OUT(0) => SI5324_RST_OUT(0),
       TX_DDC_OUT_scl_i => TX_DDC_OUT_scl_i,
@@ -316,7 +422,7 @@ begin
     );
     
   ------------------------------------------
-  -- instantiate block diagram instance
+  -- instantiate simple_filter instance
   ------------------------------------------
   
   simple_filter_0: component simple_filter
@@ -355,5 +461,38 @@ begin
       S_AXI_BVALID => M05_AXI_bvalid,                  
       S_AXI_AWREADY => M05_AXI_awready
     );
- 
+    
+  ------------------------------------------
+  -- instantiate fourier transform instance
+  ------------------------------------------
+    
+  fourier_transform_0: component fourier_transform_v1_0
+    generic map(	  
+	  C_S00_AXI_DATA_WIDTH => 64,
+	  C_S00_AXI_ADDR_WIDTH => 1
+	)
+	port map (
+	  s00_axi_aclk => s_axi_aclk,
+	  s00_axi_aresetn => peripheral_aresetn(0),
+	  s00_axi_awaddr => M07_AXI_awaddr(0 downto 0),
+	  s00_axi_awprot => M07_AXI_awprot(2 downto 0),
+	  s00_axi_awvalid => M07_AXI_awvalid,
+	  s00_axi_awready => M07_AXI_awready,
+	  s00_axi_wdata => M07_AXI_wdata(63 downto 0),
+	  s00_axi_wstrb => M07_AXI_wstrb(7 downto 0),
+	  s00_axi_wvalid => M07_AXI_wvalid,
+	  s00_axi_wready => M07_AXI_wready,
+	  s00_axi_bresp => M07_AXI_bresp(1 downto 0),
+	  s00_axi_bvalid => M07_AXI_bvalid,
+	  s00_axi_bready => M07_AXI_bready,
+	  s00_axi_araddr => M07_AXI_araddr(0 downto 0),
+	  s00_axi_arprot => M07_AXI_arprot(2 downto 0),
+	  s00_axi_arvalid => M07_AXI_arvalid,
+	  s00_axi_arready => M07_AXI_arready,
+	  s00_axi_rdata => M07_AXI_rdata(63 downto 0),
+	  s00_axi_rresp => M07_AXI_rresp(1 downto 0),
+	  s00_axi_rvalid => M07_AXI_rvalid,
+	  s00_axi_rready => M07_AXI_rready
+	);
+		
 end STRUCTURE;
