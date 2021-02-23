@@ -179,6 +179,27 @@ fi
 
 ########################################################################
 
+pretty_header "Copying source files for Fourier transform"
+
+if [ ! -d ./hardware_design/ip_repo/ft_cores ]; then
+	mkdir ./hardware_design/ip_repo/ft_cores
+fi
+
+for core in ./ft_cores/*/
+do
+	echo_blue "Copying ${core:11} source files"
+	#create folder
+	if [ ! -d ./hardware_design/ip_repo/ft_cores/${core:11} ]; then
+		mkdir ./hardware_design/ip_repo/ft_cores/${core:11}
+	fi
+		
+	cp -u -r ${core}src/* ./hardware_design/ip_repo/ft_cores/${core:11}
+done
+
+echo_green "Copying source files for Fourier transform"
+
+########################################################################
+
 if [ ! -d hardware_design/soc_project.srcs ]; then
 
 	pretty_header "Creating hardware design"

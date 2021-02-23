@@ -10,12 +10,13 @@
 #########
 #Source / constraint files:
 #########
-!vivado/src/
+!src/
 
 #########
 #IP files
 #########
-!vivado/ip_repo/
+!ip_repo/
+ip_repo/ft_cores/*
 
 #########
 #bif files
@@ -31,7 +32,7 @@ generated_bitstreams/*.bit
 #########
 #Scripts
 #########
-!vivado/scripts/
+!scripts/
 
 #########
 #Log - files
