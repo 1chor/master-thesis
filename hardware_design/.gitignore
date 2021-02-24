@@ -40,6 +40,7 @@ generated_bitstreams/*.bit
 *.log
 *.jou
 *.str
+*.tmp
 
 #########
 #Simulation generated files
