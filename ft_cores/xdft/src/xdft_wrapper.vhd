@@ -186,7 +186,7 @@ architecture arch of ft_wrapper is
     signal output_state, output_state_next : output_state_type := OUTPUT_IDLE;
     
     -- component for float_to_fixed18 converter
-    component float_to_fixed18_0 is
+    component dft_float_to_fixed18_0 is
         port (
             -- Global signals
             aclk : IN STD_LOGIC;
@@ -198,10 +198,10 @@ architecture arch of ft_wrapper is
             m_axis_result_tdata : out std_logic_vector(23 downto 0);
             m_axis_result_tuser :out std_logic_vector(0 downto 0)
         );
-    end component float_to_fixed18_0;
+    end component dft_float_to_fixed18_0;
     
     --component for fixed18_to_float converter
-    component fixed18_to_float_0 is
+    component dft_fixed18_to_float_0 is
         port (
             -- Global signals
             aclk : IN STD_LOGIC;
@@ -212,10 +212,10 @@ architecture arch of ft_wrapper is
             m_axis_result_tvalid : out std_logic;
             m_axis_result_tdata : out std_logic_vector(DATA_WIDTH downto 0)
       );
-    end component fixed18_to_float_0;
+    end component dft_fixed18_to_float_0;
   
     -- component for input FIFO (delay line)
-    component fifo_in_0
+    component dft_fifo_in_0
     port (
         clk : in std_logic;
         srst : in std_logic;
@@ -228,10 +228,10 @@ architecture arch of ft_wrapper is
         wr_rst_busy : out std_logic;
         rd_rst_busy : out std_logic
     );
-    end component fifo_in_0;
+    end component dft_fifo_in_0;
         
     -- component for output FIFO (delay line)
-    component fifo_out_0
+    component dft_fifo_out_0
     port (
         clk : in std_logic;
         srst : in std_logic;
@@ -244,7 +244,7 @@ architecture arch of ft_wrapper is
         wr_rst_busy : out std_logic;
         rd_rst_busy : out std_logic
     );
-    end component fifo_out_0;
+    end component dft_fifo_out_0;
     
     -- component for DFT IP core
     component dft_0 is
@@ -268,7 +268,7 @@ architecture arch of ft_wrapper is
 begin
 
     -- implement float_to_fixed18 unit
-    float_to_fixed18_inst : component float_to_fixed18_0
+    float_to_fixed18_inst : component dft_float_to_fixed18_0
     port map (
         -- Global signals
         aclk => clk,
@@ -282,7 +282,7 @@ begin
     );
     
     -- implement fixed18_to_float unit for real output
-    fixed18_to_float_inst_real : component fixed18_to_float_0
+    fixed18_to_float_inst_real : component dft_fixed18_to_float_0
     port map (
         -- Global signals
         aclk => clk,
@@ -295,7 +295,7 @@ begin
     );
     
     -- implement fixed18_to_float unit for imaginary output
-    fixed18_to_float_inst_imag : component fixed18_to_float_0
+    fixed18_to_float_inst_imag : component dft_fixed18_to_float_0
     port map (
         -- Global signals
         aclk => clk,
@@ -308,7 +308,7 @@ begin
     );
     
     -- implement FIFO for input (delay line)
-    fifo_in_inst : fifo_in_0
+    fifo_in_inst : dft_fifo_in_0
     port map (
         clk => clk,
         srst => reset,
@@ -323,7 +323,7 @@ begin
     );
     
     -- implement FIFO for output (delay line)
-    fifo_out_inst : fifo_out_0
+    fifo_out_inst : dft_fifo_out_0
     port map (
         clk => clk,
         srst => reset,
