@@ -191,7 +191,7 @@ architecture arch of ft_wrapper is
     signal input_state, input_state_next : input_state_type := INPUT_INIT;
         
     -- component for float_to_fixed18 converter
-    component float_to_fixed18_0 is
+    component fft_fixed_float_to_fixed18_0 is
         port (
             -- Global signals
             aclk : IN STD_LOGIC;
@@ -203,10 +203,10 @@ architecture arch of ft_wrapper is
             m_axis_result_tdata : out std_logic_vector(23 downto 0);
             m_axis_result_tuser :out std_logic_vector(0 downto 0)
         );
-    end component float_to_fixed18_0;
+    end component fft_fixed_float_to_fixed18_0;
     
     --component for fixed18_to_float converter
-    component fixed18_to_float_0 is
+    component fft_fixed_fixed18_to_float_0 is
         port (
             -- Global signals
             aclk : IN STD_LOGIC;
@@ -217,10 +217,10 @@ architecture arch of ft_wrapper is
             m_axis_result_tvalid : out std_logic;
             m_axis_result_tdata : out std_logic_vector(DATA_WIDTH downto 0)
       );
-    end component fixed18_to_float_0;
+    end component fft_fixed_fixed18_to_float_0;
     
     -- component for FFT IP core
-    component fft_0 is
+    component fft_fixed_fft_0 is
         port (
         -- Global signals
         aclk : in std_logic;                                                    -- clock
@@ -252,7 +252,7 @@ architecture arch of ft_wrapper is
         event_data_in_channel_halt : out std_logic;                             -- event: no data input available
         event_data_out_channel_halt : out std_logic                             -- event: cannot write data output
       );
-  end component fft_0;
+  end component fft_fixed_fft_0;
 
 begin
 
@@ -260,7 +260,7 @@ begin
     aresetn <= not reset;
     
     -- implement float_to_fixed18 unit
-    float_to_fixed18_inst : component float_to_fixed18_0
+    float_to_fixed18_inst : component fft_fixed_float_to_fixed18_0
     port map (
         -- Global signals
         aclk => clk,
@@ -274,7 +274,7 @@ begin
     );
     
     -- implement fixed18_to_float unit for real output
-    fixed18_to_float_inst_real : component fixed18_to_float_0
+    fixed18_to_float_inst_real : component fft_fixed_fixed18_to_float_0
     port map (
         -- Global signals
         aclk => clk,
@@ -287,7 +287,7 @@ begin
     );
     
     -- implement fixed18_to_float unit for imaginary output
-    fixed18_to_float_inst_imag : component fixed18_to_float_0
+    fixed18_to_float_inst_imag : component fft_fixed_fixed18_to_float_0
     port map (
         -- Global signals
         aclk => clk,
@@ -300,7 +300,7 @@ begin
     );
     
     -- implement FFT unit
-    fft_inst : component fft_0
+    fft_inst : component fft_fixed_fft_0
     port map (
         -- Global signals
         aclk => clk,                                                   

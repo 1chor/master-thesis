@@ -120,7 +120,7 @@ architecture arch of ft_wrapper is
     signal output_state, output_state_next : output_state_type := OUTPUT_IDLE;
     
     -- component for float_to_fixed21 converter
-    component float_to_fixed21_0 is
+    component dblclkfft_float_to_fixed21_0 is
         port (
             -- Global signals
             aclk : IN STD_LOGIC;
@@ -132,10 +132,10 @@ architecture arch of ft_wrapper is
             m_axis_result_tdata : out std_logic_vector(23 downto 0);
             m_axis_result_tuser :out std_logic_vector(0 downto 0)
         );
-    end component float_to_fixed21_0;
+    end component dblclkfft_float_to_fixed21_0;
     
     --component for fixed25_to_float converter
-    component fixed25_to_float_0 is
+    component dblclkfft_fixed25_to_float_0 is
         port (
             -- Global signals
             aclk : IN STD_LOGIC;
@@ -146,7 +146,7 @@ architecture arch of ft_wrapper is
             m_axis_result_tvalid : out std_logic;
             m_axis_result_tdata : out std_logic_vector(DATA_WIDTH downto 0)
       );
-    end component fixed25_to_float_0;
+    end component dblclkfft_fixed25_to_float_0;
     
     -- component for dblclkfft IP core
     component fftmain is
@@ -163,7 +163,7 @@ architecture arch of ft_wrapper is
 begin
 
     -- implement float_to_fixed21 unit
-    float_to_fixed21_inst : component float_to_fixed21_0
+    float_to_fixed21_inst : component dblclkfft_float_to_fixed21_0
     port map (
         -- Global signals
         aclk => clk,
@@ -177,7 +177,7 @@ begin
     );
     
     -- implement fixed25_to_float unit for real output
-    fixed25_to_float_inst_real : component fixed25_to_float_0
+    fixed25_to_float_inst_real : component dblclkfft_fixed25_to_float_0
     port map (
         -- Global signals
         aclk => clk,
@@ -190,7 +190,7 @@ begin
     );
     
     -- implement fixed25_to_float unit for imaginary output
-    fixed25_to_float_inst_imag : component fixed25_to_float_0
+    fixed25_to_float_inst_imag : component dblclkfft_fixed25_to_float_0
     port map (
         -- Global signals
         aclk => clk,
