@@ -216,11 +216,6 @@ fi
 
 pretty_header "Generating Bitstreams"
 
-#create folder
-if [ ! -d bootimage/bitstreams ]; then
-	mkdir bootimage/bitstreams
-fi
-
 cd hardware_design
 make -f scripts/Makefile bit
 	
