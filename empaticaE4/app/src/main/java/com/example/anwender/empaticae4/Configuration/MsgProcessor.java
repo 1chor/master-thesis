@@ -52,7 +52,6 @@ public class MsgProcessor {
                 mCallback.onUpdateAvailable(temp);
             }
 
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

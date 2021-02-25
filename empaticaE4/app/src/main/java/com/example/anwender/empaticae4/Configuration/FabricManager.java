@@ -6,23 +6,24 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 public class FabricManager {
-    private Callback mCallback;
+//    private Callback mCallback;
     private android.os.Handler mHandler;
     private byte[] buffer;
     private final RandomAccessFile hashDevice = null;
 
 
-    public FabricManager(FabricManager.Callback callback) {
+//    public FabricManager(FabricManager.Callback callback) {
+    public FabricManager() {
 
         buffer = new byte[128];
         mHandler = new android.os.Handler();
 
-        if (callback instanceof Callback) {
-            this.mCallback = (Callback) callback;
-        } else {
-            throw new RuntimeException(callback.toString()
-                    + " must implement NetworkManager.Callback interface");
-        }
+//        if (callback instanceof Callback) {
+//            this.mCallback = (Callback) callback;
+//        } else {
+//            throw new RuntimeException(callback.toString()
+//                    + " must implement NetworkManager.Callback interface");
+//        }
     }
 
 
@@ -104,46 +105,42 @@ public class FabricManager {
         mHandler.post(reconfigFabric);
     }
 
-    /**
-     * Apply filters on the image
-     *
-     * @param filepath abs. filepath
-     * @param driver   replace with "/proc/simple_filter"
-     */
-    void applyFilter(final String filepath, final String driver) {
-
-        Runnable applyFilter = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    // open device driver
-                    RandomAccessFile filterDriver = new RandomAccessFile(driver, "rws");
-                    // write absolute image filepath to device driver
-                    filterDriver.writeChars(filepath);
-                    // release driver
-                    filterDriver.close();
-
-                    Thread.currentThread();
-                    Thread.sleep(200);
-
-
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        mHandler.post(applyFilter);
-        // read the processed image back into the ui
-        mCallback.onFilterApplied();
-    }
+//    /**
+//     * Apply filters on the image
+//     *
+//     * @param filepath abs. filepath
+//     * @param driver   replace with "/proc/simple_filter"
+//     */
+//    void applyFilter(final String filepath, final String driver) {
+//
+//        Runnable applyFilter = new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    // open device driver
+//                    RandomAccessFile filterDriver = new RandomAccessFile(driver, "rws");
+//                    // write absolute image filepath to device driver
+//                    filterDriver.writeChars(filepath);
+//                    // release driver
+//                    filterDriver.close();
+//
+//                    Thread.currentThread();
+//                    Thread.sleep(200);
+//
+//
+//                } catch (InterruptedException | IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        };
+//
+//        mHandler.post(applyFilter);
+//        // read the processed image back into the ui
+//        mCallback.onFilterApplied();
+//    }
 
 
-    public interface Callback {
-        public void onFilterApplied();
-    }
+//    public interface Callback {
+//        public void onFilterApplied();
+//    }
 }
