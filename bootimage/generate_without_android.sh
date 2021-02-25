@@ -218,10 +218,24 @@ pretty_header "Generating Bitstreams"
 
 cd hardware_design
 make -f scripts/Makefile bit
-	
+
+#copy bitstreams
+#config_xfft_blue
 cp ./soc_project.runs/impl_1/simple_filter_0_USER_LOGIC_I_filter_logic_0_blue_filter_partial.bit generated_bitstreams/blue_filter.bit
+cp ./soc_project.runs/impl_1/fourier_transform_0_user_logic_inst_ft_wrapper_0_xfft_partial.bit generated_bitstreams/xfft.bit
+#config_xfft-fixed_green
 cp ./soc_project.runs/child_0_impl_1/simple_filter_0_USER_LOGIC_I_filter_logic_0_green_filter_partial.bit generated_bitstreams/green_filter.bit
+cp ./soc_project.runs/child_0_impl_1/fourier_transform_0_user_logic_inst_ft_wrapper_0_xfft-fixed_partial.bit generated_bitstreams/xfft-fixed.bit
+#config_xdft_red
 cp ./soc_project.runs/child_1_impl_1/simple_filter_0_USER_LOGIC_I_filter_logic_0_red_filter_partial.bit generated_bitstreams/red_filter.bit
+cp ./soc_project.runs/child_1_impl_1/fourier_transform_0_user_logic_inst_ft_wrapper_0_xdft_partial.bit generated_bitstreams/xdft.bit
+#config_intfftk
+cp ./soc_project.runs/child_2_impl_1/fourier_transform_0_user_logic_inst_ft_wrapper_0_intfftk_partial.bit generated_bitstreams/intfftk.bit
+#config_intfft_spdf
+cp ./soc_project.runs/child_3_impl_1/fourier_transform_0_user_logic_inst_ft_wrapper_0_intfft_spdf_partial.bit generated_bitstreams/intfft_spdf.bit
+#config_dblclkfft
+cp ./soc_project.runs/child_4_impl_1/fourier_transform_0_user_logic_inst_ft_wrapper_0_dblclkfft_partial.bit generated_bitstreams/dblclkfft.bit
+
 cd ..
 
 echo_green "Generating Bitstreams done"
@@ -231,9 +245,12 @@ echo_green "Generating Bitstreams done"
 pretty_header "Converting Bitstreams"
 
 cd hardware_design/generated_bitstreams
-bootgen -image blue_filter.bif -arch zynqmp -o ../../server/downloads/blue_filter.bin -w
-bootgen -image green_filter.bif -arch zynqmp -o ../../server/downloads/green_filter.bin -w
-bootgen -image red_filter.bif -arch zynqmp -o ../../server/downloads/red_filter.bin -w
+
+for bitstream in *.bif
+do
+	bootgen -image $bitstream -arch zynqmp -o ../../server/downloads/${bitstream::-4}.bin -w
+done
+
 cd ../..
 
 echo_green "Converting Bitstreams"
