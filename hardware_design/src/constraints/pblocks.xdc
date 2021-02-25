@@ -7,3 +7,11 @@ resize_pblock [get_pblocks pblock_filter_pr1] -add {RAMB36_X5Y38:RAMB36_X5Y41}
 set_property SNAPPING_MODE ON [get_pblocks pblock_filter_pr1]
 set_property CONTAIN_ROUTING 1 [get_pblocks pblock_filter_pr1]
 set_property EXCLUDE_PLACEMENT 1 [get_pblocks pblock_filter_pr1]
+
+create_pblock pblock_fourier_transform_pr2
+add_cells_to_pblock [get_pblocks pblock_fourier_transform_pr2] [get_cells -quiet [list fourier_transform_0/user_logic_inst/ft_wrapper_0]]
+resize_pblock [get_pblocks pblock_fourier_transform_pr2] -add {CLOCKREGION_X1Y5:CLOCKREGION_X2Y5}
+set_property SNAPPING_MODE ON [get_pblocks pblock_fourier_transform_pr2]
+set_property CONTAIN_ROUTING 1 [get_pblocks pblock_fourier_transform_pr2]
+set_property EXCLUDE_PLACEMENT 1 [get_pblocks pblock_fourier_transform_pr2]
+
