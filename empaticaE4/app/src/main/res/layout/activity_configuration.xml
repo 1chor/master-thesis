@@ -171,10 +171,22 @@
             android:text="@string/radio_XFFT_fixed" />
 
         <RadioButton
-            android:id="@+id/radioButton_custom_FFT"
+            android:id="@+id/radioButton_INTFFTK"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/radio_custom_FFT" />
+            android:text="@string/radio_INTFFTK" />
+
+        <RadioButton
+            android:id="@+id/radioButton_INTFFT_SPDF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_INTFFT_SPDF" />
+
+        <RadioButton
+            android:id="@+id/radioButton_DBLCLKFFT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_DBLCLKFFT" />
     </RadioGroup>
 
     <LinearLayout

@@ -176,7 +176,9 @@
     <string name="radio_XDFT">Xilinx Hardware DFT</string>
     <string name="radio_XFFT">Xilinx Hardware FFT (floating-point)</string>
     <string name="radio_XFFT_fixed">Xilinx Hardware FFT (fixed-point)</string>
-    <string name="radio_custom_FFT">Custom FFT</string>
+    <string name="radio_INTFFTK">Fully pipelined integer unscaled FFT</string>
+    <string name="radio_INTFFT_SPDF">Integer Single Path Feedback FFT</string>
+    <string name="radio_DBLCLKFFT">Generic Pipelined FFT</string>
     <string name="hash">Hash calculation:</string>
     <string name="enable_hash">enable hash calculation</string>
 </resources>

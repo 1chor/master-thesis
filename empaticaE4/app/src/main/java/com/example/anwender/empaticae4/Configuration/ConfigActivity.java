@@ -42,7 +42,9 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
     private RadioButton radioButtonXDFT;
     private RadioButton radioButtonXFFT;
     private RadioButton radioButtonXFFT_fixed;
-    private RadioButton radioButtonCustomFFT;
+    private RadioButton radioButtonINTFFTK;
+    private RadioButton radioButtonINTFFT_SPDF;
+    private RadioButton radioButtonDBLCLKFFT;
 
     //filenames
     private String blake2bDriver;
@@ -54,9 +56,8 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
     private boolean enable_hash;
 
     //public variables
-    public static String repo_name = "XFFT"; //set default name of server repository
-    //public static String repo_name = "SDFT"; //set default name of server repository
-    public static int windowSize = 128;
+    public static String repo_name = "SDFT"; //set default name of server repository
+    public static int windowSize = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,9 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         radioButtonXDFT = (RadioButton) findViewById(R.id.radioButton_XDFT);
         radioButtonXFFT = (RadioButton) findViewById(R.id.radioButton_XFFT);
         radioButtonXFFT_fixed = (RadioButton) findViewById(R.id.radioButton_XFFT_fixed);
-        radioButtonCustomFFT = (RadioButton) findViewById(R.id.radioButton_custom_FFT);
+        radioButtonINTFFTK = (RadioButton) findViewById(R.id.radioButton_INTFFTK);
+        radioButtonINTFFT_SPDF = (RadioButton) findViewById(R.id.radioButton_INTFFT_SPDF);
+        radioButtonDBLCLKFFT = (RadioButton) findViewById(R.id.radioButton_DBLCLKFFT);
         
         //When RadioGroup "Configuration" checked change
         radioGroupConfig.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -148,8 +151,16 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
                 radioButtonXFFT_fixed.setChecked(true);
                 break;
 
-            case "custom_FFT":
-                radioButtonCustomFFT.setChecked(true);
+            case "INTFFTK":
+                radioButtonINTFFTK.setChecked(true);
+                break;
+
+            case "INTFFT_SPDF":
+                radioButtonINTFFT_SPDF.setChecked(true);
+                break;
+
+            case "DBLCLKFFT":
+                radioButtonDBLCLKFFT.setChecked(true);
                 break;
         }
     }
@@ -193,9 +204,19 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
                 windowSize = 128; //set WindowSize
                 break;
 
-            case R.id.radioButton_custom_FFT:
-                repo_name = "custom_FFT"; //set name of server repository
-                //windowSize = ???; //set WindowSize
+            case R.id.radioButton_INTFFTK:
+                repo_name = "INTFFTK"; //set name of server repository
+                windowSize = 128; //set WindowSize
+                break;
+
+            case R.id.radioButton_INTFFT_SPDF:
+                repo_name = "INTFFT_SPDF"; //set name of server repository
+                windowSize = 128; //set WindowSize
+                break;
+
+            case R.id.radioButton_DBLCLKFFT:
+                repo_name = "DBLCLKFFT"; //set name of server repository
+                windowSize = 128; //set WindowSize
                 break;
 
             default: //equals to radioButton_SDFT
