@@ -4,6 +4,17 @@ from flask_restful import Resource, reqparse
 # We save our data in a python list, for simplicity
 repositories = [
 
+    {
+        "Index": "XDFT",
+        "Title": "Xilinx Discrete Fourier Transform",
+        "Version": "001",
+        "Description": "Xilinx Discrete Fourier Transform",
+        "Changelog": ["25.02.2021 Primary release"],
+        "File": "xdft.bin",
+        "Date": "25.02.2021",
+        "Checksum": "6c719309aacd88f3bbfc3ba57f454973e06c055540b444f76b4c863bb64229e7bcb3a7a53b715e05048e00babad05c76b917963efaa64ea09bfa4a0e21ebb2a7"
+    },
+    
 	{
         "Index": "XFFT",
         "Title": "Xilinx Fast Fourier Transform - Float",
@@ -25,18 +36,7 @@ repositories = [
         "Date": "25.02.2021",
         "Checksum": "6c719309aacd88f3bbfc3ba57f454973e06c055540b444f76b4c863bb64229e7bcb3a7a53b715e05048e00babad05c76b917963efaa64ea09bfa4a0e21ebb2a7"
     },
-    
-    {
-        "Index": "XDFT",
-        "Title": "Xilinx Discrete Fourier Transform",
-        "Version": "001",
-        "Description": "Xilinx Discrete Fourier Transform",
-        "Changelog": ["25.02.2021 Primary release"],
-        "File": "xdft.bin",
-        "Date": "25.02.2021",
-        "Checksum": "6c719309aacd88f3bbfc3ba57f454973e06c055540b444f76b4c863bb64229e7bcb3a7a53b715e05048e00babad05c76b917963efaa64ea09bfa4a0e21ebb2a7"
-    },
-    
+        
     {
         "Index": "INTFFTK",
         "Title": "Fully pipelined integer unscaled FFT",
