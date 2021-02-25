@@ -1,5 +1,7 @@
 package com.example.anwender.empaticae4.Configuration;
 
+import com.example.anwender.empaticae4.Main.MainActivity;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -44,13 +46,16 @@ public class FabricManager {
                     // write absolute bitstream filepath to device driver
                     hashDriver.writeChars(filepath);
 
-                    //stall thread to wait for hardware calculation
-                    Thread.currentThread();
-                    Thread.sleep(1000);
-
                     //wait until file exists (hash ready)
                     File file = new File(hash);
-                    while (!file.exists());
+                    while (!file.exists()) {
+                        try {
+                            //Thread.Sleep(1000);
+                            java.lang.Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
                     RandomAccessFile hashResult = new RandomAccessFile(hash, "r");
 
