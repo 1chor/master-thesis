@@ -4,6 +4,72 @@ from flask_restful import Resource, reqparse
 # We save our data in a python list, for simplicity
 repositories = [
 
+	{
+        "Index": "XFFT",
+        "Title": "Xilinx Fast Fourier Transform - Float",
+        "Version": "001",
+        "Description": "Xilinx Fast Fourier Transform using IEEE-754 single precision floating-point",
+        "Changelog": ["25.02.2021 Primary release"],
+        "File": "xfft.bin",
+        "Date": "25.02.2021",
+        "Checksum": "6c719309aacd88f3bbfc3ba57f454973e06c055540b444f76b4c863bb64229e7bcb3a7a53b715e05048e00babad05c76b917963efaa64ea09bfa4a0e21ebb2a7"
+    },
+    
+    {
+        "Index": "XFFT_fixed",
+        "Title": "Xilinx Fast Fourier Transform - Fixed",
+        "Version": "001",
+        "Description": "Xilinx Fast Fourier Transform using fixed-point",
+        "Changelog": ["25.02.2021 Primary release"],
+        "File": "xfft-fixed.bin",
+        "Date": "25.02.2021",
+        "Checksum": "6c719309aacd88f3bbfc3ba57f454973e06c055540b444f76b4c863bb64229e7bcb3a7a53b715e05048e00babad05c76b917963efaa64ea09bfa4a0e21ebb2a7"
+    },
+    
+    {
+        "Index": "XDFT",
+        "Title": "Xilinx Discrete Fourier Transform",
+        "Version": "001",
+        "Description": "Xilinx Discrete Fourier Transform",
+        "Changelog": ["25.02.2021 Primary release"],
+        "File": "xdft.bin",
+        "Date": "25.02.2021",
+        "Checksum": "6c719309aacd88f3bbfc3ba57f454973e06c055540b444f76b4c863bb64229e7bcb3a7a53b715e05048e00babad05c76b917963efaa64ea09bfa4a0e21ebb2a7"
+    },
+    
+    {
+        "Index": "INTFFTK",
+        "Title": "Fully pipelined integer unscaled FFT",
+        "Version": "001",
+        "Description": "Fully pipelined integer unscaled FFT",
+        "Changelog": ["25.02.2021 Primary release"],
+        "File": "intfftk.bin",
+        "Date": "25.02.2021",
+        "Checksum": "6c719309aacd88f3bbfc3ba57f454973e06c055540b444f76b4c863bb64229e7bcb3a7a53b715e05048e00babad05c76b917963efaa64ea09bfa4a0e21ebb2a7"
+    },
+    
+    {
+        "Index": "INTFFT_SPDF",
+        "Title": "Integer unscaled Radix-2 Single Path Delay Feedback FFT",
+        "Version": "001",
+        "Description": "Integer unscaled Radix-2 Single Path Delay Feedback FFT",
+        "Changelog": ["25.02.2021 Primary release"],
+        "File": "intfft_spdf.bin",
+        "Date": "25.02.2021",
+        "Checksum": "6c719309aacd88f3bbfc3ba57f454973e06c055540b444f76b4c863bb64229e7bcb3a7a53b715e05048e00babad05c76b917963efaa64ea09bfa4a0e21ebb2a7"
+    },
+    
+    {
+        "Index": "DBLCLKFFT",
+        "Title": "Highly optimized streaming FFT",
+        "Version": "001",
+        "Description": "Highly optimized streaming FFT",
+        "Changelog": ["25.02.2021 Primary release"],
+        "File": "dblclkfft.bin",
+        "Date": "25.02.2021",
+        "Checksum": "6c719309aacd88f3bbfc3ba57f454973e06c055540b444f76b4c863bb64229e7bcb3a7a53b715e05048e00babad05c76b917963efaa64ea09bfa4a0e21ebb2a7"
+    },
+    
     {
         "Index": "BLUE-FILTER",
         "Title": "IOT Image Processing",
