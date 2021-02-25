@@ -53,27 +53,23 @@ if {$STATUS != "synth_design Complete!" || $REFRESH == 1} {
 	puts "+++++++++++++++++++++++++++\n"
 }
 
-# Set status
-set STATUS [get_property STATUS [get_runs impl_1]]
-set STATUS_c0 [get_property STATUS [get_runs child_0_impl_1]]
-set STATUS_c1 [get_property STATUS [get_runs child_1_impl_1]]
-
-set REFRESH [get_property NEEDS_REFRESH [get_runs impl_1]]
-set REFRESH_c0 [get_property NEEDS_REFRESH [get_runs child_0_impl_1]]
-set REFRESH_c1 [get_property NEEDS_REFRESH [get_runs child_1_impl_1]]
-
 # Set run_list
 set run_list [get_runs -filter "IS_IMPLEMENTATION == true && CONSTRSET == constrs_1"]
 
-# Output status for debugging
-#puts $STATUS
-#puts $STATUS_c0
-#puts $STATUS_c1
-#puts $REFRESH
-#puts $REFRESH_c0
-#puts $REFRESH_c1
+# Set status
+set i 0
 
-if {$STATUS == "route_design Complete!" && $STATUS_c0 == "route_design Complete!" && $STATUS_c1 == "route_design Complete!" && $REFRESH == 0 && $REFRESH_c0 == 0 && $REFRESH_c1 == 0} {
+foreach run $run_list {
+set STATUS_$i [get_property STATUS [get_runs $run]]
+set REFRESH_$i [get_property NEEDS_REFRESH [get_runs $run]]
+incr i
+} 
+
+if {$STATUS_0 == "route_design Complete!" && $STATUS_1 == "route_design Complete!" && $STATUS_2 == "route_design Complete!" && \
+	$STATUS_3 == "route_design Complete!" && $STATUS_4 == "route_design Complete!" && $STATUS_5 == "route_design Complete!" && \
+	$REFRESH_0 == 0 && $REFRESH_1 == 0 && $REFRESH_2 == 0 && \
+	$REFRESH_3 == 0 && $REFRESH_4 == 0 && $REFRESH_5 == 0} {
+		
 	puts "\n++++++++++++++++++++++++"
 	puts "++ Generate bitstream ++"
 	puts "++++++++++++++++++++++++\n"
@@ -89,7 +85,11 @@ if {$STATUS == "route_design Complete!" && $STATUS_c0 == "route_design Complete!
 	}
 	puts "INFO: Generating bitstream done"
 	
-} elseif {$STATUS != "write_bitstream Complete!" || $STATUS_c0 != "write_bitstream Complete!" || $STATUS_c1 != "write_bitstream Complete!" || $REFRESH == 1 || $REFRESH_c0 == 1 || $REFRESH_c1 == 1} {
+} elseif {$STATUS_0 != "write_bitstream Complete!" || $STATUS_1 != "write_bitstream Complete!" || $STATUS_2 != "write_bitstream Complete!" || \
+		  $STATUS_3 != "write_bitstream Complete!" || $STATUS_4 != "write_bitstream Complete!" || $STATUS_5 != "write_bitstream Complete!" || \
+		  $REFRESH_0 == 1 || $REFRESH_1 == 1 || $REFRESH_2 == 1 || \
+		  $REFRESH_3 == 1 || $REFRESH_4 == 1 || $REFRESH_5 == 1} {
+			  
 	puts "\n++++++++++++++++++++++++"
 	puts "++ Run implementation ++"
 	puts "++++++++++++++++++++++++\n"
