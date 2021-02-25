@@ -61,9 +61,9 @@ repositories = [
     
     {
         "Index": "DBLCLKFFT",
-        "Title": "Highly optimized streaming FFT",
+        "Title": "Generic Pipelined FFT",
         "Version": "001",
-        "Description": "Highly optimized streaming FFT",
+        "Description": "Generic Pipelined FFT",
         "Changelog": ["25.02.2021 Primary release"],
         "File": "dblclkfft.bin",
         "Date": "25.02.2021",
