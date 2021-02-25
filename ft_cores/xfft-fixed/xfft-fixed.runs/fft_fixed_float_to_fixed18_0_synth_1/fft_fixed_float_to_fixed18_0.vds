@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2018.1 (64-bit)
+# SW Build 2188600 on Wed Apr  4 18:39:19 MDT 2018
+# IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
+# Start of session at: Wed Feb 24 23:14:48 2021
+# Process ID: 2603
+# Current directory: /media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.runs/fft_fixed_float_to_fixed18_0_synth_1
+# Command line: vivado -log fft_fixed_float_to_fixed18_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source fft_fixed_float_to_fixed18_0.tcl
+# Log file: /media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.runs/fft_fixed_float_to_fixed18_0_synth_1/fft_fixed_float_to_fixed18_0.vds
+# Journal file: /media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.runs/fft_fixed_float_to_fixed18_0_synth_1/vivado.jou
+#-----------------------------------------------------------
+source fft_fixed_float_to_fixed18_0.tcl -notrace
+INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP fft_fixed_float_to_fixed18_0, cache-ID = 4e713c26293e15de.
+INFO: [Common 17-206] Exiting Vivado at Wed Feb 24 23:16:03 2021...

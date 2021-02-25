@@ -61,7 +61,7 @@ end ft_wrapper;
 architecture arch of ft_wrapper is
 
     -- constant declaration
-    constant PADDING_CONFIG : std_logic_vector(7 downto 0) := (others => '0'); -- padding bits for config
+    constant PADDING_CONFIG : std_logic_vector(6 downto 0) := (others => '0'); -- padding bits for config
     constant PADDING_NFFT : std_logic_vector(2 downto 0) := (others => '0'); -- padding bits for FFT size
     constant FWD : std_logic := '1'; -- use forward transformation
     constant PADDING_DATA : std_logic_vector(5 downto 0) := (others => '0'); -- padding bits for data 

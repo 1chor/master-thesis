@@ -1,0 +1,4 @@
+vhdl xil_defaultlib  \
+"../../../../xfft-fixed.srcs/sources_1/ip/fft_fixed_float_to_fixed18_0/sim/fft_fixed_float_to_fixed18_0.vhd" \
+
+nosort
