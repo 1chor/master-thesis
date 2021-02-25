@@ -66,11 +66,7 @@ public class FabricManager {
                     hashDriver.close();
                     hashResult.close();
 
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
                 } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
@@ -99,8 +95,6 @@ public class FabricManager {
                     fabricDriver.writeChars(filepath);
                     // release driver
                     fabricDriver.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
