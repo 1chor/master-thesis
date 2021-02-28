@@ -48,11 +48,6 @@ insmod /data/modules/fourier_transform.ko
 
 echo > /dev/kmsg # empty line
 
-echo "++ Loading DFT module ++" > /dev/kmsg
-insmod /data/modules/dft.ko
-
-echo > /dev/kmsg # empty line
-
 #remount filesystem rw
 chmod 777 data
 mount -o rw,remount -t auto /
