@@ -239,16 +239,17 @@ while [ 1 ]; do
 		echo "partial.txt exists." > /dev/kmsg
 		
 		# set variables
-		bitpath="$( < partial.txt )"
-		echo $bitpath > /dev/null
-		bit=${bitpath##*/}
+		bit="$( < partial.txt )"
+		#bitpath="$( < partial.txt )"
+		#echo $bitpath > /dev/null
+		#bit=${bitpath##*/}
 		echo $bit > /dev/null
 		
 		# set flags for partial bitstream
 		echo 1 > /sys/class/fpga_manager/fpga0/flags
 		
 		# load partial bitstream
-		cp $bitpath /lib/firmware
+		cp $bit /lib/firmware
 		echo $bit > /sys/class/fpga_manager/fpga0/firmware
 		
 		# read status of fpga manager
