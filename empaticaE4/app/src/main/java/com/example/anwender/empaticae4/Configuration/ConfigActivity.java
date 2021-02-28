@@ -321,7 +321,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
 
     @Override
     public byte[] calculateHash(String file) {
-        return mFabricManager.calculateHashFromFile(MainActivity.path + "/" + file, MainActivity.path + "/" + blake2bDriver, MainActivity.path + "/" + blake2bHash);
+        return mFabricManager.calculateHashFromFile(file, MainActivity.path + "/" + blake2bDriver, MainActivity.path + "/" + blake2bHash);
     }
 
 
@@ -335,7 +335,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
             }
 
             mConsole.append("Reconfigure fabric\r\n");
-            mFabricManager.reconfigureFabric(MainActivity.path + "/" + repo.getFile(), MainActivity.path + "/" + reconfigDriver);
+            mFabricManager.reconfigureFabric(repo.getFile(), MainActivity.path + "/" + reconfigDriver);
         } else {
             mConsole.append("Bitstream invalid\r\n");
         }
