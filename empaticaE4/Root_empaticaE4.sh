@@ -185,7 +185,11 @@ while [ 1 ]; do
 	# control for blake2b
 	if [ -f "blake2b.txt" ]; then
 		echo "blake2b.txt exists." > /dev/kmsg
-		rm hash.txt
+		
+		# delete hash file
+		if [ -f hash.txt ]; then
+			rm hash.txt
+		fi
 				
 		# cat bitstream to null device, otherwise the kernel module will fail 
 		cat "$( < blake2b.txt )" > /dev/null
@@ -215,8 +219,15 @@ while [ 1 ]; do
 			
 		cp tmp.txt hash.txt 
 		
-		rm tmp.txt
-		rm blake2b.txt
+		# delete tmp file
+		if [ -f tmp.txt ]; then
+			rm tmp.txt
+		fi
+		
+		# delete blake2b file
+		if [ -f blake2b.txt ]; then
+			rm blake2b.txt
+		fi
 		
 		echo "blake2b operation done." > /dev/kmsg
 	fi
@@ -278,8 +289,21 @@ while [ 1 ]; do
 			insmod /data/modules/fourier_transform.ko FT_SIZE=128 #default size
 			echo 0x00 > /proc/myled
 		fi
-		 
-		rm partial.txt
+		
+		# delete bitstream file (local)
+		if [ -f  $bit ]; then
+			rm  $bit
+		fi
+		
+		# delete bitstream file (firmware)
+		if [ -f  /lib/firmware/$bit ]; then
+			rm  /lib/firmware/$bit
+		fi
+		
+		# delete partial file
+		if [ -f partial.txt ]; then
+			rm partial.txt
+		fi
 		
 		echo "partial operation done." > /dev/kmsg
 	fi		
