@@ -528,7 +528,7 @@ public class SpectralAnalysis {
                 this.domF = dominantFrequency(spd);
                 break;
 
-            case "INTFFT_SPDF": //Hardware Fully pipelined integer unscaled FFT
+            case "INTFFT_SPDF": //Hardware Integer unscaled Radix-2 Single Path Delay Feedback FFT
                 this.signalSize = inputSignal.size();
                 this.argConstantPart = (Math.PI * 2) / signalSize;
 
@@ -652,7 +652,7 @@ public class SpectralAnalysis {
                 this.domF = dominantFrequency(spd);
                 break;
 
-            case "DBLCLKFFT": //Hardware Fully pipelined integer unscaled FFT
+            case "DBLCLKFFT": //Hardware Generic Pipelined FFT
                 this.signalSize = inputSignal.size();
                 this.argConstantPart = (Math.PI * 2) / signalSize;
 
