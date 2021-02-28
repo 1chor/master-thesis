@@ -32,21 +32,21 @@ public class FabricManager {
     /**
      * Calculate HASH from file with the blake2b module
      *
-     * @param filepath abs. filepath
+     * @param filename     filename
      * @param driver   replace with "/proc/blake2b"
      * @return
      */
-    byte[] calculateHashFromFile(final String filepath, final String driver, final String hash) {
         Runnable getHash = new Runnable() {
             @Override
             public void run() {
+    byte[] calculateHashFromFile(final String filename, final String driver, final String hash) {
                 try {
                     // open device driver
                     RandomAccessFile hashDriver = new RandomAccessFile(driver, "rws"); // will be replaced with the device driver
                     // write absolute bitstream filepath to device driver
-                    hashDriver.writeChars(filepath);
+                    hashDriver.writeChars(filename);
 
-                    //wait until file exists (hash ready)
+                    //wait until hash file exists (hash ready)
                     File file = new File(hash);
                     while (!file.exists()) {
                         try {
@@ -80,10 +80,10 @@ public class FabricManager {
     /**
      * load the bitstream into the fabric
      *
-     * @param filepath abs. filepath
+     * @param file     filename
      * @param driver   replace with "/proc/..."
      */
-    void reconfigureFabric(final String filepath, final String driver) {
+    void reconfigureFabric(final String file, final String driver) {
 
         Runnable reconfigFabric = new Runnable() {
             @Override
@@ -92,7 +92,7 @@ public class FabricManager {
                     // open device driver
                     RandomAccessFile fabricDriver = new RandomAccessFile(driver, "rws");
                     // write absolute bitstream filepath to device driver
-                    fabricDriver.writeChars(filepath);
+                    fabricDriver.writeChars(file);
                     // release driver
                     fabricDriver.close();
                 } catch (IOException e) {
