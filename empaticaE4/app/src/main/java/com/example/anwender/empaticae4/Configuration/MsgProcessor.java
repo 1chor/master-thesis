@@ -42,10 +42,14 @@ public class MsgProcessor {
                 // if new; init download
                 mCallback.onUpdateAvailable(temp);
 
-                if (Integer.parseInt(version) > Integer.parseInt(config.get(Constants.JSON.VERSION))) {
+                if (index.equals(config.get(Constants.JSON.INDEX))) { //when INDEX is the same check the version
+                    if (Integer.parseInt(version) > Integer.parseInt(config.get(Constants.JSON.VERSION))) {
+                        mCallback.onUpdateAvailable(temp);
+                    } else {
+                        mCallback.printToTextBox("No updates available! \r\n");
+                    }
+                } else { //otherwise update
                     mCallback.onUpdateAvailable(temp);
-                } else {
-                    mCallback.printToTextBox("No updates available! \r\n");
                 }
 
             } else {
