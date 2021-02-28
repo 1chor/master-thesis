@@ -32,7 +32,32 @@ cd $Filepath
 while [ 1 ]; do
 	sleep 1
 		
-	# control for Xilinx FFT
+	# control for Xilinx DFT
+	if [ -f "xdft_input.txt" ]; then
+		echo "xdft_input.txt exists." > /dev/kmsg
+		
+		while read line; do
+			# read each line from file
+			# and forward it to the fourier_transform module
+			echo $line > /proc/fourier_transform
+		done < xdft_input.txt
+				
+		sleep 0.5
+		
+		# read dft output into file
+		cat /proc/fourier_transform > xdft_output.txt
+		
+		# delete input file
+		if [ -f xdft_input.txt ]; then
+			rm xdft_input.txt
+		fi
+		
+		echo "fourier transformation done." > /dev/kmsg
+	fi
+	
+	###################################################################
+	
+	# control for Xilinx FFT (floating-point)
 	if [ -f "xfft_input.txt" ]; then
 		echo "xfft_input.txt exists." > /dev/kmsg
 		
@@ -54,27 +79,108 @@ while [ 1 ]; do
 		
 		echo "fourier transformation done." > /dev/kmsg
 	fi
+	
+	###################################################################
+	
+	# control for Xilinx FFT (fixed-point)
+	if [ -f "xfft_fixed_input.txt" ]; then
+		echo "xfft_fixed_input.txt exists." > /dev/kmsg
 		
-	# control for blake2b
-	#~ if [ -f "$Filepath/blake2b.txt" ]; then
-		#~ echo "blake2b.txt exists." > /dev/kmsg
-		#~ rm $Filepath/hash.txt
-		#~ rm $Filepath/tmp.txt
+		while read line; do
+			# read each line from file
+			# and forward it to the fourier_transform module
+			echo $line > /proc/fourier_transform
+		done < xfft_fixed_input.txt
+				
+		sleep 0.5
 		
-		#~ # cat bitstream to null device, otherwise the kernel module will fail 
-		#~ cat "$( < blake2b.txt )" > /dev/null
+		# read fft output into file
+		cat /proc/fourier_transform > xfft_fixed_output.txt
 		
-		#~ # echo bitstream to blake2b kernel module
-		#~ echo "$( < blake2b.txt )" > /proc/blake2b
+		# delete input file
+		if [ -f xfft_fixed_input.txt ]; then
+			rm xfft_fixed_input.txt
+		fi
 		
-		#~ # wait for hash to complete
-		#~ sleep 0.1
+		echo "fourier transformation done." > /dev/kmsg
+	fi
+	
+	###################################################################
+	
+	# control for Fully pipelined integer unscaled FFT
+	if [ -f "intfftk_input.txt" ]; then
+		echo "intfftk_input.txt exists." > /dev/kmsg
 		
-		#~ # read blake2b kernel module
-		#~ cat /proc/blake2b > $Filepath/tmp.txt
+		while read line; do
+			# read each line from file
+			# and forward it to the fourier_transform module
+			echo $line > /proc/fourier_transform
+		done < intfftk_input.txt
+				
+		sleep 0.5
 		
-		#~ # check if hash is written
-		#~ isInFile=$(cat tmp.txt | grep -c "$emptyhash")
+		# read fft output into file
+		cat /proc/fourier_transform > intfftk_output.txt
+		
+		# delete input file
+		if [ -f intfftk_input.txt ]; then
+			rm intfftk_input.txt
+		fi
+		
+		echo "fourier transformation done." > /dev/kmsg
+	fi
+	
+	###################################################################
+	
+	# control for Integer unscaled Radix-2 Single Path Delay Feedback FFT
+	if [ -f "intfft_spdf_input.txt" ]; then
+		echo "intfft_spdf_input.txt exists." > /dev/kmsg
+		
+		while read line; do
+			# read each line from file
+			# and forward it to the fourier_transform module
+			echo $line > /proc/fourier_transform
+		done < intfft_spdf_input.txt
+				
+		sleep 0.5
+		
+		# read fft output into file
+		cat /proc/fourier_transform > intfft_spdf_output.txt
+		
+		# delete input file
+		if [ -f intfft_spdf_input.txt ]; then
+			rm intfft_spdf_input.txt
+		fi
+		
+		echo "fourier transformation done." > /dev/kmsg
+	fi
+	
+	###################################################################
+	
+	# control for Generic Pipelined FFT
+	if [ -f "dblclkfft_input.txt" ]; then
+		echo "dblclkfft_input.txt exists." > /dev/kmsg
+		
+		while read line; do
+			# read each line from file
+			# and forward it to the fourier_transform module
+			echo $line > /proc/fourier_transform
+		done < dblclkfft_input.txt
+				
+		sleep 0.5
+		
+		# read fft output into file
+		cat /proc/fourier_transform > dblclkfft_output.txt
+		
+		# delete input file
+		if [ -f dblclkfft_input.txt ]; then
+			rm dblclkfft_input.txt
+		fi
+		
+		echo "fourier transformation done." > /dev/kmsg
+	fi
+	
+	###################################################################
 
 		#~ while [ $isInFile -ne 0 ]; do
 			#~ # wait for hash to complete
