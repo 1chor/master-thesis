@@ -12,7 +12,7 @@ repositories = [
         "Changelog": ["25.02.2021 Primary release"],
         "File": "xdft.bin",
         "Date": "25.02.2021",
-        "Checksum": "24f25f3fb997ee444fc162108267d6cfd040380af4e2b559c0f50da5b9eb3501f48cd567eb0161f91212624b47c628cfc82305c7a6ad47ee1bfab01a15ae9d5dzcu102"
+        "Checksum": "24f25f3fb997ee444fc162108267d6cfd040380af4e2b559c0f50da5b9eb3501f48cd567eb0161f91212624b47c628cfc82305c7a6ad47ee1bfab01a15ae9d5d"
     },
     
 	{
@@ -23,7 +23,7 @@ repositories = [
         "Changelog": ["25.02.2021 Primary release"],
         "File": "xfft.bin",
         "Date": "25.02.2021",
-        "Checksum": "93ad6fba86110791dc1158a868030e1d19c30130d4d962df8fa519ab552b34c6742b5f0abb7b0246b9e06eea2228385f057611bd35aff61cc9735307296b51e2zcu102"
+        "Checksum": "93ad6fba86110791dc1158a868030e1d19c30130d4d962df8fa519ab552b34c6742b5f0abb7b0246b9e06eea2228385f057611bd35aff61cc9735307296b51e2"
     },
     
     {
@@ -34,7 +34,7 @@ repositories = [
         "Changelog": ["25.02.2021 Primary release"],
         "File": "xfft-fixed.bin",
         "Date": "25.02.2021",
-        "Checksum": "8717db9c1ca38549470c76a1b613214d9fbd885bd53606378126dd01eb501613f5e97fc59fda34e9032beb642ba2b11ff7448c9665e484e85f560bc661d5ad48zcu102"
+        "Checksum": "8717db9c1ca38549470c76a1b613214d9fbd885bd53606378126dd01eb501613f5e97fc59fda34e9032beb642ba2b11ff7448c9665e484e85f560bc661d5ad48"
     },
         
     {
@@ -45,7 +45,7 @@ repositories = [
         "Changelog": ["25.02.2021 Primary release"],
         "File": "intfftk.bin",
         "Date": "25.02.2021",
-        "Checksum": "f00056cd8b41006a477193c8b9ee2c06d9d7e6346aa2ccb90588a25fb306c1b14e945f07a8c9d8c6d90574f5a5f2af3640a8a699880f26569fc9e1e91a2e51a6zcu102"
+        "Checksum": "f00056cd8b41006a477193c8b9ee2c06d9d7e6346aa2ccb90588a25fb306c1b14e945f07a8c9d8c6d90574f5a5f2af3640a8a699880f26569fc9e1e91a2e51a6"
     },
     
     {
@@ -56,7 +56,7 @@ repositories = [
         "Changelog": ["25.02.2021 Primary release"],
         "File": "intfft_spdf.bin",
         "Date": "25.02.2021",
-        "Checksum": "fe844e4d0b589abd22896fb6a78d581366d323426642b3d83c284104600478c2b2b1c6815d82fe7862cde7b6cde0cd21b13fc1435139970893d93ef9b70a7357zcu102"
+        "Checksum": "fe844e4d0b589abd22896fb6a78d581366d323426642b3d83c284104600478c2b2b1c6815d82fe7862cde7b6cde0cd21b13fc1435139970893d93ef9b70a7357"
     },
     
     {
@@ -67,7 +67,7 @@ repositories = [
         "Changelog": ["25.02.2021 Primary release"],
         "File": "dblclkfft.bin",
         "Date": "25.02.2021",
-        "Checksum": "79b7a77dc5e192929902ea60682cd33285c89246462793f441f4b16b91fe44f2f6f3b918106ba5db3f885e7558c546887a5b910f1b79b88b021e413e46e69389zcu102"
+        "Checksum": "79b7a77dc5e192929902ea60682cd33285c89246462793f441f4b16b91fe44f2f6f3b918106ba5db3f885e7558c546887a5b910f1b79b88b021e413e46e69389"
     },
     
     {
