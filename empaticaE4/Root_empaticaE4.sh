@@ -181,24 +181,47 @@ while [ 1 ]; do
 	fi
 	
 	###################################################################
+		
+	# control for blake2b
+	if [ -f "blake2b.txt" ]; then
+		echo "blake2b.txt exists." > /dev/kmsg
+		rm hash.txt
+				
+		# cat bitstream to null device, otherwise the kernel module will fail 
+		cat "$( < blake2b.txt )" > /dev/null
+		
+		# echo bitstream to blake2b kernel module
+		echo "$( < blake2b.txt )" > /proc/blake2b
+		
+		# wait for hash to complete
+		sleep 0.1
+		
+		# read blake2b kernel module
+		cat /proc/blake2b > tmp.txt
+		
+		# check if hash is written
+		isInFile=$(cat tmp.txt | grep -c "$emptyhash")
 
-		#~ while [ $isInFile -ne 0 ]; do
-			#~ # wait for hash to complete
-			#~ sleep 0.05
+		while [ $isInFile -ne 0 ]; do
+			# wait for hash to complete
+			sleep 0.05
 			
-			#~ # read blake2b kernel module
-			#~ cat /proc/blake2b > $Filepath/tmp.txt
+			# read blake2b kernel module
+			cat /proc/blake2b > tmp.txt
 		
-			#~ # check if hash is written
-			#~ isInFile=$(cat tmp.txt | grep -c "$emptyhash")
-		#~ done
+			# check if hash is written
+			isInFile=$(cat tmp.txt | grep -c "$emptyhash")
+		done
 			
-		#~ cp tmp.txt hash.txt 
+		cp tmp.txt hash.txt 
 		
-		#~ rm $Filepath/blake2b.txt
+		rm tmp.txt
+		rm blake2b.txt
 		
-		#~ echo "blake2b operation done." > /dev/kmsg
-	#~ fi
+		echo "blake2b operation done." > /dev/kmsg
+	fi
+	
+	###################################################################
 	
 	# control for partial reconfiguration
 	#~ if [ -f "$Filepath/partial.txt" ]; then
