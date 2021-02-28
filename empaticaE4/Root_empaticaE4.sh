@@ -224,35 +224,63 @@ while [ 1 ]; do
 	###################################################################
 	
 	# control for partial reconfiguration
-	#~ if [ -f "$Filepath/partial.txt" ]; then
-		#~ echo "partial.txt exists." > /dev/kmsg
+	if [ -f "partial.txt" ]; then
+		echo "partial.txt exists." > /dev/kmsg
 		
-		#~ # set variables
-		#~ bitpath="$( < partial.txt )"
-		#~ echo $bitpath > /dev/null
-		#~ bit=${bitpath##*/}
-		#~ echo $bit > /dev/null
+		# set variables
+		bitpath="$( < partial.txt )"
+		echo $bitpath > /dev/null
+		bit=${bitpath##*/}
+		echo $bit > /dev/null
 		
-		#~ # set flags for partial bitstream
-		#~ echo 1 > /sys/class/fpga_manager/fpga0/flags
+		# set flags for partial bitstream
+		echo 1 > /sys/class/fpga_manager/fpga0/flags
 		
-		#~ # load partial bitstream
-		#~ cp $bitpath /lib/firmware
-		#~ echo $bit > /sys/class/fpga_manager/fpga0/firmware
+		# load partial bitstream
+		cp $bitpath /lib/firmware
+		echo $bit > /sys/class/fpga_manager/fpga0/firmware
 		
-		#~ # control LEDs dependent on the filter reconfigured
-		#~ if [ $bit = "blue_filter.bin" ]; then 
-			#~ echo 0x03 > /proc/myled
-		#~ elif [ $bit = "green_filter.bin" ]; then 
-			#~ echo 0x18 > /proc/myled
-		#~ elif [ $bit = "red_filter.bin" ]; then 
-			#~ echo 0C0 > /proc/myled
-		#~ else
-			#~ echo 0x00 > /proc/myled
-		#~ fi
+		# read status of fpga manager
+		state = "$(cat /sys/class/fpga_manager/fpga0/state)"
+
+		while [ $state != "operating" ]; do # wait until configuration is completed
+			# wait for hash to complete
+			sleep 0.01
+			
+			# read status of fpga manager
+			state = "$(cat /sys/class/fpga_manager/fpga0/state)"
+		done 
+		
+		# unload fourier_transform kernel module
+		rmmod fourier_transform
+		
+		# load fourier_transform module with defined size 
+		# control LEDs dependent on the filter reconfigured
+		if [ $bit = "xdft.bin" ]; then 
+			insmod /data/modules/fourier_transform.ko FT_SIZE=108
+			echo 0x01 > /proc/myled
+		elif [ $bit = "xfft.bin" ]; then 
+			insmod /data/modules/fourier_transform.ko FT_SIZE=128
+			echo 0x02 > /proc/myled
+		elif [ $bit = "xfft-fixed.bin" ]; then 
+			insmod /data/modules/fourier_transform.ko FT_SIZE=128
+			echo 004 > /proc/myled
+		elif [ $bit = "intfftk.bin" ]; then 
+			insmod /data/modules/fourier_transform.ko FT_SIZE=128
+			echo 008 > /proc/myled
+		elif [ $bit = "intfft_spdf.bin" ]; then 
+			insmod /data/modules/fourier_transform.ko FT_SIZE=128
+			echo 010 > /proc/myled
+		elif [ $bit = "dblclkfft.bin" ]; then 
+			insmod /data/modules/fourier_transform.ko FT_SIZE=128
+			echo 020 > /proc/myled
+		else
+			insmod /data/modules/fourier_transform.ko FT_SIZE=128 #default size
+			echo 0x00 > /proc/myled
+		fi
 		 
-		#~ rm $Filepath/partial.txt
+		rm partial.txt
 		
-		#~ echo "partial operation done." > /dev/kmsg
-	#~ fi		
+		echo "partial operation done." > /dev/kmsg
+	fi		
 done
