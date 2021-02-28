@@ -36,10 +36,10 @@ public class FabricManager {
      * @param driver   replace with "/proc/blake2b"
      * @return
      */
-        Runnable getHash = new Runnable() {
-            @Override
-            public void run() {
     byte[] calculateHashFromFile(final String filename, final String driver, final String hash) {
+//        Runnable getHash = new Runnable() {
+//            @Override
+//            public void run() {
                 try {
                     // open device driver
                     RandomAccessFile hashDriver = new RandomAccessFile(driver, "rws"); // will be replaced with the device driver
@@ -69,10 +69,10 @@ public class FabricManager {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
-        };
+//            }
+//        };
 
-        mHandler.post(getHash);
+//        mHandler.post(getHash);
 
         return buffer;
     }
