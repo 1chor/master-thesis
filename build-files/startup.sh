@@ -55,7 +55,7 @@ echo > /dev/kmsg # empty line
 
 #remount filesystem rw
 chmod 777 data
-mount -o rw,remount -t auto /data
+mount -o rw,remount -t auto /
 
 echo > /dev/kmsg # empty line
 
