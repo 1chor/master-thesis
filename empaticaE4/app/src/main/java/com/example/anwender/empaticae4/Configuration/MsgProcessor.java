@@ -14,8 +14,6 @@ public class MsgProcessor {
     private List<String> changelogList = new ArrayList<String>();
 
     public void process(JSONObject json) {
-        StringBuilder sb = new StringBuilder();
-
         try {
             String index = json.getString(Constants.JSON.INDEX);
             String title = json.getString(Constants.JSON.TITLE);
