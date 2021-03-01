@@ -185,11 +185,6 @@ while [ 1 ]; do
 	# control for blake2b
 	if [ -f "blake2b.txt" ]; then
 		echo "blake2b.txt exists." > /dev/kmsg
-		
-		# delete hash file
-		if [ -f hash.txt ]; then
-			rm hash.txt
-		fi
 				
 		# cat bitstream to null device, otherwise the kernel module will fail 
 		cat "$( < blake2b.txt )" > /dev/null

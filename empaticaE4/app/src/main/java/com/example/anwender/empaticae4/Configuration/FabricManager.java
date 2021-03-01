@@ -66,6 +66,9 @@ public class FabricManager {
                     hashDriver.close();
                     hashResult.close();
 
+                    //delete hash file, not needed anymore
+                    file.delete();
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
