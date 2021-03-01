@@ -38,7 +38,7 @@ public class MsgProcessor {
             // compare version if there is already a firmware installed
             if (config.get(Constants.JSON.INDEX) != null) {
                 // if new; init download
-                mCallback.onUpdateAvailable(temp);
+                //mCallback.onUpdateAvailable(temp);
 
                 if (index.equals(config.get(Constants.JSON.INDEX))) { //when INDEX is the same check the version
                     if (Integer.parseInt(version) > Integer.parseInt(config.get(Constants.JSON.VERSION))) {
