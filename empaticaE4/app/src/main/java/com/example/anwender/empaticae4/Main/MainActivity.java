@@ -41,6 +41,7 @@ import com.empatica.empalink.config.EmpaStatus;
 import com.empatica.empalink.delegate.EmpaDataDelegate;
 import com.empatica.empalink.delegate.EmpaStatusDelegate;
 import com.example.anwender.empaticae4.Configuration.ConfigActivity;
+import com.example.anwender.empaticae4.Configuration.Timer;
 import com.example.anwender.empaticae4.EWS.RRScore;
 import com.example.anwender.empaticae4.EWS.SBP;
 import com.example.anwender.empaticae4.HttpUpload.FileUpload;
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
     static public List<Integer> hrHistScore = new ArrayList<>();
     static public List<Entry> ewsScores = new ArrayList<>();
 
+    static public Timer mTimer;
 
     static public ArrayList<String> XGraphValues = new ArrayList<>();
     static public float timestp;
@@ -179,6 +181,8 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
             //Initialize the device manager to communicate with the E4
             //initEmpaticaDeviceManager();
         */
+
+        mTimer = new Timer(getApplicationContext());
     }
 
     private  void initializeLayout(){
@@ -398,8 +402,10 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                             //Set progress bar
                             progressBar.setProgress((progress * 100) / max);
 
-                            if ( progressBar.getProgress() == progressBar.getMax())
-                                Utility.toastie(getApplicationContext(),"RR Test finished!");
+                            if ( progressBar.getProgress() == progressBar.getMax()) {
+                                Utility.toastie(getApplicationContext(), "RR Test finished!");
+                                mTimer.toastie(ConfigActivity.repo_name + " transform");
+                            }
                         }
                     });
                 }
@@ -1029,6 +1035,4 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
         }
         save_hist++;
     }
-
-
 }
