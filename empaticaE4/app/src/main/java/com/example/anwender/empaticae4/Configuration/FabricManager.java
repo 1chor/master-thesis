@@ -34,45 +34,39 @@ public class FabricManager {
      * @return
      */
     byte[] calculateHashFromFile(final String filename, final String driver, final String hash) {
-//        Runnable getHash = new Runnable() {
-//            @Override
-//            public void run() {
+
+        try {
+            // open device driver
+            RandomAccessFile hashDriver = new RandomAccessFile(driver, "rws"); // will be replaced with the device driver
+            // write absolute bitstream filepath to device driver
+            hashDriver.writeChars(filename);
+
+            //wait until hash file exists (hash ready)
+            File file = new File(hash);
+            while (!file.exists()) {
                 try {
-                    // open device driver
-                    RandomAccessFile hashDriver = new RandomAccessFile(driver, "rws"); // will be replaced with the device driver
-                    // write absolute bitstream filepath to device driver
-                    hashDriver.writeChars(filename);
-
-                    //wait until hash file exists (hash ready)
-                    File file = new File(hash);
-                    while (!file.exists()) {
-                        try {
-                            //Thread.Sleep(1000);
-                            java.lang.Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    RandomAccessFile hashResult = new RandomAccessFile(hash, "r");
-
-                    //read the calculated HASH
-                    hashResult.read(buffer, 0, 128);
-
-                    // release driver
-                    hashDriver.close();
-                    hashResult.close();
-
-                    //delete hash file, not needed anymore
-                    file.delete();
-
-                } catch (IOException e) {
+                    //Thread.Sleep(1000);
+                    java.lang.Thread.sleep(1000);
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-//            }
-//        };
+            }
 
-//        mHandler.post(getHash);
+            RandomAccessFile hashResult = new RandomAccessFile(hash, "r");
+
+            //read the calculated HASH
+            hashResult.read(buffer, 0, 128);
+
+            // release driver
+            hashDriver.close();
+            hashResult.close();
+
+            //delete hash file, not needed anymore
+            file.delete();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return buffer;
     }
