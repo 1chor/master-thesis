@@ -12,6 +12,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
@@ -20,7 +21,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -47,8 +47,6 @@ import com.example.anwender.empaticae4.EWS.SBP;
 import com.example.anwender.empaticae4.HttpUpload.FileUpload;
 import com.example.anwender.empaticae4.R;
 import com.github.mikephil.charting.data.Entry;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.text.DecimalFormat;
@@ -83,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
     public static boolean sessionActive = false;                  //Define Session status
     public static String userID;
     public static String startTime;
-
 
     private EmpaDeviceManager deviceManager = null;
     private static EmpaStatus empaStatus;
