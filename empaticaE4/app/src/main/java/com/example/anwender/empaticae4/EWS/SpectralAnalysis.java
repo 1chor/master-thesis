@@ -110,6 +110,8 @@ public class SpectralAnalysis {
 
                     //Write normalised hex string to file (IEEE 754 float single precision format)
                     writeDataToFile(MainActivity.path, xdft_input_file, norm_st);
+
+                    MainActivity.mTimer.setStartTime(); //start Timer
                 }
                 Log.i("Input data", "Created input hex data: " + xdft_input_file + " !");
 
@@ -126,6 +128,8 @@ public class SpectralAnalysis {
 
                 //get FFT results
                 dft = readDataFromFile(MainActivity.path, xdft_output_file, true);
+
+                MainActivity.mTimer.setEndTime(); //End Timer
 
                 //delete output file
                 if (checkFileExists(MainActivity.path, xdft_output_file, true))
@@ -221,6 +225,8 @@ public class SpectralAnalysis {
 
                     //Write hex string to file (IEEE 754 float single precision format)
                     writeDataToFile(MainActivity.path, xfft_input_file, st);
+
+                    MainActivity.mTimer.setStartTime(); //start Timer
                 }
                 Log.i("Input data", "Created input hex data: " + xfft_input_file + " !");
 
@@ -237,6 +243,8 @@ public class SpectralAnalysis {
 
                 //get FFT results
                 dft = readDataFromFile(MainActivity.path, xfft_output_file, false);
+
+                MainActivity.mTimer.setEndTime(); //End Timer
 
                 //delete output file
                 if (checkFileExists(MainActivity.path, xfft_output_file, true))
@@ -344,6 +352,8 @@ public class SpectralAnalysis {
 
                     //Write normalised hex string to file (IEEE 754 float single precision format)
                     writeDataToFile(MainActivity.path, xfft_fixed_input_file, norm_st);
+
+                    MainActivity.mTimer.setStartTime(); //start Timer
                 }
                 Log.i("Input data", "Created input hex data: " + xfft_fixed_input_file + " !");
 
@@ -360,6 +370,8 @@ public class SpectralAnalysis {
 
                 //get FFT results
                 dft = readDataFromFile(MainActivity.path, xfft_fixed_output_file, true);
+
+                MainActivity.mTimer.setEndTime(); //End Timer
 
                 //delete output file
                 if (checkFileExists(MainActivity.path, xfft_fixed_output_file, true))
@@ -467,6 +479,8 @@ public class SpectralAnalysis {
 
                     //Write normalised hex string to file (IEEE 754 float single precision format)
                     writeDataToFile(MainActivity.path, intfftk_input_file, norm_st);
+
+                    MainActivity.mTimer.setStartTime(); //start Timer
                 }
                 Log.i("Input data", "Created input hex data: " + intfftk_input_file + " !");
 
@@ -483,6 +497,8 @@ public class SpectralAnalysis {
 
                 //get FFT results
                 dft = readDataFromFile(MainActivity.path, intfftk_output_file, true);
+
+                MainActivity.mTimer.setEndTime(); //End Timer
 
                 //delete output file
                 if (checkFileExists(MainActivity.path, intfftk_output_file, true))
@@ -591,6 +607,8 @@ public class SpectralAnalysis {
 
                     //Write normalised hex string to file (IEEE 754 float single precision format)
                     writeDataToFile(MainActivity.path, intfft_spdf_input_file, norm_st);
+
+                    MainActivity.mTimer.setStartTime(); //start Timer
                 }
                 Log.i("Input data", "Created input hex data: " + intfft_spdf_input_file + " !");
 
@@ -607,6 +625,8 @@ public class SpectralAnalysis {
 
                 //get FFT results
                 dft = readDataFromFile(MainActivity.path, intfft_spdf_output_file, true);
+
+                MainActivity.mTimer.setEndTime(); //End Timer
 
                 //delete output file
                 if (checkFileExists(MainActivity.path, intfft_spdf_output_file, true))
@@ -715,6 +735,8 @@ public class SpectralAnalysis {
 
                     //Write normalised hex string to file (IEEE 754 float single precision format)
                     writeDataToFile(MainActivity.path, dblclkfft_input_file, norm_st);
+
+                    MainActivity.mTimer.setStartTime(); //start Timer
                 }
                 Log.i("Input data", "Created input hex data: " + dblclkfft_input_file + " !");
 
@@ -731,6 +753,8 @@ public class SpectralAnalysis {
 
                 //get FFT results
                 dft = readDataFromFile(MainActivity.path, dblclkfft_output_file, true);
+
+                MainActivity.mTimer.setEndTime(); //End Timer
 
                 //delete output file
                 if (checkFileExists(MainActivity.path, dblclkfft_output_file, true))
