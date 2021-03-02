@@ -235,6 +235,8 @@ cp ./soc_project.runs/child_2_impl_1/fourier_transform_0_user_logic_inst_ft_wrap
 cp ./soc_project.runs/child_3_impl_1/fourier_transform_0_user_logic_inst_ft_wrapper_0_intfft_spdf_partial.bit generated_bitstreams/intfft_spdf.bit
 #config_dblclkfft
 cp ./soc_project.runs/child_4_impl_1/fourier_transform_0_user_logic_inst_ft_wrapper_0_dblclkfft_partial.bit generated_bitstreams/dblclkfft.bit
+#config_greybox
+cp ./soc_project.runs/child_5_impl_1/fourier_transform_0_user_logic_inst_ft_wrapper_0_greybox_partial.bit generated_bitstreams/greybox.bit
 
 cd ..
 
