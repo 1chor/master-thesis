@@ -29,6 +29,10 @@ public final class Utility {
         Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
     }
 
+    public static void toastie(Context context, String s, int length) {
+        Toast.makeText(context, s, length).show();
+    }
+
     //Check if external Storage can be written to
     public static boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
