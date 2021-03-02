@@ -356,7 +356,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
             public void run() {
                 //final int max = 9297;
                 final int max = 1888; //only one run
-                float bvp = 0;
+                float bvp;
 
                 for (int i = 0; i < max; i++) {
                     final int progress = i + 1;
