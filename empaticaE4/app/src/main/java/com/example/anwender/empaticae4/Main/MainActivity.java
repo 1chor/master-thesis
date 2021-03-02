@@ -401,6 +401,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                             progressBar.setProgress((progress * 100) / max);
 
                             if ( progressBar.getProgress() == progressBar.getMax()) {
+                                flagBVP = false;
                                 Utility.toastie(getApplicationContext(), "RR Test finished!");
                                 mTimer.toastie(ConfigActivity.repo_name + " transform");
                             }
