@@ -25,8 +25,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-// public class ConfigActivity extends AppCompatActivity implements  NetworkManager.Callback, MsgProcessor.Callback, FabricManager.Callback {
-public class ConfigActivity extends AppCompatActivity implements  NetworkManager.Callback, MsgProcessor.Callback {
+public class ConfigActivity extends AppCompatActivity implements  NetworkManager.Callback, MsgProcessor.Callback, FabricManager.Callback {
 
     //classes
     private FragmentManager mFragManager;
@@ -99,8 +98,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         //Initialise classes
         mNetworkFragment = new NetworkManager();
         mMsgProcessor = new MsgProcessor(this);
-//        mFabricManager = new FabricManager(this);
-        mFabricManager = new FabricManager();
+        mFabricManager = new FabricManager(this);
         mFragManager = getSupportFragmentManager();
         mFragManager.beginTransaction().add(mNetworkFragment, "NetworkManager").commit();
 
@@ -354,8 +352,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
     //  FABRIC MANAGER CALLBACKS:
     //--------------------------------------------------------------------------------------------//
 
-//    @Override
-//    public void onFilterApplied() {
-//        //change
-//    }
+    @Override
+    public void onReconfigureFabricDone() {
+    }
 }
