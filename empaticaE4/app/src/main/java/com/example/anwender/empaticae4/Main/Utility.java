@@ -30,7 +30,10 @@ public final class Utility {
     }
 
     public static void toastie(Context context, String s, int length) {
-        Toast.makeText(context, s, length).show();
+        if (length == Toast.LENGTH_SHORT)
+            Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
+        else //default
+            Toast.makeText(context, s, Toast.LENGTH_LONG).show();
     }
 
     //Check if external Storage can be written to
