@@ -41,7 +41,11 @@ public class SpectralAnalysis {
             case "SDFT": //Software DFT
                 this.signalSize = inputSignal.size();
                 this.argConstantPart = (Math.PI * 2) / signalSize;
+
+                MainActivity.mTimer.setStartTime(); //start Timer
                 dft = calculateDFT(inputSignal);
+                MainActivity.mTimer.setEndTime(); //End Timer
+
                 spd = SPD(dft);
                 this.expSPD = spd;
                 this.domF = dominantFrequency(spd);
