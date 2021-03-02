@@ -65,10 +65,10 @@ set REFRESH_$i [get_property NEEDS_REFRESH [get_runs $run]]
 incr i
 } 
 
-if {$STATUS_0 == "route_design Complete!" && $STATUS_1 == "route_design Complete!" && $STATUS_2 == "route_design Complete!" && \
-	$STATUS_3 == "route_design Complete!" && $STATUS_4 == "route_design Complete!" && $STATUS_5 == "route_design Complete!" && \
-	$REFRESH_0 == 0 && $REFRESH_1 == 0 && $REFRESH_2 == 0 && \
-	$REFRESH_3 == 0 && $REFRESH_4 == 0 && $REFRESH_5 == 0} {
+if {$STATUS_0 == "route_design Complete!" && $STATUS_1 == "route_design Complete!" && $STATUS_2 == "route_design Complete!" && $STATUS_3 == "route_design Complete!" && \
+	$STATUS_4 == "route_design Complete!" && $STATUS_5 == "route_design Complete!" && $STATUS_6 == "route_design Complete!" && \
+	$REFRESH_0 == 0 && $REFRESH_1 == 0 && $REFRESH_2 == 0 && $REFRESH_3 == 0 && \
+	$REFRESH_4 == 0 && $REFRESH_5 == 0 && $REFRESH_6 == 0} {
 		
 	puts "\n++++++++++++++++++++++++"
 	puts "++ Generate bitstream ++"
@@ -85,10 +85,10 @@ if {$STATUS_0 == "route_design Complete!" && $STATUS_1 == "route_design Complete
 	}
 	puts "INFO: Generating bitstream done"
 	
-} elseif {$STATUS_0 != "write_bitstream Complete!" || $STATUS_1 != "write_bitstream Complete!" || $STATUS_2 != "write_bitstream Complete!" || \
-		  $STATUS_3 != "write_bitstream Complete!" || $STATUS_4 != "write_bitstream Complete!" || $STATUS_5 != "write_bitstream Complete!" || \
-		  $REFRESH_0 == 1 || $REFRESH_1 == 1 || $REFRESH_2 == 1 || \
-		  $REFRESH_3 == 1 || $REFRESH_4 == 1 || $REFRESH_5 == 1} {
+} elseif {$STATUS_0 != "write_bitstream Complete!" || $STATUS_1 != "write_bitstream Complete!" || $STATUS_2 != "write_bitstream Complete!" || $STATUS_3 != "write_bitstream Complete!" || \
+		  $STATUS_4 != "write_bitstream Complete!" || $STATUS_5 != "write_bitstream Complete!" || $STATUS_6 != "write_bitstream Complete!" || \
+		  $REFRESH_0 == 1 || $REFRESH_1 == 1 || $REFRESH_2 == 1 || $REFRESH_3 == 1 || \
+		  $REFRESH_4 == 1 || $REFRESH_5 == 1 || $REFRESH_6 == 1} {
 			  
 	puts "\n++++++++++++++++++++++++"
 	puts "++ Run implementation ++"
