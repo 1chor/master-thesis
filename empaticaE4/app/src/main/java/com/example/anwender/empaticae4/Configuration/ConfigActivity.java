@@ -125,6 +125,8 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
 
                     if (!download) {
                         enable_hash = checkBoxhash.isChecked(); //check if hash is enabled
+
+                        MainActivity.mTimer.setStartTime(); //start Timer
                         mNetworkFragment.getUpdate();
                     }
                 }
@@ -331,6 +333,8 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         if (valid) {
             if (enable_hash) {
                 mConsole.append("Bitstream verified\r\n");
+                MainActivity.mTimer.setEndTime(); //End Timer
+                printDebug("Hash calculation took " + MainActivity.mTimer.getTimer() + " seconds.");
             } else {
                 mConsole.append("Bitstream not verified, but it continues anyway\r\n");
             }
@@ -354,5 +358,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
 
     @Override
     public void onReconfigureFabricDone() {
+        MainActivity.mTimer.setEndTime(); //End Timer
+        printDebug("Reconfiguration took " + MainActivity.mTimer.getTimer() + " seconds.");
     }
 }
