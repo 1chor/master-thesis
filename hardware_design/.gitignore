@@ -62,3 +62,8 @@ generated_bitstreams/*.bit
 *.sim/
 *.sdk/
 hd_visual/
+
+#########
+#ignore reports folders
+#########
+reports/

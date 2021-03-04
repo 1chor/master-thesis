@@ -33,6 +33,9 @@ compile:
 	gcc -I ./soc_project.sdk/device-tree -E -nostdinc -undef -D__DTS__ -x assembler-with-cpp -o ./soc_project.sdk/device-tree/system-top.dts.tmp ./soc_project.sdk/device-tree/system-top.dts
 	./../mpsoc-linux-xlnx/scripts/dtc/dtc -I dts -O dtb -o ./soc_project.sdk/device-tree/system-top.dtb ./soc_project.sdk/device-tree/system-top.dts.tmp
 	
+report:
+	$(VIVADO) $(VIVADOFLAGS) -source scripts/get_reports.tcl
+
 clean:
 	$(RM) -r ./soc_project.*
 	$(RM) -r ./.Xil
