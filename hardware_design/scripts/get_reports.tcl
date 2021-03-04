@@ -10,6 +10,10 @@ if {[file exists reports] == 0 } {
 	file mkdir reports
 }
 
+# Create subfolders
+file mkdir reports/utilization
+file mkdir reports/power
+
 puts "\n++++++++++++++++++++++++++++++"
 puts "++ Create report for ZCU102 ++"
 puts "++++++++++++++++++++++++++++++\n"
@@ -20,10 +24,10 @@ set filename zcu102
 open_run impl_1
 
 # Create utilization report
-report_utilization -file ./reports/${filename}_utilization.txt -name utilization_1
+report_utilization -file ./reports/utilization/${filename}_utilization.txt -name utilization_1
 
 # Create power report
-report_power -file {./reports/${filename}_power.pwr} -xpe {./reports/${filename}_power.xpe} -name {power_1}
+report_power -file ./reports/power/${filename}_power.pwr -xpe ./reports/power/${filename}_power.xpe -name {power_1}
 
 # Close Design
 close_design
@@ -41,10 +45,10 @@ open_checkpoint ./soc_project.runs/impl_1/fourier_transform_0_user_logic_inst_ft
 create_clock -period 10.001 -name virtclk
 
 # Create utilization report
-report_utilization -file ./reports/${filename}_utilization.txt -name utilization_1
+report_utilization -file ./reports/utilization/${filename}_utilization.txt -name utilization_1
 
 # Create power report
-report_power -file {./reports/${filename}_power.pwr} -xpe {./reports/${filename}_power.xpe} -name {power_1}
+report_power -file ./reports/power/${filename}_power.pwr -xpe ./reports/power/${filename}_power.xpe -name {power_1}
 
 # Close Checkpoint
 close_design
@@ -62,10 +66,10 @@ open_checkpoint ./soc_project.runs/child_0_impl_1/fourier_transform_0_user_logic
 create_clock -period 10.001 -name virtclk
 
 # Create utilization report
-report_utilization -file ./reports/${filename}_utilization.txt -name utilization_1
+report_utilization -file ./reports/utilization/${filename}_utilization.txt -name utilization_1
 
 # Create power report
-report_power -file {./reports/${filename}_power.pwr} -xpe {./reports/${filename}_power.xpe} -name {power_1}
+report_power -file ./reports/power/${filename}_power.pwr -xpe ./reports/power/${filename}_power.xpe -name {power_1}
 
 # Close Checkpoint
 close_design
@@ -83,10 +87,10 @@ open_checkpoint ./soc_project.runs/child_1_impl_1/fourier_transform_0_user_logic
 create_clock -period 10.001 -name virtclk
 
 # Create utilization report
-report_utilization -file ./reports/${filename}_utilization.txt -name utilization_1
+report_utilization -file ./reports/utilization/${filename}_utilization.txt -name utilization_1
 
 # Create power report
-report_power -file {./reports/${filename}_power.pwr} -xpe {./reports/${filename}_power.xpe} -name {power_1}
+report_power -file ./reports/power/${filename}_power.pwr -xpe ./reports/power/${filename}_power.xpe -name {power_1}
 
 # Close Checkpoint
 close_design
@@ -104,10 +108,10 @@ open_checkpoint ./soc_project.runs/child_2_impl_1/fourier_transform_0_user_logic
 create_clock -period 10.001 -name virtclk
 
 # Create utilization report
-report_utilization -file ./reports/${filename}_utilization.txt -name utilization_1
+report_utilization -file ./reports/utilization/${filename}_utilization.txt -name utilization_1
 
 # Create power report
-report_power -file {./reports/${filename}_power.pwr} -xpe {./reports/${filename}_power.xpe} -name {power_1}
+report_power -file ./reports/power/${filename}_power.pwr -xpe ./reports/power/${filename}_power.xpe -name {power_1}
 
 # Close Checkpoint
 close_design
@@ -125,10 +129,10 @@ open_checkpoint ./soc_project.runs/child_3_impl_1/fourier_transform_0_user_logic
 create_clock -period 10.001 -name virtclk
 
 # Create utilization report
-report_utilization -file ./reports/${filename}_utilization.txt -name utilization_1
+report_utilization -file ./reports/utilization/${filename}_utilization.txt -name utilization_1
 
 # Create power report
-report_power -file {./reports/${filename}_power.pwr} -xpe {./reports/${filename}_power.xpe} -name {power_1}
+report_power -file ./reports/power/${filename}_power.pwr -xpe ./reports/power/${filename}_power.xpe -name {power_1}
 
 # Close Checkpoint
 close_design
@@ -146,10 +150,10 @@ open_checkpoint ./soc_project.runs/child_4_impl_1/fourier_transform_0_user_logic
 create_clock -period 10.001 -name virtclk
 
 # Create utilization report
-report_utilization -file ./reports/${filename}_utilization.txt -name utilization_1
+report_utilization -file ./reports/utilization/${filename}_utilization.txt -name utilization_1
 
 # Create power report
-report_power -file {./reports/${filename}_power.pwr} -xpe {./reports/${filename}_power.xpe} -name {power_1}
+report_power -file ./reports/power/${filename}_power.pwr -xpe ./reports/power/${filename}_power.xpe -name {power_1}
 
 # Close Checkpoint
 close_design
@@ -167,10 +171,10 @@ open_checkpoint ./soc_project.runs/child_5_impl_1/fourier_transform_0_user_logic
 create_clock -period 10.001 -name virtclk
 
 # Create utilization report
-report_utilization -file ./reports/${filename}_utilization.txt -name utilization_1
+report_utilization -file ./reports/utilization/${filename}_utilization.txt -name utilization_1
 
 # Create power report
-report_power -file {./reports/${filename}_power.pwr} -xpe {./reports/${filename}_power.xpe} -name {power_1}
+report_power -file ./reports/power/${filename}_power.pwr -xpe ./reports/power/${filename}_power.xpe -name {power_1}
 
 # Close Checkpoint
 close_design
