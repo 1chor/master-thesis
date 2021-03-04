@@ -1,0 +1,422 @@
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.1 (lin64) Build 2188600 Wed Apr  4 18:39:19 MDT 2018
+| Date         : Thu Mar  4 10:18:30 2021
+| Host         : soc running 64-bit Ubuntu 18.04.5 LTS
+| Command      : report_drc -file fourier_transform_v1_0_drc_routed.rpt -pb fourier_transform_v1_0_drc_routed.pb -rpx fourier_transform_v1_0_drc_routed.rpx
+| Design       : fourier_transform_v1_0
+| Device       : xczu9eg-ffvb1156-2-e
+| Speed File   : -2
+| Design State : Routed
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 76
++-----------+------------------+---------------------------------------------------------------------+------------+
+| Rule      | Severity         | Description                                                         | Violations |
++-----------+------------------+---------------------------------------------------------------------+------------+
+| NSTD-1    | Critical Warning | Unspecified I/O Standard                                            | 1          |
+| UCIO-1    | Critical Warning | Unconstrained Logical Port                                          | 1          |
+| PDRC-153  | Warning          | Gated clock check                                                   | 2          |
+| AVAL-155  | Advisory         | enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND | 34         |
+| AVAL-156  | Advisory         | enum_USE_MULT_NONE__enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND    | 16         |
+| REQP-1701 | Advisory         | enum_DREG_0_connects_CED_GND                                        | 16         |
+| REQP-1857 | Advisory         | RAMB18E2_writefirst_collision_advisory                              | 6          |
++-----------+------------------+---------------------------------------------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+NSTD-1#1 Critical Warning
+Unspecified I/O Standard  
+122 out of 122 logical ports use I/O standard (IOSTANDARD) value 'DEFAULT', instead of a user assigned specific value. This may cause I/O contention or incompatibility with the board power or connectivity affecting performance, signal integrity or in extreme cases cause damage to the device or the components to which it is connected. To correct this violation, specify all I/O standards. This design will fail to generate a bitstream unless all logical ports have a user specified I/O standard value defined. To allow bitstream creation with unspecified I/O standard values (not recommended), use this command: set_property SEVERITY {Warning} [get_drc_checks NSTD-1].  NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for write_bitstream step for the implementation run. Problem ports: s00_axi_araddr[0], s00_axi_awaddr[0], s00_axi_bresp[1:0], s00_axi_rdata[63:0], s00_axi_rresp[1:0], s00_axi_wdata[31], s00_axi_wdata[30], s00_axi_wdata[29], s00_axi_wdata[28], s00_axi_wdata[27], s00_axi_wdata[26], s00_axi_wdata[25], s00_axi_wdata[24], s00_axi_wdata[23], s00_axi_wdata[22] (the first 15 of 50 listed).
+Related violations: <none>
+
+UCIO-1#1 Critical Warning
+Unconstrained Logical Port  
+122 out of 122 logical ports have no user assigned specific location constraint (LOC). This may cause I/O contention or incompatibility with the board power or connectivity affecting performance, signal integrity or in extreme cases cause damage to the device or the components to which it is connected. To correct this violation, specify all pin locations. This design will fail to generate a bitstream unless all logical ports have a user specified site LOC constraint defined.  To allow bitstream creation with unspecified pin locations (not recommended), use this command: set_property SEVERITY {Warning} [get_drc_checks UCIO-1].  NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for write_bitstream step for the implementation run.  Problem ports: s00_axi_araddr[0], s00_axi_awaddr[0], s00_axi_bresp[1:0], s00_axi_rdata[63:0], s00_axi_rresp[1:0], s00_axi_wdata[31], s00_axi_wdata[30], s00_axi_wdata[29], s00_axi_wdata[28], s00_axi_wdata[27], s00_axi_wdata[26], s00_axi_wdata[25], s00_axi_wdata[24], s00_axi_wdata[23], s00_axi_wdata[22] (the first 15 of 50 listed).
+Related violations: <none>
+
+PDRC-153#1 Warning
+Gated clock check  
+Net user_logic_inst/ft_wrapper_0/exp_reg[7]_i_1_n_1 is a gated clock net sourced by a combinational pin user_logic_inst/ft_wrapper_0/exp_reg[7]_i_1/O, cell user_logic_inst/ft_wrapper_0/exp_reg[7]_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#2 Warning
+Gated clock check  
+Net user_logic_inst/ft_wrapper_0/n_0_151_BUFG_inst_n_1 is a gated clock net sourced by a combinational pin user_logic_inst/ft_wrapper_0/n_0_151_BUFG_inst_i_1/O, cell user_logic_inst/ft_wrapper_0/n_0_151_BUFG_inst_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+AVAL-155#1 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/FB_1.BF_1/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e_simd.bf_dsp48e_simd_bypass/A_ir: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#2 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/FB_1.BF_1/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e_simd.bf_dsp48e_simd_bypass/B_ir: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#3 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[0].appDSP[0].bppDSP[0].u_l[0].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#4 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[0].appDSP[0].bppDSP[0].u_l[1].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#5 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[0].appDSP[0].bppDSP[1].u_l[0].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#6 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[1].appDSP[0].bppDSP[0].u_l[0].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#7 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[1].appDSP[0].bppDSP[0].u_l[1].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#8 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[1].appDSP[0].bppDSP[1].u_l[0].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#9 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/hasbf2.FB_2.BF_2/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e.bf_dsp48e_bypass/A_i: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#10 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/hasbf2.FB_2.BF_2/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e.bf_dsp48e_bypass/A_r: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#11 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/hasbf2.FB_2.BF_2/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e.bf_dsp48e_bypass/B_i: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#12 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/hasbf2.FB_2.BF_2/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e.bf_dsp48e_bypass/B_r: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#13 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.A: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#14 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.B: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#15 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[0].appDSP[0].bppDSP[0].u_l[0].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#16 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[0].appDSP[0].bppDSP[0].u_l[1].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#17 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[0].appDSP[0].bppDSP[1].u_l[0].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#18 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[1].appDSP[0].bppDSP[0].u_l[0].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#19 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[1].appDSP[0].bppDSP[0].u_l[1].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#20 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[1].appDSP[0].bppDSP[1].u_l[0].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#21 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/hasbf2.FW_2.BF_2/dsp48s.dsps_only.vx5_dsp48es.A: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#22 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/hasbf2.FW_2.BF_2/dsp48s.dsps_only.vx5_dsp48es.B: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#23 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.A: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#24 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.B: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#25 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[0].appDSP[0].bppDSP[0].u_l[0].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#26 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[0].appDSP[0].bppDSP[0].u_l[1].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#27 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[0].appDSP[0].bppDSP[1].u_l[0].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#28 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[1].appDSP[0].bppDSP[0].u_l[0].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#29 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[1].appDSP[0].bppDSP[0].u_l[1].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#30 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/has_TW_mult.MULT/i_cmpy/four_mult_structure.use_dsp.i_dsp/re_im/use_DSP48.qDSP[1].appDSP[0].bppDSP[1].u_l[0].use_dsp48e2.dsp: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#31 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/hasbf2.FW_2.BF_2/dsp48s.dsps_only.vx5_dsp48es.A: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#32 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/hasbf2.FW_2.BF_2/dsp48s.dsps_only.vx5_dsp48es.B: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#33 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[3].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.A: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-155#34 Advisory
+enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[3].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.B: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-156#1 Advisory
+enum_USE_MULT_NONE__enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/FB_1.BF_1/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e_simd.bf_dsp48e_simd_bypass/A_ir: DSP48E2 is not using the Multiplier (USE_MULT = NONE). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-156#2 Advisory
+enum_USE_MULT_NONE__enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/FB_1.BF_1/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e_simd.bf_dsp48e_simd_bypass/B_ir: DSP48E2 is not using the Multiplier (USE_MULT = NONE). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-156#3 Advisory
+enum_USE_MULT_NONE__enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/hasbf2.FB_2.BF_2/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e.bf_dsp48e_bypass/A_i: DSP48E2 is not using the Multiplier (USE_MULT = NONE). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-156#4 Advisory
+enum_USE_MULT_NONE__enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/hasbf2.FB_2.BF_2/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e.bf_dsp48e_bypass/A_r: DSP48E2 is not using the Multiplier (USE_MULT = NONE). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-156#5 Advisory
+enum_USE_MULT_NONE__enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/hasbf2.FB_2.BF_2/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e.bf_dsp48e_bypass/B_i: DSP48E2 is not using the Multiplier (USE_MULT = NONE). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-156#6 Advisory
+enum_USE_MULT_NONE__enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/hasbf2.FB_2.BF_2/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e.bf_dsp48e_bypass/B_r: DSP48E2 is not using the Multiplier (USE_MULT = NONE). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-156#7 Advisory
+enum_USE_MULT_NONE__enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.A: DSP48E2 is not using the Multiplier (USE_MULT = NONE). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-156#8 Advisory
+enum_USE_MULT_NONE__enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.B: DSP48E2 is not using the Multiplier (USE_MULT = NONE). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-156#9 Advisory
+enum_USE_MULT_NONE__enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/hasbf2.FW_2.BF_2/dsp48s.dsps_only.vx5_dsp48es.A: DSP48E2 is not using the Multiplier (USE_MULT = NONE). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-156#10 Advisory
+enum_USE_MULT_NONE__enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/hasbf2.FW_2.BF_2/dsp48s.dsps_only.vx5_dsp48es.B: DSP48E2 is not using the Multiplier (USE_MULT = NONE). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-156#11 Advisory
+enum_USE_MULT_NONE__enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.A: DSP48E2 is not using the Multiplier (USE_MULT = NONE). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-156#12 Advisory
+enum_USE_MULT_NONE__enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.B: DSP48E2 is not using the Multiplier (USE_MULT = NONE). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-156#13 Advisory
+enum_USE_MULT_NONE__enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/hasbf2.FW_2.BF_2/dsp48s.dsps_only.vx5_dsp48es.A: DSP48E2 is not using the Multiplier (USE_MULT = NONE). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-156#14 Advisory
+enum_USE_MULT_NONE__enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/hasbf2.FW_2.BF_2/dsp48s.dsps_only.vx5_dsp48es.B: DSP48E2 is not using the Multiplier (USE_MULT = NONE). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-156#15 Advisory
+enum_USE_MULT_NONE__enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[3].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.A: DSP48E2 is not using the Multiplier (USE_MULT = NONE). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+AVAL-156#16 Advisory
+enum_USE_MULT_NONE__enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[3].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.B: DSP48E2 is not using the Multiplier (USE_MULT = NONE). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+Related violations: <none>
+
+REQP-1701#1 Advisory
+enum_DREG_0_connects_CED_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/FB_1.BF_1/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e_simd.bf_dsp48e_simd_bypass/A_ir: When the DSP48E2 DREG attribute is set to 0, the CED input pin should be tied to GND to save power.
+Related violations: <none>
+
+REQP-1701#2 Advisory
+enum_DREG_0_connects_CED_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/FB_1.BF_1/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e_simd.bf_dsp48e_simd_bypass/B_ir: When the DSP48E2 DREG attribute is set to 0, the CED input pin should be tied to GND to save power.
+Related violations: <none>
+
+REQP-1701#3 Advisory
+enum_DREG_0_connects_CED_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/hasbf2.FB_2.BF_2/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e.bf_dsp48e_bypass/A_i: When the DSP48E2 DREG attribute is set to 0, the CED input pin should be tied to GND to save power.
+Related violations: <none>
+
+REQP-1701#4 Advisory
+enum_DREG_0_connects_CED_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/hasbf2.FB_2.BF_2/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e.bf_dsp48e_bypass/A_r: When the DSP48E2 DREG attribute is set to 0, the CED input pin should be tied to GND to save power.
+Related violations: <none>
+
+REQP-1701#5 Advisory
+enum_DREG_0_connects_CED_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/hasbf2.FB_2.BF_2/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e.bf_dsp48e_bypass/B_i: When the DSP48E2 DREG attribute is set to 0, the CED input pin should be tied to GND to save power.
+Related violations: <none>
+
+REQP-1701#6 Advisory
+enum_DREG_0_connects_CED_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/hasbf2.FB_2.BF_2/BTFLY0/dsp48_bfly_byp.bfly_dsp48_byp/dsp48e.bf_dsp48e_bypass/B_r: When the DSP48E2 DREG attribute is set to 0, the CED input pin should be tied to GND to save power.
+Related violations: <none>
+
+REQP-1701#7 Advisory
+enum_DREG_0_connects_CED_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.A: When the DSP48E2 DREG attribute is set to 0, the CED input pin should be tied to GND to save power.
+Related violations: <none>
+
+REQP-1701#8 Advisory
+enum_DREG_0_connects_CED_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.B: When the DSP48E2 DREG attribute is set to 0, the CED input pin should be tied to GND to save power.
+Related violations: <none>
+
+REQP-1701#9 Advisory
+enum_DREG_0_connects_CED_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/hasbf2.FW_2.BF_2/dsp48s.dsps_only.vx5_dsp48es.A: When the DSP48E2 DREG attribute is set to 0, the CED input pin should be tied to GND to save power.
+Related violations: <none>
+
+REQP-1701#10 Advisory
+enum_DREG_0_connects_CED_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[1].natural_order_input.PE/hasbf2.FW_2.BF_2/dsp48s.dsps_only.vx5_dsp48es.B: When the DSP48E2 DREG attribute is set to 0, the CED input pin should be tied to GND to save power.
+Related violations: <none>
+
+REQP-1701#11 Advisory
+enum_DREG_0_connects_CED_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.A: When the DSP48E2 DREG attribute is set to 0, the CED input pin should be tied to GND to save power.
+Related violations: <none>
+
+REQP-1701#12 Advisory
+enum_DREG_0_connects_CED_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.B: When the DSP48E2 DREG attribute is set to 0, the CED input pin should be tied to GND to save power.
+Related violations: <none>
+
+REQP-1701#13 Advisory
+enum_DREG_0_connects_CED_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/hasbf2.FW_2.BF_2/dsp48s.dsps_only.vx5_dsp48es.A: When the DSP48E2 DREG attribute is set to 0, the CED input pin should be tied to GND to save power.
+Related violations: <none>
+
+REQP-1701#14 Advisory
+enum_DREG_0_connects_CED_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[2].natural_order_input.PE/hasbf2.FW_2.BF_2/dsp48s.dsps_only.vx5_dsp48es.B: When the DSP48E2 DREG attribute is set to 0, the CED input pin should be tied to GND to save power.
+Related violations: <none>
+
+REQP-1701#15 Advisory
+enum_DREG_0_connects_CED_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[3].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.A: When the DSP48E2 DREG attribute is set to 0, the CED input pin should be tied to GND to save power.
+Related violations: <none>
+
+REQP-1701#16 Advisory
+enum_DREG_0_connects_CED_GND  
+user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[3].natural_order_input.PE/FW_1.BF_1/dsp48s.dsps_only.vx5_dsp48es.B: When the DSP48E2 DREG attribute is set to 0, the CED input pin should be tied to GND to save power.
+Related violations: <none>
+
+REQP-1857#1 Advisory
+RAMB18E2_writefirst_collision_advisory  
+Synchronous clocking is detected for BRAM (user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/has_bit_reverse.dig_rev_mem/blk_ram.use_bram_only.mem/depths_3to9.ram_loop[0].use_RAMB18.SDP_RAMB18E1_36x512) in SDP mode with WRITE_FIRST write-mode. It is strongly suggested to change this mode to NO_CHANGE for best power characteristics. However, both WRITE_FIRST and NO_CHANGE may exhibit address collisions if the same address appears on both read and write ports resulting in unknown or corrupted read data. It is suggested to confirm via simulation that an address collision never occurs and if so it is suggested to try and avoid this situation. If address collisions cannot be avoided, the write-mode may be set to READ_FIRST which guarantees that the read data is the prior contents of the memory at the cost of additional power in the design. See the FPGA Memory Resources User Guide for additional information.
+Related violations: <none>
+
+REQP-1857#2 Advisory
+RAMB18E2_writefirst_collision_advisory  
+Synchronous clocking is detected for BRAM (user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/has_bit_reverse.dig_rev_mem/blk_ram.use_bram_only.mem/depths_3to9.ram_loop[1].use_RAMB18.SDP_RAMB18E1_36x512) in SDP mode with WRITE_FIRST write-mode. It is strongly suggested to change this mode to NO_CHANGE for best power characteristics. However, both WRITE_FIRST and NO_CHANGE may exhibit address collisions if the same address appears on both read and write ports resulting in unknown or corrupted read data. It is suggested to confirm via simulation that an address collision never occurs and if so it is suggested to try and avoid this situation. If address collisions cannot be avoided, the write-mode may be set to READ_FIRST which guarantees that the read data is the prior contents of the memory at the cost of additional power in the design. See the FPGA Memory Resources User Guide for additional information.
+Related violations: <none>
+
+REQP-1857#3 Advisory
+RAMB18E2_writefirst_collision_advisory  
+Synchronous clocking is detected for BRAM (user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/FB_1.BF_1/MEM/blk_ram.use_bram_only.mem/depths_3to9.ram_loop[0].use_RAMB18.SDP_RAMB18E1_36x512) in SDP mode with WRITE_FIRST write-mode. It is strongly suggested to change this mode to NO_CHANGE for best power characteristics. However, both WRITE_FIRST and NO_CHANGE may exhibit address collisions if the same address appears on both read and write ports resulting in unknown or corrupted read data. It is suggested to confirm via simulation that an address collision never occurs and if so it is suggested to try and avoid this situation. If address collisions cannot be avoided, the write-mode may be set to READ_FIRST which guarantees that the read data is the prior contents of the memory at the cost of additional power in the design. See the FPGA Memory Resources User Guide for additional information.
+Related violations: <none>
+
+REQP-1857#4 Advisory
+RAMB18E2_writefirst_collision_advisory  
+Synchronous clocking is detected for BRAM (user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/FB_1.BF_1/MEM/blk_ram.use_bram_only.mem/depths_3to9.ram_loop[1].use_RAMB18.SDP_RAMB18E1_36x512) in SDP mode with WRITE_FIRST write-mode. It is strongly suggested to change this mode to NO_CHANGE for best power characteristics. However, both WRITE_FIRST and NO_CHANGE may exhibit address collisions if the same address appears on both read and write ports resulting in unknown or corrupted read data. It is suggested to confirm via simulation that an address collision never occurs and if so it is suggested to try and avoid this situation. If address collisions cannot be avoided, the write-mode may be set to READ_FIRST which guarantees that the read data is the prior contents of the memory at the cost of additional power in the design. See the FPGA Memory Resources User Guide for additional information.
+Related violations: <none>
+
+REQP-1857#5 Advisory
+RAMB18E2_writefirst_collision_advisory  
+Synchronous clocking is detected for BRAM (user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/hasbf2.FB_2.BF_2/MEM/blk_ram.use_bram_only.mem/depths_3to9.ram_loop[0].use_RAMB18.SDP_RAMB18E1_36x512) in SDP mode with WRITE_FIRST write-mode. It is strongly suggested to change this mode to NO_CHANGE for best power characteristics. However, both WRITE_FIRST and NO_CHANGE may exhibit address collisions if the same address appears on both read and write ports resulting in unknown or corrupted read data. It is suggested to confirm via simulation that an address collision never occurs and if so it is suggested to try and avoid this situation. If address collisions cannot be avoided, the write-mode may be set to READ_FIRST which guarantees that the read data is the prior contents of the memory at the cost of additional power in the design. See the FPGA Memory Resources User Guide for additional information.
+Related violations: <none>
+
+REQP-1857#6 Advisory
+RAMB18E2_writefirst_collision_advisory  
+Synchronous clocking is detected for BRAM (user_logic_inst/ft_wrapper_0/fft_inst/U0/i_synth/xfft_inst/non_floating_point.arch_d.xfft_inst/pe_gen[0].natural_order_input.PE/hasbf2.FB_2.BF_2/MEM/blk_ram.use_bram_only.mem/depths_3to9.ram_loop[1].use_RAMB18.SDP_RAMB18E1_36x512) in SDP mode with WRITE_FIRST write-mode. It is strongly suggested to change this mode to NO_CHANGE for best power characteristics. However, both WRITE_FIRST and NO_CHANGE may exhibit address collisions if the same address appears on both read and write ports resulting in unknown or corrupted read data. It is suggested to confirm via simulation that an address collision never occurs and if so it is suggested to try and avoid this situation. If address collisions cannot be avoided, the write-mode may be set to READ_FIRST which guarantees that the read data is the prior contents of the memory at the cost of additional power in the design. See the FPGA Memory Resources User Guide for additional information.
+Related violations: <none>
+
+
