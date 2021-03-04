@@ -16,11 +16,17 @@ puts "++++++++++++++++++++++++++++++\n"
 
 set filename zcu102
 
+# Load Implemented Design
+open_run impl_1
+
 # Create utilization report
 report_utilization -file ./reports/${filename}_utilization.txt -name utilization_1
 
 # Create power report
 report_power -file {./reports/${filename}_power.pwr} -xpe {./reports/${filename}_power.xpe} -name {power_1}
+
+# Close Design
+close_design
 
 puts "\n++++++++++++++++++++++++++++"
 puts "++ Create report for XFFT ++"
