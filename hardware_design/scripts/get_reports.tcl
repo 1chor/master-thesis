@@ -1,11 +1,13 @@
 open_project soc_project.xpr
 
 if {[file exists reports] == 0 } {
+	#puts "Create Folder"
 	file mkdir reports
-	puts "Create Folder"
 } else {
-	file delete -force -- {*}[glob reports/*]
-	puts "Clean Folder"
+	#puts "Clean Folder"
+	file delete -force -- {*}[glob reports/]
+	#puts "Create Folder"
+	file mkdir reports
 }
 
 puts "\n++++++++++++++++++++++++++++++"
