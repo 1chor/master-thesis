@@ -71,6 +71,17 @@ repositories = [
     },
     
     {
+        "Index": "SDFT",
+        "Title": "Software Discrete Fourier Transform",
+        "Version": "001",
+        "Description": "Software Discrete Fourier Transform, Implement Greybox module in hardware",
+        "Changelog": ["25.02.2021 Primary release"],
+        "File": "greybox.bin",
+        "Date": "06.03.2021",
+        "Checksum": "394f3d8eb9c8040d5232c32ed4fc3fa8ab288d2e4e79d4c1b1b8a6bcd01d758cb82545fc67626c264f374d38fefec0ca95e6f1735d9bf66d376ea9ca341d876e"
+    },
+    
+    {
         "Index": "BLUE-FILTER",
         "Title": "IOT Image Processing",
         "Version": "001",
