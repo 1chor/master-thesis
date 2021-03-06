@@ -363,7 +363,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         MainActivity.mTimer.setEndTime(2); //End Timer
         MainActivity.mTimer.setEndTime(0); //End Timer
 
-        printDebug("Reconfiguration took " + MainActivity.mTimer.getTimer(2) + " seconds.");
+        printDebug("Reconfiguration took " + MainActivity.mTimer.getTimerMilli(2) + " milliseconds.");
 
         printDebug("Update process took " + MainActivity.mTimer.getTimer(0) + " seconds.");
     }
