@@ -179,7 +179,8 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
             //initEmpaticaDeviceManager();
         */
 
-        mTimer = new Timer(getApplicationContext());
+        //Initialise Timer, number of timers and context
+        mTimer = new Timer(4, getApplicationContext());
     }
 
     private  void initializeLayout(){
@@ -403,7 +404,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                             if ( progressBar.getProgress() == progressBar.getMax()) {
                                 flagBVP = false;
                                 Utility.toastie(getApplicationContext(), "RR Test finished!");
-                                mTimer.toastie(ConfigActivity.repo_name + " transform");
+                                mTimer.toastie(ConfigActivity.repo_name + " transform", 3);
                             }
                         }
                     });

@@ -126,7 +126,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
                     if (!download) {
                         enable_hash = checkBoxhash.isChecked(); //check if hash is enabled
 
-                        MainActivity.mTimer.setStartTime(); //start Timer
+                        MainActivity.mTimer.setStartTime(0); //start Timer
                         mNetworkFragment.getUpdate();
                     }
                 }
@@ -305,6 +305,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         download = false;
         Utility.toastie(getApplicationContext(), "Download complete");
         mConsole.append("\r\nDownload Complete\r\n");
+        MainActivity.mTimer.setStartTime(1); //Start Timer
         mMsgProcessor.verifyBitstream(repo, enable_hash);
     }
 
@@ -333,13 +334,14 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         if (valid) {
             if (enable_hash) {
                 mConsole.append("Bitstream verified\r\n");
-                MainActivity.mTimer.setEndTime(); //End Timer
-                printDebug("Hash calculation took " + MainActivity.mTimer.getTimer() + " seconds.");
+                MainActivity.mTimer.setEndTime(1); //End Timer
+                printDebug("Hash calculation took " + MainActivity.mTimer.getTimer(1) + " seconds.");
             } else {
                 mConsole.append("Bitstream not verified, but it continues anyway\r\n");
             }
 
             mConsole.append("Reconfigure fabric\r\n");
+            MainActivity.mTimer.setStartTime(2); //Start Timer
             mFabricManager.reconfigureFabric(repo.getFile(), MainActivity.path + "/" + reconfigDriver);
         } else {
             mConsole.append("Bitstream invalid\r\n");
@@ -358,7 +360,11 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
 
     @Override
     public void onReconfigureFabricDone() {
-        MainActivity.mTimer.setEndTime(); //End Timer
-        printDebug("Reconfiguration took " + MainActivity.mTimer.getTimer() + " seconds.");
+        MainActivity.mTimer.setEndTime(2); //End Timer
+        MainActivity.mTimer.setEndTime(0); //End Timer
+
+        printDebug("Reconfiguration took " + MainActivity.mTimer.getTimer(2) + " seconds.");
+
+        printDebug("Update process took " + MainActivity.mTimer.getTimer(0) + " seconds.");
     }
 }
