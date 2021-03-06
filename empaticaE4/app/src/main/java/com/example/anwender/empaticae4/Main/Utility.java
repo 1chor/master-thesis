@@ -116,8 +116,14 @@ public final class Utility {
 
                     //read line from linenumber
                     line = in.readLine();
-                    //convert line to float
-                    value = Float.parseFloat(line);
+
+                    if (line != null) {
+                        //convert line to float
+                        value = Float.parseFloat(line);
+                    } else {
+                        value = 0;
+                    }
+
                     in.close();
                     //toastie(context,"Entry read");
                 }
