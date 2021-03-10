@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2018.1 (64-bit)
+# SW Build 2188600 on Wed Apr  4 18:39:19 MDT 2018
+# IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
+# Start of session at: Wed Mar 10 12:12:31 2021
+# Process ID: 16228
+# Current directory: /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.runs/dblclkfft_float_to_fixed21_0_synth_1
+# Command line: vivado -log dblclkfft_float_to_fixed21_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source dblclkfft_float_to_fixed21_0.tcl
+# Log file: /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.runs/dblclkfft_float_to_fixed21_0_synth_1/dblclkfft_float_to_fixed21_0.vds
+# Journal file: /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.runs/dblclkfft_float_to_fixed21_0_synth_1/vivado.jou
+#-----------------------------------------------------------
+source dblclkfft_float_to_fixed21_0.tcl -notrace
+INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP dblclkfft_float_to_fixed21_0, cache-ID = acf90952e719b134.
+INFO: [Common 17-206] Exiting Vivado at Wed Mar 10 12:13:44 2021...

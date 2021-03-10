@@ -477,6 +477,8 @@ begin
         write(my_line, string'("-----------------------------------"));
         writeline(output, my_line);
         
+        wait for 20 ns;
+        
         -- End of simulation
         report "Not a real failure. Simulation finished successfully. Test completed successfully" severity failure;
         wait; -- will wait forever

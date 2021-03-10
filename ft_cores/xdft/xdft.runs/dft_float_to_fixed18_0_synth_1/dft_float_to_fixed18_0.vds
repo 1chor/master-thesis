@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2018.1 (64-bit)
+# SW Build 2188600 on Wed Apr  4 18:39:19 MDT 2018
+# IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
+# Start of session at: Sun Mar  7 22:31:35 2021
+# Process ID: 30173
+# Current directory: /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/dft_float_to_fixed18_0_synth_1
+# Command line: vivado -log dft_float_to_fixed18_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source dft_float_to_fixed18_0.tcl
+# Log file: /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/dft_float_to_fixed18_0_synth_1/dft_float_to_fixed18_0.vds
+# Journal file: /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/dft_float_to_fixed18_0_synth_1/vivado.jou
+#-----------------------------------------------------------
+source dft_float_to_fixed18_0.tcl -notrace
+INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP dft_float_to_fixed18_0, cache-ID = 4e713c26293e15de.
+INFO: [Common 17-206] Exiting Vivado at Sun Mar  7 22:32:50 2021...

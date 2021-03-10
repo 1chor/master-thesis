@@ -1,0 +1,4 @@
+vhdl xil_defaultlib  \
+"../../../../dblclkfft.srcs/sources_1/ip/dblclkfft_fixed25_to_float_0/sim/dblclkfft_fixed25_to_float_0.vhd" \
+
+nosort

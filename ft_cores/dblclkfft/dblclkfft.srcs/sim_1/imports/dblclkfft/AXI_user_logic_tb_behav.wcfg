@@ -12,14 +12,22 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="449445510fs"></ZoomEndTime>
-      <Cursor1Time time="72500000fs"></Cursor1Time>
+      <ZoomEndTime time="24225000000fs"></ZoomEndTime>
+      <Cursor1Time time="7015000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="155"></NameColumnWidth>
+      <NameColumnWidth column_width="151"></NameColumnWidth>
       <ValueColumnWidth column_width="66"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="32" />
+   <WVObjectSize size="28" />
+   <wave_markers>
+      <marker label="" time="40000000" />
+      <marker label="" time="8825000000" />
+      <marker label="" time="8830000000" />
+      <marker label="" time="16515000000" />
+      <marker label="" time="16520000000" />
+      <marker label="" time="24205000000" />
+   </wave_markers>
    <wvobject type="group" fp_name="group53">
       <obj_property name="label">user logic</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -381,8 +389,8 @@
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fft_in">
-         <obj_property name="ElementShortName">fft_in[35:0]</obj_property>
-         <obj_property name="ObjectShortName">fft_in[35:0]</obj_property>
+         <obj_property name="ElementShortName">fft_in[41:0]</obj_property>
+         <obj_property name="ObjectShortName">fft_in[41:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group128">
@@ -390,8 +398,8 @@
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fft_out">
-         <obj_property name="ElementShortName">fft_out[43:0]</obj_property>
-         <obj_property name="ObjectShortName">fft_out[43:0]</obj_property>
+         <obj_property name="ElementShortName">fft_out[49:0]</obj_property>
+         <obj_property name="ObjectShortName">fft_out[49:0]</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/first_out">
          <obj_property name="ElementShortName">first_out</obj_property>
@@ -406,22 +414,6 @@
       <obj_property name="label">float to fixed18</obj_property>
       <obj_property name="DisplayName">label</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/float_to_fixed18_inst/s_axis_a_tvalid">
-      <obj_property name="ElementShortName">s_axis_a_tvalid</obj_property>
-      <obj_property name="ObjectShortName">s_axis_a_tvalid</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/float_to_fixed18_inst/s_axis_a_tdata">
-      <obj_property name="ElementShortName">s_axis_a_tdata[31:0]</obj_property>
-      <obj_property name="ObjectShortName">s_axis_a_tdata[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/float_to_fixed18_inst/m_axis_result_tvalid">
-      <obj_property name="ElementShortName">m_axis_result_tvalid</obj_property>
-      <obj_property name="ObjectShortName">m_axis_result_tvalid</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/float_to_fixed18_inst/m_axis_result_tdata">
-      <obj_property name="ElementShortName">m_axis_result_tdata[23:0]</obj_property>
-      <obj_property name="ObjectShortName">m_axis_result_tdata[23:0]</obj_property>
-   </wvobject>
    <wvobject fp_name="divider103" type="divider">
       <obj_property name="label">fixed18 to float</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -430,42 +422,10 @@
       <obj_property name="label">Real</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
-      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fixed22_to_float_inst_real/s_axis_a_tvalid">
-         <obj_property name="ElementShortName">s_axis_a_tvalid</obj_property>
-         <obj_property name="ObjectShortName">s_axis_a_tvalid</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fixed22_to_float_inst_real/s_axis_a_tdata">
-         <obj_property name="ElementShortName">s_axis_a_tdata[23:0]</obj_property>
-         <obj_property name="ObjectShortName">s_axis_a_tdata[23:0]</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fixed22_to_float_inst_real/m_axis_result_tvalid">
-         <obj_property name="ElementShortName">m_axis_result_tvalid</obj_property>
-         <obj_property name="ObjectShortName">m_axis_result_tvalid</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fixed22_to_float_inst_real/m_axis_result_tdata">
-         <obj_property name="ElementShortName">m_axis_result_tdata[31:0]</obj_property>
-         <obj_property name="ObjectShortName">m_axis_result_tdata[31:0]</obj_property>
-      </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group117">
       <obj_property name="label">Imag</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
-      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fixed22_to_float_inst_imag/s_axis_a_tvalid">
-         <obj_property name="ElementShortName">s_axis_a_tvalid</obj_property>
-         <obj_property name="ObjectShortName">s_axis_a_tvalid</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fixed22_to_float_inst_imag/s_axis_a_tdata">
-         <obj_property name="ElementShortName">s_axis_a_tdata[23:0]</obj_property>
-         <obj_property name="ObjectShortName">s_axis_a_tdata[23:0]</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fixed22_to_float_inst_imag/m_axis_result_tvalid">
-         <obj_property name="ElementShortName">m_axis_result_tvalid</obj_property>
-         <obj_property name="ObjectShortName">m_axis_result_tvalid</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/AXI_user_logic_tb/uut/ft_wrapper_0/fixed22_to_float_inst_imag/m_axis_result_tdata">
-         <obj_property name="ElementShortName">m_axis_result_tdata[31:0]</obj_property>
-         <obj_property name="ObjectShortName">m_axis_result_tdata[31:0]</obj_property>
-      </wvobject>
    </wvobject>
 </wave_config>

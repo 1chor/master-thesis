@@ -32,7 +32,7 @@ entity AXI_user_logic_tb is
 generic
 (
     C_S_AXI_DATA_WIDTH             : integer              := 64;
-    C_S_AXI_ADDR_WIDTH             : integer              := 2
+    C_S_AXI_ADDR_WIDTH             : integer              := 1
 );
 
 end AXI_user_logic_tb;
@@ -43,7 +43,7 @@ architecture bench of AXI_user_logic_tb is
 	component user_logic is
 		generic (
 		C_S_AXI_DATA_WIDTH	: integer	:= 64;
-		C_S_AXI_ADDR_WIDTH	: integer	:= 2
+		C_S_AXI_ADDR_WIDTH	: integer	:= 1
 		);
 		port (
 		S_AXI_ACLK	: in std_logic;
@@ -279,7 +279,7 @@ begin
         -- procedure to write data
         procedure write_data(val_real : std_logic_vector) is
         begin
-            S_AXI_AWADDR <= b"00";
+            S_AXI_AWADDR <= b"0";
             --send input data (only real part)
             S_AXI_WDATA <= ZERO_PADDING & val_real;
             S_AXI_WSTRB <= b"11111111";
@@ -293,7 +293,7 @@ begin
         -- procedure to read data
         procedure read_data(output_buffer_idx : integer) is
         begin
-            S_AXI_ARADDR <= b"01";
+            S_AXI_ARADDR <= b"1";
             readIt <= '1';                --Start AXI Read from Slave
             wait for 1 ns; readIt <= '0'; --Clear "Start Read" Flag
             wait until S_AXI_RVALID = '1';
