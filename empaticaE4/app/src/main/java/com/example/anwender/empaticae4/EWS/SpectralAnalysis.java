@@ -122,29 +122,34 @@ public class SpectralAnalysis {
                 dft_sw = calculateDFT(inputSignal);
 
                 //Write output values to files
-                for (int i = 0; i < signalSize; i++) {
+                for (int i=0; i<signalSize; i++) {
+                    //Hardware FFT
                     //Real component
-                    double norm_dval = 2 * dft[i].getR() / norm_abs; //normalise output value, range [-1 1]
+                    double dval = dft[i].getR(); //get real output value
 
-                    //Convert double to hex string
-                    int norm_intval = Float.floatToRawIntBits((float) norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
-
-                    String norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
-
-                    //Write normalised hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path, xdft_real_file, norm_st);
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "xdft_real.txt", dval + "\n");
 
                     //Imaginary component
-                    norm_dval = 2 * dft[i].getI() / norm_abs; //normalise output value, range [-1 1]
+                    dval = dft[i].getI(); //get imaginary output value
 
-                    //Convert double to hex string
-                    norm_intval = Float.floatToRawIntBits((float) norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "xdft_imag.txt", dval + "\n");
 
-                    norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
+                    /*############################################################################*/
 
-                    //Write normalised hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path, xdft_imag_file, norm_st);
+                    //Software FFT
+                    //Real component
+                    dval = dft_sw[i].getR(); //get real output value
 
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "xdft_real_sw.txt", dval + "\n");
+
+                    //Imaginary component
+                    dval = dft_sw[i].getI(); //get imaginary output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "xdft_imag_sw.txt", dval + "\n");
                 }
 
                 spd = SPD(dft);
@@ -211,27 +216,33 @@ public class SpectralAnalysis {
 
                 //Write output values to files
                 for (int i=0; i<signalSize; i++) {
+                    //Hardware FFT
                     //Real component
                     double dval = dft[i].getR(); //get real output value
 
-                    //Convert double to hex string
-                    int intval = Float.floatToRawIntBits((float)dval); //integer value, convert to float for IEEE 754 float single precision
-
-                    String st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
-
-                    //Write hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path, xfft_real_file, st);
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "xfft_real.txt", dval + "\n");
 
                     //Imaginary component
                     dval = dft[i].getI(); //get imaginary output value
 
-                    //Convert double to hex string
-                    intval = Float.floatToRawIntBits((float)dval); //integer value, convert to float for IEEE 754 float single precision
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "xfft_imag.txt", dval + "\n");
 
-                    st = String.format("%8s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
+                    /*############################################################################*/
 
-                    //Write hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path, xfft_imag_file, st);
+                    //Software FFT
+                    //Real component
+                    dval = dft_sw[i].getR(); //get real output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "xfft_real_sw.txt", dval + "\n");
+
+                    //Imaginary component
+                    dval = dft_sw[i].getI(); //get imaginary output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "xfft_imag_sw.txt", dval + "\n");
                 }
 
                 spd = SPD(dft);
@@ -311,27 +322,33 @@ public class SpectralAnalysis {
 
                 //Write output values to files
                 for (int i=0; i<signalSize; i++) {
+                    //Hardware FFT
                     //Real component
-                    double norm_dval = 2 * dft[i].getR() / norm_abs; //normalise real output value, range [-1, 1]
+                    double dval = dft[i].getR(); //get real output value
 
-                    //Convert double to hex string
-                    int norm_intval = Float.floatToRawIntBits((float)norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
-
-                    String norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
-
-                    //Write normalised hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path, xfft_fixed_real_file, norm_st);
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "xfft-fixed_real.txt", dval + "\n");
 
                     //Imaginary component
-                    norm_dval = 2 * dft[i].getI() / norm_abs; //normalise imaginary output value, range [-1, 1]
+                    dval = dft[i].getI(); //get imaginary output value
 
-                    //Convert double to hex string
-                    norm_intval = Float.floatToRawIntBits((float)norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "xfft-fixed_imag.txt", dval + "\n");
 
-                    norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
+                    /*############################################################################*/
 
-                    //Write normalised hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path, xfft_fixed_imag_file, norm_st);
+                    //Software FFT
+                    //Real component
+                    dval = dft_sw[i].getR(); //get real output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "xfft-fixed_real_sw.txt", dval + "\n");
+
+                    //Imaginary component
+                    dval = dft_sw[i].getI(); //get imaginary output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "xfft-fixed_imag_sw.txt", dval + "\n");
                 }
 
                 spd = SPD(dft);
@@ -410,29 +427,34 @@ public class SpectralAnalysis {
                 dft_sw = calculateDFT(inputSignal);
 
                 //Write output values to files
-                for (int i = 0; i < signalSize; i++) {
+                for (int i=0; i<signalSize; i++) {
+                    //Hardware FFT
                     //Real component
-                    double norm_dval = 2 * dft[i].getR() / norm_abs; //normalise output value, range [-1 1]
+                    double dval = dft[i].getR(); //get real output value
 
-                    //Convert double to hex string
-                    int norm_intval = Float.floatToRawIntBits((float) norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
-
-                    String norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
-
-                    //Write normalised hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path, intfftk_real_file, norm_st);
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "intfftk_real.txt", dval + "\n");
 
                     //Imaginary component
-                    norm_dval = 2 * dft[i].getI() / norm_abs; //normalise output value, range [-1 1]
+                    dval = dft[i].getI(); //get imaginary output value
 
-                    //Convert double to hex string
-                    norm_intval = Float.floatToRawIntBits((float) norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "intfftk_imag.txt", dval + "\n");
 
-                    norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
+                    /*############################################################################*/
 
-                    //Write normalised hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path,intfftk_imag_file, norm_st);
+                    //Software FFT
+                    //Real component
+                    dval = dft_sw[i].getR(); //get real output value
 
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "intfftk_real_sw.txt", dval + "\n");
+
+                    //Imaginary component
+                    dval = dft_sw[i].getI(); //get imaginary output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "intfftk_imag_sw.txt", dval + "\n");
                 }
 
                 spd = SPD(dft);
@@ -511,29 +533,34 @@ public class SpectralAnalysis {
                 dft_sw = calculateDFT(inputSignal);
 
                 //Write output values to files
-                for (int i = 0; i < signalSize; i++) {
+                for (int i=0; i<signalSize; i++) {
+                    //Hardware FFT
                     //Real component
-                    double norm_dval = 2 * dft[i].getR() / norm_abs; //normalise output value, range [-1 1]
+                    double dval = dft[i].getR(); //get real output value
 
-                    //Convert double to hex string
-                    int norm_intval = Float.floatToRawIntBits((float) norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
-
-                    String norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
-
-                    //Write normalised hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path, intfft_spdf_real_file, norm_st);
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "intfft_spdf_real.txt", dval + "\n");
 
                     //Imaginary component
-                    norm_dval = 2 * dft[i].getI() / norm_abs; //normalise output value, range [-1 1]
+                    dval = dft[i].getI(); //get imaginary output value
 
-                    //Convert double to hex string
-                    norm_intval = Float.floatToRawIntBits((float) norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "intfft_spdf_imag.txt", dval + "\n");
 
-                    norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
+                    /*############################################################################*/
 
-                    //Write normalised hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path,intfft_spdf_imag_file, norm_st);
+                    //Software FFT
+                    //Real component
+                    dval = dft_sw[i].getR(); //get real output value
 
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "intfft_spdf_real_sw.txt", dval + "\n");
+
+                    //Imaginary component
+                    dval = dft_sw[i].getI(); //get imaginary output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "intfft_spdf_imag_sw.txt", dval + "\n");
                 }
 
                 spd = SPD(dft);
@@ -612,29 +639,34 @@ public class SpectralAnalysis {
                 dft_sw = calculateDFT(inputSignal);
 
                 //Write output values to files
-                for (int i = 0; i < signalSize; i++) {
+                for (int i=0; i<signalSize; i++) {
+                    //Hardware FFT
                     //Real component
-                    double norm_dval = 2 * dft[i].getR() / norm_abs; //normalise output value, range [-1 1]
+                    double dval = dft[i].getR(); //get real output value
 
-                    //Convert double to hex string
-                    int norm_intval = Float.floatToRawIntBits((float) norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
-
-                    String norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
-
-                    //Write normalised hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path, dblclkfft_real_file, norm_st);
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "dblclkfft_real.txt", dval + "\n");
 
                     //Imaginary component
-                    norm_dval = 2 * dft[i].getI() / norm_abs; //normalise output value, range [-1 1]
+                    dval = dft[i].getI(); //get imaginary output value
 
-                    //Convert double to hex string
-                    norm_intval = Float.floatToRawIntBits((float) norm_dval); //normalised integer value, convert to float for IEEE 754 float single precision
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "dblclkfft_imag.txt", dval + "\n");
 
-                    norm_st = String.format("%8s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
+                    /*############################################################################*/
 
-                    //Write normalised hex string to file (IEEE 754 float single precision format)
-                    writeDataToFile(MainActivity.path,dblclkfft_imag_file, norm_st);
+                    //Software FFT
+                    //Real component
+                    dval = dft_sw[i].getR(); //get real output value
 
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "dblclkfft_real_sw.txt", dval + "\n");
+
+                    //Imaginary component
+                    dval = dft_sw[i].getI(); //get imaginary output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "dblclkfft_imag_sw.txt", dval + "\n");
                 }
 
                 spd = SPD(dft);
