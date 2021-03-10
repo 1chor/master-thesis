@@ -106,6 +106,8 @@ architecture bench of AXI_user_logic_tb is
     signal readIt : std_logic := '0';
         
     shared variable my_line : line;
+    
+    signal write_success : boolean := false;
         
     -- type declaration
     subtype word32_t is std_logic_vector(INPUT_WIDTH -1 downto 0);
@@ -256,6 +258,19 @@ begin
             return Result;        
         end function;
         
+        -- function to write file content 32 bit
+        impure function write_file32(filename: string; value: array_t) return boolean is
+            file FileHandle : text open write_mode is filename;
+            variable CurrentLine : line;
+        begin
+            for i in 0 to SIZE-1 loop
+                hwrite(CurrentLine, value(i), right, word32_t'length);                            
+                writeline(FileHandle, CurrentLine);
+            end loop;
+            
+            return true;        
+        end function;
+        
         -- function to convert std_logic_vector to hex string
         function slv_to_hex(slv : in std_logic_vector) return string is
             constant hex_digits : string(1 to 16) := "0123456789abcdef";
@@ -362,6 +377,14 @@ begin
             output_imag(i) := output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
         end loop;    
         
+        -- write output files
+        write_success <= write_file32("../../../../TestData/simulation/xdft_result_ones.txt", output_real);
+        assert write_success = false report "Write file was not successful!" severity error;
+        write_success <= false;
+        write_success <= write_file32("../../../../TestData/simulation/xdft_result_ones_imag.txt", output_imag);
+        assert write_success = false report "Write file was not successful!" severity error;
+        write_success <= false;
+        
         write(my_line, string'("Compare results"));
         writeline(output, my_line);
         
@@ -412,7 +435,15 @@ begin
             -- read output data
             output_real(i) := output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
             output_imag(i) := output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
-        end loop;               
+        end loop;      
+        
+         -- write output files
+        write_success <= write_file32("../../../../TestData/simulation/xdft_result_one_zeros.txt", output_real);
+        assert write_success = false report "Write file was not successful!" severity error;
+        write_success <= false;
+        write_success <= write_file32("../../../../TestData/simulation/xdft_result_one_zeros_imag.txt", output_imag);
+        assert write_success = false report "Write file was not successful!" severity error;
+        write_success <= false;
 
         write(my_line, string'("Compare results"));
         writeline(output, my_line);
@@ -465,6 +496,14 @@ begin
             output_real(i) := output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
             output_imag(i) := output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
         end loop;               
+        
+        -- write output files
+        write_success <= write_file32("../../../../TestData/simulation/xdft_result_real.txt", output_real);
+        assert write_success = false report "Write file was not successful!" severity error;
+        write_success <= false;
+        write_success <= write_file32("../../../../TestData/simulation/xdft_result_imag.txt", output_imag);
+        assert write_success = false report "Write file was not successful!" severity error;
+        write_success <= false;
         
         write(my_line, string'("Compare results"));
         writeline(output, my_line);
