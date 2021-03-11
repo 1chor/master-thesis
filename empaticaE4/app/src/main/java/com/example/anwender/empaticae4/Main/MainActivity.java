@@ -12,6 +12,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -181,6 +182,10 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
 
         //Initialise Timer, number of timers and context
         mTimer = new Timer(4, getApplicationContext());
+
+        //Create BroadcastReceiver
+        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        this.registerReceiver(this.broadcastReceiver, ifilter);
     }
 
     private  void initializeLayout(){
@@ -301,6 +306,29 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                 break;
         }
     }
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //Are we charging /charged / discharging?
+            int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+            boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
+            boolean isDisCharging = status == BatteryManager.BATTERY_STATUS_DISCHARGING;
+
+            //How are we charging?
+            int chargePlug = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+            boolean usbCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
+            boolean acCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_AC;
+
+            //get battery level
+            int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+            int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+            float batteryPct = level * 100 / (float)scale;
+
+            //load configuration
+
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
