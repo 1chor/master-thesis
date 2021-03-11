@@ -35,3 +35,4 @@ local.properties
 
 # Ignore TestData
 TestData/
+LogFiles/
