@@ -53,11 +53,12 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
 
     private SharedPreferences mSharedPref;
     private boolean download;
-    private boolean enable_hash;
 
     //public variables
     public static String repo_name = "SDFT"; //set default name of server repository
     public static int windowSize = 100;
+    public static boolean enable_hash = false;
+    public static String serverIP = "192.168.2.8"; //default value for debug case - delete afterwards
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,9 +110,6 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
 
         download = false;
 
-        //for debug case - delete afterwards
-        mServerIP.setText("192.168.2.13");
-
         //Configure button
         mButtonConfig.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,8 +118,10 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
                     //print with defined text colour
                     printColour("Enter Server IP address!", Color.RED);
                 } else {
+                    serverIP = mServerIP.getText().toString(); //save IP to variable
+
                     //Configure Network Manager and connect to server
-                    mNetworkFragment.configure("http://" + mServerIP.getText() + ":5000/api/", repo_name);
+                    mNetworkFragment.configure("http://" + serverIP + ":5000/api/", repo_name);
 
                     if (!download) {
                         enable_hash = checkBoxhash.isChecked(); //check if hash is enabled
@@ -137,6 +137,12 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
     @Override
     protected void onStart() {
         super.onStart();
+
+        //Set ServerIP
+        mServerIP.setText(serverIP);
+
+        //Set checkbox for hash calculation
+        checkBoxhash.setChecked(enable_hash);
 
         //Set current radioButton setting
         switch (repo_name) {
