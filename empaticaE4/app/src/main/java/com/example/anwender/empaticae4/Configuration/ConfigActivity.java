@@ -72,8 +72,9 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         mConsole.setMovementMethod(new ScrollingMovementMethod());
         mServerIP = (TextView) findViewById(R.id.edit_serverIP);
 
-        //initialise Button
+        //initialise Buttons
         Button mButtonConfig = (Button) findViewById(R.id.button_config);
+        Button mButtonSave = (Button) findViewById(R.id.button_save_config);
 
         //initialise RadioButtons
         RadioGroup radioGroupConfig = (RadioGroup) findViewById(R.id.radioGroup);
@@ -130,6 +131,15 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
                         mNetworkFragment.getUpdate();
                     }
                 }
+            }
+        });
+
+        mButtonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                serverIP = mServerIP.getText().toString(); //save IP to variable
+
+                enable_hash = checkBoxhash.isChecked(); //check if hash is enabled and save it to variable
             }
         });
     }

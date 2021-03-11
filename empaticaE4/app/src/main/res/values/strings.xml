@@ -181,4 +181,6 @@
     <string name="radio_DBLCLKFFT">Generic Pipelined FFT</string>
     <string name="hash">Hash calculation:</string>
     <string name="enable_hash">enable hash calculation</string>
+    <string name="save_config">Save configuration</string>
+
 </resources>
