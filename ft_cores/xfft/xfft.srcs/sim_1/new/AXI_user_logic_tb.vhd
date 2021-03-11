@@ -308,7 +308,7 @@ begin
         -- procedure to read data
         procedure read_data(output_buffer_idx : integer) is
         begin
-            S_AXI_ARADDR <= b"1";
+            S_AXI_ARADDR <= b"0";
             readIt <= '1';                --Start AXI Read from Slave
             wait for 1 ns; readIt <= '0'; --Clear "Start Read" Flag
             wait until S_AXI_RVALID = '1';
