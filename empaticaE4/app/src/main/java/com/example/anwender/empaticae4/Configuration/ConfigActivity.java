@@ -200,6 +200,21 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
     //  FUNCTIONS:
     //--------------------------------------------------------------------------------------------//
 
+    public void changeConfiguration(String config_name) {
+        if (mServerIP.getText().toString().isEmpty()) {
+            //print with defined text colour
+            printColour("Enter Server IP address!", Color.RED);
+        } else {
+            //Configure Network Manager and connect to server
+            mNetworkFragment.configure("http://" + serverIP + ":5000/api/", config_name);
+
+            if (!download) {
+                MainActivity.mTimer.setStartTime(0); //start Timer
+                mNetworkFragment.getUpdate();
+            }
+        }
+    }
+
     //When RadioGroup "Configuration" checked change
     private void doOnConfigChanged(RadioGroup group, int checkedId) {
         int checkedRadioID = group.getCheckedRadioButtonId();
