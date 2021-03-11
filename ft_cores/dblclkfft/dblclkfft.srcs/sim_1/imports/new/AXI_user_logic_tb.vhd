@@ -430,7 +430,13 @@ begin
             read_data(output_buffer_idx);
             output_buffer_idx := output_buffer_idx + 1;
         end loop;
-        
+                
+        for i in 0 to SIZE-1 loop
+            -- read output data
+            output_real(i) := output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
+            output_imag(i) := output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
+        end loop;               
+
         -- write output files
         write_success <= write_file32("../../../../TestData/simulation/dblclkfft_result_one_zeros.txt", output_real);
         assert write_success = false report "Write file was not successful!" severity error;
@@ -439,12 +445,6 @@ begin
         assert write_success = false report "Write file was not successful!" severity error;
         write_success <= false;
         
-        for i in 0 to SIZE-1 loop
-            -- read output data
-            output_real(i) := output_buffer(i)(DATA_WIDTH / 2 -1 downto 0);
-            output_imag(i) := output_buffer(i)(DATA_WIDTH -1 downto DATA_WIDTH / 2);
-        end loop;               
-
         write(my_line, string'("Compare results"));
         writeline(output, my_line);
         

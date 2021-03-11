@@ -21,6 +21,7 @@ create_project -in_memory -part xczu9eg-ffvb1156-2-e
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
+set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity info
 set_property webtalk.parent_dir /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.cache/wt [current_project]
 set_property parent.project_path /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
@@ -28,10 +29,29 @@ set_property target_language VHDL [current_project]
 set_property board_part xilinx.com:zcu102:part0:3.2 [current_project]
 set_property ip_output_repo /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
+read_verilog -library xil_defaultlib {
+  /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.srcs/sources_1/imports/generated_core/bimpy.v
+  /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.srcs/sources_1/imports/generated_core/bitreverse.v
+  /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.srcs/sources_1/imports/generated_core/butterfly.v
+  /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.srcs/sources_1/imports/generated_core/convround.v
+  /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.srcs/sources_1/imports/generated_core/fftmain.v
+  /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.srcs/sources_1/imports/generated_core/fftstage.v
+  /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.srcs/sources_1/imports/generated_core/hwbfly.v
+  /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.srcs/sources_1/imports/generated_core/laststage.v
+  /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.srcs/sources_1/imports/generated_core/longbimpy.v
+  /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.srcs/sources_1/imports/generated_core/qtrstage.v
+}
 read_vhdl -library xil_defaultlib {
+  /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.srcs/sources_1/new/dblclkfft_wrapper.vhd
   /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.srcs/sources_1/imports/new/fourier_transform_v1_0_user_logic.vhd
   /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.srcs/sources_1/imports/new/fourier_transform_v1_0.vhd
 }
+read_ip -quiet /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.srcs/sources_1/ip/dblclkfft_fixed25_to_float_0/dblclkfft_fixed25_to_float_0.xci
+set_property used_in_implementation false [get_files -all /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.srcs/sources_1/ip/dblclkfft_fixed25_to_float_0/dblclkfft_fixed25_to_float_0_ooc.xdc]
+
+read_ip -quiet /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.srcs/sources_1/ip/dblclkfft_float_to_fixed21_0/dblclkfft_float_to_fixed21_0.xci
+set_property used_in_implementation false [get_files -all /media/soc/Volume/master-thesis/ft_cores/dblclkfft/dblclkfft.srcs/sources_1/ip/dblclkfft_float_to_fixed21_0/dblclkfft_float_to_fixed21_0_ooc.xdc]
+
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
 # design are intentionally left as such for best results. Dcp files will be
