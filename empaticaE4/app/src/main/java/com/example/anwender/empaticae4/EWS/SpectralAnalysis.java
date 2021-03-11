@@ -420,6 +420,9 @@ public class SpectralAnalysis {
 
                 MainActivity.mTimer.setEndTime(3); //End Timer
 
+                //Correct shifts for first value
+                dft[0].setR(dft[0].getR() / 2);
+
                 //delete output file
                 if (checkFileExists(MainActivity.path, intfftk_output_file, true))
                     Log.i("Output data", "Deleted " + intfftk_output_file + " !");
@@ -525,6 +528,9 @@ public class SpectralAnalysis {
                 dft = readDataFromFile(MainActivity.path, intfft_spdf_output_file, true);
 
                 MainActivity.mTimer.setEndTime(3); //End Timer
+
+                //Correct shifts for first value
+                dft[0].setR(dft[0].getR() / 2);
 
                 //delete output file
                 if (checkFileExists(MainActivity.path, intfft_spdf_output_file, true))
