@@ -110,7 +110,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         download = false;
 
         //for debug case - delete afterwards
-        mServerIP.setText("192.168.2.7");
+        mServerIP.setText("192.168.2.13");
 
         //Configure button
         mButtonConfig.setOnClickListener(new View.OnClickListener() {
