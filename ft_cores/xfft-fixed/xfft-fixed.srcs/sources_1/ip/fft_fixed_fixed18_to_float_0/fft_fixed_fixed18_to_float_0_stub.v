@@ -1,11 +1,11 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.1 (lin64) Build 2188600 Wed Apr  4 18:39:19 MDT 2018
-// Date        : Sun Feb 14 16:11:03 2021
+// Date        : Sun Mar 14 14:12:31 2021
 // Host        : soc running 64-bit Ubuntu 18.04.5 LTS
-// Command     : write_verilog -force -mode synth_stub -rename_top fft_fixed_fixed18_to_float_0 -prefix
-//               fft_fixed_fixed18_to_float_0_ fixed18_to_float_0_stub.v
-// Design      : fixed18_to_float_0
+// Command     : write_verilog -force -mode synth_stub
+//               /media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.srcs/sources_1/ip/fft_fixed_fixed18_to_float_0/fft_fixed_fixed18_to_float_0_stub.v
+// Design      : fft_fixed_fixed18_to_float_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xczu9eg-ffvb1156-2-e
 // --------------------------------------------------------------------------------

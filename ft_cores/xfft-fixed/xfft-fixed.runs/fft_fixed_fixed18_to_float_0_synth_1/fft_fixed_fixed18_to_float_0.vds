@@ -2,13 +2,442 @@
 # Vivado v2018.1 (64-bit)
 # SW Build 2188600 on Wed Apr  4 18:39:19 MDT 2018
 # IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
-# Start of session at: Wed Feb 24 23:13:31 2021
-# Process ID: 2408
+# Start of session at: Sun Mar 14 14:07:39 2021
+# Process ID: 19774
 # Current directory: /media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.runs/fft_fixed_fixed18_to_float_0_synth_1
 # Command line: vivado -log fft_fixed_fixed18_to_float_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source fft_fixed_fixed18_to_float_0.tcl
 # Log file: /media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.runs/fft_fixed_fixed18_to_float_0_synth_1/fft_fixed_fixed18_to_float_0.vds
 # Journal file: /media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.runs/fft_fixed_fixed18_to_float_0_synth_1/vivado.jou
 #-----------------------------------------------------------
 source fft_fixed_fixed18_to_float_0.tcl -notrace
-INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP fft_fixed_fixed18_to_float_0, cache-ID = 49003c7c8e0aad8c.
-INFO: [Common 17-206] Exiting Vivado at Wed Feb 24 23:14:46 2021...
+Command: synth_design -top fft_fixed_fixed18_to_float_0 -part xczu9eg-ffvb1156-2-e -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xczu9eg'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xczu9eg'
+INFO: [Common 17-1540] The version limit for your license is '2021.01' and has expired for new software. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 20230 
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:20 ; elapsed = 00:00:33 . Memory (MB): peak = 1576.727 ; gain = 0.000 ; free physical = 1121 ; free virtual = 25637
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'fft_fixed_fixed18_to_float_0' [/media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.srcs/sources_1/ip/fft_fixed_fixed18_to_float_0/synth/fft_fixed_fixed18_to_float_0.vhd:69]
+	Parameter C_XDEVICEFAMILY bound to: zynquplus - type: string 
+	Parameter C_HAS_ADD bound to: 0 - type: integer 
+	Parameter C_HAS_SUBTRACT bound to: 0 - type: integer 
+	Parameter C_HAS_MULTIPLY bound to: 0 - type: integer 
+	Parameter C_HAS_DIVIDE bound to: 0 - type: integer 
+	Parameter C_HAS_SQRT bound to: 0 - type: integer 
+	Parameter C_HAS_COMPARE bound to: 0 - type: integer 
+	Parameter C_HAS_FIX_TO_FLT bound to: 1 - type: integer 
+	Parameter C_HAS_FLT_TO_FIX bound to: 0 - type: integer 
+	Parameter C_HAS_FLT_TO_FLT bound to: 0 - type: integer 
+	Parameter C_HAS_RECIP bound to: 0 - type: integer 
+	Parameter C_HAS_RECIP_SQRT bound to: 0 - type: integer 
+	Parameter C_HAS_ABSOLUTE bound to: 0 - type: integer 
+	Parameter C_HAS_LOGARITHM bound to: 0 - type: integer 
+	Parameter C_HAS_EXPONENTIAL bound to: 0 - type: integer 
+	Parameter C_HAS_FMA bound to: 0 - type: integer 
+	Parameter C_HAS_FMS bound to: 0 - type: integer 
+	Parameter C_HAS_ACCUMULATOR_A bound to: 0 - type: integer 
+	Parameter C_HAS_ACCUMULATOR_S bound to: 0 - type: integer 
+	Parameter C_A_WIDTH bound to: 18 - type: integer 
+	Parameter C_A_FRACTION_WIDTH bound to: 17 - type: integer 
+	Parameter C_B_WIDTH bound to: 18 - type: integer 
+	Parameter C_B_FRACTION_WIDTH bound to: 17 - type: integer 
+	Parameter C_C_WIDTH bound to: 18 - type: integer 
+	Parameter C_C_FRACTION_WIDTH bound to: 17 - type: integer 
+	Parameter C_RESULT_WIDTH bound to: 32 - type: integer 
+	Parameter C_RESULT_FRACTION_WIDTH bound to: 24 - type: integer 
+	Parameter C_COMPARE_OPERATION bound to: 8 - type: integer 
+	Parameter C_LATENCY bound to: 2 - type: integer 
+	Parameter C_OPTIMIZATION bound to: 1 - type: integer 
+	Parameter C_MULT_USAGE bound to: 0 - type: integer 
+	Parameter C_BRAM_USAGE bound to: 0 - type: integer 
+	Parameter C_RATE bound to: 1 - type: integer 
+	Parameter C_ACCUM_INPUT_MSB bound to: 0 - type: integer 
+	Parameter C_ACCUM_MSB bound to: 32 - type: integer 
+	Parameter C_ACCUM_LSB bound to: -1 - type: integer 
+	Parameter C_HAS_UNDERFLOW bound to: 0 - type: integer 
+	Parameter C_HAS_OVERFLOW bound to: 0 - type: integer 
+	Parameter C_HAS_INVALID_OP bound to: 0 - type: integer 
+	Parameter C_HAS_DIVIDE_BY_ZERO bound to: 0 - type: integer 
+	Parameter C_HAS_ACCUM_OVERFLOW bound to: 0 - type: integer 
+	Parameter C_HAS_ACCUM_INPUT_OVERFLOW bound to: 0 - type: integer 
+	Parameter C_HAS_ACLKEN bound to: 0 - type: integer 
+	Parameter C_HAS_ARESETN bound to: 0 - type: integer 
+	Parameter C_THROTTLE_SCHEME bound to: 3 - type: integer 
+	Parameter C_HAS_A_TUSER bound to: 0 - type: integer 
+	Parameter C_HAS_A_TLAST bound to: 0 - type: integer 
+	Parameter C_HAS_B bound to: 0 - type: integer 
+	Parameter C_HAS_B_TUSER bound to: 0 - type: integer 
+	Parameter C_HAS_B_TLAST bound to: 0 - type: integer 
+	Parameter C_HAS_C bound to: 0 - type: integer 
+	Parameter C_HAS_C_TUSER bound to: 0 - type: integer 
+	Parameter C_HAS_C_TLAST bound to: 0 - type: integer 
+	Parameter C_HAS_OPERATION bound to: 0 - type: integer 
+	Parameter C_HAS_OPERATION_TUSER bound to: 0 - type: integer 
+	Parameter C_HAS_OPERATION_TLAST bound to: 0 - type: integer 
+	Parameter C_HAS_RESULT_TUSER bound to: 0 - type: integer 
+	Parameter C_HAS_RESULT_TLAST bound to: 0 - type: integer 
+	Parameter C_TLAST_RESOLUTION bound to: 0 - type: integer 
+	Parameter C_A_TDATA_WIDTH bound to: 24 - type: integer 
+	Parameter C_A_TUSER_WIDTH bound to: 1 - type: integer 
+	Parameter C_B_TDATA_WIDTH bound to: 24 - type: integer 
+	Parameter C_B_TUSER_WIDTH bound to: 1 - type: integer 
+	Parameter C_C_TDATA_WIDTH bound to: 24 - type: integer 
+	Parameter C_C_TUSER_WIDTH bound to: 1 - type: integer 
+	Parameter C_OPERATION_TDATA_WIDTH bound to: 8 - type: integer 
+	Parameter C_OPERATION_TUSER_WIDTH bound to: 1 - type: integer 
+	Parameter C_RESULT_TDATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_RESULT_TUSER_WIDTH bound to: 1 - type: integer 
+	Parameter C_FIXED_DATA_UNSIGNED bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'floating_point_v7_1_6' declared at '/media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.srcs/sources_1/ip/fft_fixed_fixed18_to_float_0/hdl/floating_point_v7_1_vh_rfs.vhd:91604' bound to instance 'U0' of component 'floating_point_v7_1_6' [/media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.srcs/sources_1/ip/fft_fixed_fixed18_to_float_0/synth/fft_fixed_fixed18_to_float_0.vhd:195]
+INFO: [Synth 8-256] done synthesizing module 'fft_fixed_fixed18_to_float_0' (14#1) [/media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.srcs/sources_1/ip/fft_fixed_fixed18_to_float_0/synth/fft_fixed_fixed18_to_float_0.vhd:69]
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized1 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized1 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized1 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized1 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized1 has unconnected port SINIT
+WARNING: [Synth 8-3331] design carry_chain has unconnected port B[17]
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized7 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized7 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized7 has unconnected port SINIT
+WARNING: [Synth 8-3331] design flt_dec_op has unconnected port DEC_OP_STATE[11]
+WARNING: [Synth 8-3331] design flt_dec_op has unconnected port DEC_OP_STATE[10]
+WARNING: [Synth 8-3331] design flt_dec_op has unconnected port DEC_OP_STATE[9]
+WARNING: [Synth 8-3331] design flt_dec_op has unconnected port DEC_OP_STATE[8]
+WARNING: [Synth 8-3331] design flt_dec_op has unconnected port DIVIDE_BY_ZERO_IN
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized25 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized25 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized25 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized25 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized25 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized17 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized17 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized17 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized17 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized17 has unconnected port SINIT
+WARNING: [Synth 8-3331] design fix_to_flt_conv_exp has unconnected port A[16]
+WARNING: [Synth 8-3331] design fix_to_flt_conv_exp has unconnected port A[15]
+WARNING: [Synth 8-3331] design fix_to_flt_conv_exp has unconnected port A[14]
+WARNING: [Synth 8-3331] design fix_to_flt_conv_exp has unconnected port A[13]
+WARNING: [Synth 8-3331] design fix_to_flt_conv_exp has unconnected port A[12]
+WARNING: [Synth 8-3331] design fix_to_flt_conv_exp has unconnected port A[11]
+WARNING: [Synth 8-3331] design fix_to_flt_conv_exp has unconnected port A[10]
+WARNING: [Synth 8-3331] design fix_to_flt_conv_exp has unconnected port A[9]
+WARNING: [Synth 8-3331] design fix_to_flt_conv_exp has unconnected port A[8]
+WARNING: [Synth 8-3331] design fix_to_flt_conv_exp has unconnected port A[7]
+WARNING: [Synth 8-3331] design fix_to_flt_conv_exp has unconnected port A[6]
+WARNING: [Synth 8-3331] design fix_to_flt_conv_exp has unconnected port A[5]
+WARNING: [Synth 8-3331] design fix_to_flt_conv_exp has unconnected port A[4]
+WARNING: [Synth 8-3331] design fix_to_flt_conv_exp has unconnected port A[3]
+WARNING: [Synth 8-3331] design fix_to_flt_conv_exp has unconnected port A[2]
+WARNING: [Synth 8-3331] design fix_to_flt_conv_exp has unconnected port A[1]
+WARNING: [Synth 8-3331] design fix_to_flt_conv_exp has unconnected port A[0]
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized29 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized29 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized29 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized29 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized29 has unconnected port SINIT
+WARNING: [Synth 8-3331] design carry_chain__parameterized4 has unconnected port B[11]
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized13 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized13 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized13 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized13 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized13 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized23 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized23 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized23 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized23 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized23 has unconnected port SINIT
+WARNING: [Synth 8-3331] design flt_round_bit has unconnected port NORMALIZE[1]
+WARNING: [Synth 8-3331] design flt_round_bit has unconnected port FIXED_POINT
+WARNING: [Synth 8-3331] design flt_round_bit has unconnected port FIX_MANT_SIGN
+WARNING: [Synth 8-3331] design flt_round_bit has unconnected port SIGN
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized27 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized27 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized27 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized27 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized27 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized21 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized21 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized21 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized21 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized21 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized19 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized19 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized19 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized19 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized19 has unconnected port SINIT
+WARNING: [Synth 8-3331] design renorm_and_round_logic has unconnected port EXP_OUT[7]
+WARNING: [Synth 8-3331] design renorm_and_round_logic has unconnected port EXP_OUT[6]
+WARNING: [Synth 8-3331] design renorm_and_round_logic has unconnected port EXP_OUT[5]
+WARNING: [Synth 8-3331] design renorm_and_round_logic has unconnected port EXP_OUT[4]
+WARNING: [Synth 8-3331] design renorm_and_round_logic has unconnected port EXP_OUT[3]
+WARNING: [Synth 8-3331] design renorm_and_round_logic has unconnected port EXP_OUT[2]
+WARNING: [Synth 8-3331] design renorm_and_round_logic has unconnected port EXP_OUT[1]
+WARNING: [Synth 8-3331] design renorm_and_round_logic has unconnected port EXP_OUT[0]
+WARNING: [Synth 8-3331] design renorm_and_round_logic has unconnected port EXP_INC_IN
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized15 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized15 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized15 has unconnected port SINIT
+WARNING: [Synth 8-3331] design shift_msb_first has unconnected port DISTANCE[7]
+WARNING: [Synth 8-3331] design shift_msb_first has unconnected port DISTANCE[6]
+WARNING: [Synth 8-3331] design shift_msb_first has unconnected port DISTANCE[5]
+WARNING: [Synth 8-3331] design shift_msb_first has unconnected port DISTANCE[0]
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized5 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized5 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized5 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized5 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized5 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized11 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized11 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized11 has unconnected port SINIT
+INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:27 ; elapsed = 00:00:46 . Memory (MB): peak = 1576.727 ; gain = 0.000 ; free physical = 1090 ; free virtual = 25648
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:28 ; elapsed = 00:00:47 . Memory (MB): peak = 1576.727 ; gain = 0.000 ; free physical = 1085 ; free virtual = 25648
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:28 ; elapsed = 00:00:47 . Memory (MB): peak = 1576.727 ; gain = 0.000 ; free physical = 1085 ; free virtual = 25648
+---------------------------------------------------------------------------------
+INFO: [Netlist 29-17] Analyzing 94 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Device 21-403] Loading part xczu9eg-ffvb1156-2-e
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.srcs/sources_1/ip/fft_fixed_fixed18_to_float_0/fft_fixed_fixed18_to_float_0_ooc.xdc] for cell 'U0'
+Finished Parsing XDC File [/media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.srcs/sources_1/ip/fft_fixed_fixed18_to_float_0/fft_fixed_fixed18_to_float_0_ooc.xdc] for cell 'U0'
+Parsing XDC File [/media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.runs/fft_fixed_fixed18_to_float_0_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.runs/fft_fixed_fixed18_to_float_0_synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.08 . Memory (MB): peak = 2367.324 ; gain = 0.000 ; free physical = 208 ; free virtual = 24942
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:01:06 ; elapsed = 00:01:43 . Memory (MB): peak = 2367.324 ; gain = 790.598 ; free physical = 256 ; free virtual = 25004
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xczu9eg-ffvb1156-2-e
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:01:06 ; elapsed = 00:01:43 . Memory (MB): peak = 2367.324 ; gain = 790.598 ; free physical = 255 ; free virtual = 25004
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property DONT_TOUCH = true for U0. (constraint file  /media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.runs/fft_fixed_fixed18_to_float_0_synth_1/dont_touch.xdc, line 9).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:01:06 ; elapsed = 00:01:44 . Memory (MB): peak = 2367.324 ; gain = 790.598 ; free physical = 255 ; free virtual = 25005
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:07 ; elapsed = 00:01:45 . Memory (MB): peak = 2367.324 ; gain = 790.598 ; free physical = 238 ; free virtual = 24998
+---------------------------------------------------------------------------------
+INFO: [Synth 8-223] decloning instance 'U0/i_synth/DELAY_INVALID_OP' (delay__parameterized8) to 'U0/i_synth/DELAY_DIVIDE_BY_ZERO'
+INFO: [Synth 8-223] decloning instance 'U0/i_synth/DELAY_INVALID_OP' (delay__parameterized8) to 'U0/i_synth/DELAY_OVERFLOW'
+INFO: [Synth 8-223] decloning instance 'U0/i_synth/DELAY_INVALID_OP' (delay__parameterized8) to 'U0/i_synth/DELAY_UNDERFLOW'
+INFO: [Synth 8-223] decloning instance 'U0/i_synth/DELAY_INVALID_OP' (delay__parameterized8) to 'U0/i_synth/DELAY_ACCUM_OVERFLOW'
+INFO: [Synth 8-223] decloning instance 'U0/i_synth/DELAY_INVALID_OP' (delay__parameterized8) to 'U0/i_synth/DELAY_ACCUM_INPUT_OVERFLOW'
+INFO: [Synth 8-223] decloning instance 'U0/i_synth/FIX_TO_FLT_OP.SPD.OP/ROUND/EXTRA_LSB_BIT_DEL' (delay__parameterized8) to 'U0/i_synth/FIX_TO_FLT_OP.SPD.OP/ROUND/EXTRA_LSB_RND1_DEL'
+INFO: [Synth 8-223] decloning instance 'U0/i_synth/FIX_TO_FLT_OP.SPD.OP/ROUND/EXP_INC_DELAY' (delay__parameterized8) to 'U0/i_synth/FIX_TO_FLT_OP.SPD.OP/ROUND/EXP_INC_RND1_DELAY'
+INFO: [Synth 8-223] decloning instance 'U0/i_synth/FIX_TO_FLT_OP.SPD.OP/ROUND/NORMALIZE_DEL' (delay__parameterized6) to 'U0/i_synth/FIX_TO_FLT_OP.SPD.OP/ROUND/NORMALIZE_RND1_DEL'
+INFO: [Synth 8-223] decloning instance 'U0/i_synth/FIX_TO_FLT_OP.SPD.OP/ROUND/EXP_IN_DELAY.EXP_IN_DEL' (delay__parameterized12) to 'U0/i_synth/FIX_TO_FLT_OP.SPD.OP/ROUND/EXP_RND2_DELAY.EXP_RND_DEL'
+INFO: [Synth 8-223] decloning instance 'U0/i_synth/FIX_TO_FLT_OP.SPD.OP/ROUND/EXP_IN_DELAY.EXP_OFF_OP_DEL' (delay__parameterized12) to 'U0/i_synth/FIX_TO_FLT_OP.SPD.OP/ROUND/EXP_RND2_DELAY.EXP_OFF_RND_DEL'
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 2520 (col length:168)
+BRAMs: 1824 (col length: RAMB18 168 RAMB36 84)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+INFO: [Synth 8-3332] Sequential element (FIX_TO_FLT_OP.SPD.OP/NORM_SHIFT/MUX_LOOP[0].DEL_SHIFT/i_pipe/opt_has_pipe.first_q_reg[0]) is unused and will be removed from module floating_point_v7_1_6_viv.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:08 ; elapsed = 00:01:45 . Memory (MB): peak = 2367.324 ; gain = 790.598 ; free physical = 214 ; free virtual = 24989
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:02:00 ; elapsed = 00:03:14 . Memory (MB): peak = 2812.582 ; gain = 1235.855 ; free physical = 129 ; free virtual = 24230
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:02:00 ; elapsed = 00:03:14 . Memory (MB): peak = 2833.613 ; gain = 1256.887 ; free physical = 107 ; free virtual = 24186
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:02:00 ; elapsed = 00:03:15 . Memory (MB): peak = 2833.613 ; gain = 1256.887 ; free physical = 136 ; free virtual = 24195
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:02:01 ; elapsed = 00:03:16 . Memory (MB): peak = 2833.613 ; gain = 1256.887 ; free physical = 123 ; free virtual = 24198
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:02:01 ; elapsed = 00:03:16 . Memory (MB): peak = 2833.613 ; gain = 1256.887 ; free physical = 122 ; free virtual = 24198
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:01 ; elapsed = 00:03:16 . Memory (MB): peak = 2833.613 ; gain = 1256.887 ; free physical = 121 ; free virtual = 24198
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:02:01 ; elapsed = 00:03:16 . Memory (MB): peak = 2833.613 ; gain = 1256.887 ; free physical = 121 ; free virtual = 24198
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:02:01 ; elapsed = 00:03:16 . Memory (MB): peak = 2833.613 ; gain = 1256.887 ; free physical = 118 ; free virtual = 24197
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:02:01 ; elapsed = 00:03:16 . Memory (MB): peak = 2833.613 ; gain = 1256.887 ; free physical = 118 ; free virtual = 24197
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+------+------+
+|      |Cell  |Count |
++------+------+------+
+|1     |LUT2  |    28|
+|2     |LUT3  |    28|
+|3     |LUT4  |     7|
+|4     |LUT5  |     5|
+|5     |LUT6  |    20|
+|6     |MUXCY |    52|
+|7     |XORCY |    42|
+|8     |FDRE  |    63|
++------+------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:02:01 ; elapsed = 00:03:16 . Memory (MB): peak = 2833.613 ; gain = 1256.887 ; free physical = 118 ; free virtual = 24197
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 76 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:35 ; elapsed = 00:02:32 . Memory (MB): peak = 2833.613 ; gain = 466.289 ; free physical = 152 ; free virtual = 24235
+Synthesis Optimization Complete : Time (s): cpu = 00:02:01 ; elapsed = 00:03:16 . Memory (MB): peak = 2833.621 ; gain = 1256.887 ; free physical = 145 ; free virtual = 24244
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 94 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 9 instances were transformed.
+  (CARRY4) => CARRY8: 9 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+29 Infos, 100 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:02:05 ; elapsed = 00:03:19 . Memory (MB): peak = 2857.246 ; gain = 1302.668 ; free physical = 154 ; free virtual = 24231
+INFO: [Common 17-1381] The checkpoint '/media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.runs/fft_fixed_fixed18_to_float_0_synth_1/fft_fixed_fixed18_to_float_0.dcp' has been generated.
+INFO: [Coretcl 2-1482] Added synthesis output to IP cache for IP /media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.srcs/sources_1/ip/fft_fixed_fixed18_to_float_0/fft_fixed_fixed18_to_float_0.xci
+INFO: [Coretcl 2-1174] Renamed 30 cell refs.
+INFO: [Common 17-1381] The checkpoint '/media/soc/Volume/master-thesis/ft_cores/xfft-fixed/xfft-fixed.runs/fft_fixed_fixed18_to_float_0_synth_1/fft_fixed_fixed18_to_float_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file fft_fixed_fixed18_to_float_0_utilization_synth.rpt -pb fft_fixed_fixed18_to_float_0_utilization_synth.pb
+report_utilization: Time (s): cpu = 00:00:00.42 ; elapsed = 00:00:00.57 . Memory (MB): peak = 2881.258 ; gain = 0.000 ; free physical = 117 ; free virtual = 24228
+INFO: [Common 17-206] Exiting Vivado at Sun Mar 14 14:12:32 2021...

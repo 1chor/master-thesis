@@ -96,8 +96,11 @@ architecture arch of ft_wrapper is
     signal imag_fixed2float_out_tvalid    : std_logic := '0';
     signal imag_fixed2float_out_tdata     : std_logic_vector(DATA_WIDTH downto 0) := (others => '0'); -- data payload
     
-    signal temp_real_float : std_logic_vector(DATA_WIDTH downto 0) := (others => '0');
-    signal temp_imag_float : std_logic_vector(DATA_WIDTH downto 0) := (others => '0');    
+    signal temp_real_float      : std_logic_vector(DATA_WIDTH downto 0) := (others => '0');
+    signal temp_real_float_next : std_logic_vector(DATA_WIDTH downto 0) := (others => '0');
+    
+    signal temp_imag_float      : std_logic_vector(DATA_WIDTH downto 0) := (others => '0');
+    signal temp_imag_float_next : std_logic_vector(DATA_WIDTH downto 0) := (others => '0');    
     
     -- type declaration
     type state_type is (
@@ -114,6 +117,7 @@ architecture arch of ft_wrapper is
     
     type output_state_type is (
         OUTPUT_IDLE,
+        OUTPUT_CONVERT_FIRST,
         OUTPUT_DELAY,
         OUTPUT_DATA
     );
@@ -224,6 +228,8 @@ begin
             output_state <= OUTPUT_IDLE;
             index <= 0;
             receive_index <= 0;
+            temp_real_float <= (others => '0');
+            temp_imag_float <= (others => '0');
             
         elsif rising_edge(clk) then
             state <= state_next;
@@ -231,6 +237,8 @@ begin
             output_state <= output_state_next;
             index <= index_next;
             receive_index <= receive_index_next;
+            temp_real_float <= temp_real_float_next;
+            temp_imag_float <= temp_imag_float_next;
         end if;
         
     end process sync_state_proc;
@@ -250,6 +258,8 @@ begin
         float2fixed_in_tvalid <= '0';
         
         float2fixed_in_tdata <= (others => '0');
+        
+        clk_en_i <= '1'; --FFT runs
         
         case input_state is
         
@@ -305,7 +315,7 @@ begin
             when OUTPUT_DATA =>
                 clk_en <= clk_en_o; --route clock enable to output process
                 
-                if receive_index = SIZE then                    
+                if receive_index = SIZE-1 then                    
                     state_next <= TRANSFER_TO_FFT;
                 end if;
                 
@@ -316,24 +326,25 @@ begin
     end process dft_proc;
         
     -----------------------------------------------------------------------
-    
-    --signal is set outside the process due to delay
-    --temporary save float values
-    temp_real_float <= real_fixed2float_out_tdata when real_fixed2float_out_tvalid = '1';
-    temp_imag_float <= imag_fixed2float_out_tdata when imag_fixed2float_out_tvalid = '1';
-    
+
     --process to get output of the DFT
-    output_proc: process (output_state, receive_index, state, first_out, fft_out, temp_real_float, temp_imag_float, stout_ready)
+    output_proc: process (output_state, receive_index, temp_real_float, temp_imag_float, state, first_out, fft_out, stout_ready, real_fixed2float_out_tvalid, imag_fixed2float_out_tvalid, real_fixed2float_out_tdata, imag_fixed2float_out_tdata)
     begin
         --default values to prevent latches
         output_state_next <= output_state;
         receive_index_next <= receive_index;
+        temp_real_float_next <= temp_real_float;
+        temp_imag_float_next <= temp_imag_float;
         stout_valid <= '0';
         real_fixed2float_in_tvalid <= '0';
         imag_fixed2float_in_tvalid <= '0';
         
         real_fixed2float_in_tdata <= (others => '0');
         imag_fixed2float_in_tdata <= (others => '0');
+        
+        stout_data <= (others => '0');
+        
+        clk_en_o <= '1'; --FFT runs
         
         case output_state is
                 
@@ -342,7 +353,11 @@ begin
                 clk_en_o <= '1'; --FFT runs
                 
                 if (state = OUTPUT_DATA) and (first_out = '1') then --check if the output data of the GPP-FFT is valid
-                    --clk_en_o <= '0'; --FFT halted
+                    clk_en_o <= '0'; --FFT halted
+                    
+                    -------------------------
+                    -- Convert output data --
+                    -------------------------
                     
                     --convert first output data
                     --real part
@@ -352,24 +367,83 @@ begin
                     imag_fixed2float_in_tdata(DFT_OUT_WIDTH-1 downto 0) <= fft_out(DFT_OUT_WIDTH-1 downto 0); --convert fixed25 to float
                     imag_fixed2float_in_tvalid <= '1';
                     
-                    output_state_next <= OUTPUT_DELAY;
+                    output_state_next <= OUTPUT_CONVERT_FIRST;
                 end if;      
                 
+            when OUTPUT_CONVERT_FIRST =>
+            
+                clk_en_o <= '1'; --FFT runs
+                
+                if (state = OUTPUT_DATA) and (real_fixed2float_out_tvalid = '1') and (imag_fixed2float_out_tvalid = '1') then --check if the output data of the GPP-FFT is valid
+                    clk_en_o <= '0'; --FFT halted
+                    
+                    ---------------------
+                    -- Save conversion --
+                    ---------------------
+                    
+                    --temporary save float values
+                    temp_real_float_next <= real_fixed2float_out_tdata;
+                    temp_imag_float_next <= imag_fixed2float_out_tdata;
+                    
+                    -------------------------
+                    -- Convert output data --
+                    -------------------------
+                    
+                    --convert next output data
+                    --real part
+                    real_fixed2float_in_tdata(DFT_OUT_WIDTH-1 downto 0) <= fft_out(2*DFT_OUT_WIDTH-1 downto DFT_OUT_WIDTH); --convert fixed25 to float 
+                    real_fixed2float_in_tvalid <= '1';
+                    --imaginary part
+                    imag_fixed2float_in_tdata(DFT_OUT_WIDTH-1 downto 0) <= fft_out(DFT_OUT_WIDTH-1 downto 0); --convert fixed25 to float
+                    imag_fixed2float_in_tvalid <= '1';
+                    
+                    output_state_next <= OUTPUT_DELAY;
+                end if;
+                    
             when OUTPUT_DELAY =>
                 
                 clk_en_o <= '1'; --FFT runs
                 
-                if (receive_index = SIZE) then --independent of valid signals
-                    clk_en_o <= '0'; --FFT halted
-                    receive_index_next <= 0; --reset counter
-                    output_state_next <= OUTPUT_IDLE;
+                if (real_fixed2float_out_tvalid = '1') and (imag_fixed2float_out_tvalid = '1') then
+                    ---------------------
+                    -- Save conversion --
+                    ---------------------
                     
-                elsif (state = OUTPUT_DATA) and (stout_ready = '1') then --check if the master is ready to read
+                    --temporary save float values
+                    temp_real_float_next <= real_fixed2float_out_tdata;
+                    temp_imag_float_next <= imag_fixed2float_out_tdata;
+                end if;
+                                    
+                if (receive_index = SIZE-2) and (state = OUTPUT_DATA) and (stout_ready = '1') then --check if the master is ready to read
                     clk_en_o <= '0'; --FFT halted
+                    
+                    -----------------
+                    -- Output data --
+                    -----------------
                     
                     --set data outputs
                     stout_data <= temp_imag_float & temp_real_float;
                     stout_valid <= '1';
+                    
+                    --increase index
+                    receive_index_next <= receive_index + 1; 
+                    
+                    output_state_next <= OUTPUT_DATA;
+                    
+                elsif (state = OUTPUT_DATA) and (stout_ready = '1') then --check if the master is ready to read
+                    clk_en_o <= '0'; --FFT halted
+                    
+                    -----------------
+                    -- Output data --
+                    -----------------
+                    
+                    --set data outputs
+                    stout_data <= temp_imag_float & temp_real_float;
+                    stout_valid <= '1';
+                                        
+                    -------------------------
+                    -- Convert output data --
+                    -------------------------
                     
                     --convert next output data
                     --real part
@@ -380,7 +454,7 @@ begin
                     imag_fixed2float_in_tvalid <= '1';
                                    
                     --increase index
-                    receive_index_next <= receive_index + 1;     
+                    receive_index_next <= receive_index + 1;   
                     
                     output_state_next <= OUTPUT_DATA;
                 end if;
@@ -389,19 +463,47 @@ begin
         
                 clk_en_o <= '1'; --FFT runs
                 
-                if (receive_index = SIZE) then --independent of valid signals
-                    clk_en_o <= '0'; --FFT halted
-                    receive_index_next <= 0; --reset counter
-                    output_state_next <= OUTPUT_IDLE;
+                if (real_fixed2float_out_tvalid = '1') and (imag_fixed2float_out_tvalid = '1') then
+                    ---------------------
+                    -- Save conversion --
+                    ---------------------
                     
-                elsif (state = OUTPUT_DATA) and (stout_ready = '1') then --check if the master is ready to read
+                    --temporary save float values
+                    temp_real_float_next <= real_fixed2float_out_tdata;
+                    temp_imag_float_next <= imag_fixed2float_out_tdata;
+                end if;
+                
+                if (receive_index = SIZE-1) and (state = TRANSFER_TO_FFT) and (stout_ready = '1') then --check if the master is ready to read
                     clk_en_o <= '0'; --FFT halted
+                    
+                    -----------------
+                    -- Output data --
+                    -----------------
                     
                     --set data outputs
                     stout_data <= temp_imag_float & temp_real_float;
                     stout_valid <= '1';
                     
+                    receive_index_next <= 0; --reset counter
+                    
+                    output_state_next <= OUTPUT_IDLE;                    
+                    
+                elsif (state = OUTPUT_DATA) and (stout_ready = '1') then --check if the master is ready to read
+                    clk_en_o <= '0'; --FFT halted
+                    
+                    -----------------
+                    -- Output data --
+                    -----------------
+                    
+                    --set data outputs
+                    stout_data <= temp_imag_float & temp_real_float;
+                    stout_valid <= '1';
+                                        
                     if (receive_index /= SIZE-1) then --skip new output transmission
+                        -------------------------
+                        -- Convert output data --
+                        -------------------------
+                        
                         --convert next output data
                         --real part
                         real_fixed2float_in_tdata(DFT_OUT_WIDTH-1 downto 0) <= fft_out(2*DFT_OUT_WIDTH-1 downto DFT_OUT_WIDTH); --convert fixed25 to float
