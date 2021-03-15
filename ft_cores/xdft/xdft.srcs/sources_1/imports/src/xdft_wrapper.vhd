@@ -177,6 +177,7 @@ architecture arch of ft_wrapper is
         
     type input_state_type is (
         INPUT_IDLE,
+        CONVERT_FIRST,
         CONVERT,
         FIRST_FRAME,
         OTHER_FRAMES
@@ -466,9 +467,19 @@ begin
             when INPUT_IDLE =>
                 if (state = TRANSFER_TO_FFT) and (empty_i = '1') then --forward back pressure
                     stin_ready <= '1';
-                    input_state_next <= CONVERT;
+                    input_state_next <= CONVERT_FIRST;
                 end if;
                 
+            when CONVERT_FIRST =>
+                stin_ready <= '1';
+                
+                if (state = TRANSFER_TO_FFT) and (stin_valid = '1') and (empty_i = '1') then
+                    --convert first input data
+                    float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
+                    float2fixed_in_tvalid <= '1';   
+                    input_state_next <= CONVERT;  
+                end if;
+                        
             when CONVERT =>
                 stin_ready <= '1';
                 
@@ -494,10 +505,10 @@ begin
                     --increase index
                     fifo_i_index_next <= fifo_i_index + 1;     
                     
-                elsif (state = TRANSFER_TO_FFT) and (stin_valid = '1') and (empty_i = '1') then
-                    --convert first input data
-                    float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
-                    float2fixed_in_tvalid <= '1';     
+--                elsif (state = TRANSFER_TO_FFT) and (stin_valid = '1') and (empty_i = '1') then
+--                    --convert first input data
+--                    float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
+--                    float2fixed_in_tvalid <= '1';     
                 end if;
         
             when FIRST_FRAME =>                

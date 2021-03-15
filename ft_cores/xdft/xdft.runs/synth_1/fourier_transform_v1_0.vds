@@ -2,8 +2,8 @@
 # Vivado v2018.1 (64-bit)
 # SW Build 2188600 on Wed Apr  4 18:39:19 MDT 2018
 # IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
-# Start of session at: Sun Mar 14 18:04:49 2021
-# Process ID: 30600
+# Start of session at: Mon Mar 15 22:27:27 2021
+# Process ID: 19122
 # Current directory: /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1
 # Command line: vivado -log fourier_transform_v1_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source fourier_transform_v1_0.tcl
 # Log file: /media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/fourier_transform_v1_0.vds
@@ -16,9 +16,9 @@ Attempting to get a license for feature 'Synthesis' and/or device 'xczu9eg'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xczu9eg'
 INFO: [Common 17-1540] The version limit for your license is '2021.01' and has expired for new software. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 30891 
+INFO: Helper process launched with PID 19774 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1608.746 ; gain = 0.000 ; free physical = 249 ; free virtual = 25538
+Starting RTL Elaboration : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1608.746 ; gain = 0.000 ; free physical = 214 ; free virtual = 23619
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-638] synthesizing module 'fourier_transform_v1_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/new/fourier_transform_v1_0.vhd:70]
 	Parameter C_S00_AXI_DATA_WIDTH bound to: 64 - type: integer 
@@ -34,19 +34,18 @@ INFO: [Synth 8-638] synthesizing module 'ft_wrapper' [/media/soc/Volume/master-t
 	Parameter SIZE bound to: 108 - type: integer 
 	Parameter C_S_AXI_DATA_WIDTH bound to: 64 - type: integer 
 WARNING: [Synth 8-312] ignoring unsynthesizable construct: statements in entity [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/src/xdft_wrapper.vhd:55]
-INFO: [Synth 8-3491] module 'dft_float_to_fixed18_0' declared at '/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-30600-soc/realtime/dft_float_to_fixed18_0_stub.vhdl:5' bound to instance 'float_to_fixed18_inst' of component 'dft_float_to_fixed18_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/src/xdft_wrapper.vhd:278]
-INFO: [Synth 8-638] synthesizing module 'dft_float_to_fixed18_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-30600-soc/realtime/dft_float_to_fixed18_0_stub.vhdl:17]
-INFO: [Synth 8-3491] module 'dft_fixed18_to_float_0' declared at '/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-30600-soc/realtime/dft_fixed18_to_float_0_stub.vhdl:5' bound to instance 'fixed18_to_float_inst_real' of component 'dft_fixed18_to_float_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/src/xdft_wrapper.vhd:292]
-INFO: [Synth 8-638] synthesizing module 'dft_fixed18_to_float_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-30600-soc/realtime/dft_fixed18_to_float_0_stub.vhdl:16]
-INFO: [Synth 8-3491] module 'dft_fixed18_to_float_0' declared at '/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-30600-soc/realtime/dft_fixed18_to_float_0_stub.vhdl:5' bound to instance 'fixed18_to_float_inst_imag' of component 'dft_fixed18_to_float_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/src/xdft_wrapper.vhd:305]
-INFO: [Synth 8-3491] module 'dft_fifo_in_0' declared at '/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-30600-soc/realtime/dft_fifo_in_0_stub.vhdl:5' bound to instance 'fifo_in_inst' of component 'dft_fifo_in_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/src/xdft_wrapper.vhd:318]
-INFO: [Synth 8-638] synthesizing module 'dft_fifo_in_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-30600-soc/realtime/dft_fifo_in_0_stub.vhdl:21]
-INFO: [Synth 8-3491] module 'dft_fifo_out_0' declared at '/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-30600-soc/realtime/dft_fifo_out_0_stub.vhdl:5' bound to instance 'fifo_out_inst' of component 'dft_fifo_out_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/src/xdft_wrapper.vhd:333]
-INFO: [Synth 8-638] synthesizing module 'dft_fifo_out_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-30600-soc/realtime/dft_fifo_out_0_stub.vhdl:21]
-INFO: [Synth 8-3491] module 'dft_0' declared at '/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-30600-soc/realtime/dft_0_stub.vhdl:5' bound to instance 'dft_inst' of component 'dft_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/src/xdft_wrapper.vhd:348]
-INFO: [Synth 8-638] synthesizing module 'dft_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-30600-soc/realtime/dft_0_stub.vhdl:24]
-INFO: [Synth 8-226] default block is never used [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/src/xdft_wrapper.vhd:464]
-INFO: [Synth 8-226] default block is never used [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/src/xdft_wrapper.vhd:548]
+INFO: [Synth 8-3491] module 'dft_float_to_fixed18_0' declared at '/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-19122-soc/realtime/dft_float_to_fixed18_0_stub.vhdl:5' bound to instance 'float_to_fixed18_inst' of component 'dft_float_to_fixed18_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/src/xdft_wrapper.vhd:279]
+INFO: [Synth 8-638] synthesizing module 'dft_float_to_fixed18_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-19122-soc/realtime/dft_float_to_fixed18_0_stub.vhdl:17]
+INFO: [Synth 8-3491] module 'dft_fixed18_to_float_0' declared at '/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-19122-soc/realtime/dft_fixed18_to_float_0_stub.vhdl:5' bound to instance 'fixed18_to_float_inst_real' of component 'dft_fixed18_to_float_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/src/xdft_wrapper.vhd:293]
+INFO: [Synth 8-638] synthesizing module 'dft_fixed18_to_float_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-19122-soc/realtime/dft_fixed18_to_float_0_stub.vhdl:16]
+INFO: [Synth 8-3491] module 'dft_fixed18_to_float_0' declared at '/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-19122-soc/realtime/dft_fixed18_to_float_0_stub.vhdl:5' bound to instance 'fixed18_to_float_inst_imag' of component 'dft_fixed18_to_float_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/src/xdft_wrapper.vhd:306]
+INFO: [Synth 8-3491] module 'dft_fifo_in_0' declared at '/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-19122-soc/realtime/dft_fifo_in_0_stub.vhdl:5' bound to instance 'fifo_in_inst' of component 'dft_fifo_in_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/src/xdft_wrapper.vhd:319]
+INFO: [Synth 8-638] synthesizing module 'dft_fifo_in_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-19122-soc/realtime/dft_fifo_in_0_stub.vhdl:21]
+INFO: [Synth 8-3491] module 'dft_fifo_out_0' declared at '/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-19122-soc/realtime/dft_fifo_out_0_stub.vhdl:5' bound to instance 'fifo_out_inst' of component 'dft_fifo_out_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/src/xdft_wrapper.vhd:334]
+INFO: [Synth 8-638] synthesizing module 'dft_fifo_out_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-19122-soc/realtime/dft_fifo_out_0_stub.vhdl:21]
+INFO: [Synth 8-3491] module 'dft_0' declared at '/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-19122-soc/realtime/dft_0_stub.vhdl:5' bound to instance 'dft_inst' of component 'dft_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/src/xdft_wrapper.vhd:349]
+INFO: [Synth 8-638] synthesizing module 'dft_0' [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/.Xil/Vivado-19122-soc/realtime/dft_0_stub.vhdl:24]
+INFO: [Synth 8-226] default block is never used [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/src/xdft_wrapper.vhd:559]
 INFO: [Synth 8-256] done synthesizing module 'ft_wrapper' (1#1) [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/src/xdft_wrapper.vhd:65]
 WARNING: [Synth 8-6014] Unused sequential element output_reg_reg was removed.  [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/new/fourier_transform_v1_0_user_logic.vhd:269]
 WARNING: [Synth 8-6014] Unused sequential element loc_addr_reg was removed.  [/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.srcs/sources_1/imports/new/fourier_transform_v1_0_user_logic.vhd:272]
@@ -91,7 +90,7 @@ WARNING: [Synth 8-3331] design user_logic has unconnected port S_AXI_ARPROT[2]
 WARNING: [Synth 8-3331] design user_logic has unconnected port S_AXI_ARPROT[1]
 WARNING: [Synth 8-3331] design user_logic has unconnected port S_AXI_ARPROT[0]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1608.746 ; gain = 0.000 ; free physical = 253 ; free virtual = 25548
+Finished RTL Elaboration : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 1608.746 ; gain = 0.000 ; free physical = 217 ; free virtual = 23629
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -104,10 +103,10 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1608.746 ; gain = 0.000 ; free physical = 252 ; free virtual = 25547
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1608.746 ; gain = 0.000 ; free physical = 217 ; free virtual = 23630
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1608.746 ; gain = 0.000 ; free physical = 252 ; free virtual = 25547
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1608.746 ; gain = 0.000 ; free physical = 217 ; free virtual = 23630
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xczu9eg-ffvb1156-2-e
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -133,16 +132,16 @@ Completed Processing XDC Constraints
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2369.328 ; gain = 0.000 ; free physical = 293 ; free virtual = 24844
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2369.328 ; gain = 0.000 ; free physical = 276 ; free virtual = 22925
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:50 ; elapsed = 00:01:08 . Memory (MB): peak = 2369.328 ; gain = 760.582 ; free physical = 335 ; free virtual = 24891
+Finished Constraint Validation : Time (s): cpu = 00:00:50 ; elapsed = 00:01:08 . Memory (MB): peak = 2369.328 ; gain = 760.582 ; free physical = 333 ; free virtual = 22987
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xczu9eg-ffvb1156-2-e
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:50 ; elapsed = 00:01:08 . Memory (MB): peak = 2369.328 ; gain = 760.582 ; free physical = 335 ; free virtual = 24891
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:50 ; elapsed = 00:01:08 . Memory (MB): peak = 2369.328 ; gain = 760.582 ; free physical = 332 ; free virtual = 22987
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -154,13 +153,14 @@ Applied set_property DONT_TOUCH = true for user_logic_inst/ft_wrapper_0/fifo_out
 Applied set_property DONT_TOUCH = true for user_logic_inst/ft_wrapper_0/fifo_in_inst. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for user_logic_inst/ft_wrapper_0/float_to_fixed18_inst. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:50 ; elapsed = 00:01:08 . Memory (MB): peak = 2369.328 ; gain = 760.582 ; free physical = 335 ; free virtual = 24891
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:50 ; elapsed = 00:01:08 . Memory (MB): peak = 2369.328 ; gain = 760.582 ; free physical = 332 ; free virtual = 22987
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'input_state_reg' in module 'ft_wrapper'
 INFO: [Synth 8-802] inferred FSM for state register 'output_state_reg' in module 'ft_wrapper'
 INFO: [Synth 8-5546] ROM "state_next" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "state_next" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "output_state_next" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5544] ROM "input_state_next" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "exp_next" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "output_state_next" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
 ---------------------------------------------------------------------------------------------------
@@ -176,14 +176,15 @@ INFO: [Synth 8-3354] encoded FSM with state register 'output_state_reg' using en
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
-              input_idle |                               00 |                               00
-                 convert |                               01 |                               01
-             first_frame |                               10 |                               10
-            other_frames |                               11 |                               11
+              input_idle |                            00001 |                              000
+           convert_first |                            00010 |                              001
+                 convert |                            00100 |                              010
+             first_frame |                            01000 |                              011
+            other_frames |                            10000 |                              100
 ---------------------------------------------------------------------------------------------------
-INFO: [Synth 8-3354] encoded FSM with state register 'input_state_reg' using encoding 'sequential' in module 'ft_wrapper'
+INFO: [Synth 8-3354] encoded FSM with state register 'input_state_reg' using encoding 'one-hot' in module 'ft_wrapper'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:51 ; elapsed = 00:01:09 . Memory (MB): peak = 2369.328 ; gain = 760.582 ; free physical = 323 ; free virtual = 24885
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:51 ; elapsed = 00:01:09 . Memory (MB): peak = 2369.328 ; gain = 760.582 ; free physical = 317 ; free virtual = 22981
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -209,20 +210,16 @@ Detailed RTL Component Info :
 	   2 Input     64 Bit        Muxes := 4     
 	   5 Input     64 Bit        Muxes := 1     
 	   2 Input     32 Bit        Muxes := 3     
-	   4 Input     32 Bit        Muxes := 1     
+	   5 Input     32 Bit        Muxes := 1     
 	   2 Input     24 Bit        Muxes := 2     
 	   5 Input     24 Bit        Muxes := 2     
 	   2 Input     18 Bit        Muxes := 2     
-	   4 Input     18 Bit        Muxes := 1     
+	   5 Input     18 Bit        Muxes := 1     
 	   2 Input      8 Bit        Muxes := 1     
 	   2 Input      7 Bit        Muxes := 1     
-	   5 Input      7 Bit        Muxes := 1     
-	   4 Input      7 Bit        Muxes := 1     
-	   4 Input      2 Bit        Muxes := 1     
-	   2 Input      2 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 23    
-	   5 Input      1 Bit        Muxes := 8     
-	   4 Input      1 Bit        Muxes := 8     
+	   5 Input      7 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 22    
+	   5 Input      1 Bit        Muxes := 16    
 	   7 Input      1 Bit        Muxes := 1     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
@@ -245,20 +242,16 @@ Detailed RTL Component Info :
 	   2 Input     64 Bit        Muxes := 1     
 	   5 Input     64 Bit        Muxes := 1     
 	   2 Input     32 Bit        Muxes := 3     
-	   4 Input     32 Bit        Muxes := 1     
+	   5 Input     32 Bit        Muxes := 1     
 	   2 Input     24 Bit        Muxes := 2     
 	   5 Input     24 Bit        Muxes := 2     
 	   2 Input     18 Bit        Muxes := 2     
-	   4 Input     18 Bit        Muxes := 1     
+	   5 Input     18 Bit        Muxes := 1     
 	   2 Input      8 Bit        Muxes := 1     
 	   2 Input      7 Bit        Muxes := 1     
-	   5 Input      7 Bit        Muxes := 1     
-	   4 Input      7 Bit        Muxes := 1     
-	   4 Input      2 Bit        Muxes := 1     
-	   2 Input      2 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 17    
-	   5 Input      1 Bit        Muxes := 8     
-	   4 Input      1 Bit        Muxes := 8     
+	   5 Input      7 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 16    
+	   5 Input      1 Bit        Muxes := 16    
 Module user_logic 
 Detailed RTL Component Info : 
 +---Registers : 
@@ -388,7 +381,7 @@ WARNING: [Synth 8-3332] Sequential element (user_logic_inst/input_reg_reg[34]) i
 WARNING: [Synth 8-3332] Sequential element (user_logic_inst/input_reg_reg[33]) is unused and will be removed from module fourier_transform_v1_0.
 WARNING: [Synth 8-3332] Sequential element (user_logic_inst/input_reg_reg[32]) is unused and will be removed from module fourier_transform_v1_0.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:54 ; elapsed = 00:01:12 . Memory (MB): peak = 2369.328 ; gain = 760.582 ; free physical = 302 ; free virtual = 24874
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:54 ; elapsed = 00:01:12 . Memory (MB): peak = 2369.328 ; gain = 760.582 ; free physical = 283 ; free virtual = 22963
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -400,13 +393,13 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:44 ; elapsed = 00:02:34 . Memory (MB): peak = 2819.586 ; gain = 1210.840 ; free physical = 110 ; free virtual = 24127
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:44 ; elapsed = 00:02:36 . Memory (MB): peak = 2819.586 ; gain = 1210.840 ; free physical = 113 ; free virtual = 22210
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:01:44 ; elapsed = 00:02:34 . Memory (MB): peak = 2820.586 ; gain = 1211.840 ; free physical = 113 ; free virtual = 24127
+Finished Timing Optimization : Time (s): cpu = 00:01:44 ; elapsed = 00:02:36 . Memory (MB): peak = 2820.586 ; gain = 1211.840 ; free physical = 113 ; free virtual = 22210
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -418,7 +411,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:01:45 ; elapsed = 00:02:35 . Memory (MB): peak = 2841.625 ; gain = 1232.879 ; free physical = 127 ; free virtual = 24124
+Finished Technology Mapping : Time (s): cpu = 00:01:45 ; elapsed = 00:02:36 . Memory (MB): peak = 2841.625 ; gain = 1232.879 ; free physical = 124 ; free virtual = 22208
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -442,7 +435,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:46 ; elapsed = 00:02:36 . Memory (MB): peak = 2841.625 ; gain = 1232.879 ; free physical = 125 ; free virtual = 24124
+Finished IO Insertion : Time (s): cpu = 00:01:46 ; elapsed = 00:02:37 . Memory (MB): peak = 2841.625 ; gain = 1232.879 ; free physical = 123 ; free virtual = 22210
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -455,7 +448,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:46 ; elapsed = 00:02:36 . Memory (MB): peak = 2841.625 ; gain = 1232.879 ; free physical = 125 ; free virtual = 24124
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:46 ; elapsed = 00:02:37 . Memory (MB): peak = 2841.625 ; gain = 1232.879 ; free physical = 123 ; free virtual = 22210
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -467,25 +460,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:46 ; elapsed = 00:02:36 . Memory (MB): peak = 2841.625 ; gain = 1232.879 ; free physical = 124 ; free virtual = 24124
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:46 ; elapsed = 00:02:38 . Memory (MB): peak = 2841.625 ; gain = 1232.879 ; free physical = 123 ; free virtual = 22210
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:46 ; elapsed = 00:02:36 . Memory (MB): peak = 2841.625 ; gain = 1232.879 ; free physical = 124 ; free virtual = 24124
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:46 ; elapsed = 00:02:38 . Memory (MB): peak = 2841.625 ; gain = 1232.879 ; free physical = 123 ; free virtual = 22210
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:46 ; elapsed = 00:02:36 . Memory (MB): peak = 2841.625 ; gain = 1232.879 ; free physical = 124 ; free virtual = 24124
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:46 ; elapsed = 00:02:38 . Memory (MB): peak = 2841.625 ; gain = 1232.879 ; free physical = 122 ; free virtual = 22210
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:46 ; elapsed = 00:02:36 . Memory (MB): peak = 2841.625 ; gain = 1232.879 ; free physical = 124 ; free virtual = 24124
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:46 ; elapsed = 00:02:38 . Memory (MB): peak = 2841.625 ; gain = 1232.879 ; free physical = 122 ; free virtual = 22210
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -515,13 +508,13 @@ Report Cell Usage:
 |7     |BUFG                          |     1|
 |8     |CARRY8                        |     2|
 |9     |LUT1                          |     2|
-|10    |LUT2                          |    83|
-|11    |LUT3                          |    77|
-|12    |LUT4                          |    13|
-|13    |LUT5                          |    56|
-|14    |LUT6                          |    87|
-|15    |FDCE                          |   103|
-|16    |FDPE                          |     1|
+|10    |LUT2                          |    80|
+|11    |LUT3                          |    13|
+|12    |LUT4                          |    49|
+|13    |LUT5                          |    67|
+|14    |LUT6                          |   110|
+|15    |FDCE                          |   105|
+|16    |FDPE                          |     2|
 |17    |FDRE                          |   103|
 |18    |FDSE                          |     1|
 |19    |IBUF                          |    49|
@@ -532,16 +525,16 @@ Report Instance Areas:
 +------+------------------+-----------+------+
 |      |Instance          |Module     |Cells |
 +------+------------------+-----------+------+
-|1     |top               |           |   876|
-|2     |  user_logic_inst |user_logic |   753|
-|3     |    ft_wrapper_0  |ft_wrapper |   571|
+|1     |top               |           |   882|
+|2     |  user_logic_inst |user_logic |   759|
+|3     |    ft_wrapper_0  |ft_wrapper |   579|
 +------+------------------+-----------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:46 ; elapsed = 00:02:36 . Memory (MB): peak = 2841.625 ; gain = 1232.879 ; free physical = 124 ; free virtual = 24124
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:46 ; elapsed = 00:02:38 . Memory (MB): peak = 2841.625 ; gain = 1232.879 ; free physical = 121 ; free virtual = 22210
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 90 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:01:21 ; elapsed = 00:01:55 . Memory (MB): peak = 2841.625 ; gain = 472.297 ; free physical = 159 ; free virtual = 24161
-Synthesis Optimization Complete : Time (s): cpu = 00:01:46 ; elapsed = 00:02:36 . Memory (MB): peak = 2841.633 ; gain = 1232.879 ; free physical = 157 ; free virtual = 24170
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:21 ; elapsed = 00:01:57 . Memory (MB): peak = 2841.625 ; gain = 472.297 ; free physical = 157 ; free virtual = 22247
+Synthesis Optimization Complete : Time (s): cpu = 00:01:46 ; elapsed = 00:02:38 . Memory (MB): peak = 2841.633 ; gain = 1232.879 ; free physical = 146 ; free virtual = 22247
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Netlist 29-17] Analyzing 52 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -555,8 +548,8 @@ INFO: [Project 1-111] Unisim Transformation Summary:
 INFO: [Common 17-83] Releasing license: Synthesis
 54 Infos, 131 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:50 ; elapsed = 00:02:41 . Memory (MB): peak = 2862.625 ; gain = 1308.043 ; free physical = 162 ; free virtual = 24147
+synth_design: Time (s): cpu = 00:01:50 ; elapsed = 00:02:42 . Memory (MB): peak = 2862.625 ; gain = 1308.043 ; free physical = 191 ; free virtual = 22242
 INFO: [Common 17-1381] The checkpoint '/media/soc/Volume/master-thesis/ft_cores/xdft/xdft.runs/synth_1/fourier_transform_v1_0.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file fourier_transform_v1_0_utilization_synth.rpt -pb fourier_transform_v1_0_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:00.46 ; elapsed = 00:00:00.68 . Memory (MB): peak = 2886.637 ; gain = 0.000 ; free physical = 134 ; free virtual = 24147
-INFO: [Common 17-206] Exiting Vivado at Sun Mar 14 18:08:52 2021...
+report_utilization: Time (s): cpu = 00:00:00.49 ; elapsed = 00:00:00.76 . Memory (MB): peak = 2886.637 ; gain = 0.000 ; free physical = 148 ; free virtual = 22235
+INFO: [Common 17-206] Exiting Vivado at Mon Mar 15 22:31:35 2021...

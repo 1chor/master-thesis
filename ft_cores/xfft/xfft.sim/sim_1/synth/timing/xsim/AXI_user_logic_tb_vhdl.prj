@@ -1,0 +1,8 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../../xfft.srcs/sources_1/new/fourier_transform_v1_0_user_logic.vhd" \
+"../../../../../xfft.srcs/sources_1/new/xfft_wrapper.vhd" \
+"../../../../../xfft.srcs/sim_1/new/AXI_user_logic_tb.vhd" \
+
+# Do not sort compile order
+nosort

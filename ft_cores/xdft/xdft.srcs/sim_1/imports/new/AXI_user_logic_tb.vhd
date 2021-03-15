@@ -378,12 +378,12 @@ begin
         end loop;    
         
         -- write output files
-        write_success <= write_file32("../../../../TestData/simulation/xdft_result_ones.txt", output_real);
-        assert write_success = false report "Write file was not successful!" severity error;
-        write_success <= false;
-        write_success <= write_file32("../../../../TestData/simulation/xdft_result_ones_imag.txt", output_imag);
-        assert write_success = false report "Write file was not successful!" severity error;
-        write_success <= false;
+--        write_success <= write_file32("../../../../TestData/simulation/xdft_result_ones.txt", output_real);
+--        assert write_success = false report "Write file was not successful!" severity error;
+--        write_success <= false;
+--        write_success <= write_file32("../../../../TestData/simulation/xdft_result_ones_imag.txt", output_imag);
+--        assert write_success = false report "Write file was not successful!" severity error;
+--        write_success <= false;
         
         write(my_line, string'("Compare results"));
         writeline(output, my_line);
@@ -438,12 +438,12 @@ begin
         end loop;      
         
          -- write output files
-        write_success <= write_file32("../../../../TestData/simulation/xdft_result_one_zeros.txt", output_real);
-        assert write_success = false report "Write file was not successful!" severity error;
-        write_success <= false;
-        write_success <= write_file32("../../../../TestData/simulation/xdft_result_one_zeros_imag.txt", output_imag);
-        assert write_success = false report "Write file was not successful!" severity error;
-        write_success <= false;
+--        write_success <= write_file32("../../../../TestData/simulation/xdft_result_one_zeros.txt", output_real);
+--        assert write_success = false report "Write file was not successful!" severity error;
+--        write_success <= false;
+--        write_success <= write_file32("../../../../TestData/simulation/xdft_result_one_zeros_imag.txt", output_imag);
+--        assert write_success = false report "Write file was not successful!" severity error;
+--        write_success <= false;
 
         write(my_line, string'("Compare results"));
         writeline(output, my_line);
@@ -498,12 +498,12 @@ begin
         end loop;               
         
         -- write output files
-        write_success <= write_file32("../../../../TestData/simulation/xdft_result_real.txt", output_real);
-        assert write_success = false report "Write file was not successful!" severity error;
-        write_success <= false;
-        write_success <= write_file32("../../../../TestData/simulation/xdft_result_imag.txt", output_imag);
-        assert write_success = false report "Write file was not successful!" severity error;
-        write_success <= false;
+--        write_success <= write_file32("../../../../TestData/simulation/xdft_result_real.txt", output_real);
+--        assert write_success = false report "Write file was not successful!" severity error;
+--        write_success <= false;
+--        write_success <= write_file32("../../../../TestData/simulation/xdft_result_imag.txt", output_imag);
+--        assert write_success = false report "Write file was not successful!" severity error;
+--        write_success <= false;
         
         write(my_line, string'("Compare results"));
         writeline(output, my_line);
