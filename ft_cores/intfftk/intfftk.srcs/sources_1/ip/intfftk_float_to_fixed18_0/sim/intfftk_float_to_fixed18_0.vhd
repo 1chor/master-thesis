@@ -216,7 +216,7 @@ BEGIN
       C_RESULT_WIDTH => 18,
       C_RESULT_FRACTION_WIDTH => 17,
       C_COMPARE_OPERATION => 8,
-      C_LATENCY => 3,
+      C_LATENCY => 1,
       C_OPTIMIZATION => 1,
       C_MULT_USAGE => 0,
       C_BRAM_USAGE => 0,

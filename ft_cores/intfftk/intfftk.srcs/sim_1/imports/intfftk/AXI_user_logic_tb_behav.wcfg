@@ -14,21 +14,21 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="35925000001fs"></ZoomEndTime>
-      <Cursor1Time time="35905000000fs"></Cursor1Time>
+      <ZoomEndTime time="35865000001fs"></ZoomEndTime>
+      <Cursor1Time time="35845000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="147"></NameColumnWidth>
+      <NameColumnWidth column_width="151"></NameColumnWidth>
       <ValueColumnWidth column_width="66"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="51" />
    <wave_markers>
       <marker label="" time="40000000" />
-      <marker label="" time="12845000000" />
-      <marker label="" time="12875000000" />
-      <marker label="" time="24375000000" />
-      <marker label="" time="24380000000" />
-      <marker label="" time="35905000000" />
+      <marker label="" time="12825000000" />
+      <marker label="" time="12830000000" />
+      <marker label="" time="24335000000" />
+      <marker label="" time="24340000000" />
+      <marker label="" time="35845000000" />
    </wave_markers>
    <wvobject type="group" fp_name="group53">
       <obj_property name="label">user logic</obj_property>

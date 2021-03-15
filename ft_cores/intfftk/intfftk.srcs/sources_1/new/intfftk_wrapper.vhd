@@ -378,14 +378,14 @@ begin
     -----------------------------------------------------------------------
       
     --signal is set outside the process due to delay    
---    fifo_in_i <= float2fixed_out_tdata(FFT_DATA_WIDTH-1 downto 0) when float2fixed_out_tvalid = '1'; -- set FIFO input data
---    wr_en_i <= float2fixed_out_tvalid; -- set FIFO write enable
+    fifo_in_i <= float2fixed_out_tdata(FFT_DATA_WIDTH-1 downto 0) when float2fixed_out_tvalid = '1'; -- set FIFO input data
+    wr_en_i <= float2fixed_out_tvalid; -- set FIFO write enable
     
     --set intFFTk input
     in_data <= fifo_out_i when index < SIZE else (others => '0');
         
     --process to feed the intFFTk
-    input_proc: process (input_state, index, fifo_i_index, flush_index, state, empty_i, stin_valid, stin_data, float2fixed_out_tvalid, float2fixed_out_tdata)
+    input_proc: process (input_state, index, fifo_i_index, flush_index, state, empty_i, stin_valid, stin_data)
     begin
         --default values to prevent latches
         input_state_next <= input_state;
@@ -394,10 +394,8 @@ begin
         flush_index_next <= flush_index;
         stin_ready <= '0';
         float2fixed_in_tvalid <= '0';
-        wr_en_i <= '0';
         rd_en_i <= '0';
         in_valid <= '0'; 
-        fifo_in_i <= (others => '0');
         
         float2fixed_in_tdata <= (others => '0');
         
@@ -426,32 +424,26 @@ begin
             when CONVERT =>
                 stin_ready <= '1';
                 
-                if (fifo_i_index = SIZE-1) and (float2fixed_out_tvalid = '1') then  -- all input values are stored in the FIFO and intFFTk is ready to process data
+                if (fifo_i_index = SIZE-1) then  -- all input values are stored in the FIFO and intFFTk is ready to process data
                     fifo_i_index_next <= 0; --reset counter
-                    
-                    fifo_in_i <= float2fixed_out_tdata(FFT_DATA_WIDTH-1 downto 0); -- set last FIFO input data
-                    wr_en_i <= '1'; -- set FIFO write enable
                     
                     -- read FIFO data
                     rd_en_i <= '1';
                     
                     input_state_next <= SEND;
                     
-                elsif (state = TRANSFER_TO_FFT) and (stin_valid = '1') and (float2fixed_out_tvalid = '1') then
+                elsif (state = TRANSFER_TO_FFT) and (stin_valid = '1') and (empty_i = '1') then
+                    --convert first input data
+                    float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
+                    float2fixed_in_tvalid <= '1';                                                                                      
+                                        
+                elsif (state = TRANSFER_TO_FFT) and (stin_valid = '1') then
                     --convert input data
                     float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
                     float2fixed_in_tvalid <= '1';   
                     
-                    fifo_in_i <= float2fixed_out_tdata(FFT_DATA_WIDTH-1 downto 0); -- set last FIFO input data
-                    wr_en_i <= '1'; -- set FIFO write enable
-                    
                     --increase index
-                    fifo_i_index_next <= fifo_i_index + 1;
-                    
-                elsif (state = TRANSFER_TO_FFT) and (stin_valid = '1') and (empty_i = '1') then
-                    --convert first input data
-                    float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
-                    float2fixed_in_tvalid <= '1';                                
+                    fifo_i_index_next <= fifo_i_index + 1;                                     
                 end if;
             
             when SEND => 
@@ -528,8 +520,8 @@ begin
         
     --signal is set outside the process due to delay
     --temporary save float values
-    temp_real_float <= real_fixed2float_out_tdata when real_fixed2float_out_tvalid = '1' else (others => '0');
-    temp_imag_float <= imag_fixed2float_out_tdata when imag_fixed2float_out_tvalid = '1' else (others => '0');
+    temp_real_float <= real_fixed2float_out_tdata when real_fixed2float_out_tvalid = '1';
+    temp_imag_float <= imag_fixed2float_out_tdata when imag_fixed2float_out_tvalid = '1';
     
     --process to get output of the intFFTk
     output_proc: process (output_state, fifo_o_index, receive_index, state, s_out_valid, out_real, out_imag, temp_real_float, temp_imag_float, stout_ready)
@@ -566,10 +558,6 @@ begin
             when OUTPUT_START =>
                             
                 if (state = OUTPUT_DATA) and (s_out_valid = '1') then --check if the output data of the intFFTk is valid
-                    -------------------------
-                    -- Convert output data --
-                    -------------------------
-                
                     --convert first output data
                     --real part
                     real_fixed2float_in_tdata(FFT_OUT_WIDTH-1 downto 0) <= out_real; --convert fixed25 to float
@@ -587,10 +575,6 @@ begin
             when STORE =>
             
                 if (fifo_o_index = SIZE) then -- all input values are stored in the FIFO and master is ready to read data                    
-                    -------------------
-                    -- Store in FIFO --
-                    -------------------
-                    
                     --write last data to FIFO
                     fifo_in_o <= temp_imag_float & temp_real_float;
                                    
@@ -604,18 +588,10 @@ begin
                     output_state_next <= OUTPUT_DATA;
                     
                 elsif (state = OUTPUT_DATA) and (s_out_valid = '1') then --check if the output data of the intFFTk is valid
-                    -------------------
-                    -- Store in FIFO --
-                    -------------------
-                    
                     --write data to FIFO
                     fifo_in_o <= temp_imag_float & temp_real_float;
                     
                     wr_en_o <= '1';
-                    
-                    -------------------------
-                    -- Convert output data --
-                    -------------------------
                     
                     --convert next output data
                     --real part

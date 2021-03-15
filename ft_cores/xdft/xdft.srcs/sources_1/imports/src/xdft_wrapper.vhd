@@ -82,7 +82,6 @@ architecture arch of ft_wrapper is
     signal s_out_valid              : std_logic;
     signal blk_exp                  : std_logic_vector(7 downto 0) := (others => '0');
     signal exp                      : std_logic_vector(7 downto 0) := (others => '0');
-    signal exp_next                 : std_logic_vector(7 downto 0) := (others => '0');
         
     signal size_s                   : positive := SIZE;
     signal dft_size                 : std_logic_vector(5 downto 0);
@@ -118,15 +117,11 @@ architecture arch of ft_wrapper is
     signal imag_fixed2float_out_tvalid    : std_logic := '0';
     signal imag_fixed2float_out_tdata     : std_logic_vector(31 downto 0) := (others => '0'); -- data payload
     
-    signal temp_real_float       : std_logic_vector(31 downto 0) := (others => '0');
-    signal temp_real_float_next  : std_logic_vector(31 downto 0) := (others => '0');
-    signal temp_imag_float       : std_logic_vector(31 downto 0) := (others => '0');
-    signal temp_imag_float_next  : std_logic_vector(31 downto 0) := (others => '0');    
+    signal temp_real_float : std_logic_vector(31 downto 0) := (others => '0');
+    signal temp_imag_float : std_logic_vector(31 downto 0) := (others => '0');    
         
-    signal shifted_exp_real      : std_logic_vector(7 downto 0) := (others => '0');
-    signal shifted_exp_real_next : std_logic_vector(7 downto 0) := (others => '0');
-    signal shifted_exp_imag      : std_logic_vector(7 downto 0) := (others => '0');
-    signal shifted_exp_imag_next : std_logic_vector(7 downto 0) := (others => '0');       
+    signal shifted_exp_real : std_logic_vector(7 downto 0) := (others => '0');
+    signal shifted_exp_imag : std_logic_vector(7 downto 0) := (others => '0');       
     
     -- signals for input FIFO
     signal wr_rst_busy_i : std_logic; -- not used
@@ -186,9 +181,7 @@ architecture arch of ft_wrapper is
     
     type output_state_type is (
         OUTPUT_IDLE,
-        SHIFT_FIRST,
         STORE,
-        STORE_LAST,
         OUTPUT_DATA
     );
     signal output_state, output_state_next : output_state_type := OUTPUT_IDLE;
@@ -421,11 +414,6 @@ begin
             receive_index <= 0;
             fifo_i_index <= 0;
             fifo_o_index <= 0;
-            exp <= (others => '0');
-            temp_real_float <= (others => '0');
-            temp_imag_float <= (others => '0');
-            shifted_exp_real <= (others => '0');
-            shifted_exp_imag <= (others => '0');
             
         elsif rising_edge(clk) then
             state <= state_next;
@@ -435,19 +423,18 @@ begin
             receive_index <= receive_index_next;
             fifo_i_index <= fifo_i_index_next;
             fifo_o_index <= fifo_o_index_next;
-            exp <= exp_next;
-            temp_real_float <= temp_real_float_next;
-            temp_imag_float <= temp_imag_float_next;
-            shifted_exp_real <= shifted_exp_real_next;
-            shifted_exp_imag <= shifted_exp_imag_next;
         end if;
         
     end process sync_state_proc;
     
     -----------------------------------------------------------------------
-     
+      
+    --signal is set outside the process due to delay    
+    fifo_in_i <= float2fixed_out_tdata(DFT_DATA_WIDTH downto 0) when float2fixed_out_tvalid = '1'; -- set FIFO input data
+    wr_en_i <= float2fixed_out_tvalid; -- set FIFO write enable
+        
     --process to feed the DFT
-    input_proc: process (input_state, index, fifo_i_index, state, empty_i, first_ready_in, stin_valid, stin_data, float2fixed_out_tvalid, float2fixed_out_tdata)
+    input_proc: process (input_state, index, fifo_i_index, state, empty_i, first_ready_in, stin_valid, stin_data)
     begin
         --default values to prevent latches
         input_state_next <= input_state;
@@ -456,8 +443,6 @@ begin
         first_in <= '0';
         stin_ready <= '0';
         float2fixed_in_tvalid <= '0';
-        fifo_in_i <= (others => '0');
-        wr_en_i <= '0';
         rd_en_i <= '0';
         
         float2fixed_in_tdata <= (others => '0');
@@ -483,32 +468,35 @@ begin
             when CONVERT =>
                 stin_ready <= '1';
                 
-                if (fifo_i_index = SIZE-1) and (first_ready_in = '1') and (float2fixed_out_tvalid = '1') then  -- all input values are stored in the FIFO and DFT is ready to process data
+                if (fifo_i_index = SIZE-1) and (first_ready_in = '1') then  -- all input values are stored in the FIFO and DFT is ready to process data
                     fifo_i_index_next <= 0; --reset counter
-                    
-                    fifo_in_i <= float2fixed_out_tdata(DFT_DATA_WIDTH downto 0); -- set last FIFO input data
-                    wr_en_i <= '1'; -- set FIFO write enable
                     
                     -- read FIFO data
                     rd_en_i <= '1';
                     
                     input_state_next <= FIRST_FRAME;
                     
-                elsif (state = TRANSFER_TO_FFT) and (stin_valid = '1') and (float2fixed_out_tvalid = '1') then
+                elsif (state = TRANSFER_TO_FFT) and (stin_valid = '1') and (empty_i = '1') then
+                    --convert first input data
+                    float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
+                    float2fixed_in_tvalid <= '1';                                                                                      
+                                        
+                elsif (state = TRANSFER_TO_FFT) and (stin_valid = '1') then
                     --convert input data
                     float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
                     float2fixed_in_tvalid <= '1';   
                     
-                    fifo_in_i <= float2fixed_out_tdata(DFT_DATA_WIDTH downto 0); -- set FIFO input data
-                    wr_en_i <= '1'; -- set FIFO write enable
-                    
                     --increase index
+<<<<<<< HEAD
                     fifo_i_index_next <= fifo_i_index + 1;     
                     
 --                elsif (state = TRANSFER_TO_FFT) and (stin_valid = '1') and (empty_i = '1') then
 --                    --convert first input data
 --                    float2fixed_in_tdata <= stin_data(DATA_WIDTH downto 0); --convert float to fixed18
 --                    float2fixed_in_tvalid <= '1';     
+=======
+                    fifo_i_index_next <= fifo_i_index + 1;                                     
+>>>>>>> parent of 0f5ce65... removed inferred latches
                 end if;
         
             when FIRST_FRAME =>                
@@ -577,19 +565,22 @@ begin
     
     -----------------------------------------------------------------------
         
+    --signal is set outside the process due to delay
+    --temporary save float values
+    temp_real_float <= real_fixed2float_out_tdata when real_fixed2float_out_tvalid = '1';
+    temp_imag_float <= imag_fixed2float_out_tdata when imag_fixed2float_out_tvalid = '1';
+        
+    --apply shifts to exponent
+    shifted_exp_real <= std_logic_vector(unsigned(real_fixed2float_out_tdata(exponent_range'range)) + unsigned(exp)) when real_fixed2float_out_tvalid = '1';
+    shifted_exp_imag <= std_logic_vector(unsigned(imag_fixed2float_out_tdata(exponent_range'range)) + unsigned(exp)) when imag_fixed2float_out_tvalid = '1';
+    
     --process to get output of the DFT
-    output_proc: process (output_state, fifo_o_index, receive_index, exp, temp_real_float, temp_imag_float, shifted_exp_real, shifted_exp_imag, state, s_out_valid, out_real, out_imag, blk_exp, stout_ready, real_fixed2float_out_tvalid, imag_fixed2float_out_tvalid, real_fixed2float_out_tdata, imag_fixed2float_out_tdata)
+    output_proc: process (output_state, fifo_o_index, receive_index, state, s_out_valid, out_real, out_imag, blk_exp, temp_real_float, temp_imag_float, shifted_exp_real, shifted_exp_imag, stout_ready)
     begin
         --default values to prevent latches
         output_state_next <= output_state;
         fifo_o_index_next <= fifo_o_index;
         receive_index_next <= receive_index;
-        exp_next <= exp;
-        temp_real_float_next <= temp_real_float;
-        temp_imag_float_next <= temp_imag_float;
-        shifted_exp_real_next <= shifted_exp_real;
-        shifted_exp_imag_next <= shifted_exp_imag;
-        
         stout_valid <= '0';
         real_fixed2float_in_tvalid <= '0';
         imag_fixed2float_in_tvalid <= '0';
@@ -604,13 +595,9 @@ begin
                 
             when OUTPUT_IDLE =>
                 --reset exponent
-                exp_next <= (others => '0');
+                exp <= (others => '0');
                 
                 if (state = OUTPUT_DATA) and (s_out_valid = '1') then --check if the output data of the DFT is valid
-                    -------------------------
-                    -- Convert output data --
-                    -------------------------
-                    
                     --convert first output data
                     --real part
                     real_fixed2float_in_tdata(DFT_DATA_WIDTH downto 0) <= out_real; --convert float to fixed18
@@ -623,52 +610,15 @@ begin
                     fifo_o_index_next <= fifo_o_index + 1; 
                     
                     --set exponent as copy
-                    exp_next <= blk_exp;
+                    exp <= blk_exp;
                     
-                    output_state_next <= SHIFT_FIRST;
+                    output_state_next <= STORE;
                 end if;               
             
-            when SHIFT_FIRST =>
-            
-                if (state = OUTPUT_DATA) and (s_out_valid = '1') and (real_fixed2float_out_tvalid = '1') and (imag_fixed2float_out_tvalid = '1') then --check if the output data of the DFT is valid
-                    --------------------
-                    -- Shift exponent --
-                    --------------------
-                    
-                    --temporary save float values
-                    temp_real_float_next <= real_fixed2float_out_tdata;
-                    temp_imag_float_next <= imag_fixed2float_out_tdata;
-                        
-                    --apply shifts to exponent
-                    shifted_exp_real_next <= std_logic_vector(unsigned(real_fixed2float_out_tdata(exponent_range'range)) + unsigned(exp));
-                    shifted_exp_imag_next <= std_logic_vector(unsigned(imag_fixed2float_out_tdata(exponent_range'range)) + unsigned(exp));
-                    
-                    -------------------------
-                    -- Convert output data --
-                    -------------------------
-                    
-                    --convert next output data
-                    --real part
-                    real_fixed2float_in_tdata(DFT_DATA_WIDTH downto 0) <= out_real; --convert float to fixed18
-                    real_fixed2float_in_tvalid <= '1';
-                    --imaginary part
-                    imag_fixed2float_in_tdata(DFT_DATA_WIDTH downto 0) <= out_imag; --convert float to fixed18
-                    imag_fixed2float_in_tvalid <= '1';
-                                   
-                    --increase index
-                    fifo_o_index_next <= fifo_o_index + 1;   
-                    
-                    output_state_next <= STORE;         
-                end if;              
-                            
             when STORE =>
             
                 if (fifo_o_index = SIZE) then -- all input values are stored in the FIFO and master is ready to read data                    
-                    -------------------
-                    -- Store in FIFO --
-                    -------------------
-                
-                    --write data to FIFO
+                    --write last data to FIFO
                     --real part
                     --sign bit
                     fifo_in_o(STOUT_SIGN_BIT_REAL) <= temp_real_float(SIGN_BIT);
@@ -687,25 +637,14 @@ begin
                 
                     wr_en_o <= '1';
                     
-                    --------------------
-                    -- Shift exponent --
-                    --------------------
+                    fifo_o_index_next <= 0; --reset counter
+                                            
+                    -- read FIFO data
+                    rd_en_o <= '1';
                     
-                    --temporary save float values
-                    temp_real_float_next <= real_fixed2float_out_tdata;
-                    temp_imag_float_next <= imag_fixed2float_out_tdata;
-                        
-                    --apply shifts to exponent
-                    shifted_exp_real_next <= std_logic_vector(unsigned(real_fixed2float_out_tdata(exponent_range'range)) + unsigned(exp));
-                    shifted_exp_imag_next <= std_logic_vector(unsigned(imag_fixed2float_out_tdata(exponent_range'range)) + unsigned(exp));
+                    output_state_next <= OUTPUT_DATA;
                     
-                    output_state_next <= STORE_LAST;
-                    
-                elsif (state = OUTPUT_DATA) and (s_out_valid = '1') and (real_fixed2float_out_tvalid = '1') and (imag_fixed2float_out_tvalid = '1') then --check if the output data of the DFT is valid
-                    -------------------
-                    -- Store in FIFO --
-                    -------------------
-                    
+                elsif (state = OUTPUT_DATA) and (s_out_valid = '1') then --check if the output data of the DFT is valid
                     --write data to FIFO
                     --real part
                     --sign bit
@@ -724,22 +663,6 @@ begin
                     fifo_in_o(stout_mantissa_imag_range'range) <= temp_imag_float(mantissa_range'range);
                     
                     wr_en_o <= '1';
-                    
-                    --------------------
-                    -- Shift exponent --
-                    --------------------
-                    
-                    --temporary save float values
-                    temp_real_float_next <= real_fixed2float_out_tdata;
-                    temp_imag_float_next <= imag_fixed2float_out_tdata;
-                        
-                    --apply shifts to exponent
-                    shifted_exp_real_next <= std_logic_vector(unsigned(real_fixed2float_out_tdata(exponent_range'range)) + unsigned(exp));
-                    shifted_exp_imag_next <= std_logic_vector(unsigned(imag_fixed2float_out_tdata(exponent_range'range)) + unsigned(exp));
-                    
-                    -------------------------
-                    -- Convert output data --
-                    -------------------------
                     
                     --convert next output data
                     --real part
@@ -752,39 +675,7 @@ begin
                     --increase index
                     fifo_o_index_next <= fifo_o_index + 1;            
                 end if;              
-            
-            when STORE_LAST =>
-            
-                -------------------
-                -- Store in FIFO --
-                -------------------
-            
-                --write last data to FIFO
-                --real part
-                --sign bit
-                fifo_in_o(STOUT_SIGN_BIT_REAL) <= temp_real_float(SIGN_BIT);
-                --exponent with applied shifts from DFT
-                fifo_in_o(stout_exponent_real_range'range) <= shifted_exp_real;
-                --mantissa                    
-                fifo_in_o(stout_mantissa_real_range'range) <= temp_real_float(mantissa_range'range);
-                
-                --imaginary part
-                --sign bit
-                fifo_in_o(STOUT_SIGN_BIT_IMAG) <= temp_imag_float(SIGN_BIT);
-                --exponent with applied shifts from DFT
-                fifo_in_o(stout_exponent_imag_range'range) <= shifted_exp_imag;
-                --mantissa                    
-                fifo_in_o(stout_mantissa_imag_range'range) <= temp_imag_float(mantissa_range'range);
-            
-                wr_en_o <= '1';
-                                   
-                fifo_o_index_next <= 0; --reset counter
-                                        
-                -- read FIFO data
-                rd_en_o <= '1';
-                
-                output_state_next <= OUTPUT_DATA;
-            
+                        
             when OUTPUT_DATA =>
         
                 if (receive_index = SIZE) then --independent of valid signals
