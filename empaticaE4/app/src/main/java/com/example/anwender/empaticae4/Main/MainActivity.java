@@ -310,6 +310,9 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            String text = "";
+            boolean changed = false;
+
             //Are we charging /charged / discharging?
             int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
             boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
@@ -325,7 +328,67 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
             int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
             float batteryPct = level * 100 / (float)scale;
 
-            //load configuration
+            //Set battery status text
+            if (isCharging)
+                text = text + "charging or charged, ";
+            if (isDisCharging)
+                text = text + "discharging, ";
+            if (usbCharge)
+                text = text + "connected to USB plug: ";
+            if (acCharge)
+                text = text + "connected to AC plug: ";
+            text = text + batteryPct + "%";
+
+            //Display battery status
+            updateTextView(batteryLevel, text);
+
+            //Set configuration name dependend on the battery status
+            //Charging or charged
+            if ((isCharging) && (usbCharge || acCharge) && (batteryPct >= 80)) { //focus on accuracy
+                ConfigActivity.repo_name = "XFFT";
+                changed = true;
+            } else if ((isCharging) && (usbCharge || acCharge) && (batteryPct >= 65) && (batteryPct < 80)) { //focus on accuracy
+                ConfigActivity.repo_name = "XDFT";
+                changed = true;
+            } else if ((isCharging) && (usbCharge || acCharge) && (batteryPct >= 50) && (batteryPct < 65)) { //focus on accuracy
+                ConfigActivity.repo_name = "XFFT-fixed";
+                changed = true;
+            } else if ((isCharging) && (usbCharge || acCharge) && (batteryPct >= 30) && (batteryPct < 50)) { //focus on power consumption
+                ConfigActivity.repo_name = "INTFFTK";
+                changed = true;
+            } else if ((isCharging) && (usbCharge || acCharge) && (batteryPct >= 15) && (batteryPct < 30)) { //focus on power consumption
+                ConfigActivity.repo_name = "DBLCLKFFT";
+                changed = true;
+            } else if ((isCharging) && (usbCharge || acCharge) && (batteryPct >= 0) && (batteryPct < 15)) { //focus on power consumption
+                ConfigActivity.repo_name = "SDFT";
+                changed = true;
+            }
+            //Discharging
+            else if ((isDisCharging) && (!usbCharge) && (!acCharge) && (batteryPct >= 90)) { //focus on accuracy
+                ConfigActivity.repo_name = "XFFT";
+                changed = true;
+            } else if ((isDisCharging) && (!usbCharge) && (!acCharge) && (batteryPct >= 80) && (batteryPct < 90)) { //focus on power consumption
+                ConfigActivity.repo_name = "XDFT";
+                changed = true;
+            } else if ((isDisCharging) && (!usbCharge) && (!acCharge) && (batteryPct >= 70) && (batteryPct < 80)) { //focus on power consumption
+                ConfigActivity.repo_name = "INTFFT_SPDF";
+                changed = true;
+            } else if ((isDisCharging) && (!usbCharge) && (!acCharge) && (batteryPct >= 60) && (batteryPct < 70)) { //focus on power consumption
+                ConfigActivity.repo_name = "INTFFTK";
+                changed = true;
+            } else if ((isDisCharging) && (!usbCharge) && (!acCharge) && (batteryPct >= 50) && (batteryPct < 60)) { //focus on power consumption
+                ConfigActivity.repo_name = "XFFT";
+                changed = true;
+            } else if ((isDisCharging) && (!usbCharge) && (!acCharge) && (batteryPct >= 40) && (batteryPct < 50)) { //focus on power consumption
+                ConfigActivity.repo_name = "DBLCLKFFT";
+                changed = true;
+            } else if ((isDisCharging) && (!usbCharge) && (!acCharge) && (batteryPct >= 20) && (batteryPct < 40)) { //focus on power consumption
+                ConfigActivity.repo_name = "XFFT-fixed";
+                changed = true;
+            } else if ((isDisCharging) && (!usbCharge) && (!acCharge) && (batteryPct >= 0) && (batteryPct < 20)) { //focus on power consumption
+                ConfigActivity.repo_name = "SDFT";
+                changed = true;
+            }
 
         }
     };
