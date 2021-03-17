@@ -492,11 +492,11 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                             if (bvpSamples.size() == 1878) { // needed for XFFT
                                 RRScore analyze = new RRScore(bvpSamples);
                                 rrSamples.add(new Entry(rrSamples.size(), analyze.runAnalysis()));
-                                //rrScores.add(new Entry(rrScores.size(), getRREWScore(analyze.runAnalysis())));
-                                //rrHist.add((float) analyze.runAnalysis());
-                                //rrHistScore.add(getRREWScore(analyze.runAnalysis()));
-                                //setEWSValue();
-                                //setHistFiles();
+                                rrScores.add(new Entry(rrScores.size(), getRREWScore(analyze.runAnalysis())));
+                                rrHist.add((float) analyze.runAnalysis());
+                                rrHistScore.add(getRREWScore(analyze.runAnalysis()));
+                                setEWSValue();
+                                setHistFiles();
                                 Log.i("RR-Ready", "RR analysis finished!, Ready to show!");
                                 bvpSamples.clear();
                                 analyze.clearBuffer();
