@@ -122,22 +122,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         mButtonConfig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mServerIP.getText().toString().isEmpty()) {
-                    //print with defined text colour
-                    printColour("Enter Server IP address!", Color.RED);
-                } else {
-                    serverIP = mServerIP.getText().toString(); //save IP to variable
-
-                    //Configure Network Manager and connect to server
-                    mNetworkFragment.configure("http://" + serverIP + ":5000/api/", repo_name);
-
-                    if (!download) {
-                        enable_hash = checkBoxhash.isChecked(); //check if hash is enabled
-
-                        MainActivity.mTimer.setStartTime(0); //start Timer
-                        mNetworkFragment.getUpdate();
-                    }
-                }
+                changeConfiguration();
             }
         });
 
@@ -149,6 +134,10 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
                 enable_hash = checkBoxhash.isChecked(); //check if hash is enabled and save it to variable
             }
         });
+
+        if (configureExtra) {
+            changeConfiguration();
+        }
     }
 
     @Override
@@ -207,13 +196,13 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
     //  FUNCTIONS:
     //--------------------------------------------------------------------------------------------//
 
-    public void changeConfiguration(String config_name) {
-        if (mServerIP.getText().toString().isEmpty()) {
+    public void changeConfiguration() {
+        if (serverIP.isEmpty()) {
             //print with defined text colour
             printColour("Enter Server IP address!", Color.RED);
         } else {
             //Configure Network Manager and connect to server
-            mNetworkFragment.configure("http://" + serverIP + ":5000/api/", config_name);
+            mNetworkFragment.configure("http://" + serverIP + ":5000/api/", repo_name);
 
             if (!download) {
                 MainActivity.mTimer.setStartTime(0); //start Timer
