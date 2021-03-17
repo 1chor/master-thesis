@@ -64,6 +64,11 @@ sh /data/Root_empaticaE4.sh &
 
 echo > /dev/kmsg # empty line
 
+echo "++ Starting battery status simulation script ++" > /dev/kmsg
+sh /data/dump_battery.sh &
+
+echo > /dev/kmsg # empty line
+
 echo "+++++++++++++++++++++++++++++" > /dev/kmsg
 echo "++                         ++" > /dev/kmsg
 echo "++ End user startup script ++" > /dev/kmsg
