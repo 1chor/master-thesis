@@ -301,7 +301,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                 break;
             case R.id.button_config_RR:
                 final Intent ConfigActivity = new Intent(MainActivity.this, com.example.anwender.empaticae4.Configuration.ConfigActivity.class);
-                ConfigActivity.putExtra("Path", path); // Send the Path to save to
+                ConfigActivity.putExtra("configure", false); //Start activity and do not automatically change configuration
                 startActivity(ConfigActivity);
                 break;
         }
@@ -390,8 +390,28 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                 changed = true;
             }
 
+            if (changed) {
+                //load configuration
+                final Intent ConfigActivity = new Intent(MainActivity.this, com.example.anwender.empaticae4.Configuration.ConfigActivity.class);
+                ConfigActivity.putExtra("configure", true); //Start activity and change configuration
+                startActivityForResult(ConfigActivity, 1); //start activity with requestcode
+            }
         }
     };
+
+    //Callback method to get the Message from other Activity
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) { //check request code
+            if (resultCode == RESULT_OK) { //check if return code is right (successful configuration)
+                //Display configuration
+                updateTextView(configuration_name, ConfigActivity.repo_name);
+
+                Utility.toastie(getApplicationContext(), "Changed configuration");
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

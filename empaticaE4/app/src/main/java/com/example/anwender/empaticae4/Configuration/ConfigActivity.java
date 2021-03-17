@@ -1,9 +1,12 @@
 package com.example.anwender.empaticae4.Configuration;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
@@ -53,6 +56,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
 
     private SharedPreferences mSharedPref;
     private boolean download;
+    private Boolean configureExtra = false;
 
     //public variables
     public static String repo_name = "SDFT"; //set default name of server repository
@@ -64,6 +68,9 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
+
+        //get parameter from MainActivity
+        configureExtra = getIntent().getExtras().getBoolean("configure", false);
 
         mSharedPref = this.getPreferences(Context.MODE_PRIVATE);
 
@@ -328,6 +335,13 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
     @Override
     public void printToTextBox(String text) {
         printColour(text, Color.RED);
+
+        if (configureExtra) {
+            //Close activity (no new update available)
+            Intent returnIntent = new Intent();
+            setResult(Activity.RESULT_CANCELED, returnIntent); //set return code
+            finish(); //finishing activity
+        }
     }
 
 
@@ -397,5 +411,12 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
         printDebug("Reconfiguration took " + MainActivity.mTimer.getTimerMilli(2) + " milliseconds.");
 
         printDebug("Update process took " + MainActivity.mTimer.getTimer(0) + " seconds.");
+
+        if (configureExtra) {
+            //Close activity (configuration was successfull)
+            Intent returnIntent = new Intent();
+            setResult(Activity.RESULT_OK, returnIntent); //set return code
+            finish(); //finishing activity
+        }
     }
 }
