@@ -24,44 +24,44 @@ echo "++                                 ++" > /dev/kmsg
 echo "+++++++++++++++++++++++++++++++++++++" > /dev/kmsg
 
 while [ 1 ]; do
-		
-	# XFFT
-	dumpsys battery level 100 # change battery level to 100%
-	dumpsys battery status 5  # change battery status to Full 
-
-	sleep 1m # wait for 1 minute
-	
+			
 	# XDFT
-	dumpsys battery level 72  # change battery level to 72%
-	dumpsys battery status 2  # change battery status to Charging  
+	dumpsys battery set level 72  # change battery level to 72%
+	dumpsys battery set status 2  # change battery status to Charging  
 	
 	sleep 1m # wait for 1 minute
 	
 	# SDFT (Greybox)
-	dumpsys battery level 12  # change battery level to 12%
-	dumpsys battery status 2  # change battery status to Charging  
+	dumpsys battery set level 12  # change battery level to 12%
+	dumpsys battery set status 2  # change battery status to Charging  
 
 	sleep 1m # wait for 1 minute
 	# XFFT
-	dumpsys battery level 90  # change battery level to 90%
-	dumpsys battery status 2  # change battery status to Charging  
+	dumpsys battery set level 90  # change battery level to 90%
+	dumpsys battery set status 2  # change battery status to Charging  
 
 	sleep 1m # wait for 1 minute
 	
 	# DBLCLKFFT
-	dumpsys battery level 25  # change battery level to 25%
-	dumpsys battery status 2  # change battery status to Charging  
+	dumpsys battery set level 25  # change battery level to 25%
+	dumpsys battery set status 2  # change battery status to Charging  
+
+	sleep 1m # wait for 1 minute
+	
+	# XFFT
+	dumpsys battery set level 100 # change battery level to 100%
+	dumpsys battery set status 5  # change battery status to Full 
 
 	sleep 1m # wait for 1 minute
 	
 	# INTFFTK
-	dumpsys battery level 49  # change battery level to 49%
-	dumpsys battery status 2  # change battery status to Charging  
+	dumpsys battery set level 49  # change battery level to 49%
+	dumpsys battery set status 2  # change battery status to Charging  
 
 	sleep 1m # wait for 1 minute
 	
 	# XFFT-fixed
-	dumpsys battery level 60  # change battery level to 60%
-	dumpsys battery status 2  # change battery status to Charging  	
+	dumpsys battery set level 60  # change battery level to 60%
+	dumpsys battery set status 2  # change battery status to Charging  	
 	
 done
