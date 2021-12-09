@@ -165,7 +165,8 @@
     <string name="text_config_main">Current configuration:</string>
     <string name="text_config_fft">-</string>
     <string name="test_RR">• Test Respiratory Rate</string>
-    <string name="button_test_RR">Test RR</string>
+    <string name="button_test_RR_single">Single Run</string>
+    <string name="button_test_RR_all">All Runs</string>
     <string name="config_RR">Config RR</string>
     <string name="text_status">Configuration status:</string>
     <string name="serverIP">Server IP address:</string>

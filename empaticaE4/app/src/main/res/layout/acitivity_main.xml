@@ -267,15 +267,22 @@
         android:weightSum="1">
 
         <Button
-            android:id="@+id/button_test_RR"
-            android:layout_width="175dp"
+            android:id="@+id/button_test_RR_single"
+            android:layout_width="0px"
             android:layout_height="50dp"
-            android:layout_weight="0.5"
-            android:text="@string/button_test_RR" />
+            android:layout_weight="0.25"
+            android:text="@string/button_test_RR_single" />
+
+        <Button
+            android:id="@+id/button_test_RR_all"
+            android:layout_width="0px"
+            android:layout_height="50dp"
+            android:layout_weight="0.25"
+            android:text="@string/button_test_RR_all" />
 
         <Button
             android:id="@+id/button_config_RR"
-            android:layout_width="175dp"
+            android:layout_width="0px"
             android:layout_height="50dp"
             android:layout_weight="0.5"
             android:text="@string/config_RR" />

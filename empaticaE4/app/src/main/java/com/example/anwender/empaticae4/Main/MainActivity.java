@@ -136,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
     int hr_score;
     int save_hist = 5;
 
+    int max_run;
+
     private FilterBVPData filters = new FilterBVPData();
     private int filtersInit = 0;
     boolean firstWindow=true;
@@ -181,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
         */
 
         //Initialise Timer, number of timers and context
-        mTimer = new Timer(4, getApplicationContext());
+        mTimer = new Timer(5, getApplicationContext());
 
         //Create BroadcastReceiver
         IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
@@ -221,8 +223,11 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
         Button btnEWSActivity = findViewById(R.id.button_EWS_Score);
         btnEWSActivity.setOnClickListener(this);
 
-        Button btnTestRR = findViewById(R.id.button_test_RR);
-        btnTestRR.setOnClickListener(this);
+        Button btnTestRR_single = findViewById(R.id.button_test_RR_single);
+        btnTestRR_single.setOnClickListener(this);
+
+        Button btnTestRR_all = findViewById(R.id.button_test_RR_all);
+        btnTestRR_all.setOnClickListener(this);
 
         Button btnConfigRR = findViewById(R.id.button_config_RR);
         btnConfigRR.setOnClickListener(this);
@@ -293,11 +298,21 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                 startActivity(LoginActivity);
                 finish();
                 break;
-            case R.id.button_test_RR:
-                Log.i("Start RR Test", "Use " + ConfigActivity.repo_name + " method");
+            case R.id.button_test_RR_single:
+                Log.i("Start RR Test - One Run", "Use " + ConfigActivity.repo_name + " method");
+                max_run = 1888; //only one run
+                mTimer.setStartTime(4); //start Timer
                 //Start test
                 test_didReceiveBVP();
-                Utility.toastie(getApplicationContext(),"RR Test started!");
+                Utility.toastie(getApplicationContext(),"RR Test - Single Run started!");
+                break;
+            case R.id.button_test_RR_all:
+                Log.i("Start RR Test - All Run", "Use " + ConfigActivity.repo_name + " method");
+                max_run = 9297;
+                mTimer.setStartTime(4); //start Timer
+                //Start test
+                test_didReceiveBVP();
+                Utility.toastie(getApplicationContext(),"RR Test - All Runs started!");
                 break;
             case R.id.button_config_RR:
                 final Intent ConfigActivity = new Intent(MainActivity.this, com.example.anwender.empaticae4.Configuration.ConfigActivity.class);
@@ -466,8 +481,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                //final int max = 9297;
-                final int max = 1888; //only one run
+                final int max = max_run;
                 float bvp;
 
                 for (int i = 0; i < max; i++) {
@@ -514,8 +528,12 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
 
                             if ( progressBar.getProgress() == progressBar.getMax()) {
                                 flagBVP = false;
-                                Utility.toastie(getApplicationContext(), "RR Test finished!");
-                                mTimer.toastie(ConfigActivity.repo_name + " transform", 3);
+
+                                mTimer.setEndTime(4); //stop Timer
+                                mTimer.toastie("RR Test", 4);
+
+                                //Utility.toastie(getApplicationContext(), "RR Test finished!");
+                                //mTimer.toastie(ConfigActivity.repo_name + " transform", 3);
                             }
                         }
                     });
