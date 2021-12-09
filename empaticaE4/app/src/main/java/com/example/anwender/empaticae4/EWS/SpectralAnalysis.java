@@ -42,9 +42,9 @@ public class SpectralAnalysis {
                 this.signalSize = inputSignal.size();
                 this.argConstantPart = (Math.PI * 2) / signalSize;
 
-                MainActivity.mTimer.setStartTime(3); //start Timer
+                //MainActivity.mTimer.setStartTime(3); //start Timer
                 dft = calculateDFT(inputSignal);
-                MainActivity.mTimer.setEndTime(3); //End Timer
+                //MainActivity.mTimer.setEndTime(3); //End Timer
 
                 spd = SPD(dft);
                 this.expSPD = spd;
@@ -95,7 +95,7 @@ public class SpectralAnalysis {
                     //Write normalised hex string to file (IEEE 754 float single precision format)
                     writeDataToFile(MainActivity.path, xdft_input_file, norm_st);
 
-                    MainActivity.mTimer.setStartTime(3); //start Timer
+                    //MainActivity.mTimer.setStartTime(3); //start Timer
                 }
                 Log.i("Input data", "Created input hex data: " + xdft_input_file + " !");
 
@@ -113,12 +113,13 @@ public class SpectralAnalysis {
                 //get FFT results
                 dft = readDataFromFile(MainActivity.path, xdft_output_file, true);
 
-                MainActivity.mTimer.setEndTime(3); //End Timer
+                //MainActivity.mTimer.setEndTime(3); //End Timer
 
                 //delete output file
                 if (checkFileExists(MainActivity.path, xdft_output_file, true))
                     Log.i("Output data", "Deleted " + xdft_output_file + " !");
 
+                /*
                 dft_sw = calculateDFT(inputSignal);
 
                 //Write output values to files
@@ -136,7 +137,7 @@ public class SpectralAnalysis {
                     //Write double value to file
                     writeDataToFile(MainActivity.path, "xdft_imag.txt", dval + "\n");
 
-                    /*############################################################################*/
+                    *//*############################################################################*//*
 
                     //Software FFT
                     //Real component
@@ -151,6 +152,7 @@ public class SpectralAnalysis {
                     //Write double value to file
                     writeDataToFile(MainActivity.path, "xdft_imag_sw.txt", dval + "\n");
                 }
+                */
 
                 spd = SPD(dft);
                 this.expSPD = spd;
@@ -188,7 +190,7 @@ public class SpectralAnalysis {
                     //Write hex string to file (IEEE 754 float single precision format)
                     writeDataToFile(MainActivity.path, xfft_input_file, st);
 
-                    MainActivity.mTimer.setStartTime(3); //start Timer
+                    //MainActivity.mTimer.setStartTime(3); //start Timer
                 }
                 Log.i("Input data", "Created input hex data: " + xfft_input_file + " !");
 
@@ -206,12 +208,13 @@ public class SpectralAnalysis {
                 //get FFT results
                 dft = readDataFromFile(MainActivity.path, xfft_output_file, false);
 
-                MainActivity.mTimer.setEndTime(3); //End Timer
+                //MainActivity.mTimer.setEndTime(3); //End Timer
 
                 //delete output file
                 if (checkFileExists(MainActivity.path, xfft_output_file, true))
                     Log.i("Output data", "Deleted " + xfft_output_file + " !");
 
+                /*
                 dft_sw = calculateDFT(inputSignal);
 
                 //Write output values to files
@@ -229,7 +232,7 @@ public class SpectralAnalysis {
                     //Write double value to file
                     writeDataToFile(MainActivity.path, "xfft_imag.txt", dval + "\n");
 
-                    /*############################################################################*/
+                    *//*############################################################################*//*
 
                     //Software FFT
                     //Real component
@@ -244,6 +247,7 @@ public class SpectralAnalysis {
                     //Write double value to file
                     writeDataToFile(MainActivity.path, "xfft_imag_sw.txt", dval + "\n");
                 }
+                */
 
                 spd = SPD(dft);
                 this.expSPD = spd;
@@ -294,7 +298,7 @@ public class SpectralAnalysis {
                     //Write normalised hex string to file (IEEE 754 float single precision format)
                     writeDataToFile(MainActivity.path, xfft_fixed_input_file, norm_st);
 
-                    MainActivity.mTimer.setStartTime(3); //start Timer
+                    //MainActivity.mTimer.setStartTime(3); //start Timer
                 }
                 Log.i("Input data", "Created input hex data: " + xfft_fixed_input_file + " !");
 
@@ -312,12 +316,13 @@ public class SpectralAnalysis {
                 //get FFT results
                 dft = readDataFromFile(MainActivity.path, xfft_fixed_output_file, true);
 
-                MainActivity.mTimer.setEndTime(3); //End Timer
+                //MainActivity.mTimer.setEndTime(3); //End Timer
 
                 //delete output file
                 if (checkFileExists(MainActivity.path, xfft_fixed_output_file, true))
                     Log.i("Output data", "Deleted " + xfft_fixed_output_file + " !");
 
+                /*
                 dft_sw = calculateDFT(inputSignal);
 
                 //Write output values to files
@@ -335,7 +340,7 @@ public class SpectralAnalysis {
                     //Write double value to file
                     writeDataToFile(MainActivity.path, "xfft-fixed_imag.txt", dval + "\n");
 
-                    /*############################################################################*/
+                    *//*############################################################################*//*
 
                     //Software FFT
                     //Real component
@@ -350,6 +355,7 @@ public class SpectralAnalysis {
                     //Write double value to file
                     writeDataToFile(MainActivity.path, "xfft-fixed_imag_sw.txt", dval + "\n");
                 }
+                */
 
                 spd = SPD(dft);
                 this.expSPD = spd;
@@ -400,7 +406,7 @@ public class SpectralAnalysis {
                     //Write normalised hex string to file (IEEE 754 float single precision format)
                     writeDataToFile(MainActivity.path, intfftk_input_file, norm_st);
 
-                    MainActivity.mTimer.setStartTime(3); //start Timer
+                    //MainActivity.mTimer.setStartTime(3); //start Timer
                 }
                 Log.i("Input data", "Created input hex data: " + intfftk_input_file + " !");
 
@@ -418,7 +424,7 @@ public class SpectralAnalysis {
                 //get FFT results
                 dft = readDataFromFile(MainActivity.path, intfftk_output_file, true);
 
-                MainActivity.mTimer.setEndTime(3); //End Timer
+                //MainActivity.mTimer.setEndTime(3); //End Timer
 
                 //Correct shifts for first value
                 dft[0].setR(dft[0].getR() / 2);
@@ -427,6 +433,7 @@ public class SpectralAnalysis {
                 if (checkFileExists(MainActivity.path, intfftk_output_file, true))
                     Log.i("Output data", "Deleted " + intfftk_output_file + " !");
 
+                /*
                 dft_sw = calculateDFT(inputSignal);
 
                 //Write output values to files
@@ -444,7 +451,7 @@ public class SpectralAnalysis {
                     //Write double value to file
                     writeDataToFile(MainActivity.path, "intfftk_imag.txt", dval + "\n");
 
-                    /*############################################################################*/
+                    *//*############################################################################*//*
 
                     //Software FFT
                     //Real component
@@ -459,6 +466,7 @@ public class SpectralAnalysis {
                     //Write double value to file
                     writeDataToFile(MainActivity.path, "intfftk_imag_sw.txt", dval + "\n");
                 }
+                */
 
                 spd = SPD(dft);
                 this.expSPD = spd;
@@ -509,7 +517,7 @@ public class SpectralAnalysis {
                     //Write normalised hex string to file (IEEE 754 float single precision format)
                     writeDataToFile(MainActivity.path, intfft_spdf_input_file, norm_st);
 
-                    MainActivity.mTimer.setStartTime(3); //start Timer
+                    //MainActivity.mTimer.setStartTime(3); //start Timer
                 }
                 Log.i("Input data", "Created input hex data: " + intfft_spdf_input_file + " !");
 
@@ -527,7 +535,7 @@ public class SpectralAnalysis {
                 //get FFT results
                 dft = readDataFromFile(MainActivity.path, intfft_spdf_output_file, true);
 
-                MainActivity.mTimer.setEndTime(3); //End Timer
+                //MainActivity.mTimer.setEndTime(3); //End Timer
 
                 //Correct shifts for first value
                 dft[0].setR(dft[0].getR() / 2);
@@ -536,6 +544,7 @@ public class SpectralAnalysis {
                 if (checkFileExists(MainActivity.path, intfft_spdf_output_file, true))
                     Log.i("Output data", "Deleted " + intfft_spdf_output_file + " !");
 
+                /*
                 dft_sw = calculateDFT(inputSignal);
 
                 //Write output values to files
@@ -553,7 +562,7 @@ public class SpectralAnalysis {
                     //Write double value to file
                     writeDataToFile(MainActivity.path, "intfft_spdf_imag.txt", dval + "\n");
 
-                    /*############################################################################*/
+                    *//*############################################################################*//*
 
                     //Software FFT
                     //Real component
@@ -568,6 +577,7 @@ public class SpectralAnalysis {
                     //Write double value to file
                     writeDataToFile(MainActivity.path, "intfft_spdf_imag_sw.txt", dval + "\n");
                 }
+                */
 
                 spd = SPD(dft);
                 this.expSPD = spd;
@@ -618,7 +628,7 @@ public class SpectralAnalysis {
                     //Write normalised hex string to file (IEEE 754 float single precision format)
                     writeDataToFile(MainActivity.path, dblclkfft_input_file, norm_st);
 
-                    MainActivity.mTimer.setStartTime(3); //start Timer
+                    //MainActivity.mTimer.setStartTime(3); //start Timer
                 }
                 Log.i("Input data", "Created input hex data: " + dblclkfft_input_file + " !");
 
@@ -636,12 +646,13 @@ public class SpectralAnalysis {
                 //get FFT results
                 dft = readDataFromFile(MainActivity.path, dblclkfft_output_file, true);
 
-                MainActivity.mTimer.setEndTime(3); //End Timer
+                //MainActivity.mTimer.setEndTime(3); //End Timer
 
                 //delete output file
                 if (checkFileExists(MainActivity.path, dblclkfft_output_file, true))
                     Log.i("Output data", "Deleted " + dblclkfft_output_file + " !");
 
+                /*
                 dft_sw = calculateDFT(inputSignal);
 
                 //Write output values to files
@@ -659,7 +670,7 @@ public class SpectralAnalysis {
                     //Write double value to file
                     writeDataToFile(MainActivity.path, "dblclkfft_imag.txt", dval + "\n");
 
-                    /*############################################################################*/
+                    *//*############################################################################*//*
 
                     //Software FFT
                     //Real component
@@ -674,6 +685,7 @@ public class SpectralAnalysis {
                     //Write double value to file
                     writeDataToFile(MainActivity.path, "dblclkfft_imag_sw.txt", dval + "\n");
                 }
+                */
 
                 spd = SPD(dft);
                 this.expSPD = spd;
