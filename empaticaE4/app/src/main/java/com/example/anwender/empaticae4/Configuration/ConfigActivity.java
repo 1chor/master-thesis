@@ -62,7 +62,7 @@ public class ConfigActivity extends AppCompatActivity implements  NetworkManager
     public static String repo_name = "SDFT"; //set default name of server repository
     public static int windowSize = 100;
     public static boolean enable_hash = false;
-    public static String serverIP = "192.168.2.8"; //default value for debug case - delete afterwards
+    public static String serverIP = "192.168.2.7"; //default value for debug case - delete afterwards
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
