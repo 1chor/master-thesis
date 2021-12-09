@@ -541,6 +541,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                 Log.i("RR-Finish", "RR Test finished!");
             }
         });
+        thread.setPriority(Thread.MAX_PRIORITY);
         thread.start();
     }
 
