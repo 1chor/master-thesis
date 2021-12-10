@@ -2,6 +2,7 @@ package com.example.anwender.empaticae4.Configuration;
 
 import android.content.Context;
 import android.os.SystemClock;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.anwender.empaticae4.Main.Utility;
@@ -18,11 +19,13 @@ public class Timer {
     }
 
     public void setStartTime(int timer) {
-        this.startTime[timer] = SystemClock.elapsedRealtime();
+        //this.startTime[timer] = SystemClock.elapsedRealtime();
+        this.startTime[timer] = SystemClock.uptimeMillis();
     }
 
     public void setEndTime(int timer) {
-        this.endTime[timer] = SystemClock.elapsedRealtime();
+        //this.endTime[timer] = SystemClock.elapsedRealtime();
+        this.endTime[timer] = SystemClock.uptimeMillis();
     }
 
     public String getTimer(int timer) {
@@ -42,5 +45,6 @@ public class Timer {
         String printtext = text + " took " + this.getTimer(timer) + " seconds.\n" +
         text + " took " + this.getTimerMilli(timer) + " milliseconds.";
         Utility.toastie(this.context, printtext, Toast.LENGTH_LONG);
+        Log.i("Timer", printtext);
     }
 }
