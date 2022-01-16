@@ -264,7 +264,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:baselineAligned="false">
 
         <Button
             android:id="@+id/button_test_RR_single"
@@ -281,10 +282,17 @@
             android:text="@string/button_test_RR_all" />
 
         <Button
+            android:id="@+id/button_test_RR_AIO"
+            android:layout_width="0px"
+            android:layout_height="50dp"
+            android:layout_weight="0.25"
+            android:text="@string/button_test_RR_AIO"/>
+
+        <Button
             android:id="@+id/button_config_RR"
             android:layout_width="0px"
             android:layout_height="50dp"
-            android:layout_weight="0.5"
+            android:layout_weight="0.25"
             android:text="@string/config_RR" />
 
     </LinearLayout>

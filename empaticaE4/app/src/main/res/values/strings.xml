@@ -167,6 +167,7 @@
     <string name="test_RR">• Test Respiratory Rate</string>
     <string name="button_test_RR_single">Single Run</string>
     <string name="button_test_RR_all">All Runs</string>
+    <string name="button_test_RR_AIO">All Runs\nAll In One</string>
     <string name="config_RR">Config RR</string>
     <string name="text_status">Configuration status:</string>
     <string name="serverIP">Server IP address:</string>

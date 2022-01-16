@@ -229,6 +229,9 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
         Button btnTestRR_all = findViewById(R.id.button_test_RR_all);
         btnTestRR_all.setOnClickListener(this);
 
+        Button btnTestRR_AIO = findViewById(R.id.button_test_RR_AIO);
+        btnTestRR_AIO.setOnClickListener(this);
+
         Button btnConfigRR = findViewById(R.id.button_config_RR);
         btnConfigRR.setOnClickListener(this);
 
@@ -313,6 +316,14 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                 //Start test
                 test_didReceiveBVP();
                 Utility.toastie(getApplicationContext(),"RR Test - All Runs started!");
+                break;
+            case R.id.button_test_RR_AIO:
+                Log.i("Start RR Test - AIO Run", "Use " + ConfigActivity.repo_name + " method");
+                //max_run = 9400; // = 5 runs
+                mTimer.setStartTime(4); //start Timer
+                //Start test
+                test_AIO_didReceiveBVP();
+                Utility.toastie(getApplicationContext(),"RR Test - AIO Runs started!");
                 break;
             case R.id.button_config_RR:
                 final Intent ConfigActivity = new Intent(MainActivity.this, com.example.anwender.empaticae4.Configuration.ConfigActivity.class);
@@ -489,7 +500,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
 
                     bvp = Utility.readfromCSV(getApplicationContext(), path, "BVP1.csv", i);
 
-                    //When called for the first time, write sample frequency (= 64Hz) and start timestamp in the first 2 rows
+                    //When called for the first time
                     if (!flagBVP) {
                         flagBVP = true;
                         firstWindow = true;
@@ -505,10 +516,11 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                             //if (bvpSamples.size() == 1728) {
                             if (bvpSamples.size() == 1878) { // needed for XFFT
                                 RRScore analyze = new RRScore(bvpSamples);
-                                rrSamples.add(new Entry(rrSamples.size(), analyze.runAnalysis()));
-                                rrScores.add(new Entry(rrScores.size(), getRREWScore(analyze.runAnalysis())));
-                                rrHist.add((float) analyze.runAnalysis());
-                                rrHistScore.add(getRREWScore(analyze.runAnalysis()));
+                                int analysis = analyze.runAnalysis(); // run analysis
+                                rrSamples.add(new Entry(rrSamples.size(), analysis));
+                                rrScores.add(new Entry(rrScores.size(), getRREWScore(analysis)));
+                                rrHist.add((float) analysis);
+                                rrHistScore.add(getRREWScore(analysis));
                                 setEWSValue();
                                 setHistFiles();
                                 Log.i("RR-Ready", "RR analysis finished!, Ready to show!");
@@ -541,7 +553,63 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                 Log.i("RR-Finish", "RR Test finished!");
             }
         });
-        thread.setPriority(Thread.MAX_PRIORITY);
+        //thread.setPriority(Thread.MAX_PRIORITY);
+        thread.start();
+    }
+
+    public void test_AIO_didReceiveBVP() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final int max = max_run;
+                int run = 1878;
+                float bvp;
+
+                for (int i = 9; i < max; i++) {
+                    final int progress = i + 1;
+
+                    bvp = Utility.readfromCSV(getApplicationContext(), path, "BVP1.csv", i); // collect all data
+                    bvpSamples.add(filters.filteredData(bvp));
+
+                    //Update the progress bar
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            //Set progress bar
+                            progressBar.setProgress((progress * 100) / max);
+
+                        }
+                    });
+                }
+
+                RRScore analyze = new RRScore();
+                int[] analysis = analyze.runAnalysis_AIO(bvpSamples, max, run); // run analysis
+
+                for (int i = 0; i < max/run; i++) {
+                    rrSamples.add(new Entry(rrSamples.size(), analysis[i]));
+                    rrScores.add(new Entry(rrScores.size(), getRREWScore(analysis[i])));
+                    rrHist.add((float) analysis[i]);
+                    rrHistScore.add(getRREWScore(analysis[i]));
+                    setEWSValue();
+                    setHistFiles();
+                }
+                Log.i("RR-Ready", "RR analysis finished!, Ready to show!");
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mTimer.setEndTime(4); //stop Timer
+                        mTimer.toastie("RR Test", 4);
+                    }
+                });
+
+                bvpSamples.clear();
+                //analyze.clearBuffer();
+
+                Log.i("RR-Finish", "RR Test finished!");
+            }
+        });
+        //thread.setPriority(Thread.MAX_PRIORITY);
         thread.start();
     }
 

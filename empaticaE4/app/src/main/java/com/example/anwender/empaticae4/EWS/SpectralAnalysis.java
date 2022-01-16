@@ -15,10 +15,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class SpectralAnalysis {
-    private int signalSize;
+    private int[] signalSize;
     private double argConstantPart;
-    private double domF;
-    private float norm_abs;
+    private double[] domF;
+    private float[] norm_abs;
 
     private List<double[]> expSPD;
 
@@ -27,7 +27,7 @@ public class SpectralAnalysis {
 
         //variable declaration
         Complex[] dft;
-        Complex[] dft_sw;
+        //Complex[] dft_sw;
         List<double[]> spd;
 
         //variable declaration for file generation
@@ -37,23 +37,27 @@ public class SpectralAnalysis {
         float max_range_value;
         float min_range_value;
 
+        this.domF = new double[1];
+        this.norm_abs = new float[1];
+        this.signalSize = new int[1];
+
         switch (ConfigActivity.repo_name) {
             case "SDFT": //Software DFT
-                this.signalSize = inputSignal.size();
-                this.argConstantPart = (Math.PI * 2) / signalSize;
+                this.signalSize[0] = inputSignal.size();
+                this.argConstantPart = (Math.PI * 2) / signalSize[0];
 
                 //MainActivity.mTimer.setStartTime(3); //start Timer
-                dft = calculateDFT(inputSignal);
+                dft = calculateDFT(inputSignal, 0);
                 //MainActivity.mTimer.setEndTime(3); //End Timer
 
                 spd = SPD(dft);
                 this.expSPD = spd;
-                this.domF = dominantFrequency(spd);
+                this.domF[0] = dominantFrequency(spd);
                 break;
 
             case "XDFT": //Hardware Xilinx DFT
-                this.signalSize = inputSignal.size();
-                this.argConstantPart = (Math.PI * 2) / signalSize;
+                this.signalSize[0] = inputSignal.size();
+                this.argConstantPart = (Math.PI * 2) / signalSize[0];
 
                 bound = new boundaries(inputSignal); //search for boundaries
 
@@ -81,11 +85,11 @@ public class SpectralAnalysis {
                     max_range_value = bound.getMax();
                     min_range_value = -bound.getMax();
                 }
-                norm_abs = (max_range_value - min_range_value);
+                norm_abs[0] = (max_range_value - min_range_value);
 
                 //Write input values to file
-                for (int i = 0; i < signalSize; i++) {
-                    float norm_fval = 2 * inputSignal.get(i)[0] / norm_abs; //normalise input value, range [-1 1]
+                for (int i = 0; i < signalSize[0]; i++) {
+                    float norm_fval = 2 * inputSignal.get(i)[0] / norm_abs[0]; //normalise input value, range [-1 1]
 
                     //Convert float to hex string
                     int norm_intval = Float.floatToRawIntBits(norm_fval); //normalised integer value
@@ -103,15 +107,15 @@ public class SpectralAnalysis {
                 file = new File(MainActivity.path, xdft_output_file);
                 while (!file.exists()) {
                     try {
-                        //Thread.Sleep(1000);
-                        java.lang.Thread.sleep(1000);
+                        Thread.sleep(1000);
+                        //java.lang.Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
 
                 //get FFT results
-                dft = readDataFromFile(MainActivity.path, xdft_output_file, true);
+                dft = readDataFromFile(MainActivity.path, xdft_output_file, true, 0);
 
                 //MainActivity.mTimer.setEndTime(3); //End Timer
 
@@ -156,12 +160,12 @@ public class SpectralAnalysis {
 
                 spd = SPD(dft);
                 this.expSPD = spd;
-                this.domF = dominantFrequency(spd);
+                this.domF[0] = dominantFrequency(spd);
                 break;
 
             case "XFFT": //Hardware Xilinx FFT  (floating-point)
-                this.signalSize = inputSignal.size();
-                this.argConstantPart = (Math.PI * 2) / signalSize;
+                this.signalSize[0] = inputSignal.size();
+                this.argConstantPart = (Math.PI * 2) / signalSize[0];
 
                 //define file names
                 //input data files (hex)
@@ -178,8 +182,11 @@ public class SpectralAnalysis {
                 if (checkFileExists(MainActivity.path, xfft_output_file, true))
                     Log.i("Output data", "Deleted " + xfft_output_file + " !");
 
+                //Write run size
+                writeDataToFile(MainActivity.path, xfft_input_file, 1 + "\n");
+
                 //Write input values to file
-                for (int i = 0; i < signalSize; i++) {
+                for (int i = 0; i < signalSize[0]; i++) {
                     float fval = inputSignal.get(i)[0]; //get input value
 
                     //Convert float to hex string
@@ -198,15 +205,15 @@ public class SpectralAnalysis {
                 file = new File(MainActivity.path, xfft_output_file);
                 while (!file.exists()) {
                     try {
-                        //Thread.Sleep(1000);
-                        java.lang.Thread.sleep(1000);
+                        Thread.sleep(1000);
+                        //java.lang.Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
 
                 //get FFT results
-                dft = readDataFromFile(MainActivity.path, xfft_output_file, false);
+                dft = readDataFromFile(MainActivity.path, xfft_output_file, false, 0);
 
                 //MainActivity.mTimer.setEndTime(3); //End Timer
 
@@ -251,9 +258,621 @@ public class SpectralAnalysis {
 
                 spd = SPD(dft);
                 this.expSPD = spd;
-                this.domF = dominantFrequency(spd);
+                this.domF[0] = dominantFrequency(spd);
                 break;
 
+            case "XFFT_fixed": //Hardware Xilinx FFT (fixed-point)
+                this.signalSize[0] = inputSignal.size();
+                this.argConstantPart = (Math.PI * 2) / signalSize[0];
+
+                bound = new boundaries(inputSignal); //search for boundaries
+
+                //define file names
+                //input data files (hex)
+                String xfft_fixed_input_file = "xfft_fixed_input.txt";
+
+                String xfft_fixed_output_file = "xfft_fixed_output.txt";
+
+                //check if file exists and delete it
+                //input data files (hex)
+                if (checkFileExists(MainActivity.path, xfft_fixed_input_file, true))
+                    Log.i("Input data", "Deleted " + xfft_fixed_input_file + " !");
+
+                //output data file (hex)
+                if (checkFileExists(MainActivity.path, xfft_fixed_output_file, true))
+                    Log.i("Output data", "Deleted " + xfft_fixed_output_file + " !");
+
+                //normalise input values to be between -1 and 1
+                //original sign of the values are maintained
+                if (Math.abs(bound.getMin()) > bound.getMax()) {
+                    max_range_value = Math.abs(bound.getMin());
+                    min_range_value = bound.getMin();
+                } else {
+                    max_range_value = bound.getMax();
+                    min_range_value = -bound.getMax();
+                }
+                norm_abs[0] = (max_range_value - min_range_value);
+
+                //Write input values to file
+                for (int i = 0; i < signalSize[0]; i++) {
+                    float norm_fval = 2 * inputSignal.get(i)[0] / norm_abs[0]; //normalise input value, range [-1, 1]
+
+                    //Convert float to hex string
+                    int norm_intval = Float.floatToRawIntBits(norm_fval); //normalised integer value
+
+                    String norm_st = String.format("%16s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
+
+                    //Write normalised hex string to file (IEEE 754 float single precision format)
+                    writeDataToFile(MainActivity.path, xfft_fixed_input_file, norm_st);
+
+                    //MainActivity.mTimer.setStartTime(3); //start Timer
+                }
+                Log.i("Input data", "Created input hex data: " + xfft_fixed_input_file + " !");
+
+                //wait until output file exists
+                file = new File(MainActivity.path, xfft_fixed_output_file);
+                while (!file.exists()) {
+                    try {
+                        Thread.sleep(1000);
+                        //java.lang.Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                //get FFT results
+                dft = readDataFromFile(MainActivity.path, xfft_fixed_output_file, true, 0);
+
+                //MainActivity.mTimer.setEndTime(3); //End Timer
+
+                //delete output file
+                if (checkFileExists(MainActivity.path, xfft_fixed_output_file, true))
+                    Log.i("Output data", "Deleted " + xfft_fixed_output_file + " !");
+
+                /*
+                dft_sw = calculateDFT(inputSignal);
+
+                //Write output values to files
+                for (int i=0; i<signalSize; i++) {
+                    //Hardware FFT
+                    //Real component
+                    double dval = dft[i].getR(); //get real output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "xfft-fixed_real.txt", dval + "\n");
+
+                    //Imaginary component
+                    dval = dft[i].getI(); //get imaginary output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "xfft-fixed_imag.txt", dval + "\n");
+
+                    *//*############################################################################*//*
+
+                    //Software FFT
+                    //Real component
+                    dval = dft_sw[i].getR(); //get real output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "xfft-fixed_real_sw.txt", dval + "\n");
+
+                    //Imaginary component
+                    dval = dft_sw[i].getI(); //get imaginary output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "xfft-fixed_imag_sw.txt", dval + "\n");
+                }
+                */
+
+                spd = SPD(dft);
+                this.expSPD = spd;
+                this.domF[0] = dominantFrequency(spd);
+                break;
+
+            case "INTFFTK": //Hardware Fully pipelined integer unscaled FFT
+                this.signalSize[0] = inputSignal.size();
+                this.argConstantPart = (Math.PI * 2) / signalSize[0];
+
+                bound = new boundaries(inputSignal); //search for boundaries
+
+                //define file names
+                //input data files (hex)
+                String intfftk_input_file = "intfftk_input.txt";
+
+                String intfftk_output_file = "intfftk_output.txt";
+
+                //check if file exists and delete it
+                //input data files (hex)
+                if (checkFileExists(MainActivity.path, intfftk_input_file, true))
+                    Log.i("Input data", "Deleted " + intfftk_input_file + " !");
+
+                //output data file (hex)
+                if (checkFileExists(MainActivity.path, intfftk_output_file, true))
+                    Log.i("Output data", "Deleted " + intfftk_output_file + " !");
+
+                //normalise input values to be between -1 and 1
+                //original sign of the values are maintained
+                if (Math.abs(bound.getMin()) > bound.getMax()) {
+                    max_range_value = Math.abs(bound.getMin());
+                    min_range_value = bound.getMin();
+                } else {
+                    max_range_value = bound.getMax();
+                    min_range_value = -bound.getMax();
+                }
+                norm_abs[0] = (max_range_value - min_range_value);
+
+                //Write input values to file
+                for (int i = 0; i < signalSize[0]; i++) {
+                    float norm_fval = 2 * inputSignal.get(i)[0] / norm_abs[0]; //normalise input value, range [-1 1]
+
+                    //Convert float to hex string
+                    int norm_intval = Float.floatToRawIntBits(norm_fval); //normalised integer value
+
+                    String norm_st = String.format("%16s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
+
+                    //Write normalised hex string to file (IEEE 754 float single precision format)
+                    writeDataToFile(MainActivity.path, intfftk_input_file, norm_st);
+
+                    //MainActivity.mTimer.setStartTime(3); //start Timer
+                }
+                Log.i("Input data", "Created input hex data: " + intfftk_input_file + " !");
+
+                //wait until output file exists
+                file = new File(MainActivity.path, intfftk_output_file);
+                while (!file.exists()) {
+                    try {
+                        Thread.sleep(1000);
+                        //java.lang.Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                //get FFT results
+                dft = readDataFromFile(MainActivity.path, intfftk_output_file, true, 0);
+
+                //MainActivity.mTimer.setEndTime(3); //End Timer
+
+                //Correct shifts for first value
+                dft[0].setR(dft[0].getR() / 2);
+
+                //delete output file
+                if (checkFileExists(MainActivity.path, intfftk_output_file, true))
+                    Log.i("Output data", "Deleted " + intfftk_output_file + " !");
+
+                /*
+                dft_sw = calculateDFT(inputSignal);
+
+                //Write output values to files
+                for (int i=0; i<signalSize; i++) {
+                    //Hardware FFT
+                    //Real component
+                    double dval = dft[i].getR(); //get real output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "intfftk_real.txt", dval + "\n");
+
+                    //Imaginary component
+                    dval = dft[i].getI(); //get imaginary output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "intfftk_imag.txt", dval + "\n");
+
+                    *//*############################################################################*//*
+
+                    //Software FFT
+                    //Real component
+                    dval = dft_sw[i].getR(); //get real output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "intfftk_real_sw.txt", dval + "\n");
+
+                    //Imaginary component
+                    dval = dft_sw[i].getI(); //get imaginary output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "intfftk_imag_sw.txt", dval + "\n");
+                }
+                */
+
+                spd = SPD(dft);
+                this.expSPD = spd;
+                this.domF[0] = dominantFrequency(spd);
+                break;
+
+            case "INTFFT_SPDF": //Hardware Integer unscaled Radix-2 Single Path Delay Feedback FFT
+                this.signalSize[0] = inputSignal.size();
+                this.argConstantPart = (Math.PI * 2) / signalSize[0];
+
+                bound = new boundaries(inputSignal); //search for boundaries
+
+                //define file names
+                //input data files (hex)
+                String intfft_spdf_input_file = "intfft_spdf_input.txt";
+
+                String intfft_spdf_output_file = "intfft_spdf_output.txt";
+
+                //check if file exists and delete it
+                //input data files (hex)
+                if (checkFileExists(MainActivity.path, intfft_spdf_input_file, true))
+                    Log.i("Input data", "Deleted " + intfft_spdf_input_file + " !");
+
+                //output data file (hex)
+                if (checkFileExists(MainActivity.path, intfft_spdf_output_file, true))
+                    Log.i("Output data", "Deleted " + intfft_spdf_output_file + " !");
+
+                //normalise input values to be between -1 and 1
+                //original sign of the values are maintained
+                if (Math.abs(bound.getMin()) > bound.getMax()) {
+                    max_range_value = Math.abs(bound.getMin());
+                    min_range_value = bound.getMin();
+                } else {
+                    max_range_value = bound.getMax();
+                    min_range_value = -bound.getMax();
+                }
+                norm_abs[0] = (max_range_value - min_range_value);
+
+                //Write input values to file
+                for (int i = 0; i < signalSize[0]; i++) {
+                    float norm_fval = 2 * inputSignal.get(i)[0] / norm_abs[0]; //normalise input value, range [-1 1]
+
+                    //Convert float to hex string
+                    int norm_intval = Float.floatToRawIntBits(norm_fval); //normalised integer value
+
+                    String norm_st = String.format("%16s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
+
+                    //Write normalised hex string to file (IEEE 754 float single precision format)
+                    writeDataToFile(MainActivity.path, intfft_spdf_input_file, norm_st);
+
+                    //MainActivity.mTimer.setStartTime(3); //start Timer
+                }
+                Log.i("Input data", "Created input hex data: " + intfft_spdf_input_file + " !");
+
+                //wait until output file exists
+                file = new File(MainActivity.path, intfft_spdf_output_file);
+                while (!file.exists()) {
+                    try {
+                        Thread.sleep(1000);
+                        //java.lang.Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                //get FFT results
+                dft = readDataFromFile(MainActivity.path, intfft_spdf_output_file, true, 0);
+
+                //MainActivity.mTimer.setEndTime(3); //End Timer
+
+                //Correct shifts for first value
+                dft[0].setR(dft[0].getR() / 2);
+
+                //delete output file
+                if (checkFileExists(MainActivity.path, intfft_spdf_output_file, true))
+                    Log.i("Output data", "Deleted " + intfft_spdf_output_file + " !");
+
+                /*
+                dft_sw = calculateDFT(inputSignal);
+
+                //Write output values to files
+                for (int i=0; i<signalSize; i++) {
+                    //Hardware FFT
+                    //Real component
+                    double dval = dft[i].getR(); //get real output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "intfft_spdf_real.txt", dval + "\n");
+
+                    //Imaginary component
+                    dval = dft[i].getI(); //get imaginary output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "intfft_spdf_imag.txt", dval + "\n");
+
+                    *//*############################################################################*//*
+
+                    //Software FFT
+                    //Real component
+                    dval = dft_sw[i].getR(); //get real output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "intfft_spdf_real_sw.txt", dval + "\n");
+
+                    //Imaginary component
+                    dval = dft_sw[i].getI(); //get imaginary output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "intfft_spdf_imag_sw.txt", dval + "\n");
+                }
+                */
+
+                spd = SPD(dft);
+                this.expSPD = spd;
+                this.domF[0] = dominantFrequency(spd);
+                break;
+
+            case "DBLCLKFFT": //Hardware Generic Pipelined FFT
+                this.signalSize[0] = inputSignal.size();
+                this.argConstantPart = (Math.PI * 2) / signalSize[0];
+
+                bound = new boundaries(inputSignal); //search for boundaries
+
+                //define file names
+                //input data files (hex)
+                String dblclkfft_input_file = "dblclkfft_input.txt";
+
+                String dblclkfft_output_file = "dblclkfft_output.txt";
+
+                //check if file exists and delete it
+                //input data files (hex)
+                if (checkFileExists(MainActivity.path, dblclkfft_input_file, true))
+                    Log.i("Input data", "Deleted " + dblclkfft_input_file + " !");
+
+                //output data file (hex)
+                if (checkFileExists(MainActivity.path, dblclkfft_output_file, true))
+                    Log.i("Output data", "Deleted " + dblclkfft_output_file + " !");
+
+                //normalise input values to be between -1 and 1
+                //original sign of the values are maintained
+                if (Math.abs(bound.getMin()) > bound.getMax()) {
+                    max_range_value = Math.abs(bound.getMin());
+                    min_range_value = bound.getMin();
+                } else {
+                    max_range_value = bound.getMax();
+                    min_range_value = -bound.getMax();
+                }
+                norm_abs[0] = (max_range_value - min_range_value);
+
+                //Write input values to file
+                for (int i = 0; i < signalSize[0]; i++) {
+                    float norm_fval = 2 * inputSignal.get(i)[0] / norm_abs[0]; //normalise input value, range [-1 1]
+
+                    //Convert float to hex string
+                    int norm_intval = Float.floatToRawIntBits(norm_fval); //normalised integer value
+
+                    String norm_st = String.format("%16s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
+
+                    //Write normalised hex string to file (IEEE 754 float single precision format)
+                    writeDataToFile(MainActivity.path, dblclkfft_input_file, norm_st);
+
+                    //MainActivity.mTimer.setStartTime(3); //start Timer
+                }
+                Log.i("Input data", "Created input hex data: " + dblclkfft_input_file + " !");
+
+                //wait until output file exists
+                file = new File(MainActivity.path, dblclkfft_output_file);
+                while (!file.exists()) {
+                    try {
+                        Thread.sleep(1000);
+                        //java.lang.Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                //get FFT results
+                dft = readDataFromFile(MainActivity.path, dblclkfft_output_file, true, 0);
+
+                //MainActivity.mTimer.setEndTime(3); //End Timer
+
+                //delete output file
+                if (checkFileExists(MainActivity.path, dblclkfft_output_file, true))
+                    Log.i("Output data", "Deleted " + dblclkfft_output_file + " !");
+
+                /*
+                dft_sw = calculateDFT(inputSignal);
+
+                //Write output values to files
+                for (int i=0; i<signalSize; i++) {
+                    //Hardware FFT
+                    //Real component
+                    double dval = dft[i].getR(); //get real output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "dblclkfft_real.txt", dval + "\n");
+
+                    //Imaginary component
+                    dval = dft[i].getI(); //get imaginary output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "dblclkfft_imag.txt", dval + "\n");
+
+                    *//*############################################################################*//*
+
+                    //Software FFT
+                    //Real component
+                    dval = dft_sw[i].getR(); //get real output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "dblclkfft_real_sw.txt", dval + "\n");
+
+                    //Imaginary component
+                    dval = dft_sw[i].getI(); //get imaginary output value
+
+                    //Write double value to file
+                    writeDataToFile(MainActivity.path, "dblclkfft_imag_sw.txt", dval + "\n");
+                }
+                */
+
+                spd = SPD(dft);
+                this.expSPD = spd;
+                this.domF[0] = dominantFrequency(spd);
+                break;
+        }
+    }
+
+    //Constructor for AIO: Requires input signal
+    public SpectralAnalysis(List<float[]>[] inputSignal, int max, int run) {
+
+        //variable declaration
+        Complex[][] dft = new Complex[max/run][];
+        List<double[]> spd;
+
+        //variable declaration for file generation
+        File file;
+        boundaries bound;
+
+        float max_range_value;
+        float min_range_value;
+
+        this.domF = new double[max/run];
+        this.norm_abs = new float[max/run];
+        this.signalSize = new int[max/run];
+
+        switch (ConfigActivity.repo_name) {
+            case "SDFT": //Software DFT
+//                for (int i = 0; i < max; i++) {
+//                    writeDataToFile(MainActivity.path, "test.txt", String.format("%16s", Integer.toString(i)).replace(' ', '0') + "\n");
+//                }
+//
+//                for (int i = 0; i < max/run; i++) {
+//                    this.signalSize[i] = inputSignal[i].size();
+//                    dft[i] = readDataFromFile(MainActivity.path, "test.txt", false, i);
+//                }
+
+                for (int i = 0; i < max/run; i++) {
+                    this.signalSize[i] = inputSignal[i].size();
+                    this.argConstantPart = (Math.PI * 2) / signalSize[i];
+
+                    dft[0] = calculateDFT(inputSignal[i], i);
+
+                    spd = SPD(dft[0]);
+                    this.expSPD = spd;
+                    this.domF[i] = dominantFrequency(spd);
+                }
+                break;
+
+            case "XDFT": //Hardware Xilinx DFT
+                //define file names
+                String xdft_input_file = "xdft_input.txt";
+                String xdft_output_file = "xdft_output.txt";
+
+                //check if file exists and delete it
+                //input data files (hex)
+                if (checkFileExists(MainActivity.path, xdft_input_file, true))
+                    Log.i("Input data", "Deleted " + xdft_input_file + " !");
+
+                //output data file (hex)
+                if (checkFileExists(MainActivity.path, xdft_output_file, true))
+                    Log.i("Output data", "Deleted " + xdft_output_file + " !");
+
+                for (int i = 0; i < max/run; i++) {
+                    this.signalSize[i] = inputSignal[i].size();
+                    bound = new boundaries(inputSignal[i]); //search for boundaries
+
+                    //normalise input values to be between -1 and 1
+                    //original sign of the values are maintained
+                    if (Math.abs(bound.getMin()) > bound.getMax()) {
+                        max_range_value = Math.abs(bound.getMin());
+                        min_range_value = bound.getMin();
+                    } else {
+                        max_range_value = bound.getMax();
+                        min_range_value = -bound.getMax();
+                    }
+                    norm_abs[i] = (max_range_value - min_range_value);
+
+                    //Write input values to file
+                    for (int j = 0; j < signalSize[i]; j++) {
+                        float norm_fval = 2 * inputSignal[i].get(j)[0] / norm_abs[i]; //normalise input value, range [-1 1]
+
+                        //Convert float to hex string
+                        int norm_intval = Float.floatToRawIntBits(norm_fval); //normalised integer value
+
+                        String norm_st = String.format("%16s", Integer.toHexString(norm_intval)).replace(' ', '0') + "\n"; //normalised hex string
+
+                        //Write normalised hex string to file (IEEE 754 float single precision format)
+                        writeDataToFile(MainActivity.path, xdft_input_file, norm_st);
+                    }
+                    writeDataToFile(MainActivity.path, xdft_input_file, "--------\n");
+                }
+                Log.i("Input data", "Created input hex data: " + xdft_input_file + " !");
+
+                //wait until output file exists
+                file = new File(MainActivity.path, xdft_output_file);
+                while (!file.exists()) {
+                    try {
+                        Thread.sleep(1000);
+                        //java.lang.Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                for (int i = 0; i < max/run; i++) {
+                    //get FFT results
+                    dft[i] = readDataFromFile(MainActivity.path, xdft_output_file, true, i);
+
+                    spd = SPD(dft[i]);
+                    this.expSPD = spd;
+                    this.domF[i] = dominantFrequency(spd);
+                }
+
+                //delete output file
+                if (checkFileExists(MainActivity.path, xdft_output_file, true))
+                    Log.i("Output data", "Deleted " + xdft_output_file + " !");
+                break;
+
+            case "XFFT": //Hardware Xilinx FFT  (floating-point)
+                //define file names
+                String xfft_input_file = "xfft_input.txt";
+                String xfft_output_file = "xfft_output.txt";
+
+                //check if file exists and delete it
+                //input data files (hex)
+                if (checkFileExists(MainActivity.path, xfft_input_file, true))
+                    Log.i("Input data", "Deleted " + xfft_input_file + " !");
+
+                //output data file (hex)
+                if (checkFileExists(MainActivity.path, xfft_output_file, true))
+                    Log.i("Output data", "Deleted " + xfft_output_file + " !");
+
+                //Write run size
+                writeDataToFile(MainActivity.path, xfft_input_file, max / run + "\n");
+
+                for (int i = 0; i < max/run; i++) {
+                    this.signalSize[i] = inputSignal[i].size();
+
+                    //Write input values to file
+                    for (int j = 0; j < signalSize[i]; j++) {
+                        float fval = inputSignal[i].get(j)[0]; //get input value
+
+                        //Convert float to hex string
+                        int intval = Float.floatToRawIntBits(fval); //integer value
+
+                        String st = String.format("%16s", Integer.toHexString(intval)).replace(' ', '0') + "\n"; //hex string
+
+                        //Write hex string to file (IEEE 754 float single precision format)
+                        writeDataToFile(MainActivity.path, xfft_input_file, st);
+                    }
+                    writeDataToFile(MainActivity.path, xfft_input_file, "--------\n");
+                }
+                Log.i("Input data", "Created input hex data: " + xfft_input_file + " !");
+
+                //wait until output file exists
+                file = new File(MainActivity.path, xfft_output_file);
+                while (!file.exists()) {
+                    try {
+                        Thread.sleep(1000);
+                        //java.lang.Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                for (int i = 0; i < max/run; i++) {
+                    //get FFT results
+                    dft[i] = readDataFromFile(MainActivity.path, xfft_output_file, false, i);
+
+                    spd = SPD(dft[i]);
+                    this.expSPD = spd;
+                    this.domF[i] = dominantFrequency(spd);
+                }
+
+                //delete output file
+                if (checkFileExists(MainActivity.path, xfft_output_file, true))
+                    Log.i("Output data", "Deleted " + xfft_output_file + " !");
+                break;
+/*
             case "XFFT_fixed": //Hardware Xilinx FFT (fixed-point)
                 this.signalSize = inputSignal.size();
                 this.argConstantPart = (Math.PI * 2) / signalSize;
@@ -306,8 +925,8 @@ public class SpectralAnalysis {
                 file = new File(MainActivity.path, xfft_fixed_output_file);
                 while (!file.exists()) {
                     try {
-                        //Thread.Sleep(1000);
-                        java.lang.Thread.sleep(1000);
+                        Thread.sleep(1000);
+                        //java.lang.Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -321,41 +940,6 @@ public class SpectralAnalysis {
                 //delete output file
                 if (checkFileExists(MainActivity.path, xfft_fixed_output_file, true))
                     Log.i("Output data", "Deleted " + xfft_fixed_output_file + " !");
-
-                /*
-                dft_sw = calculateDFT(inputSignal);
-
-                //Write output values to files
-                for (int i=0; i<signalSize; i++) {
-                    //Hardware FFT
-                    //Real component
-                    double dval = dft[i].getR(); //get real output value
-
-                    //Write double value to file
-                    writeDataToFile(MainActivity.path, "xfft-fixed_real.txt", dval + "\n");
-
-                    //Imaginary component
-                    dval = dft[i].getI(); //get imaginary output value
-
-                    //Write double value to file
-                    writeDataToFile(MainActivity.path, "xfft-fixed_imag.txt", dval + "\n");
-
-                    *//*############################################################################*//*
-
-                    //Software FFT
-                    //Real component
-                    dval = dft_sw[i].getR(); //get real output value
-
-                    //Write double value to file
-                    writeDataToFile(MainActivity.path, "xfft-fixed_real_sw.txt", dval + "\n");
-
-                    //Imaginary component
-                    dval = dft_sw[i].getI(); //get imaginary output value
-
-                    //Write double value to file
-                    writeDataToFile(MainActivity.path, "xfft-fixed_imag_sw.txt", dval + "\n");
-                }
-                */
 
                 spd = SPD(dft);
                 this.expSPD = spd;
@@ -414,8 +998,8 @@ public class SpectralAnalysis {
                 file = new File(MainActivity.path, intfftk_output_file);
                 while (!file.exists()) {
                     try {
-                        //Thread.Sleep(1000);
-                        java.lang.Thread.sleep(1000);
+                        Thread.sleep(1000);
+                        //java.lang.Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -432,41 +1016,6 @@ public class SpectralAnalysis {
                 //delete output file
                 if (checkFileExists(MainActivity.path, intfftk_output_file, true))
                     Log.i("Output data", "Deleted " + intfftk_output_file + " !");
-
-                /*
-                dft_sw = calculateDFT(inputSignal);
-
-                //Write output values to files
-                for (int i=0; i<signalSize; i++) {
-                    //Hardware FFT
-                    //Real component
-                    double dval = dft[i].getR(); //get real output value
-
-                    //Write double value to file
-                    writeDataToFile(MainActivity.path, "intfftk_real.txt", dval + "\n");
-
-                    //Imaginary component
-                    dval = dft[i].getI(); //get imaginary output value
-
-                    //Write double value to file
-                    writeDataToFile(MainActivity.path, "intfftk_imag.txt", dval + "\n");
-
-                    *//*############################################################################*//*
-
-                    //Software FFT
-                    //Real component
-                    dval = dft_sw[i].getR(); //get real output value
-
-                    //Write double value to file
-                    writeDataToFile(MainActivity.path, "intfftk_real_sw.txt", dval + "\n");
-
-                    //Imaginary component
-                    dval = dft_sw[i].getI(); //get imaginary output value
-
-                    //Write double value to file
-                    writeDataToFile(MainActivity.path, "intfftk_imag_sw.txt", dval + "\n");
-                }
-                */
 
                 spd = SPD(dft);
                 this.expSPD = spd;
@@ -525,8 +1074,8 @@ public class SpectralAnalysis {
                 file = new File(MainActivity.path, intfft_spdf_output_file);
                 while (!file.exists()) {
                     try {
-                        //Thread.Sleep(1000);
-                        java.lang.Thread.sleep(1000);
+                        Thread.sleep(1000);
+                        //java.lang.Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -543,41 +1092,6 @@ public class SpectralAnalysis {
                 //delete output file
                 if (checkFileExists(MainActivity.path, intfft_spdf_output_file, true))
                     Log.i("Output data", "Deleted " + intfft_spdf_output_file + " !");
-
-                /*
-                dft_sw = calculateDFT(inputSignal);
-
-                //Write output values to files
-                for (int i=0; i<signalSize; i++) {
-                    //Hardware FFT
-                    //Real component
-                    double dval = dft[i].getR(); //get real output value
-
-                    //Write double value to file
-                    writeDataToFile(MainActivity.path, "intfft_spdf_real.txt", dval + "\n");
-
-                    //Imaginary component
-                    dval = dft[i].getI(); //get imaginary output value
-
-                    //Write double value to file
-                    writeDataToFile(MainActivity.path, "intfft_spdf_imag.txt", dval + "\n");
-
-                    *//*############################################################################*//*
-
-                    //Software FFT
-                    //Real component
-                    dval = dft_sw[i].getR(); //get real output value
-
-                    //Write double value to file
-                    writeDataToFile(MainActivity.path, "intfft_spdf_real_sw.txt", dval + "\n");
-
-                    //Imaginary component
-                    dval = dft_sw[i].getI(); //get imaginary output value
-
-                    //Write double value to file
-                    writeDataToFile(MainActivity.path, "intfft_spdf_imag_sw.txt", dval + "\n");
-                }
-                */
 
                 spd = SPD(dft);
                 this.expSPD = spd;
@@ -636,8 +1150,8 @@ public class SpectralAnalysis {
                 file = new File(MainActivity.path, dblclkfft_output_file);
                 while (!file.exists()) {
                     try {
-                        //Thread.Sleep(1000);
-                        java.lang.Thread.sleep(1000);
+                        Thread.sleep(1000);
+                        //java.lang.Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -652,49 +1166,16 @@ public class SpectralAnalysis {
                 if (checkFileExists(MainActivity.path, dblclkfft_output_file, true))
                     Log.i("Output data", "Deleted " + dblclkfft_output_file + " !");
 
-                /*
-                dft_sw = calculateDFT(inputSignal);
-
-                //Write output values to files
-                for (int i=0; i<signalSize; i++) {
-                    //Hardware FFT
-                    //Real component
-                    double dval = dft[i].getR(); //get real output value
-
-                    //Write double value to file
-                    writeDataToFile(MainActivity.path, "dblclkfft_real.txt", dval + "\n");
-
-                    //Imaginary component
-                    dval = dft[i].getI(); //get imaginary output value
-
-                    //Write double value to file
-                    writeDataToFile(MainActivity.path, "dblclkfft_imag.txt", dval + "\n");
-
-                    *//*############################################################################*//*
-
-                    //Software FFT
-                    //Real component
-                    dval = dft_sw[i].getR(); //get real output value
-
-                    //Write double value to file
-                    writeDataToFile(MainActivity.path, "dblclkfft_real_sw.txt", dval + "\n");
-
-                    //Imaginary component
-                    dval = dft_sw[i].getI(); //get imaginary output value
-
-                    //Write double value to file
-                    writeDataToFile(MainActivity.path, "dblclkfft_imag_sw.txt", dval + "\n");
-                }
-                */
-
                 spd = SPD(dft);
                 this.expSPD = spd;
                 this.domF = dominantFrequency(spd);
                 break;
+
+     */
         }
     }
 
-    public double getDomF(){return this.domF;}
+    public double getDomF(int index){return this.domF[index];}
     public List<double[]> getExpSPD(){return this.expSPD;}
 
     /**
@@ -702,11 +1183,11 @@ public class SpectralAnalysis {
      * @param signal input signal in form float{peaks,timeValues}
      * @return Complex[] representing the fourier transformed of the signal
      */
-    private Complex[] calculateDFT(List<float[]> signal) {
-        Complex[] result = new Complex[signalSize];
-        for(int k=0;k<signalSize;k++){
+    private Complex[] calculateDFT(List<float[]> signal, int index) {
+        Complex[] result = new Complex[signalSize[index]];
+        for(int k=0;k<signalSize[index];k++){
             Complex freqComponent= new Complex(0,0);
-            for(int n=0; n<signalSize;n++){
+            for(int n=0; n<signalSize[index];n++){
                 Complex secondSumm = new Complex(0,0);
                 secondSumm.setR(signal.get(n)[0]*Math.cos(argConstantPart*k*n));
                 secondSumm.setI(-signal.get(n)[0]*Math.sin(argConstantPart*k*n));
@@ -780,9 +1261,9 @@ public class SpectralAnalysis {
     }
 
     //Read data from file
-    private Complex[] readDataFromFile(File path, String Filename, boolean unnormalise){
+    private Complex[] readDataFromFile(File path, String Filename, boolean unnormalise, int index){
 
-        Complex[] value = new Complex[signalSize];
+        Complex[] value = new Complex[signalSize[index]];
 
         if (Utility.isExternalStorageWritable()) { //If it is writable, it is readable too
             try {
@@ -801,16 +1282,23 @@ public class SpectralAnalysis {
                     FileReader fr = new FileReader(file);
                     BufferedReader in = new BufferedReader(fr);
 
+                    if (index != 0) {
+                        for (int i = 0; i < signalSize[index] * index; i++) {
+                            ////read line and skip it
+                            line = in.readLine();
+                        }
+                    }
+
                     //read line
                     line = in.readLine();
 
                     //while (line != null) {
-                    for (int linenumber = 0; linenumber < signalSize; linenumber++) {
+                    for (int linenumber = 0; linenumber < signalSize[index]; linenumber++) {
 
                         if (line == null) {
                             Log.i("readDataFromFile", "EOF, linenumber: " + linenumber);
 
-                            for (int i = 0; i < signalSize; i++) {
+                            for (int i = 0; i < signalSize[index]; i++) {
                                 Complex zero = new Complex(0, 0);
                                 zero.setR(0.0);
                                 zero.setI(0.0);
@@ -830,8 +1318,8 @@ public class SpectralAnalysis {
 
                         //unnormalise data?
                         if (unnormalise) {
-                            real = norm_abs * real / 2;
-                            imag = norm_abs * imag / 2;
+                            real = norm_abs[index] * real / 2;
+                            imag = norm_abs[index] * imag / 2;
                         }
 
                         //set values
