@@ -31,6 +31,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -91,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
     private TextView connectedDevice;
     private TextView configuration;
     private TextView configuration_name;
+    private TextView runs_value;
+
+    private SeekBar seekBar;
 
     private ProgressBar progressBar;
     private Handler handler = new Handler();
@@ -198,6 +202,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
         connectedDevice = (TextView) findViewById(R.id.text_device_name);
         configuration = (TextView) findViewById(R.id.text_config);
         configuration_name = (TextView) findViewById(R.id.text_config_name);
+        runs_value = (TextView) findViewById(R.id.text_runs_value);
 
         updateTextView(configuration_name, ConfigActivity.repo_name);
 
@@ -234,6 +239,22 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
 
         Button btnConfigRR = findViewById(R.id.button_config_RR);
         btnConfigRR.setOnClickListener(this);
+
+        seekBar = (SeekBar) findViewById(R.id.seekBar);
+        seekBar.setMax(9);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                updateTextView(runs_value, Integer.toString(progress + 1));
+            }
+
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // Auto-generated method stub, not used
+            }
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // Auto-generated method stub, not used
+            }
+        });
 
         progressBar = findViewById(R.id.progressBar);
     }
@@ -311,7 +332,8 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
                 break;
             case R.id.button_test_RR_all:
                 Log.i("Start RR Test - All Run", "Use " + ConfigActivity.repo_name + " method");
-                max_run = 9297;
+                //max_run = 9400; // = 5 runs
+                max_run = 1888 * (seekBar.getProgress() + 1);
                 mTimer.setStartTime(4); //start Timer
                 //Start test
                 test_didReceiveBVP();
@@ -320,6 +342,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
             case R.id.button_test_RR_AIO:
                 Log.i("Start RR Test - AIO Run", "Use " + ConfigActivity.repo_name + " method");
                 //max_run = 9400; // = 5 runs
+                max_run = 1888 * (seekBar.getProgress() + 1);
                 mTimer.setStartTime(4); //start Timer
                 //Start test
                 test_AIO_didReceiveBVP();
