@@ -59,27 +59,23 @@ while [ 1 ]; do
 	
 	# control for Xilinx FFT (floating-point)
 	if [ -f "xfft_input.txt" ]; then
-		echo "xfft_input.txt exists." > /dev/kmsg
+		echo "xfft_input exists." > /dev/kmsg
 		
-		# get run size
-		read -r size < xfft_input.txt
-		# delete first line
-		sed -i '1d' xfft_input.txt
-
-		for i in $(seq 1 $size); do
+		# delete file
+		rm xfft_input.txt
+		
+		#~ # get run size
+		#~ read -r size < xfft_input.txt
+		#~ # delete first line
+		#~ sed -i '1d' xfft_input.txt
+		
+		for i in xfft_input*.txt; do
 			while read line; do
-				# check for end of run
-				if [[ "$line" == "--------" ]]; then
-					break
-				fi
-				
 				# read each line from file
 				# and forward it to the fourier_transform module
-				echo $line > /proc/fourier_transform
-			done < xfft_input.txt
-			
-			# delete current lines		
-			sed -i '1,/^--------$/d' xfft_input.txt
+						
+				echo $line > /proc/fourier_transform	
+			done < "$i"
 			
 			sleep 0.5
 			
@@ -87,9 +83,30 @@ while [ 1 ]; do
 			cat /proc/fourier_transform >> xfft_output.txt
 		done
 		
+		#~ for i in $(seq 1 $size); do
+			#~ while read line; do
+				#~ # check for end of run
+				#~ if [[ "$line" == "--------" ]]; then
+					#~ break
+				#~ fi
+				
+				#~ # read each line from file
+				#~ # and forward it to the fourier_transform module
+				#~ echo $line > /proc/fourier_transform
+			#~ done < xfft_input.txt
+			
+			#~ # delete current lines		
+			#~ sed -i '1,/^--------$/d' xfft_input.txt
+			
+			#~ sleep 0.5
+			
+			#~ # read fft output into file
+			#~ cat /proc/fourier_transform >> xfft_output.txt
+		#~ done
+		
 		# delete input file
-		if [ -f xfft_input.txt ]; then
-			rm xfft_input.txt
+		if [ -f xfft_input0.txt ]; then
+			rm xfft_input*.txt
 		fi
 		
 		echo "fourier transformation done." > /dev/kmsg

@@ -814,9 +814,10 @@ public class SpectralAnalysis {
 
             case "XFFT": //Hardware Xilinx FFT  (floating-point)
                 //define file names
-                String xfft_input_file = "xfft_input.txt";
+                String xfft_input_file = "xfft_input0.txt";
                 String xfft_output_file = "xfft_output.txt";
 
+                /*
                 //check if file exists and delete it
                 //input data files (hex)
                 if (checkFileExists(MainActivity.path, xfft_input_file, true))
@@ -825,11 +826,16 @@ public class SpectralAnalysis {
                 //output data file (hex)
                 if (checkFileExists(MainActivity.path, xfft_output_file, true))
                     Log.i("Output data", "Deleted " + xfft_output_file + " !");
+                /*
 
+                 */
                 //Write run size
-                writeDataToFile(MainActivity.path, xfft_input_file, max / run + "\n");
+                //writeDataToFile(MainActivity.path, xfft_input_file, max / run + "\n");
+
+                int k = 1;
 
                 for (int i = 0; i < max/run; i++) {
+
                     this.signalSize[i] = inputSignal[i].size();
 
                     //Write input values to file
@@ -844,9 +850,19 @@ public class SpectralAnalysis {
                         //Write hex string to file (IEEE 754 float single precision format)
                         writeDataToFile(MainActivity.path, xfft_input_file, st);
                     }
-                    writeDataToFile(MainActivity.path, xfft_input_file, "--------\n");
+                    //writeDataToFile(MainActivity.path, xfft_input_file, "--------\n");
+                    xfft_input_file = "xfft_input" + k + ".txt";
+                    k++;
                 }
                 Log.i("Input data", "Created input hex data: " + xfft_input_file + " !");
+
+                // create file to trigger the root script and it starts with the processing
+                try {
+                    file = new File(MainActivity.path, "xfft_input.txt");
+                    file.createNewFile();
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
 
                 //wait until output file exists
                 file = new File(MainActivity.path, xfft_output_file);
