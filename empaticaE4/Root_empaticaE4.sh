@@ -63,6 +63,10 @@ while [ 1 ]; do
 		
 		# delete file
 		rm xfft_input.txt
+		# delete old output file
+		if [ -f xfft_output.txt ]; then
+			rm xfft_output.txt
+		fi
 		
 		for i in xfft_input*.txt; do
 			while read line; do
@@ -78,6 +82,7 @@ while [ 1 ]; do
 			cat /proc/fourier_transform >> xfft_output.txt
 		done
 		
+		touch xfft_ready.txt
 		
 		# delete input file
 		if [ -f xfft_input0.txt ]; then

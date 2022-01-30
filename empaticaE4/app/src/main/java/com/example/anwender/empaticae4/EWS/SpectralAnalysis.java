@@ -822,6 +822,7 @@ public class SpectralAnalysis {
             case "XFFT": //Hardware Xilinx FFT  (floating-point)
                 //define file names
                 String xfft_input_file = "xfft_input0.txt";
+                String xfft_ready_file = "xfft_ready.txt";
                 String xfft_output_file = "xfft_output.txt";
 
                 MainActivity.mTimer.setStartTime(1); //start Timer
@@ -862,7 +863,7 @@ public class SpectralAnalysis {
                 }
 
                 //wait until output file exists
-                file = new File(MainActivity.path, xfft_output_file);
+                file = new File(MainActivity.path, xfft_ready_file);
                 while (!file.exists()) {
                     try {
                         Thread.sleep(1000);
@@ -871,6 +872,7 @@ public class SpectralAnalysis {
                         e.printStackTrace();
                     }
                 }
+                file.delete();
 
                 for (int i = 0; i < max/run; i++) {
                     MainActivity.mTimer.setStartTime(2); //start Timer
