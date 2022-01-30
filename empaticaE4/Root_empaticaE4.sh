@@ -64,11 +64,6 @@ while [ 1 ]; do
 		# delete file
 		rm xfft_input.txt
 		
-		#~ # get run size
-		#~ read -r size < xfft_input.txt
-		#~ # delete first line
-		#~ sed -i '1d' xfft_input.txt
-		
 		for i in xfft_input*.txt; do
 			while read line; do
 				# read each line from file
@@ -83,26 +78,6 @@ while [ 1 ]; do
 			cat /proc/fourier_transform >> xfft_output.txt
 		done
 		
-		#~ for i in $(seq 1 $size); do
-			#~ while read line; do
-				#~ # check for end of run
-				#~ if [[ "$line" == "--------" ]]; then
-					#~ break
-				#~ fi
-				
-				#~ # read each line from file
-				#~ # and forward it to the fourier_transform module
-				#~ echo $line > /proc/fourier_transform
-			#~ done < xfft_input.txt
-			
-			#~ # delete current lines		
-			#~ sed -i '1,/^--------$/d' xfft_input.txt
-			
-			#~ sleep 0.5
-			
-			#~ # read fft output into file
-			#~ cat /proc/fourier_transform >> xfft_output.txt
-		#~ done
 		
 		# delete input file
 		if [ -f xfft_input0.txt ]; then

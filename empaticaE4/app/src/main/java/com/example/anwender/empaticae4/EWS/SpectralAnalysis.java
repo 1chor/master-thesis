@@ -182,8 +182,6 @@ public class SpectralAnalysis {
                 if (checkFileExists(MainActivity.path, xfft_output_file, true))
                     Log.i("Output data", "Deleted " + xfft_output_file + " !");
 
-                //Write run size
-                writeDataToFile(MainActivity.path, xfft_input_file, 1 + "\n");
 
                 //Write input values to file
                 for (int i = 0; i < signalSize[0]; i++) {
@@ -817,20 +815,6 @@ public class SpectralAnalysis {
                 String xfft_input_file = "xfft_input0.txt";
                 String xfft_output_file = "xfft_output.txt";
 
-                /*
-                //check if file exists and delete it
-                //input data files (hex)
-                if (checkFileExists(MainActivity.path, xfft_input_file, true))
-                    Log.i("Input data", "Deleted " + xfft_input_file + " !");
-
-                //output data file (hex)
-                if (checkFileExists(MainActivity.path, xfft_output_file, true))
-                    Log.i("Output data", "Deleted " + xfft_output_file + " !");
-                /*
-
-                 */
-                //Write run size
-                //writeDataToFile(MainActivity.path, xfft_input_file, max / run + "\n");
 
                 int k = 1;
 
