@@ -182,6 +182,7 @@ public class SpectralAnalysis {
                 if (checkFileExists(MainActivity.path, xfft_output_file, true))
                     Log.i("Output data", "Deleted " + xfft_output_file + " !");
 
+                MainActivity.mTimer.setStartTime(1); //start Timer
 
                 //Write input values to file
                 for (int i = 0; i < signalSize[0]; i++) {
@@ -199,6 +200,9 @@ public class SpectralAnalysis {
                 }
                 Log.i("Input data", "Created input hex data: " + xfft_input_file + " !");
 
+                MainActivity.mTimer.setEndTime(1); //stop Timer
+                Log.i("Timer", "Write test data took " + MainActivity.mTimer.getTimer(1) + " s.\n");
+
                 //wait until output file exists
                 file = new File(MainActivity.path, xfft_output_file);
                 while (!file.exists()) {
@@ -210,8 +214,13 @@ public class SpectralAnalysis {
                     }
                 }
 
+                MainActivity.mTimer.setStartTime(2); //start Timer
+
                 //get FFT results
                 dft = readDataFromFile(MainActivity.path, xfft_output_file, false, 0);
+
+                MainActivity.mTimer.setEndTime(2); //stop Timer
+                Log.i("Timer", "Read test data took " + MainActivity.mTimer.getTimerMilli(2) + " ms.\n");
 
                 //MainActivity.mTimer.setEndTime(3); //End Timer
 
@@ -815,6 +824,7 @@ public class SpectralAnalysis {
                 String xfft_input_file = "xfft_input0.txt";
                 String xfft_output_file = "xfft_output.txt";
 
+                MainActivity.mTimer.setStartTime(1); //start Timer
 
                 int k = 1;
 
@@ -840,6 +850,9 @@ public class SpectralAnalysis {
                 }
                 Log.i("Input data", "Created input hex data: " + xfft_input_file + " !");
 
+                MainActivity.mTimer.setEndTime(1); //stop Timer
+                Log.i("Timer", "Write test data took " + MainActivity.mTimer.getTimer(1) + " s.\n");
+
                 // create file to trigger the root script and it starts with the processing
                 try {
                     file = new File(MainActivity.path, "xfft_input.txt");
@@ -860,8 +873,13 @@ public class SpectralAnalysis {
                 }
 
                 for (int i = 0; i < max/run; i++) {
+                    MainActivity.mTimer.setStartTime(2); //start Timer
+
                     //get FFT results
                     dft[i] = readDataFromFile(MainActivity.path, xfft_output_file, false, i);
+
+                    MainActivity.mTimer.setEndTime(2); //stop Timer
+                    Log.i("Timer", "Read test data took " + MainActivity.mTimer.getTimerMilli(2) + " ms.\n");
 
                     spd = SPD(dft[i]);
                     this.expSPD = spd;
