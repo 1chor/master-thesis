@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements EmpaDataDelegate,
         btnConfigRR.setOnClickListener(this);
 
         seekBar = (SeekBar) findViewById(R.id.seekBar);
-        seekBar.setMax(9);
+        seekBar.setMax(14);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
