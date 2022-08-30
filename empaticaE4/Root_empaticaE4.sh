@@ -82,6 +82,8 @@ while [ 1 ]; do
 			cat /proc/fourier_transform >> xfft_output.txt
 		done
 		
+		sleep 0.2
+		
 		touch xfft_ready.txt
 		
 		# delete input file

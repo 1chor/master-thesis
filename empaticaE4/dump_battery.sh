@@ -25,7 +25,7 @@ echo "+++++++++++++++++++++++++++++++++++++" > /dev/kmsg
 
 while [ 1 ]; do
 			
-	# XDFT
+	# XFFT-fixed
 	dumpsys battery set level 72  # change battery level to 72%
 	dumpsys battery set status 2  # change battery status to Charging  
 	
@@ -42,7 +42,7 @@ while [ 1 ]; do
 
 	sleep 1m # wait for 1 minute
 	
-	# DBLCLKFFT
+	# INTFFTK
 	dumpsys battery set level 25  # change battery level to 25%
 	dumpsys battery set status 2  # change battery status to Charging  
 
@@ -54,13 +54,13 @@ while [ 1 ]; do
 
 	sleep 1m # wait for 1 minute
 	
-	# INTFFTK
+	# DBLCKLFFT
 	dumpsys battery set level 49  # change battery level to 49%
 	dumpsys battery set status 2  # change battery status to Charging  
 
 	sleep 1m # wait for 1 minute
 	
-	# XFFT-fixed
+	# XDFT
 	dumpsys battery set level 60  # change battery level to 60%
 	dumpsys battery set status 2  # change battery status to Charging  	
 	
