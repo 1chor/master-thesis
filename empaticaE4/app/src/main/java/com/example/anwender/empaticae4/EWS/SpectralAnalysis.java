@@ -1,6 +1,7 @@
 package com.example.anwender.empaticae4.EWS;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.anwender.empaticae4.Configuration.ConfigActivity;
 import com.example.anwender.empaticae4.Main.MainActivity;
@@ -46,9 +47,13 @@ public class SpectralAnalysis {
                 this.signalSize[0] = inputSignal.size();
                 this.argConstantPart = (Math.PI * 2) / signalSize[0];
 
-                //MainActivity.mTimer.setStartTime(3); //start Timer
+                MainActivity.mTimer.setStartTime(3); //start Timer
                 dft = calculateDFT(inputSignal, 0);
-                //MainActivity.mTimer.setEndTime(3); //End Timer
+                MainActivity.mTimer.setEndTime(3); //End Timer
+
+                String printtext = "SDFT took " + MainActivity.mTimer.getTimer(3) + " seconds.\n" +
+                        "SDFT took " + MainActivity.mTimer.getTimerMilli(3) + " milliseconds.";
+                Log.i("Timer", printtext);
 
                 spd = SPD(dft);
                 this.expSPD = spd;
